@@ -1,0 +1,15 @@
+body {
+  margin: 1em;
+}
+h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 4em;
+  color: #f00;
+}
+h2 {
+  margin: 0;
+  padding: 0;
+  font-size: 4em;
+  color: #ff8080;
+}
