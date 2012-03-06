@@ -5,6 +5,8 @@
 
 var express = require('express')
   , routes = require('./routes')
+  , stylus = require('stylus')
+  , nib = require('nib')
   , config = require('./prova');
 
 var app = module.exports = express.createServer();
@@ -20,7 +22,7 @@ app.configure(function(){
   app.use(express.methodOverride());
   
   // Compile styl files
-  app.use(require('stylus').middleware({ src: __dirname + '/public' }));
+  app.use(stylus.middleware({ src: __dirname + '/public' }));
   
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
