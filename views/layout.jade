@@ -1,21 +1,19 @@
 !!! 5
 html
 	head
-		title #{title}
+		title Volox Node test
 		link(rel='stylesheet', href='/stylesheets/style.css')
-		script(src='/scripts/script.js')
 		:coffeescript
 			p=54
 			console.log "prova " + p
 	body
 		header
-			h1 Benvenuto!
-			h2 Test
-		nav
+            img(src="/img/logo.jpg", title="Logo", alt="Logo")
+            h1 #{title}
+        nav
 			ul
-				- var items = [ "link", "lunk", "lank" ]
-				- each item in items
-					li
-						a(href='/', title='#{item}') #{item}
+				- var items = { "Home": "/", "HTML5": "/html5", "CSS3": "/css3" }
+				- each title, url in items
+					li: a(href='#{url}', title='#{title}') #{title}
 		section.content!=body
-		footer
+		footer Powered by Volox

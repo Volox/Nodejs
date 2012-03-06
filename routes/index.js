@@ -5,7 +5,12 @@
 
 exports.index = function(req, res){
 	res.render('index', {
-		name: 'Volox',
-		title: 'ExpressJS title'
+		title: 'Homepage'
+	});
+};
+
+exports.html5 = function(req, res){
+    res.render('html5', {
+		title: 'HTML5'
 	});
 };
