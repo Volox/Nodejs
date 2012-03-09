@@ -1,0 +1,60 @@
+$vendors = webkit moz ms o
+vendor(prop, args)
+	for vendor in $vendors
+		-{vendor}-{prop}: args
+    
+	{prop} args
+
+
+
+
+/*
+Border radius utility functions
+*/
+border-radius(location, args...)
+	if location is a 'string'
+		vendor( join( '-', 'border' location 'left' 'radius' ), args )
+		vendor( join( '-', 'border' location 'right' 'radius' ), args )
+	else
+		vendor( 'border-radius', arguments )
+border-top-radius()
+	border-radius('top', arguments)
+border-bottom-radius()
+	border-radius('bottom', arguments)
+
+
+
+
+
+/*
+Box shadow
+*/
+box-shadow()
+	vendor( 'box-shadow', arguments )
+
+
+
+
+
+
+
+/*
+Text rotation
+*/
+text-rotation(val)
+	vendor( 'transform', 'rotate(%s)' % val )
+	if val=='90deg'
+		writing-mode: lr-tb;
+
+
+
+
+
+/*
+Linear gradient utility
+*/
+linear-bg()
+	for vendor in $vendors
+		background-image: "-%s-linear-gradient( %s )"% ( vendor arguments )
+	
+	background-image: linear-gradient( arguments )
