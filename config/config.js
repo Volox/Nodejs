@@ -4,7 +4,7 @@ Configuration file
 // Required libs
 
 require( '../utils' );
-var fs = require( 'fs' ),
+var fs = require( 'fs' ), path = require( 'path' )
 	winston = require( 'winston' );
 var prop_file = __dirname + '/configuration.json';
 var props = {};
@@ -46,6 +46,10 @@ function initLogger( config ) {
 	log.debug( 'Logger initialization' );
 	
 	var logPath = config.logPath;
+	if( !path.exists( logPath ) ) {
+		fs.mkdirSync( logPath );
+	}
+	
 	// Logging
 	for( var loggerName in config.loggers ) {
 		var logger = config.loggers[ loggerName ];
