@@ -46,7 +46,7 @@ function initLogger( config ) {
 	log.debug( 'Logger initialization' );
 	
 	var logPath = config.logPath;
-	if( !path.exists( logPath ) ) {
+	if( !path.existsSync( logPath ) ) {
 		fs.mkdirSync( logPath );
 	}
 	
