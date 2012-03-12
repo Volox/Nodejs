@@ -3,19 +3,22 @@
  */
 
 var express = require('express')
-  , routes = require('./routes')
   , stylus = require('stylus')
-  , config = require('./config');
+  , routes = require('./routes')
+  , config = require('./config')
+  , mongo = require('./mongo-wrapper');
 
 var app = module.exports = express.createServer();
-// Configuration
 
+// Configuration
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
   app.set('view options', {
 	'layout': true
   } );
+  
+  app.use(log4js.connectLogger(logger, { level: log4js.levels.INFO }));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   
@@ -37,6 +40,8 @@ app.configure('production', function(){
 // Routes
 app.get('/', routes.index );
 
-app.listen( config.port );
 
+
+// Start the WebServer
+app.listen( config.port );
 console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);

@@ -1,4 +1,8 @@
 {
-	"port": 80,
-	"asd": "asder er"
+	"port": 8080,
+	"mongo": {
+		"host": "localhost",
+		"port": 2154
+		"db-name": "test"
+	}
 }
