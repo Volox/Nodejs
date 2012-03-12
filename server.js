@@ -2,11 +2,14 @@
  * Module dependencies.
  */
 
-var express = require('express')
+var config = require('./config')
+  , log = require('winston')
+  , error = require( 'winston' ).loggers.get( 'error' ).error
+  , serverLog = require( 'winston' ).loggers.get( 'server' )
+  , express = require('express')
   , stylus = require('stylus')
   , routes = require('./routes')
-  , config = require('./config')
-  , mongo = require('./mongo-wrapper');
+  , mongo = require('./mongo-wrapper').Mongo;
 
 var app = module.exports = express.createServer();
 
@@ -18,7 +21,6 @@ app.configure(function(){
 	'layout': true
   } );
   
-  app.use(log4js.connectLogger(logger, { level: log4js.levels.INFO }));
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   
@@ -38,10 +40,13 @@ app.configure('production', function(){
 });
 
 // Routes
+// Log all requests
 app.get('/', routes.index );
-
-
+app.get('/404', routes.error );
+app.get('/505', routes.error );
+app.error( routes.error );
 
 // Start the WebServer
 app.listen( config.port );
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+log.debug( f( "Express server listening on port %d in %s mode",
+	app.address().port, app.settings.env ) );
