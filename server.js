@@ -9,7 +9,8 @@ var config = require('./config')
   , express = require('express')
   , stylus = require('stylus')
   , routes = require('./routes')
-  , mongo = require('./mongo-wrapper').Mongo;
+  , Task = require('./task')
+  , mongo = require('./mongo-wrap').instance;
 
 var app = module.exports = express.createServer();
 
@@ -27,8 +28,11 @@ app.configure(function(){
   // Compile styl files on the fly
   app.use(stylus.middleware({ src: __dirname + '/public' }));
   
+  // Log all the requests
+  app.use(routes.logger);
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
+  
 });
 
 app.configure('development', function(){
@@ -40,13 +44,18 @@ app.configure('production', function(){
 });
 
 // Routes
-// Log all requests
 app.get('/', routes.index );
 app.get('/404', routes.error );
 app.get('/505', routes.error );
-app.error( routes.error );
+
+
+/* Intance of the task */
+var task = new Task();
+app.get( '/task/list', function( req, res, next ) {
+	task.list( req, res, next );
+} );
 
 // Start the WebServer
 app.listen( config.port );
-log.debug( f( "Express server listening on port %d in %s mode",
+log.debug( f( 'Express server listening on port %d in %s mode',
 	app.address().port, app.settings.env ) );

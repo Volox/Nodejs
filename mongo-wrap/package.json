@@ -1,0 +1,4 @@
+{
+	"name": "Mongo Wrapper",
+	"main": "./mongo-wrap.js"
+}
