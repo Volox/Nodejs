@@ -1,8 +1,14 @@
 # Logs #
 logs*
 
+# MongoDB data #
+data*
+
 # Modules #
 node_modules
 
 # Generates css #
 public/stylesheets/*.css
+
+# Config files %
+mongo-node.conf

@@ -29,8 +29,18 @@ Task.prototype = {
 	init: function() {
 		this.tasks = this.mongolia.model( this.db, config.collection );
 		this.tasks.mongo( 'insert', {
-			name: "Volox",
-			timestamp: (new Date()).format( 'yyyy-mm-dd HH:mm:ss' )
+			name: "Face recognition",
+			description: "The script have to recognize all the faces on a image",
+			instances: {
+				created: 0,
+				completed: 0,
+				aborted: 0,
+				running: 0
+			},
+			
+			
+			created: (new Date()).format( 'yyyy-mm-dd HH:mm:ss' ),
+			completed: null
 		} );
 	},
 	list: function( req, res, next ) {
