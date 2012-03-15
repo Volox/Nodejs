@@ -54,6 +54,9 @@ var task = new Task();
 app.get( '/task/list', function( req, res, next ) {
 	task.list( req, res, next );
 } );
+app.put( '/task', function( req, res, next ) {
+	task.add( req, res, next );
+} );
 
 // Start the WebServer
 app.listen( config.port );

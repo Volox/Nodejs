@@ -1,4 +1,7 @@
 h1 Task list
 ul
-	- each as in asd
-		li #{as.name} @ #{as.timestamp}
+	- each task in data
+		- var perc = (task.requirements.minThreshold/100)*task.instances.completed;
+		li #{task.name} (done #{perc}%)
+			p= task.description
+			

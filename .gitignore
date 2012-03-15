@@ -11,4 +11,4 @@ node_modules
 public/stylesheets/*.css
 
 # Config files %
-mongo-node.conf
+config/*.conf

@@ -28,29 +28,54 @@ Task = function( db ) {
 Task.prototype = {
 	init: function() {
 		this.tasks = this.mongolia.model( this.db, config.collection );
-		this.tasks.mongo( 'insert', {
-			name: "Face recognition",
-			description: "The script have to recognize all the faces on a image",
-			instances: {
-				created: 0,
-				completed: 0,
-				aborted: 0,
-				running: 0
-			},
-			
-			
-			created: (new Date()).format( 'yyyy-mm-dd HH:mm:ss' ),
-			completed: null
-		} );
 	},
 	list: function( req, res, next ) {
 		var array = this.tasks.mongo( 'findArray', {}, function( i, array ) {
 			res.render( 'task/list', {
 				title: 'Task list',
-				asd: array
+				data: array
 			} );
 		} );
 	},
+	add: function() {
+		log.debug( 'Adding a task!' );
+		try {
+			var dueDate = new Date();
+			dueDate.setDate((new Date()).getDate()+5);
+			
+			this.tasks.mongo( 'insert', {
+				name: "Face recognition",
+				description: "The script have to recognize all the faces on a image",
+				
+				// Number of instances created, completed, etc.
+				instances: {
+					created: 0,
+					completed: 0,
+					aborted: 0,
+					running: 0
+				},
+				
+				// Task requirements
+				requirements: {
+					minThreshold: 10, // Minimum number of Task instances
+					maxThreshold: 50, // Max number of Task instances
+					userType: null, // Type of end user (security issue)???
+					dueDate: dueDate.format( 'yyyy-mm-dd HH:mm:ss' ), // Date limit to complete the task
+				},
+				
+				value: 5, // Task value (in bananas)
+				
+				
+				created: (new Date()).format( 'yyyy-mm-dd HH:mm:ss' ),
+			} );
+			
+			log.debug( 'Task created' );
+		} catch( ex ) {
+			log.error( f('Error while adding the task %s', ex ) );
+			res.send('FUUUUUUUU',505);
+		}
+		res.send('All done',202);
+	}
 };
 
 
