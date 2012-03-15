@@ -15,21 +15,35 @@ Mongo = function( host, port, dbName ) {
 	log.debug( 'Mongo instance created' );
 	var self = this;
 	
-	host = host || config.host;
-	port = port || config.port;
-	dbName = dbName || config[ 'db-name' ];
+	this.host = host || config.host;
+	this.port = port || config.port;
+	this.dbName = dbName || config[ 'db-name' ];
 	
+	log.debug( this.dbName );
 	
-	this.server = new Server( host, port, {
+	this.server = new Server( this.host, this.port, {
 		auto_reconnect: true
 	} );
-	this.db = new Db( dbName, this.server );
+	this.db = new Db( this.dbName, this.server );
+	
+	this.init();
 };
 
 /* Methods */
 Mongo.prototype = {
-	init: function( callback ) {
-		
+	init: function() {
+		var self = this;
+		this.db.open( function( err, db ) {
+			if( err ) {
+				var errorMsg = f( "Unable to open the connection to the db %s\n%s",
+					self.dbName, err );
+				log.error( errorMsg );
+				error( errorMsg );
+				process.exit(1);
+			} else {
+				db.close( true );
+			}
+		} );
 	}
 };
 
