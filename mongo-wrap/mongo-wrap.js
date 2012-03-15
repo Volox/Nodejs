@@ -41,7 +41,7 @@ Mongo.prototype = {
 				error( errorMsg );
 				process.exit(1);
 			} else {
-				db.close( true );
+				//db.close( true );
 			}
 		} );
 	}

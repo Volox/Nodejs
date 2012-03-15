@@ -37,7 +37,7 @@ Task.prototype = {
 			} );
 		} );
 	},
-	add: function() {
+	add: function( req, res, next ) {
 		log.debug( 'Adding a task!' );
 		try {
 			var dueDate = new Date();
@@ -67,12 +67,13 @@ Task.prototype = {
 				
 				
 				created: (new Date()).format( 'yyyy-mm-dd HH:mm:ss' ),
+			}, function( ) {
+				log.debug( arguments );
 			} );
 			
-			log.debug( 'Task created' );
 		} catch( ex ) {
 			log.error( f('Error while adding the task %s', ex ) );
-			res.send('FUUUUUUUU',505);
+			res.send(ex,505);
 		}
 		res.send('All done',202);
 	}
