@@ -2,8 +2,7 @@
 var mongo = require('../mongo-wrap').instance
   , mongolia = require('mongolia')
   , config = require( '../config' )[ "task" ]
-  , log = require( 'winston' )
-  , error = require( 'winston' ).loggers.get( 'error' ).error;
+  , log = require( 'winston' );
 
 log.debug( 'Task class loaded' );
 
@@ -30,7 +29,7 @@ Task.prototype = {
 		this.tasks = this.mongolia.model( this.db, config.collection );
 	},
 	list: function( req, res, next ) {
-		var array = this.tasks.mongo( 'findArray', {}, function( i, array ) {
+		this.tasks.mongo( 'findArray', {}, function( i, array ) {
 			res.render( 'task/list', {
 				title: 'Task list',
 				data: array

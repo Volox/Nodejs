@@ -4,8 +4,10 @@ Configuration file
 // Required libs
 
 require( '../utils' );
-var fs = require( 'fs' ), path = require( 'path' )
-	winston = require( 'winston' );
+var fs = require( 'fs' )
+  , util = require( 'util' )
+  , path = require( 'path' )
+  , winston = require( 'winston' );
 var prop_file = __dirname + '/configuration.json';
 var props = {};
 var default_props = {
@@ -54,17 +56,54 @@ function initLogger( config ) {
 	for( var loggerName in config.loggers ) {
 		var logger = config.loggers[ loggerName ];
 		
-		// Create a function in case the timestamp is a string
-		var timestamp = logger.timestamp;
-		if( typeof(timestamp)=="string" ) {
-			logger.timestamp = function() {
-				return (new Date()).format( timestamp );
+		// Add logger instance if not default
+		var loggerInstance = winston;
+		if( loggerName!="default" ) {
+			winston.loggers.add( loggerName );
+			loggerInstance = winston.loggers.get( loggerName );
+		}
+		// Remove default Console logger
+		loggerInstance.remove(winston.transports.Console);
+		
+		for( var transport in logger ) {
+			var transportObj = logger[ transport ];
+			// Uppercase the first letter
+			transport = transport.charAt(0).toUpperCase() + transport.slice(1);
+			
+			var parseLogger = function( obj, logInstance, target ) {
+				// Create a function in case the timestamp is a string
+				var timestamp = obj.timestamp;
+				if( typeof(timestamp)=="string" ) {
+					obj.timestamp = function() {
+						return (new Date()).format( timestamp );
+					}
+				}
+				
+				// Add the default pathe to the logs
+				if( obj.filename ) {
+					obj.filename = logPath+obj.filename;
+				}
+				
+				try {
+					logInstance.add( winston.transports[ target ], obj );
+				} catch( ex ) {
+					log.debug( "Unable to add the %s target for the %s logger -> %s",
+						target, loggerName, ex );
+				}
+				
+			};
+			
+			if( util.isArray( transportObj ) ) {
+				transportObj.forEach( function( val ) {
+					parseLogger( val, loggerInstance, transport );
+				} );
+			} else {
+				parseLogger( transportObj, loggerInstance, transport );
 			}
 		}
-		// Add the default pathe to the logs
-		if( logger.filename ) {
-			logger.filename = logPath+logger.filename;
-		}
+		/*
+		
+		
 		
 		// Add logger instance if not default
 		var loggerInstance = winston;
@@ -85,12 +124,15 @@ function initLogger( config ) {
 					target, loggerName, ex );
 			}
 		} );
+		*/
 	}
 	// Access the default logger
 	log = winston;
+	log.debug( 'Logger created' );
+	log.info( 'Logger created' );
+	log.error( 'Logger created' );
 	
 	/*
-	log.info( 'Logger created' );
 	// Test the Error logger
 	var error = winston.loggers.get( 'error' );
 	error.error( 'Ciao' );

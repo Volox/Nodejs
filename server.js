@@ -4,7 +4,6 @@
 
 var config = require('./config')
   , log = require('winston')
-  , error = require( 'winston' ).loggers.get( 'error' ).error
   , serverLog = require( 'winston' ).loggers.get( 'server' )
   , express = require('express')
   , stylus = require('stylus')
