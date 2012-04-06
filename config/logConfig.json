@@ -1,0 +1,28 @@
+{
+    "appenders": {
+        "console": {
+            "color": true,
+            "pattern": "%t [%l] - %m",
+            "level": "DEBUG",
+            "timestamp": "isoDateTime"
+        },
+        "file": [
+            {
+                "pattern": "%t [%l] - %m",
+                "filename": "volog.log",
+                "timestamp": "isoDateTime",
+                "maxsize": 500,
+                "maxFiles": null,
+                "level": "INFO"
+            },
+            {
+                "pattern": "",
+                "filename": "",
+                "timestamp": "",
+                "level": "ERROR"
+            }
+        ]
+    },
+    "filenameError": "volog-error.log",
+    "filename": "volog.log"
+}
