@@ -1,27 +1,39 @@
 /*
  * GET home page.
  */
-var log = require('winston')
-  , error = require( 'winston' ).loggers.get( 'error' ).error
-  , serverLog = require( 'winston' ).loggers.get( 'server' )
-
+var log = require( '../config' ).logger;
 
 exports.logger = function(req, res, next ) {
-	serverLog.debug( f( "%s - %s", req.method, req.url ) );
+	log.debug( f( "%s - %s", req.method, req.url ) );
 	next();
 };
 
-exports.index = function(req, res) {
+exports.index = function(req, res){
 	res.render('index', {
 		title: 'Homepage'
 	});
 };
 
-exports.error = function(err, req, res) {
-	serverLog.debug( f( "Error in %s - %s", req.method, req.url ) );
-	res.render('error', {
-		title: 'Error',
-		layout: false,
-		error: err
-	});
+exports.new = function(req, res){
+  res.send('new forum');
+};
+
+exports.create = function(req, res){
+  res.send('create forum');
+};
+
+exports.show = function(req, res){
+  res.send('show forum ' + req.params.forum);
+};
+
+exports.edit = function(req, res){
+  res.send('edit forum ' + req.params.forum);
+};
+
+exports.update = function(req, res){
+  res.send('update forum ' + req.params.forum);
+};
+
+exports.destroy = function(req, res){
+  res.send('destroy forum ' + req.params.forum);
 };

@@ -3,13 +3,15 @@
  */
 
 var config = require('./config')
-  , log = require('winston')
-  , serverLog = require( 'winston' ).loggers.get( 'server' )
+  , log = config.logger
   , express = require('express')
+  , Resource = require('express-resource')
   , stylus = require('stylus')
-  , routes = require('./routes')
-  , Task = require('./task')
   , mongo = require('./mongo-wrap').instance;
+
+// Routes
+var index = require('./routes')
+  , task = require('./task')
 
 var app = module.exports = express.createServer();
 
@@ -28,7 +30,7 @@ app.configure(function(){
   app.use(stylus.middleware({ src: __dirname + '/public' }));
   
   // Log all the requests
-  app.use(routes.logger);
+  app.use(index.logger);
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
   
@@ -43,21 +45,18 @@ app.configure('production', function(){
 });
 
 // Routes
-app.get('/', routes.index );
+/*
 app.get('/404', routes.error );
 app.get('/505', routes.error );
+*/
+app.resource( 'task', task );
+app.resource( index );
 
-
-/* Intance of the task */
-var task = new Task();
-app.get( '/task/list', function( req, res, next ) {
-	task.list( req, res, next );
+/* Intance of the task will be created only if mongo connection is ok */
+mongo.init( function( err, db ) {
+	// Start the WebServer
+	app.listen( config.port );
+	log.debug( f( 'Express server listening on port %d in %s mode',
+		app.address().port, app.settings.env ) );
 } );
-app.put( '/task', function( req, res, next ) {
-	task.add( req, res, next );
-} );
 
-// Start the WebServer
-app.listen( config.port );
-log.debug( f( 'Express server listening on port %d in %s mode',
-	app.address().port, app.settings.env ) );

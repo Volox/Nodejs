@@ -10,37 +10,6 @@
 	},
 	"logger": {
 		"logPath": "logs/",
-		"loggers": {
-			"default": {
-				"file": [
-					{
-						"filename": "volog.log",
-						"maxsize": 204800,
-						"timestamp": "yyyy-mm-dd HH:MM:ss",
-						"json": false
-					},
-					{
-						"filename": "volog-error.log",
-						"maxsize": 204800,
-						"timestamp": "yyyy-mm-dd HH:MM:ss",
-						"json": false,
-						"level": "error"
-					}
-				],
-				"console": {
-					"colorize": true,
-					"timestamp": "yyyy-mm-dd HH:MM:ss"
-				}
-			},
-			"server": {
-				"file": {
-					"targets": "File",
-					"filename": "volog-server.log",
-					"timestamp": "yyyy-mm-dd HH:MM:ss",
-					"maxsize": 204800,
-					"json": false
-				}
-			}
-		}
+		"logConfigFile": "logConfig.json"
 	}
 }

@@ -1,7 +1,7 @@
 // Required libs
 var mongodb = require('mongodb')
   , config = require( '../config' )[ "mongo" ]
-  , log = require( 'winston' );
+  , log = require( '../config' ).logger;
 
 log.debug( 'Mongo wrapper class loaded' );
 
@@ -22,13 +22,11 @@ Mongo = function( host, port, dbName ) {
 		auto_reconnect: true
 	} );
 	this.db = new Db( this.dbName, this.server );
-	
-	this.init();
 };
 
 /* Methods */
 Mongo.prototype = {
-	init: function() {
+	init: function( callback ) {
 		var self = this;
 		this.db.open( function( err, db ) {
 			if( err ) {
@@ -36,7 +34,7 @@ Mongo.prototype = {
 					self.dbName, err ) );
 				process.exit(1);
 			} else {
-				//db.close();
+				callback( db );
 			}
 		} );
 	}

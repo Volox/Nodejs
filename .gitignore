@@ -10,5 +10,8 @@ node_modules
 # Generates css #
 public/stylesheets/*.css
 
-# Config files %
+# Config files #
 config/*.conf
+
+# Sublime files #
+*.sublime*
