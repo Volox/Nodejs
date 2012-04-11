@@ -1,13 +1,50 @@
 {
 	"port": 8080,
+	
 	"task": {
-		"collection": "tasks"
+		"collection": "tasks",
+
+		"testObject": {
+			"name": "Face recognition",
+			"description": "The script recognize the faces in a photo.",
+
+			"taskID": 1,
+
+			"code": "alert('Fatto');",
+
+			"resources": {
+				"resourceID": "path/to/the/resource",
+				"resourceID1": "../path/to/the/resource1",
+				"resourceID2": "path/to/the/resource2",
+				"resourceID3": "/path/to/the/resource3"
+			},
+
+			"requirements": {
+				"minInstance": 20,
+				"maxInstance": 200,
+				"endDate": "2012-04-20"
+			},
+
+			"instances": {
+				"completed": 0,
+				"launched": 0,
+				"running": 0
+			},
+
+			"startDate": null,
+			"creationDate": null,
+			"endDate": null,
+
+			"active": false
+		}
 	},
+
 	"mongo": {
 		"host": "localhost",
 		"port": 27017,
 		"db-name": "test"
 	},
+	
 	"logger": {
 		"logPath": "logs/",
 		"logConfigFile": "logConfig.json"

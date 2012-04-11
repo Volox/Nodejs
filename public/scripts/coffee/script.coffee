@@ -3,7 +3,7 @@ jQuery ($) ->
 		target = $( this ).attr 'href'
 		$.ajax
 			url: target
-			type: 'put'
+			type: 'post'
 			success: ->
 				alert 'Done'
 				return
@@ -11,4 +11,20 @@ jQuery ($) ->
 				alert 'Error while addng the task'
 				return
 		return false
+
+	$( 'span.delete' ).click ->
+		$li = $( this ).closest 'li'
+		$.ajax
+			url: $li.data('url')+'/'+$li.data('taskId')
+			type: 'delete'
+			success: ->
+				alert 'Done'
+				return
+			error: ->
+				alert 'Error while deleting the task'
+				return
+		return false
+
 	return
+
+	

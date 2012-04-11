@@ -78,6 +78,7 @@ function initLogger( config ) {
 			} )
 		]
 	} );
+
 	logger.info( 'Log instance created!' );
 
 	props.logger = logger;

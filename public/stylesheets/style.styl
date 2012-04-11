@@ -48,6 +48,20 @@ body
 		h1
 			margin 0
 			padding 0
+		ul
+			li
+				position relative
+				width 70%
+				linear-bg top, lighten($bc,60%), lighten($bc,80%)
+				&:hover
+					linear-bg top, lighten($bc,80%), lighten($bc,60%)
+				span
+					position absolute
+					top 0
+					right 0
+					cursor pointer
+					img
+				p
 	footer
 		linear-bg top, lighten($bc,90%), lighten($bc,60%)
 		border-bottom-radius $borderRadius

@@ -1,4 +1,4 @@
 {
-	"name": "Task Server",
+	"name": "Task",
 	"main": "./task.js"
 }

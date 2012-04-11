@@ -1,7 +1,9 @@
 h1 Task list
 ul
 	- each task in data
-		- var perc = (task.requirements.minThreshold/100)*task.instances.completed;
-		li #{task.name} (done #{perc}%)
+		- var perc = (task.requirements.minInstance/100)*task.instances.completed;
+		li(data-url="/tasks",data-task-id="#{task.taskID}") #{task.name} (done #{perc}%)
+			span.delete(title="Delete")
+				img(src="/img/delete.png")
 			p= task.description
 			

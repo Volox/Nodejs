@@ -4,16 +4,16 @@
             "color": true,
             "pattern": "%t [%l] - %m",
             "level": "DEBUG",
-            "timestamp": "isoDateTime"
+            "timestamp": "yyyy-mm-dd HH:MM:ss"
         },
         "file": [
             {
+                "maxFiles": null,
+                "level": "INFO",
                 "pattern": "%t [%l] - %m",
                 "filename": "volog.log",
-                "timestamp": "isoDateTime",
-                "maxsize": 500,
-                "maxFiles": null,
-                "level": "INFO"
+                "maxsize": 512000,
+                "timestamp": "yyyy-mm-dd HH:MM:ss"
             },
             {
                 "pattern": "",
