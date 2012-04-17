@@ -1,0 +1,10 @@
+extends layout
+
+block append scripts
+	script(src='/scripts/task.js')
+	script(src='/scripts/taskRun.js')
+
+block content
+	h1 Page test for script loading.
+	script
+		var task = new Task( "#{task}" );

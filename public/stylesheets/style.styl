@@ -13,7 +13,7 @@ a
 	color $lc
 	text-decoration none
 	&:hover
-		color darken($lc,50%)
+		color darken($lc,20%)
 		text-decoration underline
 body
 	font-family $font
@@ -48,20 +48,6 @@ body
 		h1
 			margin 0
 			padding 0
-		ul
-			li
-				position relative
-				width 70%
-				linear-bg top, lighten($bc,60%), lighten($bc,80%)
-				&:hover
-					linear-bg top, lighten($bc,80%), lighten($bc,60%)
-				span
-					position absolute
-					top 0
-					right 0
-					cursor pointer
-					img
-				p
 	footer
 		linear-bg top, lighten($bc,90%), lighten($bc,60%)
 		border-bottom-radius $borderRadius
@@ -78,3 +64,55 @@ body
 			border-radius 10px
 .all > *
 	padding 7px
+
+
+// Task list
+div.taskList
+	ul
+		li
+			position relative
+			width 70%
+			linear-bg top, lighten($bc,60%), lighten($bc,80%)
+			&:hover
+				linear-bg top, lighten($bc,80%), lighten($bc,60%)
+			span
+				position absolute
+				top 0
+				right 0
+				cursor pointer
+				img
+			p
+
+
+// New task
+div.newTask
+	form
+		section
+			border 1px solid $bc
+			border-bottom none
+			padding 1em
+			&:first-child
+				border-top-radius 5px
+			&:last-child
+				border-bottom 1px solid $bc
+				border-bottom-radius 5px
+			&.required
+				background-color lighten( red, 80% )
+			& > .dropzone
+				$color = #999
+				padding 20px
+				background-color lighten( $color, 80% )
+				border 10px dashed $color
+				text-align center
+				color lighten( $color, 40% )
+				font-size 2em
+			&.actions
+				text-align right
+				background-color lighten( $bc, 80% )
+				input
+					margin-left 1em
+					display inline-block
+			label
+				display block
+			input,textarea
+				display block

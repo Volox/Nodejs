@@ -8,8 +8,6 @@
 			"name": "Face recognition",
 			"description": "The script recognize the faces in a photo.",
 
-			"taskID": 1,
-
 			"code": "alert('Fatto');",
 
 			"resources": {
@@ -35,7 +33,7 @@
 			"creationDate": null,
 			"endDate": null,
 
-			"active": false
+			"active": true
 		}
 	},
 

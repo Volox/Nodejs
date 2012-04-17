@@ -1,0 +1,32 @@
+extends ../layout
+
+block append scripts
+
+block content
+	div.newTask
+		h1 Task Creation
+		form(action="/tasks",method="post",enctype="multipart/form-data")
+			section.required
+				label(for="taskName") Name:
+				input#taskName(name="name", type="text", placeholder="Task name")
+			section
+				label(for="taskDescr") Description:
+				textarea#taskDescr(name="description", placeholder="Task description")
+			section.required
+				label(for="taskEndDate") Task end date
+				input#taskEndDate(name="endDate", type="date")
+			section.required
+				label(for="taskMinInstances") Minimum number of instances:
+				input#taskMinInstances(name="minInstances", type="number", placeholder="Enter the min threshold")
+			section
+				label(for="taskMaxInstances") Maximum number of instances:
+				input#taskMaxInstances(name="maxInstances", type="number", placeholder="Enter the max threshold")
+			section.required
+				label(for="taskCode") Select the file with the code:
+				input#taskCode(name="code", type="file")
+			section
+				div.dropzone Dropzone
+				ul.fileList
+			section.actions
+				input(type="reset", value="Resetta")
+				input(type="submit", value="Invia")

@@ -4,7 +4,6 @@
     "private": true,
     "dependencies": {
         "express": ">= 0.0.1"
-        , "express-resource": ">= 0.0.1"
         , "stylus": ">= 0.0.1"
         , "coffee-script": ">= 0.0.1"
         , "jade": ">= 0.0.1"

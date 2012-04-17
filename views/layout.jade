@@ -2,14 +2,19 @@
 html
 	head
 		title #{title}
-		link(rel='stylesheet', href='/stylesheets/style.css')
-		script(src='/scripts/jquery.js')
-		script(src='/scripts/script.js')
+		
+		block css
+			link(rel='stylesheet', href='/stylesheets/style.css')
+
+		block scripts
+			script(src='/scripts/jquery.js')
+			script(src='/scripts/script.js')
 	body
 		div.all
 			header
 				img(src='/img/logo.jpg', title='Logo', alt='Logo')
-			section.content!=body
+			section.content
+				block content
 			footer
 				span Powered by Volox
 				img(src="/img/vologo.jpg",title="Volox",alt="Volox")
