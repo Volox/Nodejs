@@ -27,8 +27,10 @@ if ( !loaded ) {
 	try {
 		props = JSON.parse( fs.readFileSync(prop_file, 'utf8') );
 		loaded = true;
+
 		// Set the port for the server
 		props.port = process.env.PORT || props.port;
+
 		// init the app
 		init( props );
 	} catch( err ) {
@@ -38,18 +40,24 @@ if ( !loaded ) {
 	exports = module.exports = props;
 }
 
+
+
 function init( config ) {
 	log.debug( 'Initialization' );
-	initLogger( config[ 'logger' ] )
+	initLogger( config[ 'logger' ] );
+	initTask( config[ 'task' ] );
+	initMongo( config[ 'mongo' ] );
 }
+
 function initLogger( config ) {
 	log.debug( 'Logger initialization' );
 	
-	var logPath = config.logPath;
-	if( !path.existsSync( logPath ) ) {
-		fs.mkdirSync( logPath );
+	if( !path.existsSync( config.path ) ) {
+		fs.mkdirSync( config.path );
 	}
 	
+	var logPath = config.path;
+
 	// Read log configuration file
 	var logConf = JSON.parse( fs.readFileSync( __dirname + '/' + config.logConfigFile, 'utf8') );
 	
@@ -74,7 +82,7 @@ function initLogger( config ) {
 				level: logConf.appenders.file[0].level.toLowerCase(),
 				maxsize: logConf.appenders.file[0].maxsize,
 				maxFiles: logConf.appenders.file[0].maxFiles,
-				filename: logPath + logConf.appenders.file[0].filename
+				filename: logPath +'/'+ logConf.appenders.file[0].filename
 			} )
 		]
 	} );
@@ -82,4 +90,16 @@ function initLogger( config ) {
 	logger.info( 'Log instance created!' );
 
 	props.logger = logger;
+}
+
+function initTask( config ) {
+	if( !path.existsSync( config.path ) ) {
+		fs.mkdirSync( config.path );
+	}
+}
+
+function initMongo( config ) {
+	if( !path.existsSync( config.path ) ) {
+		fs.mkdirSync( config.path );
+	}
 }

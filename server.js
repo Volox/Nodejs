@@ -22,9 +22,6 @@ var routes = require('./routes')
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
-  app.locals.use( function(req, res) {
-    res.locals[ 'layout' ] = true;
-  } );
   
   app.use(express.favicon());
   app.use(express.logger('dev'));
@@ -35,7 +32,7 @@ app.configure(function(){
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
   app.use(express.static(__dirname + '/public'));
   
-  app.use(express.bodyParser( {uploadDir: __dirname+'/uploads'} ));
+  app.use(express.bodyParser( {uploadDir: __dirname+'/'+config["task"].path} ));
   app.use(express.methodOverride());
   
   app.use(app.router);

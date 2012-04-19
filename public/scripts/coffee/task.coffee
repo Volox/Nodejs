@@ -6,38 +6,87 @@ class Task
 		@detailsUrl = @url+'/details/json'
 		@resultUrl = @url+'/result'
 
+		#Task specific data
+		@name = null
+		@description = null
+		@code = null
+
 		@result = null
 
-		@init()
+		@taskInstance = null
+
+		@readyCallbacks = []
 
 	init: ->
 		$.ajax
 			url: @detailsUrl
 			type: 'get'
 			dataType: 'json'
-			success: =>
-				console.log  'success', arguments
+			success: (data, textStatus, jqXHR) =>
+				#console.log  'success', arguments
+				@name = data.name
+				@code = data.code
+				@description = data.description
+
+				@taskInstance = eval @code
+
+				@ready()
 				return
-			error: =>
-				console.log  'error', arguments
+			error: (jqXHR, textStatus, errorThrown) =>
+				#console.log  'error', arguments
 				return
 		return
 
-	getCode: ->
+	ready: ->
+		for callback in @readyCallbacks
+			callback()
+		return
+	onReady: (callback) ->
+		@readyCallbacks.push callback
+		return
+
+	getCode: (callback, errorCallback ) ->
+		errorCallback = errorCallback || callback
 		$.ajax
 			url: @codeUrl
 			type: 'get'
-			dataType: 'script'
-			success: =>
-				console.log  'code success', arguments
+			success: (data, textStatus, jqXHR) =>
+				#console.log  'code success', arguments
+
+				@taskInstance = eval data
+
+				callback.apply null, arguments
 				return
-			error: =>
-				console.log  'code error', arguments
+			error: (jqXHR, textStatus, errorThrown) =>
+				#console.log  'code error', arguments
+				errorCallback.apply null, arguments
 				return
 		return
 
-	addScript: ->
+	addScript: (placeholder) ->
+		placeholder = placeholder || document
+
+		el = $ placeholder
+
+		script = document.createElement 'script'
+		script.src = @codeUrl
+		el.each ->
+			this.appendChild script
+			return
 		
+		###
+		@getCode ( data ) ->
+			#console.log 'AddScript', data
+			el = $ placeholder
+			script = $ '<script>',
+				text: 'alert("Wow!")'
+			el.append script
+			return
+		###
+		return
+
+	run: ->
+		@taskInstance.run()
 		return
 
 	sendResult: ->

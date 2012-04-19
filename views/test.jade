@@ -7,4 +7,12 @@ block append scripts
 block content
 	h1 Page test for script loading.
 	script
-		var task = new Task( "#{task}" );
+		jQuery( document ).ready( function() {
+			var task = new Task( "#{task}" );
+			task.onReady( function() {
+				task.run();
+			} );
+			task.init();
+		});
+	button run
+	div.placeholder

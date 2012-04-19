@@ -2,6 +2,7 @@
 	"port": 8080,
 	
 	"task": {
+		"path": "uploads",
 		"collection": "tasks",
 
 		"testObject": {
@@ -40,11 +41,13 @@
 	"mongo": {
 		"host": "localhost",
 		"port": 27017,
-		"db-name": "test"
+		"db-name": "test",
+
+		"path": "data"
 	},
 	
 	"logger": {
-		"logPath": "logs/",
+		"path": "logs",
 		"logConfigFile": "logConfig.json"
 	}
 }

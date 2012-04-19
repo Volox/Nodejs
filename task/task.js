@@ -154,9 +154,12 @@ Task.prototype = {
     //  GET /tasks/:task/code
     code: function(req, res) {
       var taskId = req.params.task;
+      var findObj = {
+        _id: new ObjectID( taskId )
+      };
       this.tasks.mongo( 'findOne', findObj, function( err, docs ) {
-        log.debug( f( 'Task %s details', taskId ) );
-        res.sendfile( docs.code );
+        log.debug( f( 'Task %s code', taskId ) );
+        res.send( docs.code );
       } );
     },
 
