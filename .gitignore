@@ -1,8 +1,8 @@
 # Logs #
-logs*
+logs/*
 
 # MongoDB data #
-data*
+data/*
 
 # Modules #
 node_modules
@@ -15,7 +15,7 @@ public/scripts/*.js
 
 
 # Sublime files #
-*.sublime*
+
 
 # Uploaded files #
 uploads/*
