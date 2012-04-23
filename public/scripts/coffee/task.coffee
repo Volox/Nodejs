@@ -8,6 +8,7 @@ class Task
 
 		#Task specific data
 		@name = null
+		@id = null
 		@description = null
 		@code = null
 
@@ -27,13 +28,14 @@ class Task
 				@name = data.name
 				@code = data.code
 				@description = data.description
+				@id = data._id
 
 				@taskInstance = eval @code
 
 				@ready()
 				return
 			error: (jqXHR, textStatus, errorThrown) =>
-				#console.log  'error', arguments
+				console.log  'error', arguments
 				return
 		return
 
@@ -63,38 +65,28 @@ class Task
 				return
 		return
 
+	###
 	addScript: (placeholder) ->
 		placeholder = placeholder || document
 
 		el = $ placeholder
 
+		# can't use jquery for debugging purposes
 		script = document.createElement 'script'
 		script.src = @codeUrl
 		el.each ->
 			this.appendChild script
 			return
 		
-		###
-		@getCode ( data ) ->
-			#console.log 'AddScript', data
-			el = $ placeholder
-			script = $ '<script>',
-				text: 'alert("Wow!")'
-			el.append script
-			return
-		###
 		return
+	###
 
 	run: ->
 		@taskInstance.run()
 		return
 
 	sendResult: ->
-		url = @resultUrl
-		method = 'put'
-
-		console.log "sending PUT #{url}"
-
+		@taskInstance.send( @resultUrl );
 		return
 
 
