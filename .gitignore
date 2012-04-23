@@ -7,11 +7,12 @@ data*
 # Modules #
 node_modules
 
-# Generates css #
+# Generated css/js #
 public/stylesheets/*.css
+public/scripts/*.js
 
 # Config files #
-config/*.conf
+
 
 # Sublime files #
 *.sublime*

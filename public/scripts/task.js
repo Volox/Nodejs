@@ -14,6 +14,7 @@
       this.detailsUrl = this.url + '/details/json';
       this.resultUrl = this.url + '/result';
       this.name = null;
+      this.id = null;
       this.description = null;
       this.code = null;
       this.result = null;
@@ -31,10 +32,13 @@
           _this.name = data.name;
           _this.code = data.code;
           _this.description = data.description;
+          _this.id = data._id;
           _this.taskInstance = eval(_this.code);
           _this.ready();
         },
-        error: function(jqXHR, textStatus, errorThrown) {}
+        error: function(jqXHR, textStatus, errorThrown) {
+          console.log('error', arguments);
+        }
       });
     };
 
@@ -67,36 +71,29 @@
       });
     };
 
-    Task.prototype.addScript = function(placeholder) {
-      var el, script;
-      placeholder = placeholder || document;
-      el = $(placeholder);
-      script = document.createElement('script');
-      script.src = this.codeUrl;
-      el.each(function() {
-        this.appendChild(script);
-      });
-      /*
-      		@getCode ( data ) ->
-      			#console.log 'AddScript', data
-      			el = $ placeholder
-      			script = $ '<script>',
-      				text: 'alert("Wow!")'
-      			el.append script
-      			return
-      */
+    /*
+    	addScript: (placeholder) ->
+    		placeholder = placeholder || document
+    
+    		el = $ placeholder
+    
+    		# can't use jquery for debugging purposes
+    		script = document.createElement 'script'
+    		script.src = @codeUrl
+    		el.each ->
+    			this.appendChild script
+    			return
+    		
+    		return
+    */
 
-    };
 
     Task.prototype.run = function() {
       this.taskInstance.run();
     };
 
     Task.prototype.sendResult = function() {
-      var method, url;
-      url = this.resultUrl;
-      method = 'put';
-      console.log("sending PUT " + url);
+      this.taskInstance.send(this.resultUrl);
     };
 
     return Task;
