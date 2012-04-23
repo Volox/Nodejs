@@ -9,7 +9,7 @@
         , "jade": ">= 0.0.1"
 		, "mongodb": ">= 0.0.1"
         , "mongolia": ">= 0.0.1"
-		, "winston": ">= 0.0.1"
+		, "bunyan": ">= 0.0.1"
     },
     "engines": {
         "node": "0.6.x",

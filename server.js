@@ -3,15 +3,15 @@
  * Module dependencies.
  */
 
+var config = require('./config')
+  , log = config.logger;
+
 var express = require('express')
   , http = require('http');
 
 var app = express();
 
-var config = require('./config')
-  , log = config.logger
-  , express = require('express')
-  , stylus = require('stylus')
+var stylus = require('stylus')
   , mongo = require('./mongo-wrap').instance;
 
 // Routes

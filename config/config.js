@@ -37,9 +37,7 @@ if ( !loaded ) {
 		log.error( err );
 	}
 	
-	exports = module.exports = props;
 }
-
 
 
 function init( config ) {
@@ -62,6 +60,46 @@ function initLogger( config ) {
 	var logConf = JSON.parse( fs.readFileSync( __dirname + '/' + config.logConfigFile, 'utf8') );
 	
 	// Configure the logger
+	var Logger = require( 'bunyan' );
+
+	var logObj = {
+		name: 'Volog',
+		streams: []
+	};
+
+	for( var type in logConf ) {
+
+		if( type.toLowerCase()==='console' ) {
+			
+			logObj.streams.push( {
+				stream: process.stdout,
+				level: logConf[ type ].level.toLowerCase()
+			} );
+
+		} else if( type.toLowerCase()==='file' ) {
+
+			var addLogger = function( obj ) {
+
+				// TODO: Add support for max fileSize and max files
+				logObj.streams.push( {
+					path: logPath + '/' + obj.fileName,
+					level: obj.level.toLowerCase(),
+
+					src: obj.source
+				} );
+			};
+
+			if( util.isArray( logConf[ type ] ) ) {
+				logConf[ type ].forEach( function() {
+					addLogger( this );
+				} );
+			} else {
+				addLogger( logConf[ type ] );
+			}
+		}
+	}
+	var logger = new Logger( logObj );
+	/*
 	var winston = require( 'winston' );
 	var logger = new (winston.Logger)( {
 		transports: [
@@ -86,6 +124,7 @@ function initLogger( config ) {
 			} )
 		]
 	} );
+	*/
 
 	logger.info( 'Log instance created!' );
 
@@ -103,3 +142,7 @@ function initMongo( config ) {
 		fs.mkdirSync( config.path );
 	}
 }
+
+
+
+exports = module.exports = props;

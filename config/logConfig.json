@@ -1,28 +1,20 @@
 {
-    "appenders": {
-        "console": {
-            "color": true,
-            "pattern": "%t [%l] - %m",
-            "level": "DEBUG",
-            "timestamp": "yyyy-mm-dd HH:MM:ss"
-        },
-        "file": [
-            {
-                "maxFiles": null,
-                "level": "INFO",
-                "pattern": "%t [%l] - %m",
-                "filename": "volog.log",
-                "maxsize": 512000,
-                "timestamp": "yyyy-mm-dd HH:MM:ss"
-            },
-            {
-                "pattern": "",
-                "filename": "",
-                "timestamp": "",
-                "level": "ERROR"
-            }
-        ]
+    "console": {
+        "level": "trace"
     },
-    "filenameError": "volog-error.log",
-    "filename": "volog.log"
+    "file": [
+        {
+            "fileName": "volog.log",
+            "level": "info",
+            
+            "maxSize": 512000,
+            "maxFiles": null
+        },
+        {
+            "fileName": "volog-error.log",
+            "level": "error",
+
+            "source": true
+        }
+    ]
 }
