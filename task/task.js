@@ -1,9 +1,6 @@
 // Required libs
-var mongo = require('../mongo-wrap').instance
-  , mongolia = require('mongolia')
-  , ObjectID = require('mongodb').ObjectID
-  , config = require( '../config' )[ "task" ]
-  , log = require( '../config' ).logger;
+var config = require( '../config' ).get( "task" )
+    log = config.logger;
 
 var fs = require( 'fs' );
 log.debug( 'Task class loaded' );
@@ -24,6 +21,7 @@ var Task = function( db ) {
 Task.prototype = {
 
   init: function() {
+    /*
     this.tasks = mongolia.model( this.db, config.collection );
 
     this.tasks.beforeInsert = function(documents, callback) {
@@ -51,7 +49,7 @@ Task.prototype = {
       //log.debug( f( 'Removed from task with query: %j', query ) );
       callback( null,  query );
     };
-
+    */
   },
 
   do: function( action ) {
@@ -71,6 +69,7 @@ Task.prototype = {
     // GET /tasks | /tasks/list
     list: function(req, res) {
       // Find only the active tasks
+      /*
       this.tasks.mongo( 'findArray', { active: true }, function( i, array ) {
         
         res.render( 'task/list', {
@@ -79,6 +78,7 @@ Task.prototype = {
         } );
 
       } );
+      */
     },
 
     // GET /tasks/new
@@ -112,10 +112,13 @@ Task.prototype = {
       },
       */
 
+
+      /*
       this.tasks.mongo( 'insert', taskObj, function( err, docs ) {
         log.debug( 'Insert Errors -> '+err );
         res.redirect( '/tasks/list' );
       } );
+*/
     },
 
     // DELETE /tasks/:task
@@ -125,10 +128,13 @@ Task.prototype = {
         _id: new ObjectID( taskId )
       };
 
+
+      /*
       this.tasks.mongo( 'remove', taskObj, function( err, docs ) {
         log.debug( 'remove Errors -> '+docs );
         res.send( f( 'task #%s removed', taskId ) );
       } );
+      */
     },
 
     // GET  /tasks/:task/:format? | /tasks/:task/details/:format?
@@ -144,10 +150,12 @@ Task.prototype = {
         var findObj = {
           _id: new ObjectID( taskId )
         }
+        /*
         this.tasks.mongo( 'findOne', findObj, function( err, docs ) {
           log.debug( f( 'Task %s details', taskId ) );
           res.json( docs );
         } );
+        */
       }
     },
 
@@ -157,10 +165,13 @@ Task.prototype = {
       var findObj = {
         _id: new ObjectID( taskId )
       };
+
+      /*
       this.tasks.mongo( 'findOne', findObj, function( err, docs ) {
         log.debug( f( 'Task %s code', taskId ) );
         res.send( docs.code );
       } );
+      */
     },
 
     // GET  /tasks/:task/resource | /tasks/:task/res

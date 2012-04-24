@@ -117,6 +117,8 @@ function initMongo( config ) {
 		var db = mongo.connect( dbUrl );
 
 		var tasksCollection = db.collection( 'tasks' );
+
+		mongoObj.db = db;
 		
 		props.mongo = mongoObj;
 	}
@@ -136,28 +138,30 @@ function initMongo( config ) {
 
 
 /* Load the configuration file */
-if ( !loaded ) {
-	log.debug( f( 'Loading configuration file @ %s', prop_file ) );
-	try {
-		fs.readFile( prop_file, 'utf8', function( err, data ) {
-			console.log( "Error", err );
+exports = module.exports = {
+	init: function( callback ) {
+		log.debug( f( 'Loading configuration file @ %s', prop_file ) );
+		try {
+			fs.readFile( prop_file, 'utf8', function( err, data ) {
+				props = JSON.parse( data );
+				
+				// Set the port for the server
+				props.port = process.env.PORT || props.port;
 
-			props = JSON.parse( data );
-			
-			// Set the app as loaded
-			loaded = true;
-			
-			// Set the port for the server
-			props.port = process.env.PORT || props.port;
+				// init the app
+				init( props );
 
-			// init the app
-			init( props );
-			
-			exports = module.exports = props;
-		} );
+				callback( props );
+			} );
 
-	} catch( err ) {
-		log.error( "asdasdasdasd", err );
-	}
-	
-}
+		} catch( err ) {
+			log.error( "Error while reading configuration file", err );
+		}
+	},
+
+	get: function( property ) {
+		return props[ property ]
+	},
+
+	logger: log
+};
