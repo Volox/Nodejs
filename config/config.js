@@ -4,14 +4,12 @@ Configuration file
 // Required libs
 
 require( '../utils' );
-var fs = require( 'fs' )
-  , path = require( 'path' )
-  , util = require( 'util' );
+var fs = require( 'fs' ),
+    path = require( 'path' ),
+    util = require( 'util' );
  
 var prop_file = __dirname + '/configuration.json';
 var props = {};
-var default_props = {
-};
 
 /* Console logger - Default */
 var log = console;
@@ -20,25 +18,6 @@ log.debug = console.log;
 
 /* Singleton instance */
 var loaded = false;
-
-/* Load the configuration file */
-if ( !loaded ) {
-	log.debug( 'Loading configuration file' );
-	try {
-		props = JSON.parse( fs.readFileSync(prop_file, 'utf8') );
-		loaded = true;
-
-		// Set the port for the server
-		props.port = process.env.PORT || props.port;
-
-		// init the app
-		init( props );
-	} catch( err ) {
-		log.error( err );
-	}
-	
-}
-
 
 function init( config ) {
 	log.debug( 'Initialization' );
@@ -50,99 +29,135 @@ function init( config ) {
 function initLogger( config ) {
 	log.debug( 'Logger initialization' );
 	
-	if( !path.existsSync( config.path ) ) {
-		fs.mkdirSync( config.path );
-	}
-	
-	var logPath = config.path;
-
-	// Read log configuration file
-	var logConf = JSON.parse( fs.readFileSync( __dirname + '/' + config.logConfigFile, 'utf8') );
-	
-	// Configure the logger
-	var Logger = require( 'bunyan' );
-
-	var logObj = {
-		name: 'Volog',
-		streams: []
-	};
-
-	for( var type in logConf ) {
-
-		if( type.toLowerCase()==='console' ) {
+	// Configuration function for the logger
+	function configureLogger( configuration ) {
+		var conf = configuration;
+		
+		// Configure the logger
+		var winston = require( 'winston' );
+		var transports = [];
+		for( var type in logConf ) {
 			
-			logObj.streams.push( {
-				stream: process.stdout,
-				level: logConf[ type ].level.toLowerCase()
-			} );
-
-		} else if( type.toLowerCase()==='file' ) {
-
-			var addLogger = function( obj ) {
-
-				// TODO: Add support for max fileSize and max files
-				logObj.streams.push( {
-					path: logPath + '/' + obj.fileName,
-					level: obj.level.toLowerCase(),
-
-					src: obj.source
-				} );
+			// Set generic properties to the object
+			var logObj = {
+				level: logConf[ type ].level,
+				timestamp: true
 			};
 
-			if( util.isArray( logConf[ type ] ) ) {
-				logConf[ type ].forEach( function() {
-					addLogger( this );
-				} );
-			} else {
-				addLogger( logConf[ type ] );
+			// Console Appender
+			if( type.toLowerCase()==='console' ) {
+				logObj.colorize = true;
+
+
+			// File Appender
+			} else if( type.toLowerCase()==='file' ) {
+				logObj.maxsize = logConf[ type ][0].maxSize;
+				logObj.maxFiles = logConf[ type ][0].maxFiles;
+				logObj.fileName = logPath +'/'+ logConf[ type ][0].fileName;
 			}
+
+			type = type.charAt(0).toupperCase()+type.slice(1);
+
+			var transportInstance = new ( winston.transports[ type ] )( logObj );
+
+			transports.push( transportInstance );
 		}
+
+		var logger = new (winston.Logger)( {
+			transports: transports
+		} );
+
+		logger.info( 'Log instance created!' );
+
+		props.logger = logger;
 	}
-	var logger = new Logger( logObj );
-	/*
-	var winston = require( 'winston' );
-	var logger = new (winston.Logger)( {
-		transports: [
-			new (winston.transports.Console)( {
-				colorize: logConf.appenders.console.color,
-				level: logConf.appenders.console.level.toLowerCase(),
-				timestamp: function() {
-					var now = new Date();
-					return now.format( logConf.appenders.console.timestamp );
-				},
-			} ),
-			new (winston.transports.File)( {
-				timestamp: function() {
-					var now = new Date();
-					return now.format( logConf.appenders.file[0].timestamp );
-				},
-				json: false,
-				level: logConf.appenders.file[0].level.toLowerCase(),
-				maxsize: logConf.appenders.file[0].maxsize,
-				maxFiles: logConf.appenders.file[0].maxFiles,
-				filename: logPath +'/'+ logConf.appenders.file[0].filename
-			} )
-		]
+
+
+	// Create the log path
+	path.exists( config.path, function( exists ) {
+		if( !exists ) {
+			fs.mkdir( config.path, function() {
+				var fileFullPath;
+
+				fileFullPath = __dirname + '/' + config.logConfigFile;
+
+				fs.readFile( fileFullPath, 'utf8', function( err, data ) {
+					var logConfiguration = JSON.parse( data );
+					configureLogger( logConfiguration );
+				} );
+			} );
+		}
 	} );
-	*/
 
-	logger.info( 'Log instance created!' );
-
-	props.logger = logger;
 }
 
 function initTask( config ) {
-	if( !path.existsSync( config.path ) ) {
-		fs.mkdirSync( config.path );
+
+	function configureTask( configuration ) {
 	}
+
+
+	path.exists( config.path, function( exists ) {
+		if( !exists ) {
+			fs.mkdir( config.path, function() {
+				
+				// Configure the tasks
+				configureTask( config );
+			} );
+		}
+	} );
 }
 
 function initMongo( config ) {
-	if( !path.existsSync( config.path ) ) {
-		fs.mkdirSync( config.path );
+	var mongo = require( 'mongojs' );
+	
+	function configureMongo( configuration ) {
+		var mongoObj = {};
+		var dbUrl = f( '%s:%d/%s', configuration.host, configuration.port, configuration['db-name'] );
+		var db = mongo.connect( dbUrl );
+
+		var tasksCollection = db.collection( 'tasks' );
+		
+		props.mongo = mongoObj;
 	}
+
+
+	path.exists( config.path, function( exists ) {
+		if( !exists ) {
+			fs.mkdir( config.path, function() {
+				
+				// Configure mongo
+				configureMongo( config );
+			} );
+		}
+	} );
 }
 
 
 
-exports = module.exports = props;
+/* Load the configuration file */
+if ( !loaded ) {
+	log.debug( f( 'Loading configuration file @ %s', prop_file ) );
+	try {
+		fs.readFile( prop_file, 'utf8', function( err, data ) {
+			console.log( "Error", err );
+
+			props = JSON.parse( data );
+			
+			// Set the app as loaded
+			loaded = true;
+			
+			// Set the port for the server
+			props.port = process.env.PORT || props.port;
+
+			// init the app
+			init( props );
+			
+			exports = module.exports = props;
+		} );
+
+	} catch( err ) {
+		log.error( "asdasdasdasd", err );
+	}
+	
+}

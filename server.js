@@ -4,19 +4,16 @@
  */
 
 var config = require('./config')
-  , log = config.logger;
 
 var express = require('express')
   , http = require('http');
 
-var app = express();
-
-var stylus = require('stylus')
-  , mongo = require('./mongo-wrap').instance;
+var app = express(),
+    stylus = require('stylus');
 
 // Routes
-var routes = require('./routes')
-  , Task = require('./task')
+var routes = require('./routes'),
+    Task = require('./task')
 
 
 app.configure(function(){
@@ -32,7 +29,7 @@ app.configure(function(){
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
   app.use(express.static(__dirname + '/public'));
   
-  app.use(express.bodyParser( {uploadDir: __dirname+'/'+config["task"].path} ));
+  //app.use(express.bodyParser( {uploadDir: __dirname+'/'+config["task"].path} ));
   app.use(express.methodOverride());
   
   app.use(app.router);
@@ -58,6 +55,7 @@ app.get('/test/:task', routes.test );
 var server = http.createServer(app);
 
 /* Intance of the task will be created only if mongo connection is ok */
+/*
 mongo.init( function( db ) {
   // Start the task repository
   var task = new Task( db );
@@ -81,6 +79,7 @@ mongo.init( function( db ) {
 	log.debug( f( 'Express server listening on port %d in %s mode',
 		server.address().port, app.settings.env ) );
 } );
+*/
 
 
 

@@ -1,6 +1,7 @@
 {
     "console": {
-        "level": "trace"
+        "level": "trace",
+        "color": false
     },
     "file": [
         {
@@ -12,9 +13,7 @@
         },
         {
             "fileName": "volog-error.log",
-            "level": "error",
-
-            "source": true
+            "level": "error"
         }
     ]
 }
