@@ -3,7 +3,9 @@
  * Module dependencies.
  */
 
-var config = require('./config'),
+var config = require('./config');
+
+var log = config.logger,
     express = require('express'),
     http = require('http');
 
@@ -27,7 +29,7 @@ app.configure(function(){
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
   app.use(express.static(__dirname + '/public'));
   
-  app.use(express.bodyParser( {uploadDir: __dirname+'/uploads' } ) );
+  app.use(express.bodyParser( {uploadDir: __dirname+'/'+config.task.path } ) );
   app.use(express.methodOverride());
   
   app.use(app.router);
@@ -43,21 +45,26 @@ app.get( '/', routes.index );
 app.post( '/uploadAjax', routes.uploadAjax );
 
 // Errors
-app.get('/404', routes.error );
-app.get('/505', routes.error );
+app.get('/404', routes.error40x );
+app.get('/505', routes.error50x );
 
 
 app.get('/test/:task', routes.test );
 
-
+app.all( '/*', routes.missing );
 var server = http.createServer(app);
 
-/* Intance of the task will be created only if mongo connection is ok */
-config.init( function( configuration ) {
-  // Start the task repository
-  var Task = require( 'task' );
-  var task = new Task( configuration.mongo.db );
+server.listen( config.port );
+  log.debug( f( 'Express server listening on port %d in %s mode',
+    server.address().port, app.settings.env ) );
 
+/* Intance of the task will be created only if mongo connection is ok */
+// Start the task repository
+/*
+var Task = require( 'task' );
+var task = new Task( configuration.mongo.db );
+*/
+/*
   // Bind resources
   app.post( '/tasks', task.do( 'create' ) );
   app.get( '/tasks/new', task.do( 'new' ) );
@@ -76,4 +83,4 @@ config.init( function( configuration ) {
   server.listen( config.port );
 	log.debug( f( 'Express server listening on port %d in %s mode',
 		server.address().port, app.settings.env ) );
-} );
+*/

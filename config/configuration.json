@@ -1,5 +1,5 @@
 {
-	"port": 8090,
+	"port": 8080,
 	
 	"task": {
 		"path": "uploads",
@@ -48,6 +48,19 @@
 	
 	"logger": {
 		"path": "logs",
-		"logConfigFile": "logConfig.json"
+		"configuration": {
+		    "console": {
+		        "level": "debug",
+		        "color": false,
+		        "json": false
+		    },
+		    "file": {
+	            "fileName": "volog.log",
+	            "level": "info",
+	            
+	            "maxSize": 512000,
+	            "maxFiles": null
+	        }
+		}
 	}
 }

@@ -6,32 +6,35 @@ Configuration file
 require( '../utils' );
 var fs = require( 'fs' ),
     path = require( 'path' ),
-    util = require( 'util' );
+    util = require( 'util' ),
+    nconf = require( 'nconf' );
  
-var prop_file = __dirname + '/configuration.json';
+var configurationFile = __dirname + '/configuration.json';
+
+
+// First load arguments from the console
+nconf.argv().env().file( {
+	file: configurationFile
+} );
+
+
 var props = {};
 
-/* Console logger - Default */
-var log = console;
-// Fallback to the console logger if the logger fails
-log.debug = console.log;
+function init() {
+	console.log( 'Initialization' );
+	props.port = nconf.get( 'port' );
 
-/* Singleton instance */
-var loaded = false;
-
-function init( config ) {
-	log.debug( 'Initialization' );
-	initLogger( config[ 'logger' ] );
-	initTask( config[ 'task' ] );
-	initMongo( config[ 'mongo' ] );
+	initLogger( nconf.get( 'logger' ) );
+	initTask( nconf.get( 'task' ) );
+	initMongo( nconf.get( 'mongo' ) );
 }
 
 function initLogger( config ) {
-	log.debug( 'Logger initialization' );
+	console.log( 'Logger initialization' );
 	
 	// Configuration function for the logger
 	function configureLogger( configuration ) {
-		var conf = configuration;
+		var logConf = configuration;
 		
 		// Configure the logger
 		var winston = require( 'winston' );
@@ -44,6 +47,7 @@ function initLogger( config ) {
 				timestamp: true
 			};
 
+
 			// Console Appender
 			if( type.toLowerCase()==='console' ) {
 				logObj.colorize = true;
@@ -51,12 +55,13 @@ function initLogger( config ) {
 
 			// File Appender
 			} else if( type.toLowerCase()==='file' ) {
-				logObj.maxsize = logConf[ type ][0].maxSize;
-				logObj.maxFiles = logConf[ type ][0].maxFiles;
-				logObj.fileName = logPath +'/'+ logConf[ type ][0].fileName;
+				logObj.maxsize = logConf[ type ].maxSize;
+				logObj.maxFiles = logConf[ type ].maxFiles;
+				logObj.filename = config.path +'/'+ logConf[ type ].fileName;
 			}
 
-			type = type.charAt(0).toupperCase()+type.slice(1);
+			// Use the type name to Create a transport instance
+			type = type.charAt(0).toUpperCase()+type.slice(1);
 
 			var transportInstance = new ( winston.transports[ type ] )( logObj );
 
@@ -74,38 +79,27 @@ function initLogger( config ) {
 
 
 	// Create the log path
-	path.exists( config.path, function( exists ) {
-		if( !exists ) {
-			fs.mkdir( config.path, function() {
-				var fileFullPath;
+	if( !path.existsSync( config.path ) ) {
+		fs.mkdirSync( config.path );
+	}
 
-				fileFullPath = __dirname + '/' + config.logConfigFile;
-
-				fs.readFile( fileFullPath, 'utf8', function( err, data ) {
-					var logConfiguration = JSON.parse( data );
-					configureLogger( logConfiguration );
-				} );
-			} );
-		}
-	} );
-
+	configureLogger( config.configuration );
 }
 
 function initTask( config ) {
 
 	function configureTask( configuration ) {
+		var taskObj = configuration;
+
+		props.task = taskObj;
 	}
 
+	// Create the Task path
+	if( !path.existsSync( config.path ) ) {
+		fs.mkdirSync( config.path );
+	}
 
-	path.exists( config.path, function( exists ) {
-		if( !exists ) {
-			fs.mkdir( config.path, function() {
-				
-				// Configure the tasks
-				configureTask( config );
-			} );
-		}
-	} );
+	configureTask( config );
 }
 
 function initMongo( config ) {
@@ -123,45 +117,18 @@ function initMongo( config ) {
 		props.mongo = mongoObj;
 	}
 
+	// Create the Task path
+	if( !path.existsSync( config.path ) ) {
+		fs.mkdirSync( config.path );
+	}
 
-	path.exists( config.path, function( exists ) {
-		if( !exists ) {
-			fs.mkdir( config.path, function() {
-				
-				// Configure mongo
-				configureMongo( config );
-			} );
-		}
-	} );
+	// Configure mongo
+	configureMongo( config );
 }
 
 
+// Call the generic initialization element
+init();
 
-/* Load the configuration file */
-exports = module.exports = {
-	init: function( callback ) {
-		log.debug( f( 'Loading configuration file @ %s', prop_file ) );
-		try {
-			fs.readFile( prop_file, 'utf8', function( err, data ) {
-				props = JSON.parse( data );
-				
-				// Set the port for the server
-				props.port = process.env.PORT || props.port;
-
-				// init the app
-				init( props );
-
-				callback( props );
-			} );
-
-		} catch( err ) {
-			log.error( "Error while reading configuration file", err );
-		}
-	},
-
-	get: function( property ) {
-		return props[ property ]
-	},
-
-	logger: log
-};
+// Export all the available properties
+exports = module.exports = props;

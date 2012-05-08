@@ -8,6 +8,7 @@ var path = require('path');
 exports.cors = function(req, res, next ) {
 	// add header to all the requests for CROSS DOMAIN AJAX
   	res.set( 'Access-Control-Allow-Origin', '*' );
+  	res.set( 'Access-Control-Allow-Headers', 'X-Requested-With');
 	next();
 };
 
@@ -16,8 +17,18 @@ exports.index = function(req, res){
 		title: 'Homepage'
 	});
 };
-exports.error = function(req, res){
-	res.send( 'FUUUU' );
+exports.error40x = function(req, res){
+	res.render('error', {
+		title: 'Error'
+	});
+};
+exports.error50x = function(req, res){
+	res.render('error', {
+		title: 'Error'
+	});
+};
+exports.missing = function(req, res){
+	res.redirect( '/404' );
 };
 
 
