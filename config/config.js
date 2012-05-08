@@ -44,14 +44,16 @@ function initLogger( config ) {
 			// Set generic properties to the object
 			var logObj = {
 				level: logConf[ type ].level,
-				timestamp: true
+				timestamp: function() {
+					return ( new Date() ).getTime();
+				}
 			};
 
 
 			// Console Appender
 			if( type.toLowerCase()==='console' ) {
 				logObj.colorize = true;
-
+				logObj.timestamp = true;
 
 			// File Appender
 			} else if( type.toLowerCase()==='file' ) {
