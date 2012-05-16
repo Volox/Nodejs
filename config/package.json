@@ -1,4 +1,4 @@
 {
-	"name": "config",
+	"name": "Configuration module",
 	"main": "./config.js"
 }

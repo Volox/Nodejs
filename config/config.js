@@ -2,8 +2,8 @@
 Configuration file
 */
 // Required libs
-
 require( '../utils' );
+
 var fs = require( 'fs' ),
     path = require( 'path' ),
     util = require( 'util' ),
@@ -20,12 +20,12 @@ nconf.argv().env().file( {
 
 var props = {};
 
-function init() {
+function init( expressApp ) {
 	console.log( 'Initialization' );
 	props.port = nconf.get( 'port' );
 
 	initLogger( nconf.get( 'logger' ) );
-	initTask( nconf.get( 'task' ) );
+	initTask( nconf.get( 'task' ), expressApp );
 	initMongo( nconf.get( 'mongo' ) );
 }
 
@@ -88,12 +88,31 @@ function initLogger( config ) {
 	configureLogger( config.configuration );
 }
 
-function initTask( config ) {
+function initTask( config, expressApp ) {
 
 	function configureTask( configuration ) {
-		var taskObj = configuration;
 
-		props.task = taskObj;
+		// init TaskRepo object
+		var TaskRepository = require( 'task_repo' );
+		var temp = new TaskRepository( configuration );
+		var taskRepo = {};
+		
+
+		// Bind the urls with the actions
+		var urlMap = configuration.urls;
+		var urlPattern = /(\w*@)?(.*)/i;
+
+		for( url in urlMap ) {
+			var action = urlMap[ url ];
+			var matches = url.match( urlPattern );
+
+			var method = matches[1] || 'get';
+			var requestUrl = (matches[2].length>0)? matches[2] : '/';
+
+
+		}
+
+		props.task = taskRepo;
 	}
 
 	// Create the Task path
@@ -112,10 +131,12 @@ function initMongo( config ) {
 		var dbUrl = f( '%s:%d/%s', configuration.host, configuration.port, configuration['db-name'] );
 		var db = mongo.connect( dbUrl );
 
-		var tasksCollection = db.collection( 'tasks' );
+		var tasksCollection = db.collection( configuration.collection );
 
 		mongoObj.db = db;
-		
+		mongoObj.tasksCollection = tasksCollection;
+
+
 		props.mongo = mongoObj;
 	}
 

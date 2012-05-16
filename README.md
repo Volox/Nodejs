@@ -9,4 +9,6 @@
 	npm install -d
 
 ## To run
+	cd *Nodejs folder*
+	mongod -f config/mongo-node.conf &
 	node server.js

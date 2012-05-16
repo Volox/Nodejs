@@ -35,6 +35,20 @@
 			"endDate": null,
 
 			"active": true
+		},
+
+		"urls": {
+			"post@/tasks": "create",
+			"get@/tasks/new": "new",
+			"DELETE@/tasks/:task": "delete",
+
+			"/tasks/list": "list",
+			"/tasks": "list",
+			
+			"/tasks/:task/code": "code",
+
+			"/tasks/:task/:format?": "details",
+			"/tasks/:task/details/:format?": "details"
 		}
 	},
 

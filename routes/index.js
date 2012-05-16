@@ -1,9 +1,9 @@
 /*
  * GET home page.
  */
-var log = require( '../config' ).logger;
-var util = require('util');
-var path = require('path');
+var log = require( 'config' ).logger,
+	util = require('util'),
+	path = require('path');
 
 exports.cors = function(req, res, next ) {
 	// add header to all the requests for CROSS DOMAIN AJAX
@@ -32,7 +32,7 @@ exports.missing = function(req, res){
 };
 
 
-exports.test = function(req, res){
+exports.test = function(req, res) {
 	var taskId = req.params.task;
 	res.render('test', {
 		title: 'Test page',
@@ -40,7 +40,7 @@ exports.test = function(req, res){
 	});
 };
 
-exports.uploadAjax = function(req, res){
+exports.uploadAjax = function(req, res) {
 	var files = util.isArray( req.files.file )? req.files.file : [ req.files.file ];
 	var response = { files: [] };
 

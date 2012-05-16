@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var config = require('./config');
+var config = require('config');
 
 var log = config.logger,
     express = require('express'),
@@ -49,7 +49,10 @@ app.get('/404', routes.error40x );
 app.get('/505', routes.error50x );
 
 
+// Testi page
 app.get('/test/:task', routes.test );
+
+
 
 app.all( '/*', routes.missing );
 var server = http.createServer(app);
@@ -58,29 +61,5 @@ server.listen( config.port );
   log.debug( f( 'Express server listening on port %d in %s mode',
     server.address().port, app.settings.env ) );
 
-/* Intance of the task will be created only if mongo connection is ok */
-// Start the task repository
-/*
-var Task = require( 'task' );
-var task = new Task( configuration.mongo.db );
-*/
-/*
-  // Bind resources
-  app.post( '/tasks', task.do( 'create' ) );
-  app.get( '/tasks/new', task.do( 'new' ) );
-  app.delete( '/tasks/:task', task.do( 'delete' ) );
 
-  app.get( '/tasks', task.do( 'list' ) );
-  app.get( '/tasks/list', task.do( 'list' ) );
-
-  app.get( '/tasks/:task/code', task.do( 'code' ) );
-
-  app.get( '/tasks/:task/:format?', task.do( 'details' ) );
-  app.get( '/tasks/:task/details/:format?', task.do( 'details' ) );
-
-
-  // Start the WebServer
-  server.listen( config.port );
-	log.debug( f( 'Express server listening on port %d in %s mode',
-		server.address().port, app.settings.env ) );
-*/
+// Bind task resources

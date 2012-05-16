@@ -4,242 +4,110 @@
 		"selected_items":
 		[
 			[
-				"pro",
-				"props"
+				"Tas",
+				"TaskRepository"
 			],
 			[
-				"ty",
-				"type"
+				"config",
+				"configuration"
 			],
 			[
-				"fo",
-				"for	for (…) {…}"
-			],
-			[
-				"to",
-				"toLowerCase"
-			],
-			[
-				"st",
-				"stdout"
-			],
-			[
-				"str",
-				"stream"
-			],
-			[
-				"log",
-				"logObj"
-			],
-			[
-				"rea",
-				"readyCallbacks"
-			],
-			[
-				"tas",
-				"taskInstance"
-			],
-			[
-				"sr",
-				"script"
-			],
-			[
-				"data",
-				"dataType"
-			],
-			[
-				"code",
-				"codeUrl"
-			],
-			[
-				"de",
-				"description"
-			],
-			[
-				"call",
-				"callback"
-			],
-			[
-				"get",
-				"getCode"
-			],
-			[
-				"erro",
-				"errorCallback"
-			],
-			[
-				"r",
-				"routes"
-			],
-			[
-				"details",
-				"detailsUrl"
-			],
-			[
-				"task",
-				"taskId"
-			],
-			[
-				"res",
-				"response"
-			],
-			[
-				"fun",
-				"fun	Function"
-			],
-			[
-				"fon",
-				"font-size"
-			],
-			[
-				"te",
-				"text-align"
-			],
-			[
-				"in",
-				"inline-block"
-			],
-			[
-				"margi",
-				"margin"
-			],
-			[
-				"la",
-				"last-child"
-			],
-			[
-				"fn",
-				"function"
+				"T",
+				"TaskRepository"
 			],
 			[
 				"mongo",
-				"mongolia"
-			],
-			[
-				"lo",
-				"log"
-			],
-			[
-				"requi",
-				"require"
-			],
-			[
-				"win",
-				"winston"
-			],
-			[
-				"confi",
-				"config"
+				"mongoObj"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "config/config.js",
-			"settings":
-			{
-				"buffer_size": 2842,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "server.js",
 			"settings":
 			{
-				"buffer_size": 2072,
+				"buffer_size": 1313,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "routes/index.js",
+			"file": "task_repo/task_repo.js",
 			"settings":
 			{
-				"buffer_size": 1167,
+				"buffer_size": 352,
 				"line_ending": "Windows"
 			}
 		}
 	],
-	"build_system": "",
+	"build_system": "Packages/Nodejs/Nodejs.sublime-build",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 286.0,
 		"selected_items":
 		[
 			[
-				"ins",
-				"Package Control: Install Package"
-			],
-			[
-				"packa",
-				"Preferences: Browse Packages"
+				"up",
+				"Package Control: Upgrade/Overwrite All Packages"
 			],
 			[
 				"in",
 				"Package Control: Install Package"
 			],
 			[
-				"di",
-				"SublimeLinter: Disable Background Linting"
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"pa",
+				"Package Control: Disable Package"
 			],
 			[
 				"disa",
 				"SublimeLinter: Disable Background Linting"
 			],
 			[
-				"upda",
-				"Package Control: Upgrade/Overwrite All Packages"
-			],
-			[
-				"remove",
-				"Package Control: Remove Package"
-			],
-			[
-				"Package Control: ",
-				"Package Control: Upgrade/Overwrite All Packages"
-			],
-			[
-				"mark",
-				"Markdown Preview: current file in browser"
-			],
-			[
-				"mar",
-				"Markdown Preview: current file in Sublime Text"
-			],
-			[
-				"linter ",
+				"dis",
 				"SublimeLinter: Disable Background Linting"
 			],
 			[
 				"rese",
-				"SublimeCodeIntel: Reset"
+				"SublimeLinter: Reset"
 			],
 			[
-				"forma",
-				"Pretty JSON: Reformat (Pretty Print) JSON"
+				"upda",
+				"Package Control: Upgrade/Overwrite All Packages"
 			],
 			[
-				"su",
-				"SublimeCodeIntel: Reset"
+				"prede",
+				"Preferences: Settings - Default"
 			],
 			[
-				"list",
-				"SublimeLinter: Show Error List"
+				"diff",
+				"Git: Diff All"
 			],
 			[
-				"insta",
+				"next",
+				"SublimeLinter: Extract Annotations"
+			],
+			[
+				"lin",
+				"SublimeLinter: Lint Current File"
+			],
+			[
+				"ins",
 				"Package Control: Install Package"
 			],
 			[
-				"up",
-				"Package Control: Upgrade Package"
-			],
-			[
-				"packea",
-				"Package Control: List Packages"
-			],
-			[
-				"install",
+				"instal",
 				"Package Control: Install Package"
 			],
 			[
@@ -247,79 +115,31 @@
 				"Git: Custom Command"
 			],
 			[
-				"cus",
+				"git co",
 				"Git: Custom Command"
-			],
-			[
-				"qio",
-				"Git: Quick Commit"
-			],
-			[
-				"gita",
-				"Git: Add..."
-			],
-			[
-				"qu",
-				"Git: Quick Commit"
 			],
 			[
 				"git",
-				"Git: Custom Command"
+				"Git: Status"
 			],
 			[
-				"git push",
-				"Git: Push"
+				"node",
+				"Nodejs::Run::Current File"
 			],
 			[
-				"git pu",
-				"Git: Push"
-			],
-			[
-				"git ",
-				"Git: Graph All"
-			],
-			[
-				"git comm",
-				"Git: Commit"
-			],
-			[
-				"git ad",
-				"Git: Add..."
-			],
-			[
-				"git add",
-				"Git: Add Selected Hunk"
-			],
-			[
-				"git com",
-				"Git: Commit"
-			],
-			[
-				"inst",
-				"Package Control: Install Package"
-			],
-			[
-				"json",
-				"Pretty JSON: Reformat (Pretty Print) JSON"
-			],
-			[
-				"lint re",
-				"SublimeLinter: Reset"
+				"node st",
+				"Nodejs::Default File Settings"
 			],
 			[
 				"lint",
 				"SublimeLinter: Lint Current File"
 			],
 			[
-				"lin",
-				"SublimeLinter: Reset"
-			],
-			[
 				"rest",
 				"SublimeLinter: Reset"
 			],
 			[
-				"instal",
+				"install",
 				"Package Control: Install Package"
 			],
 			[
@@ -344,64 +164,37 @@
 	},
 	"file_history":
 	[
-		"/D/Google Drive/Tesi/Tesi Latex/Tesi.tex",
-		"/D/Projects/Nodejs/task/task.js",
-		"/D/Portable/Sublime Text 2/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
-		"/D/Projects/Nodejs/utils/utils.js",
-		"/D/Projects/Nodejs/config/configuration.json",
-		"/D/Projects/Nodejs/config/logConfig.json",
-		"/D/Projects/Nodejs/project.sublime-project",
-		"/D/Projects/Nodejs/package.json",
-		"/D/Projects/Nodejs/project.sublime-workspace",
+		"/D/Portable/Nodejs/routes/index.js",
+		"/D/Portable/Nodejs/config/package.json",
+		"/D/Portable/Nodejs/config/configuration.json",
+		"/D/Portable/Nodejs/config/config.js",
+		"/D/Portable/Nodejs/utils/utils.js",
+		"/D/Portable/Nodejs/README.md",
+		"/D/Portable/Nodejs/views/error.jade",
+		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
+		"/D/Portable/Nodejs/views/layout.jade",
+		"/D/Portable/Nodejs/package.json",
+		"/D/Portable/Nodejs/task/task.js",
+		"/D/Portable/Nodejs/public/scripts/coffee/task.coffee",
+		"/D/Portable/Nodejs/config/logConfig.json",
+		"/D/down/jQueryTimelinr_095/js/jquery.timelinr-0.9.5.js",
+		"/D/Portable/Nodejs/sample.js",
 		"/D/Portable/Sublime Text 2/Data/Packages/Default/Preferences.sublime-settings",
-		"/D/Projects/Nodejs/README.md",
-		"/D/Projects/Nodejs/server.js",
-		"/D/Projects/Nodejs/views/test.jade",
-		"/D/Projects/Nodejs/public/scripts/coffee/task.coffee",
-		"/D/Projects/Nodejs/config/config.js",
-		"/D/Projects/Nodejs/routes/index.js",
-		"/D/Projects/Nodejs/public/scripts/coffee/taskRun.coffee",
-		"/D/Projects/Nodejs/views/task/list.jade",
-		"/D/Projects/Nodejs/views/task/new.jade",
-		"/D/Projects/Nodejs/views/layout.jade",
-		"/D/Projects/Nodejs/views/index.jade",
-		"/D/Projects/Nodejs/public/scripts/task.js",
-		"/D/Projects/Nodejs/public/scripts/coffee/script.coffee",
-		"/D/Projects/Nodejs/public/scripts/jquery.js",
-		"/D/Projects/Nodejs/public/stylesheets/style.styl",
-		"/D/Projects/Nodejs/public/scripts/script.js",
-		"/D/Projects/Nodejs/logs/volog-mongo.log",
-		"/D/Portable/Sublime Text 2/Data/Packages/User/SublimeLinter.sublime-settings",
-		"/D/Projects/Nodejs/mongo-wrap/mongo-wrap.js",
-		"/D/Projects/Nodejs/public/stylesheets/theme.styl",
-		"/D/Projects/Nodejs/public/stylesheets/functions.styl",
-		"/D/Projects/Nodejs/test.sublime-project",
-		"/D/Projects/Nodejs/public/stylesheets/error.styl",
-		"/D/Projects/Nodejs/logs/volog.log",
-		"/D/Projects/Nodejs/node_modules/winston/lib/winston/logger.js",
-		"/D/Projects/Nodejs/node_modules/winston/lib/winston/transports/console.js",
-		"/D/Projects/Nodejs/utils/date.format.js",
-		"/D/Projects/Nodejs/task/package.json",
-		"/D/Projects/Nodejs/utils/package.json",
-		"/D/Projects/Nodejs/node_modules/winston/lib/winston/transports/file.js",
-		"/D/Projects/Nodejs/node_modules/winston/lib/winston/transports.js",
-		"/D/Projects/Nodejs/node_modules/winston/lib/winston/common.js",
-		"/D/Portable/Sublime Text 2/Data/Packages/Pretty JSON/Pretty JSON.sublime-settings",
-		"/D/Projects/Nodejs/config/package.json",
-		"/D/Projects/Nodejs/config/log4js.json",
-		"/D/Projects/Nodejs/test.sublime-workspace",
-		"/D/Portable/Sublime Text 2/Data/Packages/User/Preferences.sublime-settings",
+		"/D/Portable/Nodejs/server.js",
+		"/D/Portable/Nodejs/views/task/new.jade",
+		"/D/Portable/Sublime Text 2/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
 		"/D/Portable/Nodejs/test.sublime-project",
+		"/D/Portable/Nodejs/README",
+		"/D/Portable/Sublime Text 2/Data/Packages/Nodejs/Nodejs.sublime-settings",
+		"/D/Portable/Sublime Text 2/Data/Packages/User/Nodejs.sublime-settings",
 		"/D/down/Sublime Text 2 Build 2190/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
 		"/D/down/Sublime Text 2 Build 2190/Data/Packages/User/Preferences.sublime-settings",
-		"/D/Portable/Nodejs/server.js",
 		"/D/down/Sublime Text 2 Build 2190/Data/Packages/User/JavaScript.sublime-settings",
 		"/D/down/Sublime Text 2 Build 2190/Data/Packages/User/SublimeLinter.sublime-settings",
 		"/D/down/Sublime Text 2 Build 2190/Data/Packages/SublimeCodeIntel/Base File.sublime-settings",
 		"/D/down/Sublime Text 2 Build 2181/Data/Packages/User/Default (Windows).sublime-keymap",
 		"/D/down/Sublime Text 2 Build 2181/Data/Packages/Default/Default (Windows).sublime-keymap",
 		"/D/Portable/Nodejs/mongo-wrap/mongo-wrap.js",
-		"/D/Portable/Nodejs/package.json",
 		"/D/down/Sublime Text 2 Build 2181/Data/Packages/Default/Preferences.sublime-settings"
 	],
 	"find":
@@ -420,11 +213,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"lin",
-			"json",
-			"forum",
-			"forums",
-			"forum",
+			"utf",
 			"var",
 			"\n	\n",
 			"d",
@@ -437,7 +226,7 @@
 		"replace_history":
 		[
 		],
-		"reverse": true,
+		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
 		"whole_word": false,
@@ -451,127 +240,18 @@
 			[
 				{
 					"buffer": 0,
-					"file": "config/config.js",
-					"settings":
-					{
-						"buffer_size": 2842,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								724,
-								724
-							]
-						],
-						"settings":
-						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"text-indent": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": false,
-							"sublimelinter_delay": 0,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"Python Django": "python"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 360.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
 					"file": "server.js",
 					"settings":
 					{
-						"buffer_size": 2072,
+						"buffer_size": 1313,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1158,
-								1158
+								356,
+								356
 							]
 						],
 						"settings":
@@ -640,7 +320,7 @@
 							[
 							],
 							"pyflakes_ignore_import_*": true,
-							"sublimelinter": false,
+							"sublimelinter": true,
 							"sublimelinter_delay": 0,
 							"sublimelinter_disable":
 							[
@@ -663,113 +343,30 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 507.0,
+						"translation.y": 76.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "routes/index.js",
+					"buffer": 1,
+					"file": "task_repo/task_repo.js",
 					"settings":
 					{
-						"buffer_size": 1167,
+						"buffer_size": 352,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								116,
+								116
 							]
 						],
 						"settings":
 						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"text-indent": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": false,
-							"sublimelinter_delay": 0,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"Python Django": "python"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -782,7 +379,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 32.0
+		"height": 0.0
 	},
 	"input":
 	{
