@@ -57,6 +57,9 @@ app.get('/test/:task', routes.test );
 app.all( '/*', routes.missing );
 var server = http.createServer(app);
 
+var TaskRepository = require( 'task-repo' );
+//var TaskRepositoryInstance = new TaskRepository();
+var TRI = new TaskRepository( config.task );
 
 
 server.listen( config.port );

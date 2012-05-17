@@ -54,6 +54,7 @@ function initLogger( config ) {
 		
 		// Configure the logger
 		var winston = require( 'winston' );
+
 		var transports = [];
 		for( var type in logConf ) {
 			
@@ -79,7 +80,7 @@ function initLogger( config ) {
 			}
 
 			// Use the type name to Create a transport instance
-			type = _(type).capitalize();
+			type = _( type ).capitalize();
 
 			var transportInstance = new ( winston.transports[ type ] )( logObj );
 
@@ -104,11 +105,11 @@ function initLogger( config ) {
 	configureLogger( config.configuration );
 }
 
-function initTask( config, expressApp ) {
+function initTask( config ) {
 
 	function configureTask( configuration ) {
 		// init TaskRepo object
-		var taskRepo = {};
+		var taskRepo = configuration;
 
 		props.task = taskRepo;
 	}

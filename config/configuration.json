@@ -64,8 +64,6 @@
 		"path": "logs",
 		"configuration": {
 		    "console": {
-		        "level": "debug",
-		        "color": false,
 		        "json": false
 		    },
 		    "file": {
