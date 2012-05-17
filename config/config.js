@@ -149,7 +149,6 @@ function initMongo( config ) {
 	configureMongo( config );
 }
 
-
 // Call the generic initialization element
 init();
 

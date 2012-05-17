@@ -27,7 +27,7 @@
 			"file": "server.js",
 			"settings":
 			{
-				"buffer_size": 1313,
+				"buffer_size": 1287,
 				"line_ending": "Windows"
 			}
 		},
@@ -35,7 +35,15 @@
 			"file": "task_repo/task_repo.js",
 			"settings":
 			{
-				"buffer_size": 352,
+				"buffer_size": 330,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "config/config.js",
+			"settings":
+			{
+				"buffer_size": 3368,
 				"line_ending": "Windows"
 			}
 		}
@@ -164,6 +172,7 @@
 	},
 	"file_history":
 	[
+		"/D/Projects/Nodejs/.gitignore",
 		"/D/Portable/Nodejs/routes/index.js",
 		"/D/Portable/Nodejs/config/package.json",
 		"/D/Portable/Nodejs/config/configuration.json",
@@ -235,7 +244,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -243,15 +252,15 @@
 					"file": "server.js",
 					"settings":
 					{
-						"buffer_size": 1313,
+						"buffer_size": 1287,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								356,
-								356
+								1069,
+								1069
 							]
 						],
 						"settings":
@@ -343,7 +352,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 76.0,
+						"translation.y": 225.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -353,20 +362,47 @@
 					"file": "task_repo/task_repo.js",
 					"settings":
 					{
-						"buffer_size": 352,
+						"buffer_size": 330,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								116,
-								116
+								26,
+								26
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "config/config.js",
+					"settings":
+					{
+						"buffer_size": 3368,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3244,
+								3244
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,

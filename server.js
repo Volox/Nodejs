@@ -60,6 +60,3 @@ var server = http.createServer(app);
 server.listen( config.port );
   log.debug( f( 'Express server listening on port %d in %s mode',
     server.address().port, app.settings.env ) );
-
-
-// Bind task resources
