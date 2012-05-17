@@ -1,15 +1,7 @@
 var util = require( 'util' );
+var _ = require( 'underscore' );
+_.str	= require( 'underscore.string' );
+_.mixin( _.str.exports() );
 
-f = util.format;
 
-
-proxy = function( fn, context ) {
-
-	// Simulated bind
-	var args = slice.call( arguments, 2 ),
-		proxy = function() {
-			return fn.apply( context, args.concat( slice.call( arguments ) ) );
-		};
-
-	return proxy;
-};
+f = _.sprintf;

@@ -1,9 +1,11 @@
 /*
  * GET home page.
  */
-var log = require( 'config' ).logger,
-	util = require('util'),
-	path = require('path');
+
+var config = require( 'config' );
+var log = config.logger,
+	util = config.util,
+	path = config.path;
 
 exports.cors = function(req, res, next ) {
 	// add header to all the requests for CROSS DOMAIN AJAX

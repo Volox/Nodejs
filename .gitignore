@@ -15,7 +15,7 @@ public/scripts/*.js
 
 
 # Sublime files #
-*.sublime*
+*.sublime-workspace
 
 # Uploaded files #
 uploads/*

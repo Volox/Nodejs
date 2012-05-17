@@ -7,7 +7,12 @@ require( '../utils' );
 var fs = require( 'fs' ),
     path = require( 'path' ),
     util = require( 'util' ),
-    nconf = require( 'nconf' );
+    nconf = require( 'nconf' ),
+    mongo = require( 'mongojs' ),
+    _ = require( 'underscore' );
+
+_.str = require( 'underscore.string' );
+_.mixin( _.str.exports() );
  
 var configurationFile = __dirname + '/configuration.json';
 
@@ -22,11 +27,22 @@ var props = {};
 
 function init( expressApp ) {
 	console.log( 'Initialization' );
+
+	// Copy the port variable
 	props.port = nconf.get( 'port' );
 
-	initLogger( nconf.get( 'logger' ) );
-	initTask( nconf.get( 'task' ), expressApp );
-	initMongo( nconf.get( 'mongo' ) );
+	// Common Required modules
+	props.util	= util;
+	props.fs 	= fs;
+	props.path	= path;
+	props.nconf	= nconf;
+	props._		= _;
+	props.mongo	= mongo;
+
+	// Init the sections
+	initLogger(	nconf.get( 'logger' ) );
+	initTask(	nconf.get( 'task' ) );
+	initMongo(	nconf.get( 'mongo' ) );
 }
 
 function initLogger( config ) {
@@ -63,7 +79,7 @@ function initLogger( config ) {
 			}
 
 			// Use the type name to Create a transport instance
-			type = type.charAt(0).toUpperCase()+type.slice(1);
+			type = _(type).capitalize();
 
 			var transportInstance = new ( winston.transports[ type ] )( logObj );
 
@@ -91,26 +107,8 @@ function initLogger( config ) {
 function initTask( config, expressApp ) {
 
 	function configureTask( configuration ) {
-
 		// init TaskRepo object
-		var TaskRepository = require( 'task_repo' );
-		var temp = new TaskRepository( configuration );
 		var taskRepo = {};
-		
-
-		// Bind the urls with the actions
-		var urlMap = configuration.urls;
-		var urlPattern = /(\w*@)?(.*)/i;
-
-		for( url in urlMap ) {
-			var action = urlMap[ url ];
-			var matches = url.match( urlPattern );
-
-			var method = matches[1] || 'get';
-			var requestUrl = (matches[2].length>0)? matches[2] : '/';
-
-
-		}
 
 		props.task = taskRepo;
 	}

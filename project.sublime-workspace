@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"pro",
+				"prototype"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
 				"Tas",
 				"TaskRepository"
 			],
@@ -24,26 +32,32 @@
 	"buffers":
 	[
 		{
+			"contents": "\n/**\n * Module dependencies.\n */\n\nvar config = require('config');\n\nvar log = config.logger,\n    express = require('express'),\n    http = require('http');\n\nvar app = express(),\n    stylus = require('stylus');\n\n// Routes\nvar routes = require('./routes');\n\n\napp.configure(function(){\n  app.set('views', __dirname + '/views');\n  app.set('view engine', 'jade');\n  \n  app.use(express.favicon());\n  app.use(express.logger('dev'));\n\n  // CORS -> Cross Domain ajax requests\n  app.use( routes.cors );\n\n  app.use(require('stylus').middleware({ src: __dirname + '/public' }));\n  app.use(express.static(__dirname + '/public'));\n  \n  app.use(express.bodyParser( {uploadDir: __dirname+'/'+config.task.path } ) );\n  app.use(express.methodOverride());\n  \n  app.use(app.router);\n});\n\napp.configure('development', function(){\n  app.use(express.errorHandler());\n});\n\n\n// Routes\napp.get( '/', routes.index );\napp.post( '/uploadAjax', routes.uploadAjax );\n\n// Errors\napp.get('/404', routes.error40x );\napp.get('/505', routes.error50x );\n\n\n// Testi page\napp.get('/test/:task', routes.test );\n\n\n\napp.all( '/*', routes.missing );\nvar server = http.createServer(app);\n\nvar \n\nserver.listen( config.port );\n  log.debug( f( 'Express server listening on port %d in %s mode',\n    server.address().port, app.settings.env ) );",
 			"file": "server.js",
+			"file_size": 1352,
+			"file_write_time": 129817147406480181,
 			"settings":
 			{
-				"buffer_size": 1287,
+				"buffer_size": 1293,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "task_repo/task_repo.js",
+			"file": "task-repo/task-repo.js",
 			"settings":
 			{
-				"buffer_size": 330,
+				"buffer_size": 833,
 				"line_ending": "Windows"
 			}
 		},
 		{
+			"contents": "	/*\n	Configuration file\n	*/\n	// Required libs\n	require( '../utils' );\n\n	var fs = require( 'fs' ),\n	    path = require( 'path' ),\n	    util = require( 'util' ),\n	    nconf = require( 'nconf' ),\n	    mongo = require( 'mongojs' ),\n	    _ = require( 'underscore' );\n\n	_.str = require( 'underscore.string' );\n	_.mixin( _.str.exports() );\n	 \n	var configurationFile = __dirname + '/configuration.json';\n\n\n	// First load arguments from the console\n	nconf.argv().env().file( {\n		file: configurationFile\n	} );\n\n\n	var props = {};\n\n	function init( expressApp ) {\n		console.log( 'Initialization' );\n\n		// Copy the port variable\n		props.port = nconf.get( 'port' );\n\n		// Common Required modules\n		props.util	= util;\n		props.fs 	= fs;\n		props.path	= path;\n		props.nconf	= nconf;\n		props._		= _;\n		props.mongo	= mongo;\n\n		// Init the sections\n		initLogger(	nconf.get( 'logger' ) );\n		initTask(	nconf.get( 'task' ) );\n		initMongo(	nconf.get( 'mongo' ) );\n	}\n\n	function initLogger( config ) {\n		console.log( 'Logger initialization' );\n		\n		// Configuration function for the logger\n		function configureLogger( configuration ) {\n			var logConf = configuration;\n			\n			// Configure the logger\n			var winston = require( 'winston' );\n			var transports = [];\n			for( var type in logConf ) {\n				\n				// Set generic properties to the object\n				var logObj = {\n					level: logConf[ type ].level,\n					timestamp: function() {\n						return ( new Date() ).getTime();\n					}\n				};\n\n\n				// Console Appender\n				if( type.toLowerCase()==='console' ) {\n					logObj.colorize = true;\n					logObj.timestamp = true;\n\n				// File Appender\n				} else if( type.toLowerCase()==='file' ) {\n					logObj.maxsize = logConf[ type ].maxSize;\n					logObj.maxFiles = logConf[ type ].maxFiles;\n					logObj.filename = config.path +'/'+ logConf[ type ].fileName;\n				}\n\n				// Use the type name to Create a transport instance\n				type = _(type).capitalize();\n\n				var transportInstance = new ( winston.transports[ type ] )( logObj );\n\n				transports.push( transportInstance );\n			}\n\n			var logger = new (winston.Logger)( {\n				transports: transports\n			} );\n\n			logger.info( 'Log instance created!' );\n\n			props.logger = logger;\n		}\n\n\n		// Create the log path\n		if( !path.existsSync( config.path ) ) {\n			fs.mkdirSync( config.path );\n		}\n\n		configureLogger( config.configuration );\n	}\n\n	function initTask( config, expressApp ) {\n\n		function configureTask( configuration ) {\n			// init TaskRepo object\n			var taskRepo = {};\n\n			props.task = taskRepo;\n		}\n\n		// Create the Task path\n		if( !path.existsSync( config.path ) ) {\n			fs.mkdirSync( config.path );\n		}\n\n		configureTask( config );\n	}\n\n	function initMongo( config ) {\n		var mongo = require( 'mongojs' );\n		\n		function configureMongo( configuration ) {\n			var mongoObj = {};\n			var dbUrl = f( '%s:%d/%s', configuration.host, configuration.port, configuration['db-name'] );\n			var db = mongo.connect( dbUrl );\n\n			var tasksCollection = db.collection( configuration.collection );\n\n			mongoObj.db = db;\n			mongoObj.tasksCollection = tasksCollection;\n\n\n			props.mongo = mongoObj;\n		}\n\n		// Create the Task path\n		if( !path.existsSync( config.path ) ) {\n			fs.mkdirSync( config.path );\n		}\n\n		// Configure mongo\n		configureMongo( config );\n	}\n\n	// Call the generic initialization element\n	init();\n\n	// Export all the available properties\n	exports = module.exports = props;",
 			"file": "config/config.js",
+			"file_size": 3406,
+			"file_write_time": 129817187724666250,
 			"settings":
 			{
-				"buffer_size": 3368,
+				"buffer_size": 3370,
 				"line_ending": "Windows"
 			}
 		}
@@ -172,17 +186,19 @@
 	},
 	"file_history":
 	[
-		"/D/Projects/Nodejs/.gitignore",
-		"/D/Portable/Nodejs/routes/index.js",
-		"/D/Portable/Nodejs/config/package.json",
-		"/D/Portable/Nodejs/config/configuration.json",
 		"/D/Portable/Nodejs/config/config.js",
 		"/D/Portable/Nodejs/utils/utils.js",
+		"/D/Portable/Nodejs/package.json",
+		"/D/Portable/Nodejs/routes/index.js",
+		"/D/Portable/Nodejs/project.sublime-project",
+		"/D/Portable/Nodejs/config/package.json",
+		"/D/Portable/Nodejs/task-repo/package.json",
+		"/D/Portable/Nodejs/task_repo/task_repo.js",
+		"/D/Portable/Nodejs/config/configuration.json",
 		"/D/Portable/Nodejs/README.md",
 		"/D/Portable/Nodejs/views/error.jade",
 		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
 		"/D/Portable/Nodejs/views/layout.jade",
-		"/D/Portable/Nodejs/package.json",
 		"/D/Portable/Nodejs/task/task.js",
 		"/D/Portable/Nodejs/public/scripts/coffee/task.coffee",
 		"/D/Portable/Nodejs/config/logConfig.json",
@@ -244,7 +260,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -252,15 +268,15 @@
 					"file": "server.js",
 					"settings":
 					{
-						"buffer_size": 1287,
+						"buffer_size": 1293,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1069,
-								1069
+								1147,
+								1147
 							]
 						],
 						"settings":
@@ -352,25 +368,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 225.0,
+						"translation.y": 330.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "task_repo/task_repo.js",
+					"file": "task-repo/task-repo.js",
 					"settings":
 					{
-						"buffer_size": 330,
+						"buffer_size": 833,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								26,
-								26
+								169,
+								169
 							]
 						],
 						"settings":
@@ -388,15 +404,15 @@
 					"file": "config/config.js",
 					"settings":
 					{
-						"buffer_size": 3368,
+						"buffer_size": 3370,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3244,
-								3244
+								1,
+								3370
 							]
 						],
 						"settings":
@@ -405,7 +421,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1306.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
