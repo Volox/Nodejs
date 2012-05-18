@@ -1,17 +1,15 @@
 extends layout
 
+block append css
+	link(rel='stylesheet', href='/stylesheets/test.css')
+
 block append scripts
 	script(src='/scripts/task.js')
 	script(src='/scripts/taskRun.js')
+	//script(src='/scripts/libs/jcanvas.min.js')
+	script(src='/scripts/libs/pixastic.min.js')
 
 block content
 	h1 Page test for script loading.
-	script
-		jQuery( document ).ready( function() {
-			var task = new Task( "#{task}" );
-			task.onReady( function() {
-				task.run();
-			} );
-			task.init();
-		});
-	div.placeholder
+	.images
+		img#img(src="/img/test.jpg")

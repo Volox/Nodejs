@@ -4,6 +4,46 @@
 		"selected_items":
 		[
 			[
+				"blu",
+				"blursteps"
+			],
+			[
+				"oc",
+				"octaves"
+			],
+			[
+				"for",
+				"forr	Range comprehension (inclusive)"
+			],
+			[
+				"fo",
+				"forr	Range comprehension (inclusive)"
+			],
+			[
+				"img",
+				"imgData"
+			],
+			[
+				"re",
+				"requestUrl"
+			],
+			[
+				"tas",
+				"taskI"
+			],
+			[
+				"u",
+				"uTaskI"
+			],
+			[
+				"cu",
+				"customLevels"
+			],
+			[
+				"level",
+				"levels"
+			],
+			[
 				"pro",
 				"prototype"
 			],
@@ -32,57 +72,60 @@
 	"buffers":
 	[
 		{
-			"contents": "\n/**\n * Module dependencies.\n */\n\nvar config = require('config');\n\nvar log = config.logger,\n    express = require('express'),\n    http = require('http');\n\nvar app = express(),\n    stylus = require('stylus');\n\n// Routes\nvar routes = require('./routes');\n\n\napp.configure(function(){\n  app.set('views', __dirname + '/views');\n  app.set('view engine', 'jade');\n  \n  app.use(express.favicon());\n  app.use(express.logger('dev'));\n\n  // CORS -> Cross Domain ajax requests\n  app.use( routes.cors );\n\n  app.use(require('stylus').middleware({ src: __dirname + '/public' }));\n  app.use(express.static(__dirname + '/public'));\n  \n  app.use(express.bodyParser( {uploadDir: __dirname+'/'+config.task.path } ) );\n  app.use(express.methodOverride());\n  \n  app.use(app.router);\n});\n\napp.configure('development', function(){\n  app.use(express.errorHandler());\n});\n\n\n// Routes\napp.get( '/', routes.index );\napp.post( '/uploadAjax', routes.uploadAjax );\n\n// Errors\napp.get('/404', routes.error40x );\napp.get('/505', routes.error50x );\n\n\n// Testi page\napp.get('/test/:task', routes.test );\n\n\n\napp.all( '/*', routes.missing );\nvar server = http.createServer(app);\n\nvar \n\nserver.listen( config.port );\n  log.debug( f( 'Express server listening on port %d in %s mode',\n    server.address().port, app.settings.env ) );",
-			"file": "server.js",
-			"file_size": 1352,
-			"file_write_time": 129817147406480181,
+			"file": "public/scripts/coffee/taskRun.coffee",
 			"settings":
 			{
-				"buffer_size": 1293,
+				"buffer_size": 668,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "task-repo/task-repo.js",
+			"file": "views/test.jade",
 			"settings":
 			{
-				"buffer_size": 833,
+				"buffer_size": 355,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "	/*\n	Configuration file\n	*/\n	// Required libs\n	require( '../utils' );\n\n	var fs = require( 'fs' ),\n	    path = require( 'path' ),\n	    util = require( 'util' ),\n	    nconf = require( 'nconf' ),\n	    mongo = require( 'mongojs' ),\n	    _ = require( 'underscore' );\n\n	_.str = require( 'underscore.string' );\n	_.mixin( _.str.exports() );\n	 \n	var configurationFile = __dirname + '/configuration.json';\n\n\n	// First load arguments from the console\n	nconf.argv().env().file( {\n		file: configurationFile\n	} );\n\n\n	var props = {};\n\n	function init( expressApp ) {\n		console.log( 'Initialization' );\n\n		// Copy the port variable\n		props.port = nconf.get( 'port' );\n\n		// Common Required modules\n		props.util	= util;\n		props.fs 	= fs;\n		props.path	= path;\n		props.nconf	= nconf;\n		props._		= _;\n		props.mongo	= mongo;\n\n		// Init the sections\n		initLogger(	nconf.get( 'logger' ) );\n		initTask(	nconf.get( 'task' ) );\n		initMongo(	nconf.get( 'mongo' ) );\n	}\n\n	function initLogger( config ) {\n		console.log( 'Logger initialization' );\n		\n		// Configuration function for the logger\n		function configureLogger( configuration ) {\n			var logConf = configuration;\n			\n			// Configure the logger\n			var winston = require( 'winston' );\n			var transports = [];\n			for( var type in logConf ) {\n				\n				// Set generic properties to the object\n				var logObj = {\n					level: logConf[ type ].level,\n					timestamp: function() {\n						return ( new Date() ).getTime();\n					}\n				};\n\n\n				// Console Appender\n				if( type.toLowerCase()==='console' ) {\n					logObj.colorize = true;\n					logObj.timestamp = true;\n\n				// File Appender\n				} else if( type.toLowerCase()==='file' ) {\n					logObj.maxsize = logConf[ type ].maxSize;\n					logObj.maxFiles = logConf[ type ].maxFiles;\n					logObj.filename = config.path +'/'+ logConf[ type ].fileName;\n				}\n\n				// Use the type name to Create a transport instance\n				type = _(type).capitalize();\n\n				var transportInstance = new ( winston.transports[ type ] )( logObj );\n\n				transports.push( transportInstance );\n			}\n\n			var logger = new (winston.Logger)( {\n				transports: transports\n			} );\n\n			logger.info( 'Log instance created!' );\n\n			props.logger = logger;\n		}\n\n\n		// Create the log path\n		if( !path.existsSync( config.path ) ) {\n			fs.mkdirSync( config.path );\n		}\n\n		configureLogger( config.configuration );\n	}\n\n	function initTask( config, expressApp ) {\n\n		function configureTask( configuration ) {\n			// init TaskRepo object\n			var taskRepo = {};\n\n			props.task = taskRepo;\n		}\n\n		// Create the Task path\n		if( !path.existsSync( config.path ) ) {\n			fs.mkdirSync( config.path );\n		}\n\n		configureTask( config );\n	}\n\n	function initMongo( config ) {\n		var mongo = require( 'mongojs' );\n		\n		function configureMongo( configuration ) {\n			var mongoObj = {};\n			var dbUrl = f( '%s:%d/%s', configuration.host, configuration.port, configuration['db-name'] );\n			var db = mongo.connect( dbUrl );\n\n			var tasksCollection = db.collection( configuration.collection );\n\n			mongoObj.db = db;\n			mongoObj.tasksCollection = tasksCollection;\n\n\n			props.mongo = mongoObj;\n		}\n\n		// Create the Task path\n		if( !path.existsSync( config.path ) ) {\n			fs.mkdirSync( config.path );\n		}\n\n		// Configure mongo\n		configureMongo( config );\n	}\n\n	// Call the generic initialization element\n	init();\n\n	// Export all the available properties\n	exports = module.exports = props;",
-			"file": "config/config.js",
-			"file_size": 3406,
-			"file_write_time": 129817187724666250,
+			"file": "public/stylesheets/test.styl",
 			"settings":
 			{
-				"buffer_size": 3370,
-				"line_ending": "Windows"
+				"buffer_size": 27,
+				"line_ending": "Windows",
+				"name": "test.styl"
 			}
 		}
 	],
 	"build_system": "Packages/Nodejs/Nodejs.sublime-build",
 	"command_palette":
 	{
-		"height": 286.0,
+		"height": 375.0,
 		"selected_items":
 		[
-			[
-				"up",
-				"Package Control: Upgrade/Overwrite All Packages"
-			],
 			[
 				"in",
 				"Package Control: Install Package"
 			],
 			[
-				"insta",
-				"Package Control: Install Package"
+				"up",
+				"Package Control: Upgrade/Overwrite All Packages"
 			],
 			[
 				"remo",
 				"Package Control: Remove Package"
+			],
+			[
+				"git a",
+				"Git: Add..."
+			],
+			[
+				"git",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
 			],
 			[
 				"inst",
@@ -141,10 +184,6 @@
 				"Git: Custom Command"
 			],
 			[
-				"git",
-				"Git: Status"
-			],
-			[
 				"node",
 				"Nodejs::Run::Current File"
 			],
@@ -169,7 +208,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 522.0
+		"width": 386.0
 	},
 	"console":
 	{
@@ -186,15 +225,21 @@
 	},
 	"file_history":
 	[
+		"/D/Portable/Nodejs/server.js",
+		"/D/Portable/Nodejs/public/scripts/taskRun.js",
+		"/D/Portable/Nodejs/routes/index.js",
+		"/D/Portable/Nodejs/task-repo/task-repo.js",
+		"/D/Portable/Nodejs/task-repo/task/task.js",
+		"/D/Portable/Nodejs/task-repo/micro-task/micro-task.js",
 		"/D/Portable/Nodejs/config/config.js",
 		"/D/Portable/Nodejs/utils/utils.js",
+		"/D/Portable/Nodejs/config/configuration.json",
+		"/D/Portable/Nodejs/.gitignore",
 		"/D/Portable/Nodejs/package.json",
-		"/D/Portable/Nodejs/routes/index.js",
 		"/D/Portable/Nodejs/project.sublime-project",
 		"/D/Portable/Nodejs/config/package.json",
 		"/D/Portable/Nodejs/task-repo/package.json",
 		"/D/Portable/Nodejs/task_repo/task_repo.js",
-		"/D/Portable/Nodejs/config/configuration.json",
 		"/D/Portable/Nodejs/README.md",
 		"/D/Portable/Nodejs/views/error.jade",
 		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
@@ -205,7 +250,6 @@
 		"/D/down/jQueryTimelinr_095/js/jquery.timelinr-0.9.5.js",
 		"/D/Portable/Nodejs/sample.js",
 		"/D/Portable/Sublime Text 2/Data/Packages/Default/Preferences.sublime-settings",
-		"/D/Portable/Nodejs/server.js",
 		"/D/Portable/Nodejs/views/task/new.jade",
 		"/D/Portable/Sublime Text 2/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
 		"/D/Portable/Nodejs/test.sublime-project",
@@ -260,138 +304,55 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "server.js",
+					"file": "public/scripts/coffee/taskRun.coffee",
 					"settings":
 					{
-						"buffer_size": 1293,
+						"buffer_size": 668,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1147,
-								1147
+								371,
+								371
 							]
 						],
 						"settings":
 						{
-							"annotations":
-							[
-								"TODO",
-								"README",
-								"FIXME"
-							],
-							"csslint_options":
-							{
-								"adjoining-classes": "warning",
-								"box-model": true,
-								"box-sizing": "warning",
-								"compatible-vendor-prefixes": "warning",
-								"display-property-grouping": true,
-								"duplicate-background-images": "warning",
-								"duplicate-properties": true,
-								"empty-rules": true,
-								"errors": true,
-								"fallback-colors": "warning",
-								"floats": "warning",
-								"font-faces": "warning",
-								"font-sizes": "warning",
-								"gradients": "warning",
-								"ids": "warning",
-								"import": "warning",
-								"important": "warning",
-								"known-properties": true,
-								"outline-none": "warning",
-								"overqualified-elements": "warning",
-								"qualified-headings": "warning",
-								"regex-selectors": "warning",
-								"rules-count": "warning",
-								"shorthand": "warning",
-								"text-indent": "warning",
-								"unique-headings": "warning",
-								"universal-selector": "warning",
-								"vendor-prefix": true,
-								"zero-units": "warning"
-							},
-							"gjslint_ignore":
-							[
-								110
-							],
-							"gjslint_options":
-							[
-							],
-							"javascript_linter": "jshint",
-							"jshint_options":
-							{
-								"browser": true,
-								"evil": true,
-								"regexdash": true,
-								"sub": true,
-								"trailing": true,
-								"wsh": true
-							},
-							"pep8_ignore":
-							[
-								"E501"
-							],
-							"perl_linter": "perlcritic",
-							"pyflakes_ignore":
-							[
-							],
-							"pyflakes_ignore_import_*": true,
-							"sublimelinter": true,
-							"sublimelinter_delay": 0,
-							"sublimelinter_disable":
-							[
-							],
-							"sublimelinter_executable_map":
-							{
-							},
-							"sublimelinter_fill_outlines": false,
-							"sublimelinter_gutter_marks": false,
-							"sublimelinter_notes": false,
-							"sublimelinter_objj_check_ascii": false,
-							"sublimelinter_popup_errors_on_save": false,
-							"sublimelinter_syntax_map":
-							{
-								"Python Django": "python"
-							},
-							"sublimelinter_wrap_find": true,
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 330.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "task-repo/task-repo.js",
+					"file": "views/test.jade",
 					"settings":
 					{
-						"buffer_size": 833,
+						"buffer_size": 355,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								169,
-								169
+								318,
+								324
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -401,27 +362,27 @@
 				},
 				{
 					"buffer": 2,
-					"file": "config/config.js",
+					"file": "public/stylesheets/test.styl",
 					"settings":
 					{
-						"buffer_size": 3370,
+						"buffer_size": 27,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1,
-								3370
+								27,
+								27
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"auto_name": "test.styl",
+							"syntax": "Packages/Stylus/Stylus.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1306.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -471,8 +432,16 @@
 		"selected_items":
 		[
 			[
+				"inde",
+				"routes/index.js"
+			],
+			[
 				"ser",
 				"server.js"
+			],
+			[
+				"con",
+				"config/configuration.json"
 			],
 			[
 				"",

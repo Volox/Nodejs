@@ -50,7 +50,7 @@ app.get('/505', routes.error50x );
 
 
 // Testi page
-app.get('/test/:task', routes.test );
+app.get('/test', routes.test );
 
 
 

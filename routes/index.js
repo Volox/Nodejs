@@ -35,10 +35,8 @@ exports.missing = function(req, res){
 
 
 exports.test = function(req, res) {
-	var taskId = req.params.task;
 	res.render('test', {
-		title: 'Test page',
-		task: taskId
+		title: 'Test page'
 	});
 };
 
