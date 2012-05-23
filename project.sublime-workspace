@@ -4,20 +4,72 @@
 		"selected_items":
 		[
 			[
-				"blu",
-				"blursteps"
+				"oc",
+				"octaveArray"
 			],
 			[
-				"oc",
-				"octaves"
+				"octa",
+				"octaveArray"
 			],
 			[
 				"for",
 				"forr	Range comprehension (inclusive)"
 			],
 			[
+				"blu",
+				"blurStep"
+			],
+			[
+				"ro",
+				"rowArray"
+			],
+			[
+				"off",
+				"offsetY"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"matDi",
+				"matDim"
+			],
+			[
+				"offse",
+				"offsetX"
+			],
+			[
+				"type",
+				"typeof"
+			],
+			[
+				"numer",
+				"numeric"
+			],
+			[
+				"red",
+				"redDim"
+			],
+			[
+				"canva",
+				"canvas"
+			],
+			[
+				"can",
+				"canvas"
+			],
+			[
+				"row",
+				"rowArray"
+			],
+			[
+				"p",
+				"pow"
+			],
+			[
 				"fo",
-				"forr	Range comprehension (inclusive)"
+				"fora	Array Comprehension"
 			],
 			[
 				"img",
@@ -75,7 +127,7 @@
 			"file": "public/scripts/coffee/taskRun.coffee",
 			"settings":
 			{
-				"buffer_size": 668,
+				"buffer_size": 1359,
 				"line_ending": "Windows"
 			}
 		},
@@ -83,7 +135,7 @@
 			"file": "views/test.jade",
 			"settings":
 			{
-				"buffer_size": 355,
+				"buffer_size": 302,
 				"line_ending": "Windows"
 			}
 		},
@@ -91,9 +143,17 @@
 			"file": "public/stylesheets/test.styl",
 			"settings":
 			{
-				"buffer_size": 27,
+				"buffer_size": 44,
 				"line_ending": "Windows",
 				"name": "test.styl"
+			}
+		},
+		{
+			"file": "public/scripts/libs/numeric.js",
+			"settings":
+			{
+				"buffer_size": 118123,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -225,6 +285,7 @@
 	},
 	"file_history":
 	[
+		"/D/Portable/Nodejs/public/scripts/libs/numeric.js",
 		"/D/Portable/Nodejs/server.js",
 		"/D/Portable/Nodejs/public/scripts/taskRun.js",
 		"/D/Portable/Nodejs/routes/index.js",
@@ -312,23 +373,24 @@
 					"file": "public/scripts/coffee/taskRun.coffee",
 					"settings":
 					{
-						"buffer_size": 668,
+						"buffer_size": 1359,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								371,
-								371
+								966,
+								966
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage"
+							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 328.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -338,15 +400,15 @@
 					"file": "views/test.jade",
 					"settings":
 					{
-						"buffer_size": 355,
+						"buffer_size": 302,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								318,
-								324
+								273,
+								273
 							]
 						],
 						"settings":
@@ -365,15 +427,15 @@
 					"file": "public/stylesheets/test.styl",
 					"settings":
 					{
-						"buffer_size": 27,
+						"buffer_size": 44,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								27,
-								27
+								44,
+								44
 							]
 						],
 						"settings":
@@ -383,6 +445,34 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "public/scripts/libs/numeric.js",
+					"settings":
+					{
+						"buffer_size": 118123,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								117127,
+								117127
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 54628.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

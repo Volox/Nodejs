@@ -3587,4 +3587,151 @@ numeric.svd= function svd(A) {
 };
 
 
-exports = module.exports = numeric;
+numeric.gauss = function( w, h, sigma, center ) {
+    sigma = sigma || 1;
+    center = ( typeof center != 'undefined' )? center : true;
+
+    var offsetX = parseInt( center? w/2: 0 );
+    var offsetY = parseInt( center? h/2: 0 );
+
+    var matrix = [];
+    for( var row = 0; row<h; row++ ) {
+        var rowArray = [];
+        for( var col = 0; col<w; col++ ) {
+            var x=col-offsetX, y=row-offsetY,
+                exp = (-(x*x+y*y)/(2*sigma*sigma)),
+                val = Math.exp(exp);
+
+            rowArray.push( val );
+        }
+        matrix.push( rowArray );
+    }
+
+    var S = numeric.sum( matrix );
+
+    return numeric.div( matrix, S );
+};
+
+
+numeric.fromImage = function( imgID, scale ) {
+    var matrix = [];
+    scale = ( typeof(scale)!='undefined' )? scale : 1;
+
+    var img = document.getElementById( imgID );
+    var canvas = document.createElement( 'canvas' );
+    var h = img.height*scale;
+    var w = img.width*scale;
+
+    canvas.width = w;
+    canvas.height = h;
+
+    var cx = canvas.getContext( '2d' );
+    cx.drawImage( img, 0, 0, w, h );
+
+    var imgData = cx.getImageData( 0, 0, w, h );
+    for( var y=0; y<h; y++ ) {
+        var rowArray = [];
+        for( var x=0; x<w; x++ ) {
+            var idx = (x+y*w)*4;
+            var r = imgData.data[ idx ],
+                g = imgData.data[ idx+1 ],
+                b = imgData.data[ idx+2 ];
+
+            rowArray.push( 0.3*r + 0.59*g + 0.11*b );
+        }
+        matrix.push( rowArray );
+    }
+
+    return matrix;
+};
+
+numeric.toImage = function( matrix ) {
+    var canvas = document.createElement( 'canvas' );
+    var cx = canvas.getContext( '2d' );
+
+    
+    var matDim = numeric.dim( matrix );
+    var h = matDim[0],
+        w = matDim[1];
+
+    canvas.width = w;
+    canvas.height = h;
+
+    // Find max & min
+    var max = Number.MIN_VALUE;
+    var min = Number.MAX_VALUE;
+    for( var x=0; x<w; x++ ) {
+        for( var y=0; y<h; y++ ) {
+            var value = matrix[y][x];
+
+            min = ( value<min)? value : min;
+            max = ( value>max)? value : max;
+        }
+    }
+
+    //out:255=x:max
+
+    var imgData = cx.createImageData( w, h );
+    for( var x=0; x<w; x++ ) {
+        for( var y=0; y<h; y++ ) {
+            var idx = (x+y*w)*4;
+            var value = matrix[y][x];
+
+            imgData.data[ idx ] = (value-min)*255/max;
+            imgData.data[ idx+1 ] = (value-min)*255/max;
+            imgData.data[ idx+2 ] = (value-min)*255/max;
+            imgData.data[ idx+3 ] = 255;
+        }
+    }
+
+
+    cx.putImageData( imgData, 0, 0 );
+
+    return canvas;
+};
+
+numeric.fft = function( matrix ) {
+    var result = [];
+    
+};
+
+numeric.conv = function( matrix, filter ) {
+    var result = [];
+    
+    var matDim = numeric.dim( matrix );
+    var filterDim = numeric.dim( filter );
+    var mW = matDim[1],
+        mH = matDim[0],
+        fW = filterDim[1],
+        fH = filterDim[0];
+
+    for( var y=0; y<mH; y++ ) {
+        var rowArray = [];
+        for( var x=0; x<mW; x++ ) {
+            var value = 0;
+
+            for (var fy=0; fy<fH; fy++) {
+                for (var fx=0; fx<fW; fx++) {
+                    var oY = y-fy;
+                    var oX = x-fx;
+
+                    oX = (oX>mW) ? mW : oX;
+                    oX = (oX<0) ? 0 : oX;
+
+                    oY = (oY>mH) ? mH : oY;
+                    oY = (oY<0) ? 0 : oY;
+
+                    value += matrix[oY][oX]*filter[fy][fx];
+                }
+            }
+            rowArray.push( value );
+        }
+        result.push( rowArray );
+    }
+
+    return result;
+}
+
+if( typeof exports != 'undefined' ) {
+    exports = module.exports = numeric;
+}
