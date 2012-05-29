@@ -3690,9 +3690,88 @@ numeric.toImage = function( matrix ) {
     return canvas;
 };
 
-numeric.fft = function( matrix ) {
+
+numeric.dct = function( matrix ) {
+    var dim = numeric.dim( matrix );
+    if (dim.length==1)
+        return numeric.dct1d( matrix );
+    else
+        return numeric.dct2d( matrix );
+};
+
+// 8 input DCT
+numeric.dct1d  = function( vector ) {
+    // Unsafe operation
+    var pad = 8-( (vector.length%8==0 )? 8: vector.length%8 );
+    for (var i=0; i<pad; i++) {
+        vector.push( 0 );
+    };
+
+    var result = new Array( vector.length );
+    // DCT constants
+    var c1=1004,    // cos(pi/16)<<10
+        s1=200,     // sin(pi/16)<<10
+        c3=851,     // cos(3pi/16)<<10
+        s3=569,     // sin(3pi/16)<<10
+        r2c6=554,   // sqrt(2)*cos(6pi/16)<<10
+        r2s6=1337,
+        r2=181;     // sqrt(2)<<7
+
+    for (var i=0; i<vector.length; i+=8) {
+        var x0=vector[i+0],
+            x1=vector[i+1],
+            x2=vector[i+2],
+            x3=vector[i+3],
+            x4=vector[i+4],
+            x5=vector[i+5],
+            x6=vector[i+6],
+            x7=vector[i+7],
+            x8;
+
+        // Stage 1
+        x8=x7+x0; x0-=x7;  x7=x1+x6; x1-=x6;
+        x6=x2+x5; x2-=x5;  x5=x3+x4; x3-=x4;
+
+        // Stage 2
+        x4=x8+x5; x8-=x5;  x5=x7+x6; x7-=x6;
+        x6=c1*(x1+x2); x2=(-s1-c1)*x2+x6; x1=(s1-c1)*x1+x6;
+        x6=c3*(x0+x3); x3=(-s3-c3)*x3+x6; x0=(s3-c3)*x0+x6;
+
+        // Stage 3
+        x6=x4+x5; x4-=x5;
+        x5=r2c6*(x7+x8); x7=(-r2s6-r2c6)*x7+x5; x8=(r2s6-r2c6)*x8+x5;
+        x5=x0+x2;x0-=x2; x2=x3+x1; x3-=x1;
+
+        // Stage 4, round, and output
+        result[i+0]=x6;  result[i+4]=x4;
+        result[i+2]=(x8+512)>>10; result[i+6] = (x7+512)>>10;
+        result[i+7]=(x2-x5+512)>>10; result[i+1]=(x2+x5+512)>>10;
+        result[i+3]=(x3*r2+65536)>>17; result[i+5]=(x0*r2+65536)>>17;
+    };
+    return result;
+};
+
+numeric.dct2d = function( matrix ) {
     var result = [];
-    
+    for(row=0;row<8;row++) {
+        // DCT 1D row
+        /*
+        dctBlock[row][0]=x6;  dctBlock[row][4]=x4;
+        dctBlock[row][2]=x8>>10; dctBlock[row][6] = x7>>10;
+        dctBlock[row][7]=(x2-x5)>>10; dctBlock[row][1]=(x2+x5)>>10;
+        dctBlock[row][3]=(x3*r2)>>17; dctBlock[row][5]=(x0*r2)>>17;
+        */
+    }
+    for(col=0;col<8;col++) {
+        // DCT 1D col
+        /*
+        dctBlock[0][col]=(x6+16)>>5;  dctBlock[4][col]=(x4+16)>>5;
+        dctBlock[2][col]=(x8+16384)>>15; dctBlock[6][col] = (x7+16384)>>15;
+        dctBlock[7][col]=(x2-x5+16384)>>15; dctBlock[1][col]=(x2+x5+16384)>>15;
+        dctBlock[3][col]=((x3>>8)*r2+8192)>>14;
+        dctBlock[5][col]=((x0>>8)*r2+8192)>>14;
+        */
+    }
 };
 
 numeric.conv = function( matrix, filter ) {

@@ -2,7 +2,7 @@
 (function() {
 
   $(window).load(function() {
-    var $images, $origImg, DoG, ScaleSpace, blurFilter, blurStep, blurSteps, d, edgeH, edgeV, filteredImage, image, laplace, octave, octaveArray, octaves, sigma, sigmas, _i, _j, _k, _l, _len, _ref;
+    var $images, $origImg, blurSteps, d, edgeH, edgeV, laplace, octaves, sigma;
     $images = $('#images');
     $origImg = $('#img');
     d = 9;
@@ -12,33 +12,28 @@
     laplace = [[0.5, 1, 0.5], [1, -6, 1], [0.5, 1, 0.5]];
     octaves = 4;
     blurSteps = 5;
-    ScaleSpace = [];
-    sigmas = numeric.linspace(1, d / 2, blurSteps);
-    for (octave = _i = 1; 1 <= octaves ? _i <= octaves : _i >= octaves; octave = 1 <= octaves ? ++_i : --_i) {
-      octaveArray = [];
-      image = numeric.fromImage('img', 1 / octave);
-      for (blurStep = _j = 1; 1 <= blurSteps ? _j <= blurSteps : _j >= blurSteps; blurStep = 1 <= blurSteps ? ++_j : --_j) {
-        blurFilter = numeric.gauss(d, d, sigmas[blurStep - 1]);
-        filteredImage = numeric.conv(image, blurFilter);
-        octaveArray.push(filteredImage);
-      }
-      ScaleSpace.push(octaveArray);
-    }
-    DoG = [];
-    for (_k = 0, _len = ScaleSpace.length; _k < _len; _k++) {
-      octave = ScaleSpace[_k];
-      octaveArray = [];
-      for (blurStep = _l = 0, _ref = blurSteps - 2; 0 <= _ref ? _l <= _ref : _l >= _ref; blurStep = 0 <= _ref ? ++_l : --_l) {
-        image = numeric.sub(octave[blurStep], octave[blurStep + 1]);
-        octaveArray.push(image);
-        $images.append(numeric.toImage(image));
-      }
-      DoG.push(octaveArray);
-    }
+    console.log(numeric.dct([1, 2, 3, 4, 6, 2, 23, 6]));
     /*
-    	$images.append numeric.toImage numeric.conv red, edgeV
-    	$images.append numeric.toImage numeric.conv red, edgeH
-    	$images.append numeric.toImage numeric.conv red, laplace
+    	ScaleSpace = []
+    	sigmas = numeric.linspace 1, d/2, blurSteps
+    	for octave in [1..octaves]
+    		octaveArray = []
+    		image = numeric.fromImage 'img', 1/octave
+    		for blurStep in [1..blurSteps]
+    			blurFilter = numeric.gauss d, d, sigmas[blurStep-1]
+    			filteredImage = numeric.conv image, blurFilter
+    			octaveArray.push filteredImage
+    			#$images.append numeric.toImage filteredImage
+    		ScaleSpace.push octaveArray
+    
+    	DoG = []
+    	for octave in ScaleSpace
+    		octaveArray = []
+    		for blurStep in [0..blurSteps-2]	
+    			image = numeric.sub octave[blurStep], octave[blurStep+1]
+    			octaveArray.push image
+    			$images.append numeric.toImage image
+    		DoG.push octaveArray
     */
 
   });

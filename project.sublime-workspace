@@ -124,10 +124,13 @@
 	"buffers":
 	[
 		{
+			"contents": "\n\n$( window ).load () ->\n	$images = $ '#images'\n	$origImg = $ '#img'\n\n	#$images.append $canvas\n	#red = numeric.fromImage 'img', 0.5\n\n	d = 9\n	sigma = 1\n	#test = numeric.gauss d, d, sigma\n	#test = numeric.mul test, 200000000\n	#console.log numeric.prettyPrint test\n	\n	#conv = numeric.conv red, test\n	edgeV = [	[	1,	0,	-1],\n				[	1,	0,	-1],\n				[	1,	0,	-1]]\n\n	edgeH = [	[	1,	1,	1],\n				[	0,	0,	0],\n				[	-1,	-1,	-1]]\n\n	laplace = [	[	0.5,	1,	0.5],\n				[	1,	-6,	1],\n				[	0.5,	1,	0.5]]\n\n	# Compute DoG\n	octaves = 4\n	blurSteps = 5\n\n	ScaleSpace = []\n	sigmas = numeric.linspace 1, d/2, blurSteps\n	for octave in [1..octaves]\n		octaveArray = []\n		image = numeric.fromImage 'img', 1/octave\n		for blurStep in [1..blurSteps]\n			blurFilter = numeric.gauss d, d, sigmas[blurStep-1]\n			filteredImage = numeric.conv image, blurFilter\n			octaveArray.push filteredImage\n			#$images.append numeric.toImage filteredImage\n		ScaleSpace.push octaveArray\n\n	DoG = []\n	for octave in ScaleSpace\n		octaveArray = []\n		for blurStep in [0..blurSteps-2]	\n			image = numeric.sub octave[blurStep], octave[blurStep+1]\n			octaveArray.push image\n			$images.append numeric.toImage image\n		DoG.push octaveArray\n	###\n	$images.append numeric.toImage numeric.conv red, edgeV\n	$images.append numeric.toImage numeric.conv red, edgeH\n	$images.append numeric.toImage numeric.conv red, laplace\n	###\n	return\n",
 			"file": "public/scripts/coffee/taskRun.coffee",
+			"file_size": 1417,
+			"file_write_time": 129823180693937714,
 			"settings":
 			{
-				"buffer_size": 1359,
+				"buffer_size": 1358,
 				"line_ending": "Windows"
 			}
 		},
@@ -135,7 +138,7 @@
 			"file": "views/test.jade",
 			"settings":
 			{
-				"buffer_size": 302,
+				"buffer_size": 338,
 				"line_ending": "Windows"
 			}
 		},
@@ -373,15 +376,15 @@
 					"file": "public/scripts/coffee/taskRun.coffee",
 					"settings":
 					{
-						"buffer_size": 1359,
+						"buffer_size": 1358,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								966,
-								966
+								939,
+								939
 							]
 						],
 						"settings":
@@ -390,7 +393,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 328.0,
+						"translation.y": 76.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -400,15 +403,15 @@
 					"file": "views/test.jade",
 					"settings":
 					{
-						"buffer_size": 302,
+						"buffer_size": 338,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								273,
-								273
+								338,
+								338
 							]
 						],
 						"settings":

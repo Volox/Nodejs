@@ -28,10 +28,15 @@ $( window ).load () ->
 
 	# Compute DoG
 	octaves = 4
-	blurSteps = 5;
+	blurSteps = 5
 
+
+
+	console.log numeric.dct [1,2,3,4,6,2,23,6]
+
+	###
 	ScaleSpace = []
-	sigmas = numeric.linspace(1,d/2,blurSteps);
+	sigmas = numeric.linspace 1, d/2, blurSteps
 	for octave in [1..octaves]
 		octaveArray = []
 		image = numeric.fromImage 'img', 1/octave
@@ -50,9 +55,5 @@ $( window ).load () ->
 			octaveArray.push image
 			$images.append numeric.toImage image
 		DoG.push octaveArray
-	###
-	$images.append numeric.toImage numeric.conv red, edgeV
-	$images.append numeric.toImage numeric.conv red, edgeH
-	$images.append numeric.toImage numeric.conv red, laplace
 	###
 	return
