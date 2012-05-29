@@ -2,7 +2,7 @@
  * MicroTask Class
  */
 
-var config = require( 'config' );
+var config = require( '../../config' );
 
 var log		= config.logger,
 	_		= config._,

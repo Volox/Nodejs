@@ -3774,9 +3774,17 @@ numeric.dct2d = function( matrix ) {
     }
 };
 
+numeric.fft = function( matrix ) {
+    FFT.init( matrix.length );
+    FFT.fft( matrix, numeric.sub( matrix, matrix) );
+};
+numeric.ifft = function( matrix ) {
+    FFT.init( matrix.length );
+    FFT.ifft( matrix, numeric.sub( matrix, matrix) );
+};
+
 numeric.conv = function( matrix, filter ) {
     var result = [];
-    
     var matDim = numeric.dim( matrix );
     var filterDim = numeric.dim( filter );
     var mW = matDim[1],
@@ -3807,7 +3815,6 @@ numeric.conv = function( matrix, filter ) {
         }
         result.push( rowArray );
     }
-
     return result;
 }
 

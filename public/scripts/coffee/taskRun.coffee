@@ -1,19 +1,23 @@
-
-
+# instead of document ready to ensure image loading
 $( window ).load () ->
 	$images = $ '#images'
 	$origImg = $ '#img'
 
 	#$images.append $canvas
-	#red = numeric.fromImage 'img', 0.5
+	red = numeric.fromImage 'img'
 
 	d = 9
 	sigma = 1
-	#test = numeric.gauss d, d, sigma
+	test = numeric.gauss d, d, sigma
+
+
 	#test = numeric.mul test, 200000000
 	#console.log numeric.prettyPrint test
 	
-	#conv = numeric.conv red, test
+	conv = numeric.conv red, test
+
+	$images.append numeric.toImage conv
+
 	edgeV = [	[	1,	0,	-1],
 				[	1,	0,	-1],
 				[	1,	0,	-1]]
@@ -30,9 +34,13 @@ $( window ).load () ->
 	octaves = 4
 	blurSteps = 5
 
+	###
+	arr = [1,2,3,4,6,2,23,6]
+	console.log arr
+	numeric.fft arr
+	console.log arr
+	###
 
-
-	console.log numeric.dct [1,2,3,4,6,2,23,6]
 
 	###
 	ScaleSpace = []

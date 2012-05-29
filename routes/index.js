@@ -2,7 +2,7 @@
  * GET home page.
  */
 
-var config = require( 'config' );
+var config = require( '../config' );
 var log = config.logger,
 	util = config.util,
 	path = config.path;

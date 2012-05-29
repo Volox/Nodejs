@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var config = require('config');
+var config = require('./config');
 
 var log = config.logger,
     express = require('express'),

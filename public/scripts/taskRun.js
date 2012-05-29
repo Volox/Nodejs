@@ -2,17 +2,27 @@
 (function() {
 
   $(window).load(function() {
-    var $images, $origImg, blurSteps, d, edgeH, edgeV, laplace, octaves, sigma;
+    var $images, $origImg, blurSteps, conv, d, edgeH, edgeV, laplace, octaves, red, sigma, test;
     $images = $('#images');
     $origImg = $('#img');
+    red = numeric.fromImage('img');
     d = 9;
     sigma = 1;
+    test = numeric.gauss(d, d, sigma);
+    conv = numeric.conv(red, test);
+    $images.append(numeric.toImage(conv));
     edgeV = [[1, 0, -1], [1, 0, -1], [1, 0, -1]];
     edgeH = [[1, 1, 1], [0, 0, 0], [-1, -1, -1]];
     laplace = [[0.5, 1, 0.5], [1, -6, 1], [0.5, 1, 0.5]];
     octaves = 4;
     blurSteps = 5;
-    console.log(numeric.dct([1, 2, 3, 4, 6, 2, 23, 6]));
+    /*
+    	arr = [1,2,3,4,6,2,23,6]
+    	console.log arr
+    	numeric.fft arr
+    	console.log arr
+    */
+
     /*
     	ScaleSpace = []
     	sigmas = numeric.linspace 1, d/2, blurSteps

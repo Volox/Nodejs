@@ -4,16 +4,28 @@
 		"selected_items":
 		[
 			[
+				"my",
+				"myMatrix"
+			],
+			[
+				"r",
+				"result"
+			],
+			[
+				"v",
+				"vector"
+			],
+			[
+				"for",
+				"for	for (…) {…}"
+			],
+			[
 				"oc",
 				"octaveArray"
 			],
 			[
 				"octa",
 				"octaveArray"
-			],
-			[
-				"for",
-				"forr	Range comprehension (inclusive)"
 			],
 			[
 				"blu",
@@ -123,42 +135,6 @@
 	},
 	"buffers":
 	[
-		{
-			"contents": "\n\n$( window ).load () ->\n	$images = $ '#images'\n	$origImg = $ '#img'\n\n	#$images.append $canvas\n	#red = numeric.fromImage 'img', 0.5\n\n	d = 9\n	sigma = 1\n	#test = numeric.gauss d, d, sigma\n	#test = numeric.mul test, 200000000\n	#console.log numeric.prettyPrint test\n	\n	#conv = numeric.conv red, test\n	edgeV = [	[	1,	0,	-1],\n				[	1,	0,	-1],\n				[	1,	0,	-1]]\n\n	edgeH = [	[	1,	1,	1],\n				[	0,	0,	0],\n				[	-1,	-1,	-1]]\n\n	laplace = [	[	0.5,	1,	0.5],\n				[	1,	-6,	1],\n				[	0.5,	1,	0.5]]\n\n	# Compute DoG\n	octaves = 4\n	blurSteps = 5\n\n	ScaleSpace = []\n	sigmas = numeric.linspace 1, d/2, blurSteps\n	for octave in [1..octaves]\n		octaveArray = []\n		image = numeric.fromImage 'img', 1/octave\n		for blurStep in [1..blurSteps]\n			blurFilter = numeric.gauss d, d, sigmas[blurStep-1]\n			filteredImage = numeric.conv image, blurFilter\n			octaveArray.push filteredImage\n			#$images.append numeric.toImage filteredImage\n		ScaleSpace.push octaveArray\n\n	DoG = []\n	for octave in ScaleSpace\n		octaveArray = []\n		for blurStep in [0..blurSteps-2]	\n			image = numeric.sub octave[blurStep], octave[blurStep+1]\n			octaveArray.push image\n			$images.append numeric.toImage image\n		DoG.push octaveArray\n	###\n	$images.append numeric.toImage numeric.conv red, edgeV\n	$images.append numeric.toImage numeric.conv red, edgeH\n	$images.append numeric.toImage numeric.conv red, laplace\n	###\n	return\n",
-			"file": "public/scripts/coffee/taskRun.coffee",
-			"file_size": 1417,
-			"file_write_time": 129823180693937714,
-			"settings":
-			{
-				"buffer_size": 1358,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/test.jade",
-			"settings":
-			{
-				"buffer_size": 338,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/stylesheets/test.styl",
-			"settings":
-			{
-				"buffer_size": 44,
-				"line_ending": "Windows",
-				"name": "test.styl"
-			}
-		},
-		{
-			"file": "public/scripts/libs/numeric.js",
-			"settings":
-			{
-				"buffer_size": 118123,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "Packages/Nodejs/Nodejs.sublime-build",
 	"command_palette":
@@ -288,6 +264,10 @@
 	},
 	"file_history":
 	[
+		"/D/Portable/Nodejs/public/stylesheets/test.styl",
+		"/D/Portable/Nodejs/views/test.jade",
+		"/D/Portable/Nodejs/public/scripts/coffee/taskRun.coffee",
+		"/D/Portable/Nodejs/public/scripts/libs/fft.js",
 		"/D/Portable/Nodejs/public/scripts/libs/numeric.js",
 		"/D/Portable/Nodejs/server.js",
 		"/D/Portable/Nodejs/public/scripts/taskRun.js",
@@ -368,118 +348,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "public/scripts/coffee/taskRun.coffee",
-					"settings":
-					{
-						"buffer_size": 1358,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								939,
-								939
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 76.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "views/test.jade",
-					"settings":
-					{
-						"buffer_size": 338,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								338,
-								338
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/stylesheets/test.styl",
-					"settings":
-					{
-						"buffer_size": 44,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								44,
-								44
-							]
-						],
-						"settings":
-						{
-							"auto_name": "test.styl",
-							"syntax": "Packages/Stylus/Stylus.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/scripts/libs/numeric.js",
-					"settings":
-					{
-						"buffer_size": 118123,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								117127,
-								117127
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 54628.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				}
 			]
 		}
 	],
