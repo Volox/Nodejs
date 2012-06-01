@@ -2,7 +2,7 @@
 $( window ).load () ->
 	$images = $ '#images'
 	$origImg = $ '#img'
-
+	
 	#$images.append $canvas
 	red = numeric.fromImage 'img'
 
