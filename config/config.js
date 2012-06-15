@@ -9,6 +9,7 @@ var fs = require( 'fs' ),
     util = require( 'util' ),
     nconf = require( 'nconf' ),
     mongo = require( 'mongojs' ),
+    request = require( 'request' ),
     _ = require( 'underscore' );
 
 _.str = require( 'underscore.string' );
@@ -37,6 +38,7 @@ function init( expressApp ) {
 	props.path	= path;
 	props.nconf	= nconf;
 	props._		= _;
+	props.request=request;
 	props.mongo	= mongo;
 
 	// Init the sections

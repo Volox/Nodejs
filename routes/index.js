@@ -21,12 +21,14 @@ exports.index = function(req, res){
 };
 exports.error40x = function(req, res){
 	res.render('error', {
-		title: 'Error'
+		title: 'Error',
+		message: 'Missing page'
 	});
 };
 exports.error50x = function(req, res){
 	res.render('error', {
-		title: 'Error'
+		title: 'Error',
+		message: 'SERVER ERRROR'
 	});
 };
 exports.missing = function(req, res){

@@ -6,6 +6,7 @@
 var config = require('./config');
 
 var log = config.logger,
+    _ = config._,
     express = require('express'),
     http = require('http');
 
@@ -54,14 +55,18 @@ app.get('/test', routes.test );
 
 
 
-app.all( '/*', routes.missing );
 var server = http.createServer(app);
 
 var TaskRepository = require( './task-repo' );
-//var TaskRepositoryInstance = new TaskRepository();
-var TRI = new TaskRepository( config.task );
+var TRI = new TaskRepository( config.nconf.get( "task_repository" ) );
+app.get('/task/list', _.bind( TRI.taskList, TRI ) );
+app.get('/task/:task', _.bind( TRI.taskDetail, TRI ) );
 
 
+
+
+
+app.all( '/*', routes.missing );
 server.listen( config.port );
   log.debug( f( 'Express server listening on port %d in %s mode',
     server.address().port, app.settings.env ) );

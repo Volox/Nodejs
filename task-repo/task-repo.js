@@ -6,14 +6,27 @@ var config = require( '../config' );
 
 var log		= config.logger,
 	_		= config._,
+	request = config.request,
 	mongo	= config.mongo;
 
 var Task = require( './task' );
 
 var TaskRepository = function( configuration ) {
 	this.name = "Task Repository";
-	this.urlMapping = configuration.urls;
-	this.taskList = [];
+	
+	this.configuration = configuration;
+	
+	this.host = configuration.host;
+	this.port = configuration.port;
+	this.basePath = configuration.basePath;
+
+	// Http request base options
+	this.baseOptions = {
+		host: this.host,
+		port: this.port,
+	}
+
+
 
 	log.info( 'Task Repository created' );
 
@@ -21,10 +34,93 @@ var TaskRepository = function( configuration ) {
 }
 
 TaskRepository.prototype.init = function() {
+
+
+	/*
 	var taskI = new Task();
 	this.addTask( taskI );
+	*/
 }
 
+TaskRepository.prototype.taskList = function(req, res){
+	var config = this.configuration.actions.taskList;
+	var url = f( '%s:%s%s/%s', this.host, this.port, this.basePath, config.path );
+
+	try {
+		request( {url: url, method: config.method }, function( error, response, body ) {
+			try {
+				body = JSON.parse(body);
+			} catch( error ) {
+				body = error
+			}
+
+			res.render('task/list', {
+				title: 'Task list',
+				data: body
+			});
+		} );
+
+	} catch( error ) {
+		res.render('error', {
+			title: 'Request error',
+			message: error
+		});
+	}
+};
+
+TaskRepository.prototype.taskDetail = function(req, res) {
+	var taskID = req.params.task;
+
+	var config = this.configuration.actions.task;
+	var url = f( '%s:%s%s/%s', this.host, this.port, this.basePath, config.path.replace( "{query}", taskID ) );
+
+	try {
+		request( {url: url, method: config.method }, function( error, response, body ) {
+			try {
+				body = JSON.parse(body);
+
+				var objects = [];
+				_.each( body.objects, function( element ) {
+					var object = {
+						id: element.id
+					};
+
+					_.each( element.body, function( value ) {
+						object[ value.fieldId ] = value.value;
+					} );
+
+					objects.push( object );
+				} );
+
+				body.objects = objects;
+			} catch( error ) {
+				body = error
+			}
+
+			res.render('task/detail', {
+				title: 'Task detail',
+				data: body || error
+			});
+		} );
+
+	} catch( error ) {
+		res.render('error', {
+			title: 'Request error',
+			message: error
+		});
+	}
+
+};
+
+
+
+
+
+
+
+
+
+/*
 TaskRepository.prototype.bindUrls = function( app ) {
 	// Bind the urls with the actions
 	var urlMap = this.urlMapping;
@@ -43,7 +139,7 @@ TaskRepository.prototype.bindUrls = function( app ) {
 		app[ method.toLowerCase() ]( requestUrl, _.bind( this.actions[ action ], this ) );
 	}
 }
-
+*/
 
 // Create the action namespace
 TaskRepository.prototype.actions = {};
@@ -71,10 +167,5 @@ TaskRepository.prototype.addTask = function( task ) {
 	this.taskList.push( task );
 	// Add the task to mongo db
 }
-
-
-TaskRepository.prototype._auth = function() {
-	log.debug( 'Authorising' );
-};
 
 exports = module.exports = TaskRepository;

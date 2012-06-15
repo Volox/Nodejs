@@ -4,14 +4,9 @@ block append scripts
 
 block content
 	div.taskList
-		h1 Task list
-		ul
-			- each task in data
-				- var perc = (task.requirements.minInstance/100)*task.instances.completed;
-				li(data-url="/tasks",data-task-id="#{task._id}")
-					a(href="/test/#{task._id}") #{task.name}
-					|  (done #{perc}%)
-					span.delete(title="Delete")
-						img(src="/img/delete.png")
-					p= task.description
-			
+		h1 &micro;Task list
+		if data.microTasks
+			ul
+				each microTask in data.microTasks
+					a(href="/task/#{microTask.id}")
+						li= microTask.id

@@ -1,4 +1,5 @@
 class VoloCL
+	@kernels: {}
 	constructor: () ->
 		@cl = window.WebCL
 		@platform = null
@@ -18,6 +19,7 @@ class VoloCL
 		@inputs = []
 		@outputs = []
 		@arguments = []
+		@argumentsMap = {}
 
 		# init
 		@init()
@@ -30,7 +32,7 @@ class VoloCL
 		if not window.WebCL
 			alert "WebCL not supported"
 		else
-			console.log "WebCL supported"
+			#console.log "WebCL supported"
 
 		@platform = @getPlatforms()[ 0 ]
 		@device = @getDevices( @platform )[ 0 ]
@@ -48,13 +50,15 @@ class VoloCL
 
 	# Kernel related
 	getKernel: (val) ->
-		url = val
-		if $( val ).length
+		kernelSource = VoloCL.kernels[ val ]
+		if not kernelSource?
 			url = $( val ).prop 'src'
+			ajaxResult = $.ajax url,
+				async: false
+			kernelSource = ajaxResult.responseText
+			VoloCL.kernels[ val ] = kernelSource
 
-		ajaxResult = $.ajax url,
-			async: false
-		return ajaxResult.responseText
+		return kernelSource
 
 	loadKernel: (url,name) ->
 		try
@@ -74,37 +78,40 @@ class VoloCL
 			# Program built, now take care of the kernel
 			@kernel = @program.createKernel name
 			# Add arguments
-			for argument, index in @arguments
+			for name, index in @arguments
+				argument = @argumentsMap[ name ]
 				@kernel.setKernelArg index, argument.buffer, argument.type
-			console.log 'Kernel loaded'
-
+ 
 			# Create command Queue
 			@cmdQueue = @ctx.createCommandQueue @device, 0
 
-			# Enqueue inputs
-			for input in @inputs
-				@cmdQueue.enqueueWriteBuffer input.buffer, false, 0, input.size, input.value, []
-
-			# Reserve local/global WorkSpace
-			###
-			localWS = [16,4]
-			globalWS = [Math.ceil(width/localWS[0])*localWS[0], 
-						Math.ceil(height/localWS[1])*localWS[1] ];
-			###
-
-			# Execute the kernel
-			@cmdQueue.enqueueNDRangeKernel @kernel, @globalWS.length, [], @globalWS, @localWS, []
-
-			# Gather outputs
-			for output in @outputs
-				@cmdQueue.enqueueReadBuffer output.buffer, false, 0, output.size, output.value, []
-
-			@cmdQueue.finish()
 			return true
-		catch error
 			console.log error
 			return false
 
+	# Run the kernel
+	runKernel:  () ->
+		try
+			# Enqueue inputs
+			for name in @inputs
+				input = @argumentsMap[ name ]
+				@cmdQueue.enqueueWriteBuffer input.buffer, false, 0, input.size, input.value, []
+
+			# Execute the kernel
+			#workGroupSize = @kernel.getKernelWorkGroupInfo(@device, @cl.CL_KERNEL_WORK_GROUP_SIZE);
+			
+			@cmdQueue.enqueueNDRangeKernel @kernel, @globalWS.length, [], @globalWS, @localWS, []
+
+			# Gather outputs
+			for name in @outputs
+				output = @argumentsMap[ name ]
+				@cmdQueue.enqueueReadBuffer output.buffer, false, 0, output.size, output.value, []
+
+			@cmdQueue.finish()
+		catch error
+			console.error error
+
+		return
 
 	#throw new Error "Not implemented"
 	# WorkSpace
@@ -121,31 +128,46 @@ class VoloCL
 		buffer = @ctx.createBuffer @cl.CL_MEM_READ_ONLY, size
 		varObj = 
 			name: name
-			buffer: buffer
 			size: size
 			value: value
+			buffer: buffer
 		
-		@inputs.push varObj
-		@arguments.push varObj
-		return buffer
+		@arguments.push name
+		@inputs.push name
+
+		@argumentsMap[ name ] = varObj
+		return
 
 	addOutput: (name,size,value) ->
 		buffer = @ctx.createBuffer @cl.CL_MEM_WRITE_ONLY, size
 		varObj = 
 			name: name
 			size: size
-			buffer: buffer
 			value: value
+			buffer: buffer
 		
-		@outputs.push varObj
-		@arguments.push varObj
-		return buffer
+		@outputs.push name
+		@arguments.push name
+		
+		@argumentsMap[ name ] = varObj
+		return
 
-	addArgument: (variable,type) ->
-		@arguments.push
+	addArgument: (name,variable,type) ->
+		varObj =
 			buffer: variable
+			name: name
 			type: @cl.types[type]
+			value: variable
+
+		@arguments.push name
+		@argumentsMap[ name ] = varObj
 		return variable
 
-
+	setValues: (map)->
+		for name,value in map
+			@setValue name, value
+		return
+	setValue: (name, value)->
+		@argumentsMap[ name ] = value extends @argumentsMap[ name ]
+		return
 window.VoloCL = VoloCL
