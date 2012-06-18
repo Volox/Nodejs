@@ -11,6 +11,9 @@ node_modules
 public/stylesheets/*.css
 public/scripts/*.js
 
+# Video #
+public/video/*
+
 # Config files #
 
 

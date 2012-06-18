@@ -41,6 +41,11 @@ exports.test = function(req, res) {
 		title: 'Test page'
 	});
 };
+exports.testVideo = function(req, res) {
+	res.render('testVideo', {
+		title: 'Video test page'
+	});
+};
 
 exports.uploadAjax = function(req, res) {
 	var files = util.isArray( req.files.file )? req.files.file : [ req.files.file ];

@@ -1,0 +1,19 @@
+extends layout
+
+block append css
+	link(rel='stylesheet', href='/stylesheets/test.css')
+
+block append scripts
+	script(src="/scripts/testVideo.js")
+block content
+	h1 Video test.
+	- tags = [ "buck", "apple", "butterfly" ]
+	ul#tags
+		each tag in tags
+			li= tag
+	video#video(width="854", height="480", autobuffer)
+		source(src="/video/big_buck_bunny.ogg", type="video/ogg")
+		p Not supported
+	br
+	ul#timestamps
+	button#clickme Click me

@@ -50,8 +50,9 @@ app.get('/404', routes.error40x );
 app.get('/505', routes.error50x );
 
 
-// Testi page
+// Test pages
 app.get('/test', routes.test );
+app.get('/testVideo', routes.testVideo );
 
 
 

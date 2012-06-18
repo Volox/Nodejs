@@ -4,384 +4,28 @@
 		"selected_items":
 		[
 			[
-				"va",
-				"value"
+				"scri",
+				"scripts"
 			],
 			[
-				"lo",
-				"log	log"
+				"sta",
+				"stage4"
 			],
 			[
-				"im",
-				"imageData"
+				"stage",
+				"stage3"
 			],
 			[
-				"Volo",
-				"VoloTest"
-			],
-			[
-				"ker",
-				"kernelArgs"
-			],
-			[
-				"re",
-				"return"
-			],
-			[
-				"kerne",
-				"kernelSrc"
-			],
-			[
-				"ima",
-				"image"
-			],
-			[
-				"in",
-				"inputImages"
-			],
-			[
-				"ou",
-				"outputSize"
-			],
-			[
-				"mic",
-				"microTask"
-			],
-			[
-				"co",
-				"column"
-			],
-			[
-				"obj",
-				"object"
-			],
-			[
-				"p",
-				"push"
-			],
-			[
-				"ob",
-				"object"
-			],
-			[
-				"de",
-				"debug"
-			],
-			[
-				"base",
-				"basePath"
-			],
-			[
-				"ta",
-				"taskID"
-			],
-			[
-				"ba",
-				"basePath"
-			],
-			[
-				"conf",
-				"config"
-			],
-			[
-				"tas",
-				"task"
-			],
-			[
-				"uchar",
-				"uchar4"
-			],
-			[
-				"min",
-				"minVal"
-			],
-			[
-				"blu",
-				"blurCanvas"
-			],
-			[
-				"ma",
-				"maxVal"
-			],
-			[
-				"cu",
-				"currentIdx"
-			],
-			[
-				"pi",
-				"point"
-			],
-			[
-				"bl",
-				"blurFactor"
-			],
-			[
-				"blurS",
-				"blurSteps"
-			],
-			[
-				"y",
-				"y"
-			],
-			[
-				"ca",
-				"canvas"
-			],
-			[
-				"D",
-				"DoGRow"
-			],
-			[
-				"sca",
-				"scaleSpace"
-			],
-			[
-				"var",
-				"variable"
-			],
-			[
-				"oct",
-				"octave"
-			],
-			[
-				"argu",
-				"argument"
-			],
-			[
-				"arg",
-				"argument"
-			],
-			[
-				"ar",
-				"argumentsMap"
-			],
-			[
-				"se",
-				"setValue"
-			],
-			[
-				"argument",
-				"argumentsMap"
-			],
-			[
-				"a",
-				"argument"
-			],
-			[
-				"h",
-				"height"
-			],
-			[
-				"wi",
-				"width"
-			],
-			[
-				"w",
-				"width"
-			],
-			[
-				"crea",
-				"createImage"
-			],
-			[
-				"can",
-				"canvas"
-			],
-			[
-				"oc",
-				"octave"
-			],
-			[
-				"sc",
-				"scaleSpace"
-			],
-			[
-				"kern",
-				"kernels"
-			],
-			[
-				"gauss",
-				"gaussSize"
-			],
-			[
-				"wr",
-				"workGroupSize"
-			],
-			[
-				"e",
-				"exp"
-			],
-			[
-				"fOu",
-				"fOut"
-			],
-			[
-				"fo",
-				"fOut"
-			],
-			[
-				"v",
-				"val"
-			],
-			[
-				"fil",
-				"filterIdx"
-			],
-			[
-				"B",
-				"BYTES_PER_ELEMENT"
-			],
-			[
-				"setG",
-				"setGlobalWS"
-			],
-			[
-				"glo",
-				"globalWS"
-			],
-			[
-				"loca",
-				"localWS"
-			],
-			[
-				"out",
-				"outData"
-			],
-			[
-				"bu",
-				"buffer"
-			],
-			[
-				"i",
-				"index"
-			],
-			[
-				"uch",
-				"uchar4"
-			],
-			[
-				"__",
-				"__global"
-			],
-			[
-				"add",
-				"addInput"
-			],
-			[
-				"pro",
-				"prop"
-			],
-			[
-				"c",
-				"ctx"
-			],
-			[
-				"get",
-				"getKernel"
-			],
-			[
-				"ke",
-				"kernelSrc"
-			],
-			[
-				"aja",
-				"ajaxResult"
-			],
-			[
-				"pla",
-				"platform"
-			],
-			[
-				"WebCL",
-				"WebCL"
-			],
-			[
-				"device",
-				"devices"
-			],
-			[
-				"op",
-				"optGroup"
-			],
-			[
-				"devi",
-				"devices"
-			],
-			[
-				"plat",
-				"platform"
-			],
-			[
-				"my",
-				"myMatrix"
-			],
-			[
-				"r",
-				"result"
+				"A",
+				"Array"
 			],
 			[
 				"for",
 				"for	for (…) {…}"
 			],
 			[
-				"octa",
-				"octaveArray"
-			],
-			[
-				"ro",
-				"rowArray"
-			],
-			[
-				"off",
-				"offsetY"
-			],
-			[
-				"val",
-				"value"
-			],
-			[
-				"matDi",
-				"matDim"
-			],
-			[
-				"offse",
-				"offsetX"
-			],
-			[
-				"type",
-				"typeof"
-			],
-			[
-				"numer",
-				"numeric"
-			],
-			[
-				"red",
-				"redDim"
-			],
-			[
-				"canva",
-				"canvas"
-			],
-			[
-				"row",
-				"rowArray"
-			],
-			[
-				"img",
-				"imgData"
-			],
-			[
-				"u",
-				"uTaskI"
-			],
-			[
-				"level",
-				"levels"
-			],
-			[
-				"fun",
-				"function"
+				"rest",
+				"result"
 			],
 			[
 				"Tas",
@@ -404,42 +48,35 @@
 	"buffers":
 	[
 		{
-			"file": "public/scripts/opencl/volo.cl",
+			"file": "server.js",
 			"settings":
 			{
-				"buffer_size": 2768,
+				"buffer_size": 1575,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/scripts/coffee/webcl.coffee",
+			"file": "views/testVideo.jade",
 			"settings":
 			{
-				"buffer_size": 1206,
+				"buffer_size": 431,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/scripts/coffee/VoloCL.coffee",
+			"file": "public/scripts/coffee/testVideo.coffee",
 			"settings":
 			{
-				"buffer_size": 3906,
-				"line_ending": "Windows"
+				"buffer_size": 287,
+				"line_ending": "Windows",
+				"name": "testVideo"
 			}
 		},
 		{
-			"file": "public/scripts/coffee/MM.coffee",
+			"file": "public/stylesheets/test.styl",
 			"settings":
 			{
-				"buffer_size": 4462,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/test.jade",
-			"settings":
-			{
-				"buffer_size": 387,
+				"buffer_size": 75,
 				"line_ending": "Windows"
 			}
 		}
@@ -447,7 +84,7 @@
 	"build_system": "Packages/Nodejs/Nodejs.sublime-build",
 	"command_palette":
 	{
-		"height": 261.0,
+		"height": 375.0,
 		"selected_items":
 		[
 			[
@@ -455,24 +92,16 @@
 				"Package Control: Upgrade/Overwrite All Packages"
 			],
 			[
-				"insta",
+				"in",
 				"Package Control: Install Package"
 			],
 			[
-				"in",
+				"insta",
 				"Package Control: Install Package"
 			],
 			[
 				"remo",
 				"Package Control: Remove Package"
-			],
-			[
-				"git a",
-				"Git: Add..."
-			],
-			[
-				"git",
-				"Package Control: Install Package"
 			],
 			[
 				"inst",
@@ -531,6 +160,10 @@
 				"Git: Custom Command"
 			],
 			[
+				"git",
+				"Git: Status"
+			],
+			[
 				"node",
 				"Nodejs::Run::Current File"
 			],
@@ -572,45 +205,34 @@
 	},
 	"file_history":
 	[
-		"/D/Portable/Nodejs/task-repo/task-repo.js",
-		"/D/Portable/Nodejs/views/task/detail.jade",
-		"/D/Portable/Nodejs/views/task/list.jade",
-		"/D/Portable/Nodejs/public/scripts/opencl/volo.cl",
-		"/D/Portable/Nodejs/public/scripts/coffee/MM.coffee",
-		"/D/Portable/Nodejs/views/index.jade",
-		"/D/Portable/Nodejs/public/scripts/coffee/webcl.coffee",
-		"/D/Portable/Nodejs/public/scripts/coffee/VoloCL.coffee",
-		"/D/Portable/Nodejs/config/configuration.json",
+		"/D/Projects/Nodejs/views/index.jade",
+		"/D/Projects/Nodejs/routes/index.js",
+		"/D/Projects/Nodejs/public/scripts/task.js",
+		"/D/Projects/Nodejs/public/scripts/coffee/taskRun.coffee",
+		"/D/Projects/Nodejs/views/test.jade",
+		"/D/Projects/Nodejs/public/scripts/libs/numeric.js",
+		"/D/Projects/Nodejs/config/config.js",
+		"/D/Projects/Nodejs/server.js",
+		"/D/Projects/Nodejs/public/stylesheets/theme.styl",
+		"/D/Projects/Nodejs/task_repo/task_repo.js",
+		"/D/Projects/Nodejs/.gitignore",
 		"/D/Portable/Nodejs/routes/index.js",
-		"/D/Portable/Nodejs/server.js",
-		"/D/Portable/Nodejs/views/error.jade",
-		"/D/Portable/Nodejs/config/config.js",
-		"/D/Portable/Nodejs/package.json",
-		"/D/Portable/Nodejs/task-repo/task/task.js",
-		"/D/Portable/Nodejs/task-repo/micro-task/micro-task.js",
-		"/D/Portable/Nodejs/views/test.jade",
-		"/D/Portable/Nodejs/public/scripts/VoloCL.js",
-		"/D/Portable/Nodejs/public/scripts/MM.js",
-		"/D/Portable/Nodejs/public/scripts/libs/numeric.js",
-		"/D/Portable/Nodejs/public/stylesheets/test.styl",
-		"/D/Portable/Nodejs/public/scripts/coffee/taskRun.coffee",
-		"/D/Portable/Nodejs/public/scripts/libs/fft.js",
-		"/D/Portable/Nodejs/public/scripts/taskRun.js",
-		"/D/Portable/Nodejs/utils/utils.js",
-		"/D/Portable/Nodejs/.gitignore",
-		"/D/Portable/Nodejs/project.sublime-project",
 		"/D/Portable/Nodejs/config/package.json",
-		"/D/Portable/Nodejs/task-repo/package.json",
-		"/D/Portable/Nodejs/task_repo/task_repo.js",
+		"/D/Portable/Nodejs/config/configuration.json",
+		"/D/Portable/Nodejs/config/config.js",
+		"/D/Portable/Nodejs/utils/utils.js",
 		"/D/Portable/Nodejs/README.md",
+		"/D/Portable/Nodejs/views/error.jade",
 		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
 		"/D/Portable/Nodejs/views/layout.jade",
+		"/D/Portable/Nodejs/package.json",
 		"/D/Portable/Nodejs/task/task.js",
 		"/D/Portable/Nodejs/public/scripts/coffee/task.coffee",
 		"/D/Portable/Nodejs/config/logConfig.json",
 		"/D/down/jQueryTimelinr_095/js/jquery.timelinr-0.9.5.js",
 		"/D/Portable/Nodejs/sample.js",
 		"/D/Portable/Sublime Text 2/Data/Packages/Default/Preferences.sublime-settings",
+		"/D/Portable/Nodejs/server.js",
 		"/D/Portable/Nodejs/views/task/new.jade",
 		"/D/Portable/Sublime Text 2/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
 		"/D/Portable/Nodejs/test.sublime-project",
@@ -643,7 +265,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			" 	",
+			"2s",
+			"2c",
 			"utf",
 			"var",
 			"\n	\n",
@@ -656,7 +279,6 @@
 		"regex": false,
 		"replace_history":
 		[
-			","
 		],
 		"reverse": false,
 		"show_context": true,
@@ -667,28 +289,28 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/scripts/opencl/volo.cl",
+					"file": "server.js",
 					"settings":
 					{
-						"buffer_size": 2768,
+						"buffer_size": 1575,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1141,
-								1141
+								989,
+								989
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/C++/C.tmLanguage",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
 							"tab_size": 2,
 							"translate_tabs_to_spaces": true
 						},
@@ -700,23 +322,23 @@
 				},
 				{
 					"buffer": 1,
-					"file": "public/scripts/coffee/webcl.coffee",
+					"file": "views/testVideo.jade",
 					"settings":
 					{
-						"buffer_size": 1206,
+						"buffer_size": 431,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								120,
-								120
+								145,
+								145
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -727,78 +349,50 @@
 				},
 				{
 					"buffer": 2,
-					"file": "public/scripts/coffee/VoloCL.coffee",
+					"file": "public/scripts/coffee/testVideo.coffee",
 					"settings":
 					{
-						"buffer_size": 3906,
+						"buffer_size": 287,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3340,
-								3340
+								168,
+								168
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"auto_name": "testVideo",
+							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 1484.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "public/scripts/coffee/MM.coffee",
+					"file": "public/stylesheets/test.styl",
 					"settings":
 					{
-						"buffer_size": 4462,
+						"buffer_size": 75,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1941,
-								1941
+								75,
+								75
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 978.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "views/test.jade",
-					"settings":
-					{
-						"buffer_size": 387,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								278,
-								278
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Stylus/Stylus.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -842,7 +436,7 @@
 	"menu_visible": true,
 	"replace":
 	{
-		"height": 60.0
+		"height": 0.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -851,84 +445,24 @@
 		"selected_items":
 		[
 			[
-				"te",
-				"views/test.jade"
+				"test",
+				"public/stylesheets/test.styl"
 			],
 			[
-				"web",
-				"public/scripts/coffee/webcl.coffee"
+				"in",
+				"views/index.jade"
 			],
 			[
-				"volo",
-				"public/scripts/coffee/VoloCL.coffee"
-			],
-			[
-				"mm",
-				"public/scripts/coffee/MM.coffee"
-			],
-			[
-				"we",
-				"public/scripts/coffee/webcl.coffee"
-			],
-			[
-				"con",
-				"config/configuration.json"
-			],
-			[
-				"err",
-				"views/error.jade"
-			],
-			[
-				"pa",
-				"package.json"
+				"inde",
+				"routes/index.js"
 			],
 			[
 				"ser",
 				"server.js"
 			],
 			[
-				"tes",
-				"views/test.jade"
-			],
-			[
-				"v",
-				"public/scripts/opencl/volo.cl"
-			],
-			[
-				"voloc",
-				"public/scripts/VoloCL.js"
-			],
-			[
-				"mm.co",
-				"public/scripts/coffee/MM.coffee"
-			],
-			[
 				"num",
 				"public/scripts/libs/numeric.js"
-			],
-			[
-				"nume",
-				"public/scripts/libs/numeric.js"
-			],
-			[
-				"numer",
-				"public/scripts/libs/numeric.js"
-			],
-			[
-				"taskr",
-				"public/scripts/coffee/taskRun.coffee"
-			],
-			[
-				"nu",
-				"public/scripts/libs/numeric.js"
-			],
-			[
-				"testjade",
-				"views/test.jade"
-			],
-			[
-				"inde",
-				"routes/index.js"
 			],
 			[
 				"",
