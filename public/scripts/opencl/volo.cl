@@ -2,14 +2,15 @@ __kernel void clMaxMin( __global const uchar4* images,
                         __global uchar4* keyPoints,
                         uint width,
                         uint height ) {
+  /*
   uint x = get_global_id(0);
   uint y = get_global_id(1);
 
   if (x >= width || y >= height) return;
 
-  uchar4* prevImage = images[0];
-  uchar4* image = images[1];
-  uchar4* nextImage = images[2];
+  uchar4 prevImage = images[0];
+  uchar4 image = images[1];
+  uchar4 nextImage = images[2];
 
   uint idx = y*width+x;
   // Using only r channel (grayscale image)
@@ -23,19 +24,20 @@ __kernel void clMaxMin( __global const uchar4* images,
       uint nY = y+j;
 
       uint currentIdx = nY*width+nX;
-      maxVal = max( (uchar4) prevImage[ currentIdx ] ).x, maxVal );
-      minVal = min( (uchar4) prevImage[ currentIdx ] ).x, minVal );
+      maxVal = max( ((uchar4) prevImage[ currentIdx ] ).x, maxVal );
+      minVal = min( ((uchar4) prevImage[ currentIdx ] ).x, minVal );
 
-      maxVal = max( (uchar4) image[ currentIdx ] ).x, maxVal );
-      minVal = min( (uchar4) image[ currentIdx ] ).x, minVal );
+      maxVal = max( ((uchar4) image[ currentIdx ] ).x, maxVal );
+      minVal = min( ((uchar4) image[ currentIdx ] ).x, minVal );
 
-      maxVal = max( (uchar4) nextImage[ currentIdx ] ).x, maxVal );
-      minVal = min( (uchar4) nextImage[ currentIdx ] ).x, minVal );
+      maxVal = max( ((uchar4) nextImage[ currentIdx ] ).x, maxVal );
+      minVal = min( ((uchar4) nextImage[ currentIdx ] ).x, minVal );
     }
   }
 
   if( maxVal!=point || minVal!=point )
     keyPoints[ idx ] = (uchar4)(255,0,0,255)
+  */
 }
 
 __kernel void clDiff( __global const uchar4* src1,

@@ -4,6 +4,46 @@
 		"selected_items":
 		[
 			[
+				"va",
+				"value"
+			],
+			[
+				"lo",
+				"log	log"
+			],
+			[
+				"im",
+				"imageData"
+			],
+			[
+				"Volo",
+				"VoloTest"
+			],
+			[
+				"ker",
+				"kernelArgs"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"kerne",
+				"kernelSrc"
+			],
+			[
+				"ima",
+				"image"
+			],
+			[
+				"in",
+				"inputImages"
+			],
+			[
+				"ou",
+				"outputSize"
+			],
+			[
 				"mic",
 				"microTask"
 			],
@@ -32,10 +72,6 @@
 				"basePath"
 			],
 			[
-				"re",
-				"request"
-			],
-			[
 				"ta",
 				"taskID"
 			],
@@ -50,10 +86,6 @@
 			[
 				"tas",
 				"task"
-			],
-			[
-				"ima",
-				"images"
 			],
 			[
 				"uchar",
@@ -74,10 +106,6 @@
 			[
 				"cu",
 				"currentIdx"
-			],
-			[
-				"im",
-				"images"
 			],
 			[
 				"pi",
@@ -108,20 +136,12 @@
 				"scaleSpace"
 			],
 			[
-				"lo",
-				"log	log"
-			],
-			[
 				"var",
 				"variable"
 			],
 			[
 				"oct",
 				"octave"
-			],
-			[
-				"in",
-				"input"
 			],
 			[
 				"argu",
@@ -134,10 +154,6 @@
 			[
 				"ar",
 				"argumentsMap"
-			],
-			[
-				"va",
-				"varObj"
 			],
 			[
 				"se",
@@ -168,10 +184,6 @@
 				"createImage"
 			],
 			[
-				"ou",
-				"outData"
-			],
-			[
 				"can",
 				"canvas"
 			],
@@ -186,10 +198,6 @@
 			[
 				"kern",
 				"kernels"
-			],
-			[
-				"ker",
-				"kernelSrc"
 			],
 			[
 				"gauss",
@@ -238,10 +246,6 @@
 			[
 				"out",
 				"outData"
-			],
-			[
-				"Volo",
-				"VoloTest"
 			],
 			[
 				"bu",
@@ -400,34 +404,42 @@
 	"buffers":
 	[
 		{
-			"file": "task-repo/task-repo.js",
+			"file": "public/scripts/opencl/volo.cl",
 			"settings":
 			{
-				"buffer_size": 3424,
+				"buffer_size": 2768,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "views/task/detail.jade",
+			"file": "public/scripts/coffee/webcl.coffee",
 			"settings":
 			{
-				"buffer_size": 572,
+				"buffer_size": 1206,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "views/task/list.jade",
+			"file": "public/scripts/coffee/VoloCL.coffee",
 			"settings":
 			{
-				"buffer_size": 215,
+				"buffer_size": 3906,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "views/index.jade",
+			"file": "public/scripts/coffee/MM.coffee",
 			"settings":
 			{
-				"buffer_size": 182,
+				"buffer_size": 4462,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/test.jade",
+			"settings":
+			{
+				"buffer_size": 387,
 				"line_ending": "Windows"
 			}
 		}
@@ -560,27 +572,28 @@
 	},
 	"file_history":
 	[
+		"/D/Portable/Nodejs/task-repo/task-repo.js",
+		"/D/Portable/Nodejs/views/task/detail.jade",
+		"/D/Portable/Nodejs/views/task/list.jade",
+		"/D/Portable/Nodejs/public/scripts/opencl/volo.cl",
+		"/D/Portable/Nodejs/public/scripts/coffee/MM.coffee",
+		"/D/Portable/Nodejs/views/index.jade",
+		"/D/Portable/Nodejs/public/scripts/coffee/webcl.coffee",
+		"/D/Portable/Nodejs/public/scripts/coffee/VoloCL.coffee",
 		"/D/Portable/Nodejs/config/configuration.json",
 		"/D/Portable/Nodejs/routes/index.js",
 		"/D/Portable/Nodejs/server.js",
 		"/D/Portable/Nodejs/views/error.jade",
 		"/D/Portable/Nodejs/config/config.js",
 		"/D/Portable/Nodejs/package.json",
-		"/D/Portable/Nodejs/views/task/detail.jade",
-		"/D/Portable/Nodejs/views/task/list.jade",
 		"/D/Portable/Nodejs/task-repo/task/task.js",
 		"/D/Portable/Nodejs/task-repo/micro-task/micro-task.js",
 		"/D/Portable/Nodejs/views/test.jade",
-		"/D/Portable/Nodejs/public/scripts/coffee/MM.coffee",
-		"/D/Portable/Nodejs/public/scripts/opencl/volo.cl",
-		"/D/Portable/Nodejs/public/scripts/coffee/webcl.coffee",
-		"/D/Portable/Nodejs/public/scripts/coffee/VoloCL.coffee",
 		"/D/Portable/Nodejs/public/scripts/VoloCL.js",
 		"/D/Portable/Nodejs/public/scripts/MM.js",
 		"/D/Portable/Nodejs/public/scripts/libs/numeric.js",
 		"/D/Portable/Nodejs/public/stylesheets/test.styl",
 		"/D/Portable/Nodejs/public/scripts/coffee/taskRun.coffee",
-		"/D/Portable/Nodejs/task-repo/task-repo.js",
 		"/D/Portable/Nodejs/public/scripts/libs/fft.js",
 		"/D/Portable/Nodejs/public/scripts/taskRun.js",
 		"/D/Portable/Nodejs/utils/utils.js",
@@ -659,50 +672,52 @@
 			[
 				{
 					"buffer": 0,
-					"file": "task-repo/task-repo.js",
+					"file": "public/scripts/opencl/volo.cl",
 					"settings":
 					{
-						"buffer_size": 3424,
+						"buffer_size": 2768,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								919,
-								919
+								1141,
+								1141
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/C++/C.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 394.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "views/task/detail.jade",
+					"file": "public/scripts/coffee/webcl.coffee",
 					"settings":
 					{
-						"buffer_size": 572,
+						"buffer_size": 1206,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								293,
-								293
+								120,
+								120
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -712,49 +727,78 @@
 				},
 				{
 					"buffer": 2,
-					"file": "views/task/list.jade",
+					"file": "public/scripts/coffee/VoloCL.coffee",
 					"settings":
 					{
-						"buffer_size": 215,
+						"buffer_size": 3906,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								177,
-								177
+								3340,
+								3340
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1484.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "views/index.jade",
+					"file": "public/scripts/coffee/MM.coffee",
 					"settings":
 					{
-						"buffer_size": 182,
+						"buffer_size": 4462,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								130,
-								130
+								1941,
+								1941
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 978.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "views/test.jade",
+					"settings":
+					{
+						"buffer_size": 387,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								278,
+								278
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -807,6 +851,26 @@
 		"selected_items":
 		[
 			[
+				"te",
+				"views/test.jade"
+			],
+			[
+				"web",
+				"public/scripts/coffee/webcl.coffee"
+			],
+			[
+				"volo",
+				"public/scripts/coffee/VoloCL.coffee"
+			],
+			[
+				"mm",
+				"public/scripts/coffee/MM.coffee"
+			],
+			[
+				"we",
+				"public/scripts/coffee/webcl.coffee"
+			],
+			[
 				"con",
 				"config/configuration.json"
 			],
@@ -827,16 +891,8 @@
 				"views/test.jade"
 			],
 			[
-				"mm",
-				"public/scripts/coffee/MM.coffee"
-			],
-			[
 				"v",
 				"public/scripts/opencl/volo.cl"
-			],
-			[
-				"we",
-				"public/scripts/coffee/webcl.coffee"
 			],
 			[
 				"voloc",
@@ -845,10 +901,6 @@
 			[
 				"mm.co",
 				"public/scripts/coffee/MM.coffee"
-			],
-			[
-				"te",
-				"public/stylesheets/test.styl"
 			],
 			[
 				"num",

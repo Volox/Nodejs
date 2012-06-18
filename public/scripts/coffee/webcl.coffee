@@ -7,7 +7,6 @@ jQuery ($) ->
 		# get the image
 		$img = $ '#img'
 		try
-
 			# Build scale space
 			octaves = [2,1,1/2,1/3]
 			blurSteps = 5
@@ -29,11 +28,12 @@ jQuery ($) ->
 					blurCanvas.id = "scale_#{octave}_#{blurStep}"
 					
 					octaveRow.push blurCanvas
-					#$dome.append blurCanvas
+					$dome.append blurCanvas
 
 				scaleSpace.push octaveRow
 			
 			# Compute DoG
+			###
 			DoG = []
 			for octave in scaleSpace
 				DoGRow = []
@@ -46,6 +46,7 @@ jQuery ($) ->
 			# Find maxmin
 			for octave in scaleSpace
 				MM.maxmin octave
+			###
 		catch error
 			console.log error
 		return

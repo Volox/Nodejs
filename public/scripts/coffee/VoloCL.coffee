@@ -1,6 +1,5 @@
 class VoloCL
-	@kernels: {}
-	constructor: () ->
+	constructor: ( kernelSrc ) ->
 		@cl = window.WebCL
 		@platform = null
 		@device = null
@@ -12,23 +11,17 @@ class VoloCL
 		@kernel = null
 
 		# WorkSpace
-		@localWS = 0
+		@localWS = [ 16, 4 ]
 		@globalWS = 0
 
-		# I/O related
-		@inputs = []
-		@outputs = []
-		@arguments = []
-		@argumentsMap = {}
-
 		# init
-		@init()
+		@init( kernelSrc )
 
-	init: ->
-		@initCL()
+	init: ( kernelSrc ) ->
+		@initCL( kernelSrc )
 		return
 
-	initCL: ->
+	initCL: ( kernelSrc )->
 		if not window.WebCL
 			alert "WebCL not supported"
 		else
@@ -39,6 +32,7 @@ class VoloCL
 		@ctx = @cl.createContextFromType [ @cl.CL_CONTEXT_PLATFORM, 
                                            @platform ],
                                            @cl.CL_DEVICE_TYPE_DEFAULT
+		@loadKernel kernelSrc
 		return
 
 	getPlatforms: ->
@@ -50,17 +44,14 @@ class VoloCL
 
 	# Kernel related
 	getKernel: (val) ->
-		kernelSource = VoloCL.kernels[ val ]
-		if not kernelSource?
-			url = $( val ).prop 'src'
-			ajaxResult = $.ajax url,
+		if val
+			ajaxResult = $.ajax val,
 				async: false
 			kernelSource = ajaxResult.responseText
-			VoloCL.kernels[ val ] = kernelSource
 
 		return kernelSource
 
-	loadKernel: (url,name) ->
+	loadKernel: ( url ) ->
 		try
 			@kernelSrc = @getKernel url
 
@@ -74,43 +65,39 @@ class VoloCL
 				console.log 'Kernel NOT loaded'
 				console.log log
 				throw error
-
-			# Program built, now take care of the kernel
-			@kernel = @program.createKernel name
-			# Add arguments
-			for name, index in @arguments
-				argument = @argumentsMap[ name ]
-				@kernel.setKernelArg index, argument.buffer, argument.type
- 
-			# Create command Queue
-			@cmdQueue = @ctx.createCommandQueue @device, 0
-
-			return true
+		catch error
 			console.log error
-			return false
+
+		return
 
 	# Run the kernel
-	runKernel:  () ->
-		try
-			# Enqueue inputs
-			for name in @inputs
-				input = @argumentsMap[ name ]
-				@cmdQueue.enqueueWriteBuffer input.buffer, false, 0, input.size, input.value, []
+	runKernel: ( name, size, kernelArgs ) ->
+		# Program built, now take care of the kernel
+		kernel = @program.createKernel name
+		# Add arguments
+		for name, index in kernelArgs.arguments
+			argument = kernelArgs.argumentsMap[ name ]
+			kernel.setKernelArg index, argument.buffer, argument.type
 
-			# Execute the kernel
-			#workGroupSize = @kernel.getKernelWorkGroupInfo(@device, @cl.CL_KERNEL_WORK_GROUP_SIZE);
-			
-			@cmdQueue.enqueueNDRangeKernel @kernel, @globalWS.length, [], @globalWS, @localWS, []
+		# Create command Queue
+		cmdQueue = @ctx.createCommandQueue @device, 0
 
-			# Gather outputs
-			for name in @outputs
-				output = @argumentsMap[ name ]
-				@cmdQueue.enqueueReadBuffer output.buffer, false, 0, output.size, output.value, []
+		# Enqueue inputs
+		for name in kernelArgs.inputs
+			input = kernelArgs.argumentsMap[ name ]
+			cmdQueue.enqueueWriteBuffer input.buffer, false, 0, input.size, input.value, []
 
-			@cmdQueue.finish()
-		catch error
-			console.error error
 
+		@globalWS = [ Math.ceil(size[0]/16)*16, Math.ceil(size[1]/4)*4 ]
+
+		cmdQueue.enqueueNDRangeKernel kernel, @globalWS.length, [], @globalWS, @localWS, []
+
+		# Gather outputs
+		for name in kernelArgs.outputs
+			output = kernelArgs.argumentsMap[ name ]
+			cmdQueue.enqueueReadBuffer output.buffer, false, 0, output.size, output.value, []
+
+		cmdQueue.finish()
 		return
 
 	#throw new Error "Not implemented"
@@ -122,9 +109,26 @@ class VoloCL
 		@globalWS = value
 		return
 
+class KernelArguments
+	constructor: (  VoloCL ) ->
+		@cl = VoloCL.cl
+		@ctx = VoloCL.ctx
+		@arguments = []
+		@inputs = []
+		@outputs = []
+		@argumentsMap = {}
+		return
 
-	# I/O related
-	addInput: (name,size,value) ->
+	addInput: (name, variable ) ->
+		value = variable
+		# image
+		if variable?.data?.data?.length
+			value = variable.data.data
+		else if variable?.data?.length
+			value = variable.data
+
+		size = value.length*value.BYTES_PER_ELEMENT
+
 		buffer = @ctx.createBuffer @cl.CL_MEM_READ_ONLY, size
 		varObj = 
 			name: name
@@ -138,7 +142,16 @@ class VoloCL
 		@argumentsMap[ name ] = varObj
 		return
 
-	addOutput: (name,size,value) ->
+	addOutput: (name, variable ) ->
+		valuee = variable
+		# image
+		if variable?.data?.data?.length
+			value = variable.data.data
+		else if variable?.data?.length
+			value = variable.data
+
+		size = value.length*value.BYTES_PER_ELEMENT
+
 		buffer = @ctx.createBuffer @cl.CL_MEM_WRITE_ONLY, size
 		varObj = 
 			name: name
@@ -148,11 +161,11 @@ class VoloCL
 		
 		@outputs.push name
 		@arguments.push name
-		
+
 		@argumentsMap[ name ] = varObj
 		return
 
-	addArgument: (name,variable,type) ->
+	addArgument: ( name, variable, type = "UINT" ) ->
 		varObj =
 			buffer: variable
 			name: name
@@ -161,13 +174,7 @@ class VoloCL
 
 		@arguments.push name
 		@argumentsMap[ name ] = varObj
-		return variable
+		return
 
-	setValues: (map)->
-		for name,value in map
-			@setValue name, value
-		return
-	setValue: (name, value)->
-		@argumentsMap[ name ] = value extends @argumentsMap[ name ]
-		return
+window.KernelArguments = KernelArguments
 window.VoloCL = VoloCL
