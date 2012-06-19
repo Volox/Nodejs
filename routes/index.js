@@ -43,7 +43,22 @@ exports.test = function(req, res) {
 };
 exports.testVideo = function(req, res) {
 	res.render('testVideo', {
-		title: 'Video test page'
+		title: 'Video test page',
+		tags: [
+			"cloud",
+			"tree",
+			"landscape",
+			"grass",
+			"river",
+			"flowers",
+			"bird",
+			"funny",
+			"bunny",
+			"hole",
+			"sky",
+			"squirrel",
+			"butterfly",
+		]
 	});
 };
 

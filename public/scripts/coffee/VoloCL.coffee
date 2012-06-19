@@ -11,8 +11,8 @@ class VoloCL
 		@kernel = null
 
 		# WorkSpace
-		@localWS = [ 16, 4 ]
-		@globalWS = 0
+		@localWS = null
+		@globalWS = null
 
 		# init
 		@init( kernelSrc )
@@ -87,8 +87,8 @@ class VoloCL
 			input = kernelArgs.argumentsMap[ name ]
 			cmdQueue.enqueueWriteBuffer input.buffer, false, 0, input.size, input.value, []
 
-
-		@globalWS = [ Math.ceil(size[0]/16)*16, Math.ceil(size[1]/4)*4 ]
+		@localWS = [ 16, 4 ]
+		@globalWS = [ Math.ceil(size[0]/@localWS[0])*@localWS[0], Math.ceil(size[1]/@localWS[1])*@localWS[1] ]
 
 		cmdQueue.enqueueNDRangeKernel kernel, @globalWS.length, [], @globalWS, @localWS, []
 
@@ -97,6 +97,7 @@ class VoloCL
 			output = kernelArgs.argumentsMap[ name ]
 			cmdQueue.enqueueReadBuffer output.buffer, false, 0, output.size, output.value, []
 
+		cmdQueue.flush()
 		cmdQueue.finish()
 		return
 

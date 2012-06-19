@@ -1,6 +1,67 @@
 video
 	padding 10px
 	border 1px solid #999
+
 #tags
-	color red
-	cursor pointer
+	margin 0
+	padding 0
+	list-style none
+	li
+		@width 70px
+		color black
+		border 2px solid gray
+		width @width
+		height @width
+		line-height @width - 0.5%
+		text-align center
+		display inline-block
+		cursor pointer
+		border-radius 2*@width
+		&:hover
+			background-color #66CC66
+			border-color green
+			font-weight bold
+		&:active
+			border-color red
+
+#timestamps
+	@height 50px
+	margin 5px
+	padding 0
+	list-style none
+	display block
+	border 1px solid gray
+	position relative
+	height @height
+	
+	li
+		display inline-block
+		position absolute
+		top 0
+
+		background-color red
+		border-right 1px solid
+
+		width 0.9%
+		height @height
+		
+		cursor pointer
+		
+		div
+			display none
+			position absolute
+			top @height
+
+			padding 5px
+
+			background-color #ccc
+			border-radius 0 10px 10px 10px
+			border 1px solid gray
+			font-size 0.9em
+
+			span
+				display block
+
+		&:hover
+			div
+				display block
