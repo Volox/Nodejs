@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -12,6 +11,13 @@ var log = config.logger,
 
 var app = express(),
     stylus = require('stylus');
+
+
+// Process tweaks
+console.log( process.title );
+process.title = 'Volox';
+console.log( process.title );
+console.log( '# of cpus: '+require('os').cpus().length );
 
 // Routes
 var routes = require('./routes');
@@ -53,6 +59,7 @@ app.get('/505', routes.error50x );
 // Test pages
 app.get('/test', routes.test );
 app.get('/testVideo', routes.testVideo );
+app.get('/testVideoPOI', routes.testVideoPOI );
 
 
 

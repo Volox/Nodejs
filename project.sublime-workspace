@@ -4,28 +4,396 @@
 		"selected_items":
 		[
 			[
-				"scri",
-				"scripts"
+				"di",
+				"display"
 			],
 			[
-				"sta",
-				"stage4"
+				"le",
+				"length"
 			],
 			[
-				"stage",
-				"stage3"
+				"tag",
+				"tagId"
 			],
 			[
-				"A",
-				"Array"
+				"lo",
+				"localWS"
+			],
+			[
+				"va",
+				"value"
+			],
+			[
+				"im",
+				"imageData"
+			],
+			[
+				"Volo",
+				"VoloTest"
+			],
+			[
+				"ker",
+				"kernelArgs"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"kerne",
+				"kernelSrc"
+			],
+			[
+				"ima",
+				"image"
+			],
+			[
+				"in",
+				"inputImages"
+			],
+			[
+				"ou",
+				"outputSize"
+			],
+			[
+				"mic",
+				"microTask"
+			],
+			[
+				"co",
+				"column"
+			],
+			[
+				"obj",
+				"object"
+			],
+			[
+				"p",
+				"push"
+			],
+			[
+				"ob",
+				"object"
+			],
+			[
+				"de",
+				"debug"
+			],
+			[
+				"base",
+				"basePath"
+			],
+			[
+				"ta",
+				"taskID"
+			],
+			[
+				"ba",
+				"basePath"
+			],
+			[
+				"conf",
+				"config"
+			],
+			[
+				"tas",
+				"task"
+			],
+			[
+				"uchar",
+				"uchar4"
+			],
+			[
+				"min",
+				"minVal"
+			],
+			[
+				"blu",
+				"blurCanvas"
+			],
+			[
+				"ma",
+				"maxVal"
+			],
+			[
+				"cu",
+				"currentIdx"
+			],
+			[
+				"pi",
+				"point"
+			],
+			[
+				"bl",
+				"blurFactor"
+			],
+			[
+				"blurS",
+				"blurSteps"
+			],
+			[
+				"y",
+				"y"
+			],
+			[
+				"ca",
+				"canvas"
+			],
+			[
+				"D",
+				"DoGRow"
+			],
+			[
+				"sca",
+				"scaleSpace"
+			],
+			[
+				"var",
+				"variable"
+			],
+			[
+				"oct",
+				"octave"
+			],
+			[
+				"argu",
+				"argument"
+			],
+			[
+				"arg",
+				"argument"
+			],
+			[
+				"ar",
+				"argumentsMap"
+			],
+			[
+				"se",
+				"setValue"
+			],
+			[
+				"argument",
+				"argumentsMap"
+			],
+			[
+				"a",
+				"argument"
+			],
+			[
+				"h",
+				"height"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"crea",
+				"createImage"
+			],
+			[
+				"can",
+				"canvas"
+			],
+			[
+				"oc",
+				"octave"
+			],
+			[
+				"sc",
+				"scaleSpace"
+			],
+			[
+				"kern",
+				"kernels"
+			],
+			[
+				"gauss",
+				"gaussSize"
+			],
+			[
+				"wr",
+				"workGroupSize"
+			],
+			[
+				"e",
+				"exp"
+			],
+			[
+				"fOu",
+				"fOut"
+			],
+			[
+				"fo",
+				"fOut"
+			],
+			[
+				"v",
+				"val"
+			],
+			[
+				"fil",
+				"filterIdx"
+			],
+			[
+				"B",
+				"BYTES_PER_ELEMENT"
+			],
+			[
+				"setG",
+				"setGlobalWS"
+			],
+			[
+				"glo",
+				"globalWS"
+			],
+			[
+				"loca",
+				"localWS"
+			],
+			[
+				"out",
+				"outData"
+			],
+			[
+				"bu",
+				"buffer"
+			],
+			[
+				"i",
+				"index"
+			],
+			[
+				"uch",
+				"uchar4"
+			],
+			[
+				"__",
+				"__global"
+			],
+			[
+				"add",
+				"addInput"
+			],
+			[
+				"pro",
+				"prop"
+			],
+			[
+				"c",
+				"ctx"
+			],
+			[
+				"get",
+				"getKernel"
+			],
+			[
+				"ke",
+				"kernelSrc"
+			],
+			[
+				"aja",
+				"ajaxResult"
+			],
+			[
+				"pla",
+				"platform"
+			],
+			[
+				"WebCL",
+				"WebCL"
+			],
+			[
+				"device",
+				"devices"
+			],
+			[
+				"op",
+				"optGroup"
+			],
+			[
+				"devi",
+				"devices"
+			],
+			[
+				"plat",
+				"platform"
+			],
+			[
+				"my",
+				"myMatrix"
+			],
+			[
+				"r",
+				"result"
 			],
 			[
 				"for",
 				"for	for (…) {…}"
 			],
 			[
-				"rest",
-				"result"
+				"octa",
+				"octaveArray"
+			],
+			[
+				"ro",
+				"rowArray"
+			],
+			[
+				"off",
+				"offsetY"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"matDi",
+				"matDim"
+			],
+			[
+				"offse",
+				"offsetX"
+			],
+			[
+				"type",
+				"typeof"
+			],
+			[
+				"numer",
+				"numeric"
+			],
+			[
+				"red",
+				"redDim"
+			],
+			[
+				"canva",
+				"canvas"
+			],
+			[
+				"row",
+				"rowArray"
+			],
+			[
+				"img",
+				"imgData"
+			],
+			[
+				"u",
+				"uTaskI"
+			],
+			[
+				"level",
+				"levels"
+			],
+			[
+				"fun",
+				"function"
 			],
 			[
 				"Tas",
@@ -48,35 +416,19 @@
 	"buffers":
 	[
 		{
-			"file": "server.js",
+			"file": "views/testVideoPOI.jade",
 			"settings":
 			{
-				"buffer_size": 1575,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/testVideo.jade",
-			"settings":
-			{
-				"buffer_size": 431,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/scripts/coffee/testVideo.coffee",
-			"settings":
-			{
-				"buffer_size": 287,
+				"buffer_size": 330,
 				"line_ending": "Windows",
-				"name": "testVideo"
+				"name": "testVideoPOI"
 			}
 		},
 		{
-			"file": "public/stylesheets/test.styl",
+			"file": "public/scripts/coffee/testVideoPOI.coffee",
 			"settings":
 			{
-				"buffer_size": 75,
+				"buffer_size": 347,
 				"line_ending": "Windows"
 			}
 		}
@@ -84,7 +436,7 @@
 	"build_system": "Packages/Nodejs/Nodejs.sublime-build",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 261.0,
 		"selected_items":
 		[
 			[
@@ -92,16 +444,24 @@
 				"Package Control: Upgrade/Overwrite All Packages"
 			],
 			[
-				"in",
+				"insta",
 				"Package Control: Install Package"
 			],
 			[
-				"insta",
+				"in",
 				"Package Control: Install Package"
 			],
 			[
 				"remo",
 				"Package Control: Remove Package"
+			],
+			[
+				"git a",
+				"Git: Add..."
+			],
+			[
+				"git",
+				"Package Control: Install Package"
 			],
 			[
 				"inst",
@@ -160,10 +520,6 @@
 				"Git: Custom Command"
 			],
 			[
-				"git",
-				"Git: Status"
-			],
-			[
 				"node",
 				"Nodejs::Run::Current File"
 			],
@@ -205,34 +561,50 @@
 	},
 	"file_history":
 	[
-		"/D/Projects/Nodejs/views/index.jade",
-		"/D/Projects/Nodejs/routes/index.js",
-		"/D/Projects/Nodejs/public/scripts/task.js",
-		"/D/Projects/Nodejs/public/scripts/coffee/taskRun.coffee",
-		"/D/Projects/Nodejs/views/test.jade",
-		"/D/Projects/Nodejs/public/scripts/libs/numeric.js",
-		"/D/Projects/Nodejs/config/config.js",
-		"/D/Projects/Nodejs/server.js",
-		"/D/Projects/Nodejs/public/stylesheets/theme.styl",
-		"/D/Projects/Nodejs/task_repo/task_repo.js",
-		"/D/Projects/Nodejs/.gitignore",
 		"/D/Portable/Nodejs/routes/index.js",
-		"/D/Portable/Nodejs/config/package.json",
+		"/D/Portable/Nodejs/server.js",
+		"/D/Portable/Nodejs/views/testVideo.jade",
+		"/D/Portable/Nodejs/public/stylesheets/test.styl",
+		"/D/Portable/Nodejs/public/scripts/coffee/testVideo.coffee",
+		"/D/Portable/Nodejs/views/index.jade",
+		"/D/Portable/Nodejs/public/scripts/coffee/testVideoPOI.coffee",
+		"/D/Portable/Nodejs/public/stylesheets/theme.styl",
+		"/D/Portable/Nodejs/node_modules/stylus/testing/test.styl",
+		"/D/Portable/Nodejs/public/scripts/opencl/volo.cl",
+		"/D/Portable/Nodejs/public/scripts/coffee/webcl.coffee",
+		"/D/Portable/Nodejs/views/test.jade",
+		"/D/Portable/Nodejs/public/scripts/coffee/MM.coffee",
+		"/D/Portable/Nodejs/public/scripts/coffee/VoloCL.coffee",
+		"/D/Portable/Nodejs/task-repo/task-repo.js",
+		"/D/Portable/Nodejs/views/task/detail.jade",
+		"/D/Portable/Nodejs/views/task/list.jade",
 		"/D/Portable/Nodejs/config/configuration.json",
-		"/D/Portable/Nodejs/config/config.js",
-		"/D/Portable/Nodejs/utils/utils.js",
-		"/D/Portable/Nodejs/README.md",
 		"/D/Portable/Nodejs/views/error.jade",
+		"/D/Portable/Nodejs/config/config.js",
+		"/D/Portable/Nodejs/package.json",
+		"/D/Portable/Nodejs/task-repo/task/task.js",
+		"/D/Portable/Nodejs/task-repo/micro-task/micro-task.js",
+		"/D/Portable/Nodejs/public/scripts/VoloCL.js",
+		"/D/Portable/Nodejs/public/scripts/MM.js",
+		"/D/Portable/Nodejs/public/scripts/libs/numeric.js",
+		"/D/Portable/Nodejs/public/scripts/coffee/taskRun.coffee",
+		"/D/Portable/Nodejs/public/scripts/libs/fft.js",
+		"/D/Portable/Nodejs/public/scripts/taskRun.js",
+		"/D/Portable/Nodejs/utils/utils.js",
+		"/D/Portable/Nodejs/.gitignore",
+		"/D/Portable/Nodejs/project.sublime-project",
+		"/D/Portable/Nodejs/config/package.json",
+		"/D/Portable/Nodejs/task-repo/package.json",
+		"/D/Portable/Nodejs/task_repo/task_repo.js",
+		"/D/Portable/Nodejs/README.md",
 		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
 		"/D/Portable/Nodejs/views/layout.jade",
-		"/D/Portable/Nodejs/package.json",
 		"/D/Portable/Nodejs/task/task.js",
 		"/D/Portable/Nodejs/public/scripts/coffee/task.coffee",
 		"/D/Portable/Nodejs/config/logConfig.json",
 		"/D/down/jQueryTimelinr_095/js/jquery.timelinr-0.9.5.js",
 		"/D/Portable/Nodejs/sample.js",
 		"/D/Portable/Sublime Text 2/Data/Packages/Default/Preferences.sublime-settings",
-		"/D/Portable/Nodejs/server.js",
 		"/D/Portable/Nodejs/views/task/new.jade",
 		"/D/Portable/Sublime Text 2/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
 		"/D/Portable/Nodejs/test.sublime-project",
@@ -265,8 +637,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"2s",
-			"2c",
+			" 	",
 			"utf",
 			"var",
 			"\n	\n",
@@ -279,6 +650,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			","
 		],
 		"reverse": false,
 		"show_context": true,
@@ -294,25 +666,24 @@
 			[
 				{
 					"buffer": 0,
-					"file": "server.js",
+					"file": "views/testVideoPOI.jade",
 					"settings":
 					{
-						"buffer_size": 1575,
+						"buffer_size": 330,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								989,
-								989
+								330,
+								330
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"auto_name": "testVideoPOI",
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -322,77 +693,24 @@
 				},
 				{
 					"buffer": 1,
-					"file": "views/testVideo.jade",
+					"file": "public/scripts/coffee/testVideoPOI.coffee",
 					"settings":
 					{
-						"buffer_size": 431,
+						"buffer_size": 347,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								145,
-								145
+								347,
+								347
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
 							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/scripts/coffee/testVideo.coffee",
-					"settings":
-					{
-						"buffer_size": 287,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								168,
-								168
-							]
-						],
-						"settings":
-						{
-							"auto_name": "testVideo",
-							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/stylesheets/test.styl",
-					"settings":
-					{
-						"buffer_size": 75,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								75,
-								75
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Stylus/Stylus.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -436,7 +754,7 @@
 	"menu_visible": true,
 	"replace":
 	{
-		"height": 0.0
+		"height": 60.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -445,24 +763,92 @@
 		"selected_items":
 		[
 			[
-				"test",
-				"public/stylesheets/test.styl"
-			],
-			[
-				"in",
-				"views/index.jade"
-			],
-			[
-				"inde",
-				"routes/index.js"
-			],
-			[
 				"ser",
 				"server.js"
 			],
 			[
+				"inde",
+				"views/index.jade"
+			],
+			[
+				"test",
+				"public/stylesheets/test.styl"
+			],
+			[
+				"video",
+				"public/scripts/coffee/testVideo.coffee"
+			],
+			[
+				"te",
+				"views/test.jade"
+			],
+			[
+				"web",
+				"public/scripts/coffee/webcl.coffee"
+			],
+			[
+				"volo",
+				"public/scripts/coffee/VoloCL.coffee"
+			],
+			[
+				"mm",
+				"public/scripts/coffee/MM.coffee"
+			],
+			[
+				"we",
+				"public/scripts/coffee/webcl.coffee"
+			],
+			[
+				"con",
+				"config/configuration.json"
+			],
+			[
+				"err",
+				"views/error.jade"
+			],
+			[
+				"pa",
+				"package.json"
+			],
+			[
+				"tes",
+				"views/test.jade"
+			],
+			[
+				"v",
+				"public/scripts/opencl/volo.cl"
+			],
+			[
+				"voloc",
+				"public/scripts/VoloCL.js"
+			],
+			[
+				"mm.co",
+				"public/scripts/coffee/MM.coffee"
+			],
+			[
 				"num",
 				"public/scripts/libs/numeric.js"
+			],
+			[
+				"nume",
+				"public/scripts/libs/numeric.js"
+			],
+			[
+				"numer",
+				"public/scripts/libs/numeric.js"
+			],
+			[
+				"taskr",
+				"public/scripts/coffee/taskRun.coffee"
+			],
+			[
+				"nu",
+				"public/scripts/libs/numeric.js"
+			],
+			[
+				"testjade",
+				"views/test.jade"
 			],
 			[
 				"",

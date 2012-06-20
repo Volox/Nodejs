@@ -41,6 +41,12 @@ exports.test = function(req, res) {
 		title: 'Test page'
 	});
 };
+
+exports.testVideoPOI = function(req, res) {
+	res.render('testVideoPOI', {
+		title: 'Video Point Of Interest test page'
+	});
+};
 exports.testVideo = function(req, res) {
 	res.render('testVideo', {
 		title: 'Video test page',
