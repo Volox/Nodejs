@@ -4,6 +4,102 @@
 		"selected_items":
 		[
 			[
+				"file",
+				"fileContents"
+			],
+			[
+				"save",
+				"saveToDB"
+			],
+			[
+				"ta",
+				"taskID"
+			],
+			[
+				"parent",
+				"parentTask"
+			],
+			[
+				"pa",
+				"parentTask"
+			],
+			[
+				"code",
+				"codeAvailable"
+			],
+			[
+				"co",
+				"collection  (variable)"
+			],
+			[
+				"sa",
+				"saveToDB"
+			],
+			[
+				"for",
+				"for  (keyword)"
+			],
+			[
+				"task",
+				"taskID"
+			],
+			[
+				"tas",
+				"taskID"
+			],
+			[
+				"sta",
+				"statusCode"
+			],
+			[
+				"err",
+				"errorMessage"
+			],
+			[
+				"erro",
+				"errorMessage"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"fo",
+				"format"
+			],
+			[
+				"lo",
+				"log"
+			],
+			[
+				"re",
+				"results"
+			],
+			[
+				"repo",
+				"repoCollection"
+			],
+			[
+				"con",
+				"configuration"
+			],
+			[
+				"date",
+				"dateStart"
+			],
+			[
+				"time",
+				"timeStart"
+			],
+			[
+				"tim",
+				"timeStart"
+			],
+			[
+				"s",
+				"seconds"
+			],
+			[
 				"di",
 				"display"
 			],
@@ -14,10 +110,6 @@
 			[
 				"tag",
 				"tagId"
-			],
-			[
-				"lo",
-				"localWS"
 			],
 			[
 				"va",
@@ -34,10 +126,6 @@
 			[
 				"ker",
 				"kernelArgs"
-			],
-			[
-				"re",
-				"return"
 			],
 			[
 				"kerne",
@@ -60,10 +148,6 @@
 				"microTask"
 			],
 			[
-				"co",
-				"column"
-			],
-			[
 				"obj",
 				"object"
 			],
@@ -84,20 +168,12 @@
 				"basePath"
 			],
 			[
-				"ta",
-				"taskID"
-			],
-			[
 				"ba",
 				"basePath"
 			],
 			[
 				"conf",
 				"config"
-			],
-			[
-				"tas",
-				"task"
 			],
 			[
 				"uchar",
@@ -228,10 +304,6 @@
 				"fOut"
 			],
 			[
-				"fo",
-				"fOut"
-			],
-			[
 				"v",
 				"val"
 			],
@@ -332,10 +404,6 @@
 				"result"
 			],
 			[
-				"for",
-				"for	for (…) {…}"
-			],
-			[
 				"octa",
 				"octaveArray"
 			],
@@ -416,19 +484,34 @@
 	"buffers":
 	[
 		{
-			"file": "views/testVideoPOI.jade",
+			"file": "server.js",
 			"settings":
 			{
-				"buffer_size": 330,
-				"line_ending": "Windows",
-				"name": "testVideoPOI"
+				"buffer_size": 1854,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/scripts/coffee/testVideoPOI.coffee",
+			"file": "task-repo/task-repo.js",
 			"settings":
 			{
-				"buffer_size": 347,
+				"buffer_size": 7287,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "config/configuration.json",
+			"settings":
+			{
+				"buffer_size": 813,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/task/new.jade",
+			"settings":
+			{
+				"buffer_size": 824,
 				"line_ending": "Windows"
 			}
 		}
@@ -561,27 +644,37 @@
 	},
 	"file_history":
 	[
+		"/D/Portable/Nodejs/views/task/detail.jade",
+		"/D/Portable/Nodejs/views/task/list.jade",
+		"/D/Portable/Nodejs/views/task/new.jade",
+		"/D/Portable/Nodejs/views/index.jade",
+		"/D/Portable/Nodejs/public/scripts/coffee/uTaskImplementation.coffee",
+		"/D/Portable/Nodejs/config/mongo-node.conf",
+		"/D/Portable/Nodejs/config/config.js",
+		"/D/Portable/Nodejs/public/stylesheets/style.styl",
+		"/D/Portable/Nodejs/config/configuration.json",
+		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
+		"/D/Portable/Nodejs/public/scripts/coffee/uTask.coffee",
+		"/D/Portable/Nodejs/views/task/sample.jade",
+		"/D/Portable/Nodejs/package.json",
 		"/D/Portable/Nodejs/routes/index.js",
+		"/D/Portable/Nodejs/sample.js",
+		"/D/Portable/Nodejs/public/scripts/coffee/test.coffee",
+		"/D/Portable/Nodejs/views/test.jade",
+		"/D/Portable/Nodejs/public/scripts/coffee/testVideoPOI.coffee",
+		"/D/Portable/Nodejs/views/testVideoPOI.jade",
 		"/D/Portable/Nodejs/server.js",
 		"/D/Portable/Nodejs/views/testVideo.jade",
 		"/D/Portable/Nodejs/public/stylesheets/test.styl",
 		"/D/Portable/Nodejs/public/scripts/coffee/testVideo.coffee",
-		"/D/Portable/Nodejs/views/index.jade",
-		"/D/Portable/Nodejs/public/scripts/coffee/testVideoPOI.coffee",
 		"/D/Portable/Nodejs/public/stylesheets/theme.styl",
 		"/D/Portable/Nodejs/node_modules/stylus/testing/test.styl",
 		"/D/Portable/Nodejs/public/scripts/opencl/volo.cl",
 		"/D/Portable/Nodejs/public/scripts/coffee/webcl.coffee",
-		"/D/Portable/Nodejs/views/test.jade",
 		"/D/Portable/Nodejs/public/scripts/coffee/MM.coffee",
 		"/D/Portable/Nodejs/public/scripts/coffee/VoloCL.coffee",
 		"/D/Portable/Nodejs/task-repo/task-repo.js",
-		"/D/Portable/Nodejs/views/task/detail.jade",
-		"/D/Portable/Nodejs/views/task/list.jade",
-		"/D/Portable/Nodejs/config/configuration.json",
 		"/D/Portable/Nodejs/views/error.jade",
-		"/D/Portable/Nodejs/config/config.js",
-		"/D/Portable/Nodejs/package.json",
 		"/D/Portable/Nodejs/task-repo/task/task.js",
 		"/D/Portable/Nodejs/task-repo/micro-task/micro-task.js",
 		"/D/Portable/Nodejs/public/scripts/VoloCL.js",
@@ -597,15 +690,12 @@
 		"/D/Portable/Nodejs/task-repo/package.json",
 		"/D/Portable/Nodejs/task_repo/task_repo.js",
 		"/D/Portable/Nodejs/README.md",
-		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
 		"/D/Portable/Nodejs/views/layout.jade",
 		"/D/Portable/Nodejs/task/task.js",
 		"/D/Portable/Nodejs/public/scripts/coffee/task.coffee",
 		"/D/Portable/Nodejs/config/logConfig.json",
 		"/D/down/jQueryTimelinr_095/js/jquery.timelinr-0.9.5.js",
-		"/D/Portable/Nodejs/sample.js",
 		"/D/Portable/Sublime Text 2/Data/Packages/Default/Preferences.sublime-settings",
-		"/D/Portable/Nodejs/views/task/new.jade",
 		"/D/Portable/Sublime Text 2/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
 		"/D/Portable/Nodejs/test.sublime-project",
 		"/D/Portable/Nodejs/README",
@@ -666,24 +756,79 @@
 			[
 				{
 					"buffer": 0,
-					"file": "views/testVideoPOI.jade",
+					"file": "server.js",
 					"settings":
 					{
-						"buffer_size": 330,
+						"buffer_size": 1854,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								330,
-								330
+								1655,
+								1655
 							]
 						],
 						"settings":
 						{
-							"auto_name": "testVideoPOI",
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 312.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "task-repo/task-repo.js",
+					"settings":
+					{
+						"buffer_size": 7287,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6329,
+								6329
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3258.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "config/configuration.json",
+					"settings":
+					{
+						"buffer_size": 813,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								152,
+								152
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -692,24 +837,24 @@
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "public/scripts/coffee/testVideoPOI.coffee",
+					"buffer": 3,
+					"file": "views/task/new.jade",
 					"settings":
 					{
-						"buffer_size": 347,
+						"buffer_size": 824,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								347,
-								347
+								514,
+								514
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -763,8 +908,64 @@
 		"selected_items":
 		[
 			[
+				"new",
+				"views/task/new.jade"
+			],
+			[
+				"lis",
+				"views/task/list.jade"
+			],
+			[
+				"in",
+				"views/index.jade"
+			],
+			[
+				"impl",
+				"public/scripts/coffee/uTaskImplementation.coffee"
+			],
+			[
+				"de",
+				"views/task/detail.jade"
+			],
+			[
+				"n",
+				"views/task/new.jade"
+			],
+			[
+				"config",
+				"config/config.js"
+			],
+			[
+				"style",
+				"public/stylesheets/style.styl"
+			],
+			[
+				"sc",
+				"public/scripts/coffee/script.coffee"
+			],
+			[
+				"scr",
+				"public/scripts/coffee/script.coffee"
+			],
+			[
+				"deta",
+				"views/task/detail.jade"
+			],
+			[
+				"sa",
+				"views/task/sample.jade"
+			],
+			[
+				"sam",
+				"views/task/sample.jade"
+			],
+			[
 				"ser",
 				"server.js"
+			],
+			[
+				"tes",
+				"views/test.jade"
 			],
 			[
 				"inde",
@@ -809,10 +1010,6 @@
 			[
 				"pa",
 				"package.json"
-			],
-			[
-				"tes",
-				"views/test.jade"
 			],
 			[
 				"v",

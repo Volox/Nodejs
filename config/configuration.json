@@ -6,66 +6,23 @@
 		"port": 8080,
 		"basePath": "/CrowdSearch_prototype_trunk",
 
-		"actions": {
-			"task": {
-				"method": "GET",
-				"path": "getTask.do?q={query}"
-			},
-			"taskList": {
-				"method": "GET",
-				"path": "getTaskComposition.do?q=1"
-			}
-		}
-	},
+		"repository": {
+			"host": "localhost",
+			"port": 27017,
+			"db-name": "test",
 
-	"task": {
-		"path": "uploads",
-		"collection": "tasks",
-
-		"testObject": {
-			"name": "Face recognition",
-			"description": "The script recognize the faces in a photo.",
-
-			"code": "alert('Fatto');",
-
-			"resources": {
-				"resourceID": "path/to/the/resource",
-				"resourceID1": "../path/to/the/resource1",
-				"resourceID2": "path/to/the/resource2",
-				"resourceID3": "/path/to/the/resource3"
-			},
-
-			"requirements": {
-				"minInstance": 20,
-				"maxInstance": 200,
-				"endDate": "2012-04-20"
-			},
-
-			"instances": {
-				"completed": 0,
-				"launched": 0,
-				"running": 0
-			},
-
-			"startDate": null,
-			"creationDate": null,
-			"endDate": null,
-
-			"active": true
+			"collection": "task"
 		},
 
-		"urls": {
-			"post@/tasks": "create",
-			"get@/tasks/new": "new",
-			"DELETE@/tasks/:task": "delete",
-
-			"/tasks/list": "list",
-			"/tasks": "list",
-			
-			"/tasks/:task/code": "code",
-
-			"/tasks/:task/:format?": "details",
-			"/tasks/:task/details/:format?": "details"
+		"API": {
+			"details": {
+				"method": "GET",
+				"path": "getTask.do?q={taskID}"
+			},
+			"list": {
+				"method": "GET",
+				"path": "getTaskComposition.do?q={taskID}"
+			}
 		}
 	},
 

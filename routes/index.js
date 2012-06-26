@@ -47,6 +47,8 @@ exports.testVideoPOI = function(req, res) {
 		title: 'Video Point Of Interest test page'
 	});
 };
+
+
 exports.testVideo = function(req, res) {
 	res.render('testVideo', {
 		title: 'Video test page',

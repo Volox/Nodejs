@@ -4,28 +4,33 @@ block append scripts
 
 block content
 	div.taskDetail
-		h1 Task #{data.id} (#{data.type}): #{data.title}
-		if data.schema
-			h2 Schema
-			table
-				each column in data.schema
-					tr
-						td= column.id
-						td= column.name
-						td= column.type
-		pre!= JSON.stringify(data.configuration)
-		hr
-		span!= data.question
-		hr
-		if data.objects
-			h3 Data
-			table
-				thead
-					tr
-						each column in data.schema
-							th= column.name
-				tbody
-					each object in data.objects
+		if errorMessage
+			h1.error!= errorMessage
+		else
+			h1 Task #{data.id} (#{data.type}): #{data.title}
+			if code
+				a(href="/task/#{data.task || data.id}/code.js") See code
+			if data.schema
+				h2 Schema
+				table
+					each column in data.schema
+						tr
+							td= column.id
+							td= column.name
+							td= column.type
+			pre!= JSON.stringify(data.configuration)
+			hr
+			span!= data.question
+			hr
+			if data.objects
+				h3 Data
+				table
+					thead
 						tr
 							each column in data.schema
-								td= object[ column.id ]			
+								th= column.name
+					tbody
+						each object in data.objects
+							tr
+								each column in data.schema
+									td= object[ column.id ]

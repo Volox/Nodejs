@@ -38,12 +38,11 @@ function init( expressApp ) {
 	props.path	= path;
 	props.nconf	= nconf;
 	props._		= _;
-	props.request=request;
 	props.mongo	= mongo;
+	props.request=request;
 
 	// Init the sections
 	initLogger(	nconf.get( 'logger' ) );
-	initTask(	nconf.get( 'task' ) );
 	initMongo(	nconf.get( 'mongo' ) );
 }
 
@@ -107,23 +106,6 @@ function initLogger( config ) {
 	configureLogger( config.configuration );
 }
 
-function initTask( config ) {
-
-	function configureTask( configuration ) {
-		// init TaskRepo object
-		var taskRepo = configuration;
-
-		props.task = taskRepo;
-	}
-
-	// Create the Task path
-	if( !path.existsSync( config.path ) ) {
-		fs.mkdirSync( config.path );
-	}
-
-	configureTask( config );
-}
-
 function initMongo( config ) {
 	var mongo = require( 'mongojs' );
 	
@@ -132,13 +114,9 @@ function initMongo( config ) {
 		var dbUrl = f( '%s:%d/%s', configuration.host, configuration.port, configuration['db-name'] );
 		var db = mongo.connect( dbUrl );
 
-		var tasksCollection = db.collection( configuration.collection );
-
 		mongoObj.db = db;
-		mongoObj.tasksCollection = tasksCollection;
 
-
-		props.mongo = mongoObj;
+		props.mongoDB = mongoObj;
 	}
 
 	// Create the Task path

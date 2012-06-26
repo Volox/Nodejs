@@ -12,12 +12,8 @@ var log = config.logger,
 var app = express(),
     stylus = require('stylus');
 
-
 // Process tweaks
-console.log( process.title );
 process.title = 'Volox';
-console.log( process.title );
-console.log( '# of cpus: '+require('os').cpus().length );
 
 // Routes
 var routes = require('./routes');
@@ -36,7 +32,7 @@ app.configure(function(){
   app.use(require('stylus').middleware({ src: __dirname + '/public' }));
   app.use(express.static(__dirname + '/public'));
   
-  app.use(express.bodyParser( {uploadDir: __dirname+'/'+config.task.path } ) );
+  app.use(express.bodyParser( {uploadDir: __dirname+'/uploads' } ) );
   app.use(express.methodOverride());
   
   app.use(app.router);
@@ -65,10 +61,15 @@ app.get('/testVideoPOI', routes.testVideoPOI );
 
 var server = http.createServer(app);
 
+// Task Repository API
 var TaskRepository = require( './task-repo' );
 var TRI = new TaskRepository( config.nconf.get( "task_repository" ) );
-app.get('/task/list', _.bind( TRI.taskList, TRI ) );
-app.get('/task/:task', _.bind( TRI.taskDetail, TRI ) );
+//app.get('/task/list', TRI.API.list );
+app.get('/task/:task', TRI.API.details );
+app.get('/task/:task/list', TRI.API.uTaskList );
+app.get('/task/:task/code.:format?', TRI.API.code );
+app.get('/task/:task/code/add', TRI.API.addCode );
+app.post('/task/:task/code', TRI.API.postCode );
 
 
 
