@@ -3,28 +3,51 @@ extends ../layout
 block append scripts
 	:coffeescript
 		fieldNum = 0
-		addField = ->
+		addField = (name) ->
 			id = "taskCode_#{fieldNum++}"
 			$section = $ '<section>'
+
 			$label = $ '<label>',
-				'for': id
-				text: "Upload file #{fieldNum}"
+				for: id+'_name',
+				text: "Name for field: "
+
+			$input = $ '<input>',
+				id: id+'_name',
+				name: id+'_name',
+				type: 'text',
+				value: name,
+			#	disabled: if (name) then true else false
+
+			$section.append $label
+			$section.append $input
+			$section.append '<br>'
+
+			$label = $ '<label>',
+				for: id,
+				text: "Upload file #{fieldNum}: "
 			$input = $ '<input>',
 				id: id,
 				name: id,
 				type: 'file'
 
 			$section.append $label
+			$section.append '<br>'
 			$section.append $input
+
+			$( 'form' ).prepend '<hr>'
 			$( 'form' ).prepend $section
+			return
+
 		jQuery ($)->
-			addField()
+			addField 'home'
 			$( '#btnSend' ).click ->
 				numFile = 0
 				$( 'input[type="file"]' ).each ->
 					if $( @ ).val()!="" then numFile++
 					return
-				return 0==numFile
+				if numFile==0
+					alert 'Selezionare almeno 1 file'
+				return numFile!=0
 
 			$( '#btnAdd' ).click ->
 				addField()
@@ -32,5 +55,5 @@ block content
 	h1 #{title}
 	form(action="/task/#{taskID}/code",method="post",enctype="multipart/form-data")
 		section.actions
-			input#btnAdd(type="button", value="Aggiungi")
-			input#btnSend(type="submit", value="Invia")
+			input#btnAdd(type="button", value="Add file")
+			input#btnSend(type="submit", value="Send")

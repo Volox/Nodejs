@@ -2,9 +2,9 @@
 	"port": 8080,
 	
 	"task_repository": {
-		"host": "http://LAP-AMAURI",
+		"host": "http://pc-volonterio",
 		"port": 8080,
-		"basePath": "/CrowdSearch_prototype_trunk",
+		"basePath": "/CrowdSearch_prototype_v2",
 
 		"repository": {
 			"host": "localhost",

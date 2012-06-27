@@ -11,6 +11,46 @@ var log		= config.logger,
 	mongo	= config.mongo;
 
 
+
+var Requester = function( defaults ) {
+	this.cache = {};
+
+	this.defaultObj = _.extend( {
+		method: 'get'
+	}, defaults);
+};
+
+Requester.prototype.get = function( config, callback, force ) {
+	if( typeof(config)=='string' ) {
+		config = {
+			url: config
+		};
+	}
+
+
+	if( this.cache[ config.url ] && !force ) {
+		log.debug( 'Using cached resource' );
+		callback( null, { statusCode: 200 }, this.cache[ config.url ] );
+	} else {
+		log.debug( 'Using remote resource' );
+		var urlConfig = _.extend( {}, this.defaultObj, config );
+		var self = this;
+		request( urlConfig, function( error, response, body ) {
+
+			// Cache only the good responses
+			if( response.statusCode==200 ) {
+				self.cache[ urlConfig.url ] = body;
+			}
+			callback( error, response, body );
+		} );
+	}
+
+};
+
+
+
+
+
 var TaskRepository = function( configuration ) {
 	this.name = "Task Repository";
 	
@@ -21,6 +61,8 @@ var TaskRepository = function( configuration ) {
 	this.basePath = configuration.basePath;
 
 	this.collection = null;
+
+	this.requester = new Requester();
 
 	this.init();
 }
@@ -55,7 +97,7 @@ TaskRepository.prototype.API.list = function(req, res) {
 
 	try {
 		log.debug( f( 'fetching URL %s', url ) );
-		request( {url: url, method: config.method }, function( error, response, body ) {
+		this.requester.get( {url: url, method: config.method }, function( error, response, body ) {
 
 			console.log( response.status, body );
 			body = JSON.parse(body);
@@ -81,7 +123,7 @@ TaskRepository.prototype.API.uTaskList = function(req, res) {
 	var url = f( '%s:%s%s/%s', this.host, this.port, this.basePath, config.path.replace( '{taskID}', taskID ) );
 
 	log.debug( f( 'Fetching URL %s', url ) );
-	request( {url: url, method: config.method }, function( error, response, body ) {
+	this.requester.get( {url: url, method: config.method }, function( error, response, body ) {
 		log.debug( f( 'Url %s fetched', url ) );
 		if( !error ) {
 			var errorMessage = null;
@@ -131,7 +173,7 @@ TaskRepository.prototype.API.details = function(req, res) {
 
 		log.debug( f( 'Fetching URL %s', url ) );
 		var self = this;
-		request( {url: url, method: config.method }, function( error, response, body ) {
+		this.requester.get( {url: url, method: config.method }, function( error, response, body ) {
 			log.debug( f( 'Url %s fetched', url ) );
 			if( !error ) {
 				var errorMessage = null;
@@ -164,7 +206,7 @@ TaskRepository.prototype.API.details = function(req, res) {
 				}
 
 				// Retrieve the code associated to the Task
-				parentTask = ( body.isMicroTask )? body.task : null;
+				parentTask = ( body.isMicroTask )? body.task : body.id;
 				codeAvailable = false;
 				if( !errorMessage ) {
 					self.collection.findOne( { taskID: parentTask }, function( err, docs ) {
@@ -204,9 +246,8 @@ TaskRepository.prototype.API.addCode = function(req, res) {
 	});
 };
 TaskRepository.prototype.API.postCode = function(req, res) {
-	var uTaskID = req.params.task;
-	var code = req.body.code;
-	var taskID = req.body.parentTask || req.params.task;
+	var codeName = req.body;
+	var taskID = parseInt( req.body.parentTask || req.params.task );
 	var files = req.files;
 
 
@@ -216,14 +257,14 @@ TaskRepository.prototype.API.postCode = function(req, res) {
 
 	log.debug( f( 'Fetching URL %s', url ) );
 	var self = this;
-	request( {url: url, method: config.method }, function( error, response, body ) {
+	this.requester.get( {url: url, method: config.method }, function( error, response, body ) {
 		log.debug( f( 'Url %s fetched', url ) );
 
 		try {
 			body = JSON.parse( body );
 
 			// Parent found
-			var parentTask = ( body.isMicroTask )? body.task : body.id;
+			var parentTask = parseInt( ( body.isMicroTask )? body.task : body.id );
 
 			// Save to DB function
 			var saveToDB = _.bind( function( err, data ) {
@@ -231,14 +272,13 @@ TaskRepository.prototype.API.postCode = function(req, res) {
 
 				this.collection.save( {
 					taskID: parentTask,
-					code: data,
-					type: 'js'
+					code: data
 				}, function( err, saved ) {
 					log.debug( 'Saved to the DB' );
 					res.redirect( '/task/'+taskID );
 
-					for( fileName in files ) {
-						fs.unlink( files[ fileName ].path, function() {
+					for( fileID in files ) {
+						fs.unlink( files[ fileID ].path, function() {
 							log.debug( 'File removed' );
 						} );
 					}
@@ -246,13 +286,19 @@ TaskRepository.prototype.API.postCode = function(req, res) {
 			}, self );
 
 
-			// Check the input used
+			// Check the input files
 			var fileContents = {};
 			log.debug( 'Reading uploaded files' );
-			for( fileName in files) {
-				var file = files[ fileName ];
+			for( fileID in files) {
+				var file = files[ fileID ];
+				var fileName = codeName[ fileID+'_name' ] || file.name;
+
+
+				// REPLACE the dot with an underscore
+				fileName = fileName.replace( /\./ig, '_' );
 				if( file.size ) {
-					fileContents[ fileName  ] = fs.readFileSync( file.path,'utf8' );
+					log.debug( fileName, file.type );
+					fileContents[ fileName  ] = fs.readFileSync( file.path );
 				}
 			}
 
@@ -273,14 +319,14 @@ TaskRepository.prototype.API.postCode = function(req, res) {
 
 TaskRepository.prototype.API.code = function(req, res) {
 	var taskID = parseInt( req.params.task );
-	var format = req.params.format || 'js';
+	var page = req.params.page;
 
-	log.debug( 'Returning code for '+taskID+' in '+format );
+	log.debug( 'Returning code for '+taskID+' in '+page );
 
 	if( taskID==='sample' ) {
 		res.sendfile( 'public/scripts/uTaskImplementation.js' );
 	} else {
-		this.collection.findOne( { taskID: taskID, type: format }, { code: 1 }, function( err, docs ) {
+		this.collection.findOne( { taskID: taskID }, { code: 1 }, function( err, docs ) {
 			if( !err && docs ) {
 				res.send( docs.code );
 			} else {
@@ -295,7 +341,26 @@ TaskRepository.prototype.API.code = function(req, res) {
 	}
 };
 
+TaskRepository.prototype.API.run = function(req, res) {
+	var taskID = parseInt( req.params.task );
+	var page = req.params.page || 'home';
 
+	log.debug( 'Running '+page+' code for '+taskID );
+	var query = { taskID: taskID };
+
+	this.collection.findOne( query, { code: 1 }, function( err, docs ) {
+		log.debug( 'Sending code' );
+		if( !err && docs ) {
+
+			// Reconciliate dot and underscore
+			page = page.replace( /\./ig, '_' );
+			res.send( docs.code[ page ] );
+		} else {
+			log.debug( f( 'Unable to retrieve the code for %s, error: %s ', taskID, err ) );
+			res.send( 'Not found', 404 );
+		}
+	} );
+};
 
 
 

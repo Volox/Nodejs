@@ -4,8 +4,52 @@
 		"selected_items":
 		[
 			[
+				"se",
+				"send"
+			],
+			[
 				"file",
-				"fileContents"
+				"fileName"
+			],
+			[
+				"code",
+				"codeName"
+			],
+			[
+				"mar",
+				"margin-right"
+			],
+			[
+				"de",
+				"debug"
+			],
+			[
+				"ur",
+				"urlConfig"
+			],
+			[
+				"ca",
+				"cache"
+			],
+			[
+				"con",
+				"config"
+			],
+			[
+				"confi",
+				"config"
+			],
+			[
+				"pro",
+				"prototype"
+			],
+			[
+				"Re",
+				"Requester"
+			],
+			[
+				"re",
+				"request"
 			],
 			[
 				"save",
@@ -22,10 +66,6 @@
 			[
 				"pa",
 				"parentTask"
-			],
-			[
-				"code",
-				"codeAvailable"
 			],
 			[
 				"co",
@@ -72,16 +112,8 @@
 				"log"
 			],
 			[
-				"re",
-				"results"
-			],
-			[
 				"repo",
 				"repoCollection"
-			],
-			[
-				"con",
-				"configuration"
 			],
 			[
 				"date",
@@ -160,10 +192,6 @@
 				"object"
 			],
 			[
-				"de",
-				"debug"
-			],
-			[
 				"base",
 				"basePath"
 			],
@@ -212,10 +240,6 @@
 				"y"
 			],
 			[
-				"ca",
-				"canvas"
-			],
-			[
 				"D",
 				"DoGRow"
 			],
@@ -242,10 +266,6 @@
 			[
 				"ar",
 				"argumentsMap"
-			],
-			[
-				"se",
-				"setValue"
 			],
 			[
 				"argument",
@@ -350,10 +370,6 @@
 			[
 				"add",
 				"addInput"
-			],
-			[
-				"pro",
-				"prop"
 			],
 			[
 				"c",
@@ -487,7 +503,7 @@
 			"file": "server.js",
 			"settings":
 			{
-				"buffer_size": 1854,
+				"buffer_size": 1902,
 				"line_ending": "Windows"
 			}
 		},
@@ -495,7 +511,7 @@
 			"file": "task-repo/task-repo.js",
 			"settings":
 			{
-				"buffer_size": 7287,
+				"buffer_size": 8866,
 				"line_ending": "Windows"
 			}
 		},
@@ -511,7 +527,23 @@
 			"file": "views/task/new.jade",
 			"settings":
 			{
-				"buffer_size": 824,
+				"buffer_size": 1266,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/task/detail.jade",
+			"settings":
+			{
+				"buffer_size": 794,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/stylesheets/style.styl",
+			"settings":
+			{
+				"buffer_size": 1159,
 				"line_ending": "Windows"
 			}
 		}
@@ -519,7 +551,7 @@
 	"build_system": "Packages/Nodejs/Nodejs.sublime-build",
 	"command_palette":
 	{
-		"height": 261.0,
+		"height": 375.0,
 		"selected_items":
 		[
 			[
@@ -644,13 +676,14 @@
 	},
 	"file_history":
 	[
+		"/D/Portable/Nodejs/task-repo/task/task.js",
+		"/D/Portable/Nodejs/config/config.js",
 		"/D/Portable/Nodejs/views/task/detail.jade",
 		"/D/Portable/Nodejs/views/task/list.jade",
 		"/D/Portable/Nodejs/views/task/new.jade",
 		"/D/Portable/Nodejs/views/index.jade",
 		"/D/Portable/Nodejs/public/scripts/coffee/uTaskImplementation.coffee",
 		"/D/Portable/Nodejs/config/mongo-node.conf",
-		"/D/Portable/Nodejs/config/config.js",
 		"/D/Portable/Nodejs/public/stylesheets/style.styl",
 		"/D/Portable/Nodejs/config/configuration.json",
 		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
@@ -675,7 +708,6 @@
 		"/D/Portable/Nodejs/public/scripts/coffee/VoloCL.coffee",
 		"/D/Portable/Nodejs/task-repo/task-repo.js",
 		"/D/Portable/Nodejs/views/error.jade",
-		"/D/Portable/Nodejs/task-repo/task/task.js",
 		"/D/Portable/Nodejs/task-repo/micro-task/micro-task.js",
 		"/D/Portable/Nodejs/public/scripts/VoloCL.js",
 		"/D/Portable/Nodejs/public/scripts/MM.js",
@@ -759,15 +791,15 @@
 					"file": "server.js",
 					"settings":
 					{
-						"buffer_size": 1854,
+						"buffer_size": 1902,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1655,
-								1655
+								1602,
+								1602
 							]
 						],
 						"settings":
@@ -777,7 +809,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 312.0,
+						"translation.y": 351.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -787,15 +819,15 @@
 					"file": "task-repo/task-repo.js",
 					"settings":
 					{
-						"buffer_size": 7287,
+						"buffer_size": 8866,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6329,
-								6329
+								7372,
+								7372
 							]
 						],
 						"settings":
@@ -804,7 +836,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3258.0,
+						"translation.y": 3780.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -821,8 +853,8 @@
 						"selection":
 						[
 							[
-								152,
-								152
+								159,
+								159
 							]
 						],
 						"settings":
@@ -841,15 +873,15 @@
 					"file": "views/task/new.jade",
 					"settings":
 					{
-						"buffer_size": 824,
+						"buffer_size": 1266,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								514,
-								514
+								337,
+								337
 							]
 						],
 						"settings":
@@ -859,6 +891,60 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "views/task/detail.jade",
+					"settings":
+					{
+						"buffer_size": 794,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								311,
+								311
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/stylesheets/style.styl",
+					"settings":
+					{
+						"buffer_size": 1159,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1159,
+								1159
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Stylus/Stylus.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 245.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -897,6 +983,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 92.0
+	},
 	"replace":
 	{
 		"height": 60.0
@@ -907,6 +997,18 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"style",
+				"public/stylesheets/style.styl"
+			],
+			[
+				"det",
+				"views/task/detail.jade"
+			],
+			[
+				"con",
+				"config/config.js"
+			],
 			[
 				"new",
 				"views/task/new.jade"
@@ -934,10 +1036,6 @@
 			[
 				"config",
 				"config/config.js"
-			],
-			[
-				"style",
-				"public/stylesheets/style.styl"
 			],
 			[
 				"sc",
@@ -998,10 +1096,6 @@
 			[
 				"we",
 				"public/scripts/coffee/webcl.coffee"
-			],
-			[
-				"con",
-				"config/configuration.json"
 			],
 			[
 				"err",

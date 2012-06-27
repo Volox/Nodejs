@@ -5,7 +5,6 @@ Configuration file
 require( '../utils' );
 
 var fs = require( 'fs' ),
-    path = require( 'path' ),
     util = require( 'util' ),
     nconf = require( 'nconf' ),
     mongo = require( 'mongojs' ),
@@ -35,7 +34,6 @@ function init( expressApp ) {
 	// Common Required modules
 	props.util	= util;
 	props.fs 	= fs;
-	props.path	= path;
 	props.nconf	= nconf;
 	props._		= _;
 	props.mongo	= mongo;
@@ -99,7 +97,7 @@ function initLogger( config ) {
 
 
 	// Create the log path
-	if( !path.existsSync( config.path ) ) {
+	if( !fs.existsSync( config.path ) ) {
 		fs.mkdirSync( config.path );
 	}
 
@@ -120,7 +118,7 @@ function initMongo( config ) {
 	}
 
 	// Create the Task path
-	if( !path.existsSync( config.path ) ) {
+	if( !fs.existsSync( config.path ) ) {
 		fs.mkdirSync( config.path );
 	}
 
