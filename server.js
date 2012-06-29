@@ -64,12 +64,20 @@ var server = http.createServer(app);
 // Task Repository API
 var TaskRepository = require( './task-repo' );
 var TRI = new TaskRepository( config.nconf.get( "task_repository" ) );
+
 //app.get('/task/list', TRI.API.list );
 app.get('/task/:task', TRI.API.details );
 app.get('/task/:task/list', TRI.API.uTaskList );
+
 app.get('/task/:task/code.:format?', TRI.API.code );
-app.get('/task/:task/run/:page', TRI.API.run );
 app.get('/task/:task/code/add', TRI.API.addCode );
+
+app.get('/task/:task/run/:page', TRI.API.run );
+
+app.get('/task/:task/input/:field?', TRI.API.input );
+
+app.get('/task/:task/configuration/:field?', TRI.API.configuration );
+
 app.post('/task/:task/code', TRI.API.postCode );
 
 

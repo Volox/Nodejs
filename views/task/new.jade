@@ -2,58 +2,62 @@ extends ../layout
 
 block append scripts
 	:coffeescript
-		fieldNum = 0
-		addField = (name) ->
-			id = "taskCode_#{fieldNum++}"
-			$section = $ '<section>'
-
-			$label = $ '<label>',
-				for: id+'_name',
-				text: "Name for field: "
-
-			$input = $ '<input>',
-				id: id+'_name',
-				name: id+'_name',
-				type: 'text',
-				value: name,
-			#	disabled: if (name) then true else false
-
-			$section.append $label
-			$section.append $input
-			$section.append '<br>'
-
-			$label = $ '<label>',
-				for: id,
-				text: "Upload file #{fieldNum}: "
-			$input = $ '<input>',
-				id: id,
-				name: id,
-				type: 'file'
-
-			$section.append $label
-			$section.append '<br>'
-			$section.append $input
-
-			$( 'form' ).prepend '<hr>'
-			$( 'form' ).prepend $section
-			return
-
+		jQuery.event.props.push 'dataTransfer'
 		jQuery ($)->
-			addField 'home'
-			$( '#btnSend' ).click ->
-				numFile = 0
-				$( 'input[type="file"]' ).each ->
-					if $( @ ).val()!="" then numFile++
-					return
-				if numFile==0
-					alert 'Selezionare almeno 1 file'
-				return numFile!=0
+			$fileList = $ '.fileList'
+			$dropzone = $ '.dropzone'
 
-			$( '#btnAdd' ).click ->
-				addField()
+			$dropzone.on 'drop', ( evt ) ->
+				$( @ ).removeClass 'active'
+
+				files = evt.dataTransfer.files
+				for file in files
+					fileList = $dropzone.data( 'fileList' ) || {}
+					if !fileList[ file.name ]
+						fileList[ file.name ] = file
+						$li = $ '<li>',
+							text: "#{file.name} (#{file.type})"
+						$fileList.append $li
+						$dropzone.data 'fileList', fileList
+					else
+						alert "'#{file.name}'' already present!"
+
+				return false
+			$dropzone.on 'dragover dragenter', (evt) ->
+				evt.dataTransfer.dropEffect = 'copy'
+				$( @ ).addClass 'active'
+				return false
+
+			$dropzone.on 'dragexit', ->
+				$( @ ).removeClass 'active'
+				return false
+			
+			$( '#btnSend' ).click ->
+				$form = $ 'form'
+				fileList = $dropzone.data( 'fileList' ) || {}
+				if $.isEmptyObject( fileList )
+					alert 'Selezionare almeno 1 file'
+				else
+					formData = new FormData $form[ 0 ]
+					$.each fileList, ( fileID, file )->
+						formData.append fileID, file
+
+					xhr = new XMLHttpRequest()
+					xhr.open $form.prop( 'method' ), $form.prop( 'action' ), true
+					xhr.setRequestHeader "X-Requested-With", "XMLHttpRequest"
+					xhr.onprogress = ( evt ) ->
+						console.log 'Progresso: '+parseInt evt.position/evt.total*100
+					xhr.onload = ( evt ) ->
+						location.href = evt.originalTarget.responseText
+						return
+					xhr.send formData
+
+				return false
 block content
 	h1 #{title}
 	form(action="/task/#{taskID}/code",method="post",enctype="multipart/form-data")
+		div.dropzone Drop files here
+		ul.fileList
 		section.actions
-			input#btnAdd(type="button", value="Add file")
+			// input#btnAdd(type="button", value="Add file")
 			input#btnSend(type="submit", value="Send")

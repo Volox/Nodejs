@@ -13,7 +13,8 @@
         "jade": "*",
 		"mongojs": "*",
 		"winston": "*",
-        "socket.io": "*"
+        "socket.io": "*",
+        "q": "*"
     },
     "engines": {
         "node": "0.6.x",

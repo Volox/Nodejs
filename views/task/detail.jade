@@ -9,8 +9,8 @@ block content
 		else
 			h1 Task #{data.id} (#{data.type}): #{data.title}
 			if code
-				a.action(href="/task/#{data.task || data.id}/code.js") See code
-				a.action(href="/task/#{data.task || data.id}/run/home") Run code
+				a.action(href="/task/#{data.id}/code.js") See code
+				a.action(href="/task/#{data.id}/run/home.html") Run code
 			if data.schema
 				h2 Schema
 				table

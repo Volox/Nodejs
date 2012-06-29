@@ -1,24 +1,45 @@
 class Sample extends uTask
 	init: ->
-		console.log 'Init!'
+		$( '#btnRun' ).remove()
+		@getConfiguration 'categories', ( error, json) =>
+			categories = json
 
-		@getData 'image', 1
+			name = 'text'
+			$select = $ '<select>'
+			for category in categories
+				$option = $ '<option>',
+					text: category,
+					value: category
+				$select.append $option
 
-		# 
+			@getData name, ( error, json) =>
+				if !error
+					data = json[ name ]
+					$( 'body' ).append $ '<ul>',
+						id: 'tweetList'
+
+					$ul = $ '#tweetList'
+					for tweet in data
+						$li = $ '<li>'
+						$li.append $select.clone()
+						$li.append $ '<span>',
+							text: tweet.value
+						$ul.append $li
+				else
+					alert 'FUUUUUUU'
+
+				$( 'body' ).append $ '<button>',
+					text: 'Send results',
+					click: @run
+				return
+
+			return
+
 	run: ->
 		console.log 'Run!'
-
-		results = []
-		@sendStatus 'running'
-
-		for perc in [0..100]
-			results.push perc
-			@sendStatus "processing #{perc}%"
-
-		@setData 'results', results
-
 		@send()
 
 # Entry point configurable
 $ ->
-	new Sample
+	$( '#btnRun' ).click ->
+		new Sample

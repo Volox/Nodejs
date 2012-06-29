@@ -9,6 +9,7 @@ var fs = require( 'fs' ),
     nconf = require( 'nconf' ),
     mongo = require( 'mongojs' ),
     request = require( 'request' ),
+    Q = require( 'q' ),
     _ = require( 'underscore' );
 
 _.str = require( 'underscore.string' );

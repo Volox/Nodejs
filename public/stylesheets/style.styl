@@ -67,3 +67,24 @@ body
 
 a.action
 	margin-right 1em
+
+div.dropzone
+	@height 5em
+	margin-top 1em
+	margin-bottom 1em
+	border 5px dashed #ccc
+	height @height
+	display block
+	text-align center
+	font-size 1em
+	color #aaa
+	font-weight bold
+	line-height @height
+
+	&.active
+		border-color green
+		color green
+
+	&.present
+		border-color red
+		color red
