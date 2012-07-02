@@ -6,11 +6,9 @@ block append scripts
 		jQuery ($)->
 			$fileList = $ '.fileList'
 			$dropzone = $ '.dropzone'
+			$hiddenFile = $ '.hiddenFile', $dropzone
 
-			$dropzone.on 'drop', ( evt ) ->
-				$( @ ).removeClass 'active'
-
-				files = evt.dataTransfer.files
+			addFiles = ( files ) ->
 				for file in files
 					fileList = $dropzone.data( 'fileList' ) || {}
 					if !fileList[ file.name ]
@@ -21,7 +19,20 @@ block append scripts
 						$dropzone.data 'fileList', fileList
 					else
 						alert "'#{file.name}'' already present!"
+				return
+			$hiddenFile.on 'change', ( evt )->
+				addFiles @files
 
+				return
+
+			$dropzone.on 'click', ( evt ) ->
+				evt.stopPropagation()
+				$hiddenFile.trigger evt
+
+			$dropzone.on 'drop', ( evt ) ->
+				$( @ ).removeClass 'active'
+
+				addFiles evt.dataTransfer.files
 				return false
 			$dropzone.on 'dragover dragenter', (evt) ->
 				evt.dataTransfer.dropEffect = 'copy'
@@ -56,7 +67,8 @@ block append scripts
 block content
 	h1 #{title}
 	form(action="/task/#{taskID}/code",method="post",enctype="multipart/form-data")
-		div.dropzone Drop files here
+		div.dropzone Click or drop files here
+			input.hiddenFile(type="file",multiple)
 		ul.fileList
 		section.actions
 			// input#btnAdd(type="button", value="Add file")

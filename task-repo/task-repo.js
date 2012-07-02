@@ -2,53 +2,13 @@
  * Task Repository module
  * TODO: Move to a separated server
  */
-var config = require( '../config' );
+var config = require( '../config' ),
+	Requester = require( './requester' );
 
 var log		= config.logger,
 	_		= config._,
 	fs		= config.fs,
-	request = config.request,
 	mongo	= config.mongo;
-
-
-
-var Requester = function( defaults ) {
-	this.cache = {};
-
-	this.defaultObj = _.extend( {
-		method: 'get'
-	}, defaults);
-};
-
-Requester.prototype.get = function( config, callback, force ) {
-	if( typeof(config)=='string' ) {
-		config = {
-			url: config
-		};
-	}
-
-
-	if( this.cache[ config.url ] && !force ) {
-		log.debug( 'Using cached resource' );
-		callback( null, { statusCode: 200 }, this.cache[ config.url ] );
-	} else {
-		log.debug( 'Using remote resource' );
-		var urlConfig = _.extend( {}, this.defaultObj, config );
-		var self = this;
-		request( urlConfig, function( error, response, body ) {
-
-			// Cache only the good responses
-			if( response.statusCode==200 ) {
-				self.cache[ urlConfig.url ] = body;
-			}
-			callback( error, response, body );
-		} );
-	}
-
-};
-
-
-
 
 
 var TaskRepository = function( configuration ) {
@@ -192,21 +152,6 @@ TaskRepository.prototype.API.details = function(req, res) {
 					// Try to parse the response content
 					try {
 						body = JSON.parse(body);
-
-						var objects = [];
-						_.each( body.objects, function( element ) {
-							var object = {
-								id: element.id
-							};
-
-							_.each( element.body, function( value ) {
-								object[ value.fieldId ] = value.value;
-							} );
-
-							objects.push( object );
-						} );
-
-						body.objects = objects;
 					} catch( ex ) { errorMessage = ex }
 				}
 
@@ -454,24 +399,7 @@ TaskRepository.prototype.API.input = function(req, res) {
 				try {
 					body = JSON.parse(body);
 
-					// Parse to extract the selected field
-					var data = {};
-					data[ field ] = [];
-
-					// Find fieldName<->fieldID matching
-					var fieldID;
-					_.each( body.schema, function( element ) {
-						if( element.name==field ) {
-							fieldID = element.id
-						}
-					} );
-					_.each( body.objects, function( element ) {
-						_.each( element.body, function( fieldElement ) {
-							if( fieldElement.fieldId==fieldID ) {
-								data[ field ].push( fieldElement );
-							}
-						} );
-					} );
+					var data = body.objects;
 
 					res.type( 'json' );
 					res.send( JSON.stringify( data ) );
@@ -519,7 +447,14 @@ TaskRepository.prototype.API.configuration = function(req, res) {
 					body = JSON.parse(body);
 
 					// Parse to extract the selected field
-					var data = body.configuration[ field ];
+					var data = [];
+					for( index in body.configurations ) {
+						configuration = body.configurations[ index ];
+
+						if( configuration[ field ] ) {
+							data.push( configuration[ field ] );
+						}
+					}
 
 					res.type( 'json' );
 					res.send( JSON.stringify( data ) );
@@ -535,5 +470,66 @@ TaskRepository.prototype.API.configuration = function(req, res) {
 		}
 	} );
 };
+
+TaskRepository.prototype.API.postResult = function(req, res) {
+	var taskID = parseInt( req.params.task );
+
+	var config = this.configuration.API.save;
+	var url = f( '%s:%s%s/%s', this.host, this.port, this.basePath, config.path );
+
+	log.debug( f( 'Fetching URL %s', url ) );
+	var self = this;
+
+	console.log( req.body );
+
+	this.requester.post( { url: url, body: req.body }, function( error, response, body ) {
+		log.debug( f( 'Url %s fetched', url ) );
+
+		if( !error ) {
+			var errorMessage = null;
+			if( response.statusCode!=200) {
+				errorMessage = body;
+				log.debug( errorMessage );
+			} else {
+
+			}
+
+			if( !req.xhr ) {
+				res.send( 'Ok' );
+			} else {
+				res.type( 'json' );
+				res.send( '"OK"' );
+			}
+
+
+		} else {
+			if( !req.xhr ) {
+				res.render('error', {
+					title: 'Request error',
+					message: error || response
+				});
+			} else {
+				res.type( 'json' );
+				res.send( { error: error || response } );
+			}
+		}
+	} );
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 exports = module.exports = TaskRepository;

@@ -9,7 +9,6 @@ block content
 		else
 			h1 Task #{data.id} (#{data.type}): #{data.title}
 			if code
-				a.action(href="/task/#{data.id}/code.js") See code
 				a.action(href="/task/#{data.id}/run/home.html") Run code
 			if data.schema
 				h2 Schema
@@ -19,7 +18,7 @@ block content
 							td= column.id
 							td= column.name
 							td= column.type
-			pre!= JSON.stringify(data.configuration)
+			pre!= JSON.stringify(data.configurations)
 			hr
 			span!= data.question
 			hr
@@ -28,10 +27,10 @@ block content
 				table
 					thead
 						tr
-							each column in data.schema
-								th= column.name
+							each val, fieldName in data.objects.field
+								th= fieldName
 					tbody
-						each object in data.objects
-							tr
-								each column in data.schema
-									td= object[ column.id ]
+						each objectId, index in data.objects.id
+							tr(data-object-id="#{objectId}")
+								each val, fieldName in data.objects.field
+									td= data.objects.field[ fieldName ][ index ]

@@ -3,12 +3,14 @@ class uTask
 		pathFragments = location.pathname.split '/'
 		taskID = pathFragments[ 2 ]
 
+		@task = taskID
 		@url = '/task/' + taskID
 		@codeUrl = @url+'/code'
 		@inputUrl = @url+'/input'
 		@configUrl = @url+'/configuration'
 		@resultUrl = @url+'/result'
 
+		@outputData = {}
 
 		@init()
 
@@ -44,9 +46,31 @@ class uTask
 				callback null, json
 		return
 	
-	setData: ( name, data ) ->
-		console.log "Setting #{name} to #{value}"
-		# set an output value
+	storeData: ( name, data ) ->
+		@outputData[ name ] = data
+		return
+	postData: ( formData, callback ) ->
+		if !callback
+			callback = formData
+			formData = undefined
+		# Post the stored data to the server
+		$.ajax
+			url: @resultUrl,
+			data: formData || JSON.stringify( @outputData ),
+			processData: if formData then false else true,
+			contentType: if formData then false else 'application/json; charset=UTF-8',
+			dataType: if formData then undefined else 'json',
+			cache: false,
+			type: 'POST',
+			beforeSend: ( xhr )=>
+				xhr.setRequestHeader "X-Requested-With", "XMLHttpRequest"
+				return
+			error: (jXHR, status, error )=>
+				callback error, {}
+				return
+			success: ( data, status, jXHR )=>
+				callback null, data
+				return
 		return
 
 	sendStatus: ( status ) ->

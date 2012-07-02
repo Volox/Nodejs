@@ -80,6 +80,7 @@ app.get('/task/:task/configuration/:field?', TRI.API.configuration );
 
 app.post('/task/:task/code', TRI.API.postCode );
 
+app.post('/task/:task/result', TRI.API.postResult );
 
 
 

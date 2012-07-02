@@ -1,0 +1,5 @@
+{
+	"name": "Requester",
+	"main": "./requester.js",
+	"description": "Proxy to perform request to the crowdsearcher"
+}
