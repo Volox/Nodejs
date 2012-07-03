@@ -67,6 +67,8 @@ block append scripts
 block content
 	h1 #{title}
 	form(action="/task/#{taskID}/code",method="post",enctype="multipart/form-data")
+		label(for="name") Insert code instance name: 
+		input#name(name="name",placeholder="Insert name")
 		div.dropzone Click or drop files here
 			input.hiddenFile(type="file",multiple)
 		ul.fileList

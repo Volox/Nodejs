@@ -3,13 +3,10 @@ extends ../layout
 block append scripts
 block content
 	div.taskList
-		h1 &micro;Task list
+		h1 &micro;Task list for Task #{taskID} 
 		a.addCode(href="/task/#{taskID}/code/add") Add code
-		if errorMessage
-			h2.error!= errorMessage
-		else
-			if data.microTasks
-				ul
-					each microTask in data.microTasks
-						li
-							a(href="/task/#{microTask.id}")= microTask.id
+		if data.microTasks
+			ul
+				each microTask in data.microTasks
+					li
+						a(href="/task/#{microTask.id}")= microTask.id

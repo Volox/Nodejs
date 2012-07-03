@@ -81,12 +81,13 @@ class Sample extends uTask
 		return
 	run: =>
 		console.log 'Run!'
-		
+	
 		@createOuput()
 		
 		@postData ( error, data )=>
 			if !error
 				@$runBtn.prop 'disabled', true
+				alert 'Data sent successfully'
 			else
 				alert "Unable to post results\n#{error}"
 		return

@@ -1,35 +1,39 @@
 {
 	"port": 80,
-	
-	"task_repository": {
-		"host": "http://pc-volonterio",
+
+	"crowdsearch": {
+		
+		"cache": false,
+
+		"hostname": "pc-volonterio",
 		"port": 8080,
-		"basePath": "/CrowdSearch_prototype_v2",
-
-		"repository": {
-			"host": "localhost",
-			"port": 27017,
-			"db-name": "test",
-
-			"collection": "task",
-
-			"path": "tasks"
-		},
+		"appPath": "/CrowdSearch_prototype_v2",
 
 		"API": {
 			"details": {
 				"method": "GET",
-				"path": "getTask.do?q={taskID}"
+				"path": "getTask.do",
+				"params": {
+					"q": "taskID",
+					"selectors": "fields"
+				}
 			},
 			"list": {
 				"method": "GET",
-				"path": "getTaskComposition.do?q={taskID}"
+				"path": "getTaskComposition.do",
+				"params": {
+					"q": "taskID"
+				}
 			},
 			"save": {
 				"method": "POST",
 				"path": "postAnswer.do"
 			}
 		}
+	},
+	
+	"task_repository": {
+		"path": "tasks"
 	},
 
 	"mongo": {

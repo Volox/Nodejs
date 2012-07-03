@@ -8,6 +8,7 @@ var config = require( '../config' ),
 var log		= config.logger,
 	_		= config._,
 	fs		= config.fs,
+	path	= config.path,
 	mongo	= config.mongo;
 
 
@@ -15,11 +16,6 @@ var TaskRepository = function( configuration ) {
 	this.name = "Task Repository";
 	
 	this.configuration = configuration;
-	
-	this.host = configuration.host;
-	this.port = configuration.port;
-	this.basePath = configuration.basePath;
-
 	this.collection = null;
 	this.taskPath = null;
 
@@ -29,21 +25,13 @@ var TaskRepository = function( configuration ) {
 }
 
 TaskRepository.prototype.init = function() {
-	// Test mongo DB and Repository
-	var repoConfig = this.configuration[ "repository" ];
-	var dbUrl = f( '%s:%d/%s', repoConfig.host, repoConfig.port, repoConfig['db-name'] );
-	var db = mongo.connect( dbUrl );
-	var repoCollection = db.collection( repoConfig.collection );
-
-	this.collection = repoCollection;
-
 	// Bind the API
 	for( API in this.API ) {
 		this.API[ API ] = _.bind( this.API[ API ], this )
 	}
 
 	// Create the path
-	this.taskPath = __dirname+'/'+repoConfig.path
+	this.taskPath = path.join( __dirname, this.configuration.path );
 	if( !fs.existsSync( this.taskPath ) ) {
 		fs.mkdirSync( this.taskPath );
 	}
@@ -52,138 +40,74 @@ TaskRepository.prototype.init = function() {
 
 
 
-
+TaskRepository.prototype.getFilePath = function( taskID, implementation, file ) {
+	if( !implementation )
+		implementation = 'default'
+	if( !file )
+		file = 'home.html'
+	var filePath = path.join( this.taskPath, ""+taskID, implementation, file );
+	return filePath;
+};
+TaskRepository.prototype.check = function( taskID, implementation, file ) {
+	return fs.existsSync( this.getFilePath( taskID, implementation, file ) );
+};
 
 TaskRepository.prototype.API = {};
 
-TaskRepository.prototype.API.list = function(req, res) {
-	var config = this.configuration.API.list;
-	var url = f( '%s:%s%s/%s', this.host, this.port, this.basePath, config.path );
-
-	try {
-		log.debug( f( 'fetching URL %s', url ) );
-		this.requester.get( {url: url, method: config.method }, function( error, response, body ) {
-
-			console.log( response.status, body );
-			body = JSON.parse(body);
-
-			res.render('task/list', {
-				title: 'Task list',
-				data: body
-			});
-		} );
-
-	} catch( error ) {
-		res.render('error', {
-			title: 'Request error',
-			message: error
-		});
-	}
-
-}
-
 TaskRepository.prototype.API.uTaskList = function(req, res) {
 	var taskID = req.params.task;
-	var config = this.configuration.API.list;
-	var url = f( '%s:%s%s/%s', this.host, this.port, this.basePath, config.path.replace( '{taskID}', taskID ) );
+	this.requester.get( taskID, 'list', function( error, body ) {
+		try {
+			if( error )
+				throw error;
+			
+			body = JSON.parse(body);
 
-	log.debug( f( 'Fetching URL %s', url ) );
-	this.requester.get( {url: url, method: config.method }, function( error, response, body ) {
-		log.debug( f( 'Url %s fetched', url ) );
-		if( !error ) {
-			var errorMessage = null;
-			if( response.statusCode==404) {
-				errorMessage = 'Task not found';
-				log.debug( f( 'Task %s not found', taskID ) );
-			} else if( response.statusCode==400) {
-				errorMessage = 'Task not specified';
-				log.debug( 'Task not specified' );
-			} else {
-				// Try to parse the response content
-				try {
-					body = JSON.parse(body);
-				} catch( ex ) { errorMessage = ex }
-			}
+			if( !body.microTasks )
+				throw "The selected task does not have any microTask associated";
 
-			// Render the page
 			res.render('task/list', {
 				title: 'Task list',
 				taskID: taskID,
-				data: body,
-				errorMessage: errorMessage
+				data: body
 			});
-		} else {
+		} catch( error ) {
+			log.error( error );
 			res.render('error', {
 				title: 'Request error',
 				message: error
 			});
 		}
-
 	} );
 }
 
 TaskRepository.prototype.API.details = function(req, res) {
-
 	var taskID = req.params.task;
 
-	if( taskID==='sample' ) {
-		res.render( 'task/sample', {
-			title: 'Task Sample',
-			taskID: taskID
-		} );
+	var self = this;
+	this.requester.get( taskID, 'details', function( error, body ) {
+		try {
+			if( error )
+				throw error;
+			
+			body = JSON.parse(body);
 
-	} else {
-		var config = this.configuration.API.details;
-		var url = f( '%s:%s%s/%s', this.host, this.port, this.basePath, config.path.replace( "{taskID}", taskID ) );
+			var parentTask = body.task;
+			var codeAvailable = self.check( parentTask ) || self.check( body.id );
 
-		log.debug( f( 'Fetching URL %s', url ) );
-		var self = this;
-		this.requester.get( {url: url, method: config.method }, function( error, response, body ) {
-			log.debug( f( 'Url %s fetched', url ) );
-			if( !error ) {
-				var errorMessage = null;
-				if( response.statusCode==404) {
-					errorMessage = 'Task not found';
-					log.debug( f( 'Task %s not found', taskID ) );
-				} else if( response.statusCode==400) {
-					errorMessage = 'Task not specified';
-					log.debug( 'Task not specified' );
-				} else {
-					// Try to parse the response content
-					try {
-						body = JSON.parse(body);
-					} catch( ex ) { errorMessage = ex }
-				}
-
-				// Retrieve the code associated to the Task
-				parentTask = body.task;
-				codeAvailable = false;
-				if( !errorMessage ) {
-					var query = { taskID: { $in: [ taskID, parentTask ]} };
-					self.collection.findOne( query, function( err, docs ) {
-						if( !err && docs ) {
-							codeAvailable = true
-						}
-
-						// Render the page
-						res.render('task/detail', {
-							title: 'Task detail',
-							data: body,
-							code: codeAvailable,
-							errorMessage: errorMessage
-						});
-					} );
-				}
-			} else {
-				res.render('error', {
-					title: 'Request error',
-					message: error
-				});
-			}
-
-		} );
-	}
-
+			res.render('task/detail', {
+				title: 'Task detail',
+				data: body,
+				code: codeAvailable
+			});
+		} catch( error ) {
+			log.error( error );
+			res.render('error', {
+				title: 'Request error',
+				message: error
+			});
+		}
+	} );
 
 };
 
@@ -197,172 +121,98 @@ TaskRepository.prototype.API.addCode = function(req, res) {
 	});
 };
 TaskRepository.prototype.API.postCode = function(req, res) {
-	var codeName = req.body;
-	var taskID = parseInt( req.body.parentTask || req.params.task );
+	var codeName = ( _( req.body.name ).isBlank() )? 'default' : req.body.name;
+	var taskID = parseInt( req.params.task );
 	var files = req.files;
 
 
-	// Get the uTask parent to save the resources
-	var config = this.configuration.API.details;
-	var url = f( '%s:%s%s/%s', this.host, this.port, this.basePath, config.path.replace( "{taskID}", taskID ) );
-
-	log.debug( f( 'Fetching URL %s', url ) );
+	log.debug( 'Code name: '+codeName );
 	var self = this;
-	this.requester.get( {url: url, method: config.method }, function( error, response, body ) {
-		log.debug( f( 'Url %s fetched', url ) );
-
+	this.requester.get( taskID, 'details', function( error, body ) {
 		try {
-			body = JSON.parse( body );
+			if( error )
+				throw error;
+			
+			body = JSON.parse(body);
 
-			// Parent found
 			var parentTask = parseInt( ( body.isMicroTask )? body.task : body.id );
 
-			// Save to DB function
-			var saveToDB = _.bind( function( err, data ) {
-				log.debug( 'Saving data to DB' );
+			// Save to FS function
+			var saveFiles = function( files ) {
+				log.debug( 'Saving data to filesystem' );
 
-				this.collection.save( {
-					taskID: parentTask,
-					code: data
-				}, function( err, saved ) {
-					log.debug( 'Saved to the DB' );
+				for( fileID in files) {
+					var file = files[ fileID ];
 
-					// Return response accordingly to the request
-					if( req.xhr ) {
-						res.send( '/task/'+parentTask+'/list' );
-					} else {
-						res.redirect( '/task/'+parentTask+'/list' );
+					if( file.size>=0 ) {
+						var taskPath = path.join( self.taskPath, ""+parentTask );
+						if( !fs.existsSync( taskPath ) ) {
+							fs.mkdirSync( taskPath );
+						}
+						taskPath = path.join( taskPath, codeName );
+						if( !fs.existsSync( taskPath ) ) {
+							fs.mkdirSync( taskPath );
+						}
+
+						var filePath = path.join( taskPath, file.name );
+						fs.renameSync( file.path, filePath );
 					}
+				}
 
-					for( fileID in files ) {
-						fs.unlink( files[ fileID ].path, function() {
-							log.debug( 'File '+fileID+' removed' );
-						} );
-					}
-				} );
-			}, self );
-
-
-			// Check the input files
-			var fileContents = {};
-			log.debug( 'Reading uploaded files' );
-			for( fileID in files) {
-				var file = files[ fileID ];
-
-				if( file.size ) {
-					var taskPath = self.taskPath+'/'+parentTask
-					if( !fs.existsSync( taskPath ) ) {
-						fs.mkdirSync( taskPath );
-					}
-
-					var filePath = taskPath+'/'+file.name;
-					fs.renameSync( file.path, filePath );
-					fileContents[ file.name.replace( '\.', '_' ) ] = filePath;
-
-					/*
-						fileContents[ fileName  ] = fs.readFileSync( file.path, 'utf8' );
-					} else {
-						log.debug( 'Reading '+file.name+' as binary' );
-						var binaryFile = fs.readFileSync( file.path, 'binary' );
-						fileContents[ fileName  ] = binaryFile;
-					}
-					*/
+				// Return response accordingly to the request
+				if( req.xhr ) {
+					res.send( '/task/'+parentTask+'/list' );
+				} else {
+					res.redirect( '/task/'+parentTask+'/list' );
 				}
 			}
 
-			if( _.size(fileContents)!=0 ) {
-				saveToDB( null, fileContents );
-			} else {
-				throw new Error( 'No file uploaded' )
-			}
+			saveFiles( files );
 
-		} catch ( ex ) {
+		} catch( error ) {
+			log.error( error );
 			res.render('error', {
 				title: 'Request error',
-				message: ex
+				message: error
 			});
 		}
+
 	} );
-};
-
-TaskRepository.prototype.API.code = function(req, res) {
-	var taskID = parseInt( req.params.task );
-	var page = req.params.page;
-
-	log.debug( 'Returning code for '+taskID+' in '+page );
-
-	if( taskID==='sample' ) {
-		res.sendfile( 'public/scripts/uTaskImplementation.js' );
-	} else {
-		var query = { taskID: { $in: [ taskID ] } }
-		this.collection.findOne( query, { code: 1 }, function( err, docs ) {
-			if( !err && docs ) {
-				res.send( docs.code );
-			} else {
-				log.debug( f( 'Unable to retrieve the code for %s, error: %s ', taskID, err ) );
-				res.render('error', {
-					title: 'Request error',
-					message: err || 'Code not found'
-				});
-			}
-		} );
-		//throw new Error( 'Code not found' );
-	}
 };
 
 TaskRepository.prototype.API.run = function(req, res) {
 	var taskID = parseInt( req.params.task );
-	var page = req.params.page || 'home.html';
-	
-	// Reconciliate dot and underscore
-	page = page.replace( /\./ig, '_' );
+	var implementation = req.params.implementation || 'default';
+	var file = req.params.file || 'home.html';
 
-	var config = this.configuration.API.details;
-	var url = f( '%s:%s%s/%s', this.host, this.port, this.basePath, config.path.replace( "{taskID}", taskID ) );
-
-	log.debug( f( 'Fetching URL %s', url ) );
 	var self = this;
-	this.requester.get( {url: url, method: config.method }, function( error, response, body ) {
-		log.debug( f( 'Url %s fetched', url ) );
-		if( !error ) {
-			var errorMessage = null;
-			if( response.statusCode==404) {
-				errorMessage = 'Task not found';
-				log.debug( f( 'Task %s not found', taskID ) );
-			} else if( response.statusCode==400) {
-				errorMessage = 'Task not specified';
-				log.debug( 'Task not specified' );
-			} else {
-				// Try to parse the response content
-				try {
-					body = JSON.parse(body);
-				} catch( ex ) { errorMessage = ex }
+	this.requester.get( taskID, 'details', function( error, body ) {
+		try {
+			if( error )
+				throw error;
+			
+			body = JSON.parse(body);
+
+			var parentTask = body.task;
+			var filePath = self.getFilePath( body.id, implementation, file );
+			var codeAvailable = self.check( body.id, implementation, file );
+
+			if( parentTask && !codeAvailable ) {
+				filePath = self.getFilePath( parentTask, implementation, file );
+				codeAvailable = self.check( parentTask, implementation, file );
 			}
+			
 
-			// Retrieve the code associated to the Task
-			parentTask = ( body.isMicroTask )? body.task : body.id;
-
-			var query = { taskID: { $in: [ taskID, parentTask ] } };
-			query[ 'code.'+page ] = { $exists: true };
-			self.collection.find( query, { code: 1, taskID: 1 }, function( err, docs ) {
-				log.debug( 'Sending code' );
-				if( !err && docs ) {
-					var task = null;
-					if( docs.length>1 ) {
-						task = ( docs[0].taskID==taskID )? docs[0] : docs[1];
-					} else {
-						task = docs[0];
-					}
-					res.sendfile( task.code[ page ] );
-				} else {
-					log.debug( f( 'Unable to retrieve the code for %s, error: %s ', taskID, err ) );
-					res.send( 'Not found', 404 );
-				}
-			} );
-		} else {
+			if( codeAvailable ) {
+				res.sendfile( filePath );
+			} else {
+				res.send( 'Not found', 404 );
+			}
+		} catch( error ) {
+			log.error( error );
 			res.render('error', {
 				title: 'Request error',
-				message: 'Url not feched'
+				message: error
 			});
 		}
 	} );
@@ -373,44 +223,35 @@ TaskRepository.prototype.API.input = function(req, res) {
 	var taskID = parseInt( req.params.task );
 	var field = req.params.field || '*';
 
-	var config = this.configuration.API.details;
-	var url = f( '%s:%s%s/%s', this.host, this.port, this.basePath, config.path.replace( "{taskID}", taskID ) );
-
-	log.debug( f( 'Fetching URL %s', url ) );
 	var self = this;
+	this.requester.get( taskID, 'details', 'objects', function( error, body ) {
+		try {
+			if( error )
+				throw error;
+			
+			body = JSON.parse(body);
 
-	/*
-	res.type( 'json' );
-	res.send( 'json', 404 );
-	return
-	*/
-	this.requester.get( {url: url, method: config.method }, function( error, response, body ) {
-		log.debug( f( 'Url %s fetched', url ) );
-		if( !error ) {
-			var errorMessage = null;
-			if( response.statusCode==404) {
-				errorMessage = 'Task not found';
-				log.debug( f( 'Task %s not found', taskID ) );
-			} else if( response.statusCode==400) {
-				errorMessage = 'Task not specified';
-				log.debug( 'Task not specified' );
+			var data;
+			if( field!='*' ) {
+				data = {};
+				data.field = {};
+				data.id = body.objects.id;
+				data.field[ field ] = body.objects.field[ field ];
 			} else {
-				// Try to parse the response content
-				try {
-					body = JSON.parse(body);
-
-					var data = body.objects;
-
-					res.type( 'json' );
-					res.send( JSON.stringify( data ) );
-				} catch( ex ) { errorMessage = ex }
+				data = body.objects;
 			}
 
-
-		} else {
+			if( req.xhr ) {
+				res.type( 'json' );
+				res.send( JSON.stringify( data ) );
+			} else {
+				throw "Not implemented"
+			}
+		} catch( error ) {
+			log.error( error );
 			res.render('error', {
 				title: 'Request error',
-				message: 'Url not feched'
+				message: error
 			});
 		}
 	} );
@@ -420,52 +261,34 @@ TaskRepository.prototype.API.configuration = function(req, res) {
 	var taskID = parseInt( req.params.task );
 	var field = req.params.field || '*';
 
-	var config = this.configuration.API.details;
-	var url = f( '%s:%s%s/%s', this.host, this.port, this.basePath, config.path.replace( "{taskID}", taskID ) );
-
-	log.debug( f( 'Fetching URL %s', url ) );
 	var self = this;
+	this.requester.get( taskID, 'details', 'configurations', function( error, body ) {
+		try {
+			if( error )
+				throw error;
+			
+			body = JSON.parse(body);
 
-	/*
-	res.type( 'json' );
-	res.send( 'json', 404 );
-	return
-	*/
-	this.requester.get( {url: url, method: config.method }, function( error, response, body ) {
-		log.debug( f( 'Url %s fetched', url ) );
-		if( !error ) {
-			var errorMessage = null;
-			if( response.statusCode==404) {
-				errorMessage = 'Task not found';
-				log.debug( f( 'Task %s not found', taskID ) );
-			} else if( response.statusCode==400) {
-				errorMessage = 'Task not specified';
-				log.debug( 'Task not specified' );
-			} else {
-				// Try to parse the response content
-				try {
-					body = JSON.parse(body);
+			var data = [];
+			for( index in body.configurations ) {
+				configuration = body.configurations[ index ];
 
-					// Parse to extract the selected field
-					var data = [];
-					for( index in body.configurations ) {
-						configuration = body.configurations[ index ];
-
-						if( configuration[ field ] ) {
-							data.push( configuration[ field ] );
-						}
-					}
-
-					res.type( 'json' );
-					res.send( JSON.stringify( data ) );
-				} catch( ex ) { errorMessage = ex }
+				if( configuration[ field ] ) {
+					data.push( configuration[ field ] );
+				}
 			}
 
-
-		} else {
+			if( req.xhr ) {
+				res.type( 'json' );
+				res.send( JSON.stringify( data ) );
+			} else {
+				throw "Not implemented"
+			}
+		} catch( error ) {
+			log.error( error );
 			res.render('error', {
 				title: 'Request error',
-				message: 'Url not feched'
+				message: error
 			});
 		}
 	} );
@@ -477,41 +300,35 @@ TaskRepository.prototype.API.postResult = function(req, res) {
 	var config = this.configuration.API.save;
 	var url = f( '%s:%s%s/%s', this.host, this.port, this.basePath, config.path );
 
-	log.debug( f( 'Fetching URL %s', url ) );
 	var self = this;
-
-	console.log( req.body );
-
 	this.requester.post( { url: url, body: req.body }, function( error, response, body ) {
-		log.debug( f( 'Url %s fetched', url ) );
+		try {
+			if( error )
+				throw error;
+			
+			body = JSON.parse(body);
 
-		if( !error ) {
-			var errorMessage = null;
-			if( response.statusCode!=200) {
-				errorMessage = body;
-				log.debug( errorMessage );
-			} else {
+			var data = [];
+			for( index in body.configurations ) {
+				configuration = body.configurations[ index ];
 
+				if( configuration[ field ] ) {
+					data.push( configuration[ field ] );
+				}
 			}
 
-			if( !req.xhr ) {
-				res.send( 'Ok' );
-			} else {
+			if( req.xhr ) {
 				res.type( 'json' );
 				res.send( '"OK"' );
-			}
-
-
-		} else {
-			if( !req.xhr ) {
-				res.render('error', {
-					title: 'Request error',
-					message: error || response
-				});
 			} else {
-				res.type( 'json' );
-				res.send( { error: error || response } );
+				res.send( 'OK' );
 			}
+		} catch( error ) {
+			log.error( error );
+			res.render('error', {
+				title: 'Request error',
+				message: error
+			});
 		}
 	} );
 };

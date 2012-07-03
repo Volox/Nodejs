@@ -6,6 +6,7 @@ require( '../utils' );
 
 var fs = require( 'fs' ),
     util = require( 'util' ),
+    path = require( 'path' ),
     nconf = require( 'nconf' ),
     mongo = require( 'mongojs' ),
     request = require( 'request' ),
@@ -35,6 +36,7 @@ function init( expressApp ) {
 	// Common Required modules
 	props.util	= util;
 	props.fs 	= fs;
+	props.path 	= path;
 	props.nconf	= nconf;
 	props._		= _;
 	props.mongo	= mongo;
@@ -113,7 +115,7 @@ function initMongo( config ) {
 		var dbUrl = f( '%s:%d/%s', configuration.host, configuration.port, configuration['db-name'] );
 		var db = mongo.connect( dbUrl );
 
-		mongoObj.db = db;
+		mongoObj = db;
 
 		props.mongoDB = mongoObj;
 	}

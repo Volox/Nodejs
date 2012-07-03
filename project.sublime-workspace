@@ -4,48 +4,172 @@
 		"selected_items":
 		[
 			[
-				"cate",
-				"category"
-			],
-			[
-				"re",
-				"return"
-			],
-			[
-				"config",
+				"conf",
 				"configuration"
 			],
 			[
-				"de",
-				"details"
-			],
-			[
-				"con",
-				"configUrl"
+				"code",
+				"codeName"
 			],
 			[
 				"fi",
-				"fieldID"
-			],
-			[
-				"fie",
 				"field"
 			],
 			[
-				"field",
-				"fieldID"
+				"con",
+				"config"
+			],
+			[
+				"api",
+				"apiUrl"
+			],
+			[
+				"co",
+				"codeAvailable"
+			],
+			[
+				"pare",
+				"parentTask"
+			],
+			[
+				"ta",
+				"taskID"
+			],
+			[
+				"fil",
+				"filePath"
+			],
+			[
+				"task",
+				"taskPath"
 			],
 			[
 				"pa",
-				"pathFragments"
+				"path"
+			],
+			[
+				"confi",
+				"config"
+			],
+			[
+				"sen",
+				"send"
+			],
+			[
+				"get",
+				"getFilePath"
+			],
+			[
+				"save",
+				"saveFile"
+			],
+			[
+				"th",
+				"throw"
+			],
+			[
+				"exis",
+				"existsSync"
+			],
+			[
+				"re",
+				"response"
+			],
+			[
+				"err",
+				"error"
+			],
+			[
+				"erro",
+				"error"
+			],
+			[
+				"mongo",
+				"mongoLoad"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"drop",
+				"dropzone"
+			],
+			[
+				"c",
+				"categories"
+			],
+			[
+				"run",
+				"runBtn"
+			],
+			[
+				"fiel",
+				"field"
+			],
+			[
+				"fie",
+				"fieldName"
+			],
+			[
+				"data",
+				"dataType"
+			],
+			[
+				"for",
+				"formData"
+			],
+			[
+				"an",
+				"answers"
+			],
+			[
+				"de",
+				"debug"
+			],
+			[
+				"res",
+				"response"
+			],
+			[
+				"par",
+				"parseInt"
+			],
+			[
+				"set",
+				"setRequestHeader"
 			],
 			[
 				"tas",
 				"taskID"
 			],
 			[
-				"task",
-				"taskID"
+				"ob",
+				"objReturn"
+			],
+			[
+				"e",
+				"element"
+			],
+			[
+				"ca",
+				"category"
+			],
+			[
+				"cate",
+				"categories"
+			],
+			[
+				"ou",
+				"outputData"
+			],
+			[
+				"config",
+				"configuration"
+			],
+			[
+				"field",
+				"fieldID"
 			],
 			[
 				"doc",
@@ -68,16 +192,8 @@
 				"formData"
 			],
 			[
-				"for",
-				"form"
-			],
-			[
 				"in",
 				"input"
-			],
-			[
-				"fil",
-				"fileList"
 			],
 			[
 				"fon",
@@ -92,24 +208,12 @@
 				"send"
 			],
 			[
-				"code",
-				"codeName"
-			],
-			[
 				"mar",
 				"margin-right"
 			],
 			[
 				"ur",
 				"urlConfig"
-			],
-			[
-				"ca",
-				"cache"
-			],
-			[
-				"confi",
-				"config"
 			],
 			[
 				"pro",
@@ -120,20 +224,8 @@
 				"Requester"
 			],
 			[
-				"save",
-				"saveToDB"
-			],
-			[
-				"ta",
-				"taskID"
-			],
-			[
 				"parent",
 				"parentTask"
-			],
-			[
-				"co",
-				"collection  (variable)"
 			],
 			[
 				"sa",
@@ -142,18 +234,6 @@
 			[
 				"sta",
 				"statusCode"
-			],
-			[
-				"err",
-				"errorMessage"
-			],
-			[
-				"erro",
-				"errorMessage"
-			],
-			[
-				"res",
-				"response"
 			],
 			[
 				"lo",
@@ -216,10 +296,6 @@
 				"image"
 			],
 			[
-				"ou",
-				"outputSize"
-			],
-			[
 				"mic",
 				"microTask"
 			],
@@ -232,20 +308,12 @@
 				"push"
 			],
 			[
-				"ob",
-				"object"
-			],
-			[
 				"base",
 				"basePath"
 			],
 			[
 				"ba",
 				"basePath"
-			],
-			[
-				"conf",
-				"config"
 			],
 			[
 				"uchar",
@@ -360,10 +428,6 @@
 				"workGroupSize"
 			],
 			[
-				"e",
-				"exp"
-			],
-			[
 				"fOu",
 				"fOut"
 			],
@@ -412,14 +476,6 @@
 				"addInput"
 			],
 			[
-				"c",
-				"ctx"
-			],
-			[
-				"get",
-				"getKernel"
-			],
-			[
 				"ke",
 				"kernelSrc"
 			],
@@ -458,62 +514,6 @@
 			[
 				"r",
 				"result"
-			],
-			[
-				"octa",
-				"octaveArray"
-			],
-			[
-				"ro",
-				"rowArray"
-			],
-			[
-				"off",
-				"offsetY"
-			],
-			[
-				"val",
-				"value"
-			],
-			[
-				"matDi",
-				"matDim"
-			],
-			[
-				"offse",
-				"offsetX"
-			],
-			[
-				"type",
-				"typeof"
-			],
-			[
-				"numer",
-				"numeric"
-			],
-			[
-				"red",
-				"redDim"
-			],
-			[
-				"canva",
-				"canvas"
-			],
-			[
-				"row",
-				"rowArray"
-			],
-			[
-				"img",
-				"imgData"
-			],
-			[
-				"u",
-				"uTaskI"
-			],
-			[
-				"level",
-				"levels"
 			]
 		]
 	},
@@ -523,23 +523,15 @@
 			"file": "server.js",
 			"settings":
 			{
-				"buffer_size": 2032,
+				"buffer_size": 2142,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "task-repo/task-repo.js",
+			"file": "task-repo/requester/requester.js",
 			"settings":
 			{
-				"buffer_size": 13632,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/task/new.jade",
-			"settings":
-			{
-				"buffer_size": 1807,
+				"buffer_size": 2375,
 				"line_ending": "Windows"
 			}
 		},
@@ -547,7 +539,7 @@
 			"file": "public/scripts/coffee/uTaskImplementation.coffee",
 			"settings":
 			{
-				"buffer_size": 864,
+				"buffer_size": 2036,
 				"line_ending": "Windows"
 			}
 		},
@@ -555,7 +547,7 @@
 			"file": "public/scripts/coffee/uTask.coffee",
 			"settings":
 			{
-				"buffer_size": 1456,
+				"buffer_size": 2138,
 				"line_ending": "Windows"
 			}
 		}
@@ -563,7 +555,7 @@
 	"build_system": "Packages/Nodejs/Nodejs.sublime-build",
 	"command_palette":
 	{
-		"height": 211.0,
+		"height": 375.0,
 		"selected_items":
 		[
 			[
@@ -688,20 +680,24 @@
 	},
 	"file_history":
 	[
-		"/D/Portable/Nodejs/task-repo/tasks/1/home.html",
-		"/D/down/To Upload/home.html",
-		"/D/Portable/Nodejs/public/stylesheets/style.styl",
+		"/D/Portable/Nodejs/.gitignore",
+		"/D/Portable/Nodejs/task-repo/task-repo.js",
+		"/D/Portable/Nodejs/views/index.jade",
 		"/D/Portable/Nodejs/config/configuration.json",
+		"/D/Portable/Nodejs/views/task/new.jade",
 		"/D/Portable/Nodejs/views/task/detail.jade",
+		"/D/Portable/Nodejs/config/config.js",
+		"/D/Portable/Nodejs/views/error.jade",
+		"/D/Portable/Nodejs/views/task/list.jade",
+		"/D/Portable/Nodejs/public/stylesheets/style.styl",
+		"/D/Portable/Nodejs/task-repo/requester/package.json",
+		"/D/down/To Upload/home.html",
+		"/D/Portable/Nodejs/task-repo/tasks/1/home.html",
 		"/D/Portable/Nodejs/views/task/sample.jade",
 		"/D/Portable/Nodejs/views/layout.jade",
-		"/D/Portable/Nodejs/config/config.js",
 		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
 		"/D/Portable/Nodejs/package.json",
 		"/D/Portable/Nodejs/task-repo/task/task.js",
-		"/D/Portable/Nodejs/views/task/list.jade",
-		"/D/Portable/Nodejs/views/task/new.jade",
-		"/D/Portable/Nodejs/views/index.jade",
 		"/D/Portable/Nodejs/public/scripts/coffee/uTaskImplementation.coffee",
 		"/D/Portable/Nodejs/config/mongo-node.conf",
 		"/D/Portable/Nodejs/public/scripts/coffee/uTask.coffee",
@@ -721,8 +717,6 @@
 		"/D/Portable/Nodejs/public/scripts/coffee/webcl.coffee",
 		"/D/Portable/Nodejs/public/scripts/coffee/MM.coffee",
 		"/D/Portable/Nodejs/public/scripts/coffee/VoloCL.coffee",
-		"/D/Portable/Nodejs/task-repo/task-repo.js",
-		"/D/Portable/Nodejs/views/error.jade",
 		"/D/Portable/Nodejs/task-repo/micro-task/micro-task.js",
 		"/D/Portable/Nodejs/public/scripts/VoloCL.js",
 		"/D/Portable/Nodejs/public/scripts/MM.js",
@@ -731,7 +725,6 @@
 		"/D/Portable/Nodejs/public/scripts/libs/fft.js",
 		"/D/Portable/Nodejs/public/scripts/taskRun.js",
 		"/D/Portable/Nodejs/utils/utils.js",
-		"/D/Portable/Nodejs/.gitignore",
 		"/D/Portable/Nodejs/project.sublime-project",
 		"/D/Portable/Nodejs/config/package.json",
 		"/D/Portable/Nodejs/task-repo/package.json",
@@ -807,15 +800,15 @@
 					"file": "server.js",
 					"settings":
 					{
-						"buffer_size": 2032,
+						"buffer_size": 2142,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1709,
-								1709
+								1573,
+								1573
 							]
 						],
 						"settings":
@@ -825,25 +818,25 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 546.0,
+						"translation.y": 449.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "task-repo/task-repo.js",
+					"file": "task-repo/requester/requester.js",
 					"settings":
 					{
-						"buffer_size": 13632,
+						"buffer_size": 2375,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								13422,
-								13422
+								2020,
+								2020
 							]
 						],
 						"settings":
@@ -852,30 +845,30 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 6579.0,
+						"translation.y": 572.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "views/task/new.jade",
+					"file": "public/scripts/coffee/uTaskImplementation.coffee",
 					"settings":
 					{
-						"buffer_size": 1807,
+						"buffer_size": 2036,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								425,
-								425
+								322,
+								322
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -886,45 +879,18 @@
 				},
 				{
 					"buffer": 3,
-					"file": "public/scripts/coffee/uTaskImplementation.coffee",
-					"settings":
-					{
-						"buffer_size": 864,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								439,
-								439
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "public/scripts/coffee/uTask.coffee",
 					"settings":
 					{
-						"buffer_size": 1456,
+						"buffer_size": 2138,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1182,
-								1182
+								975,
+								975
 							]
 						],
 						"settings":
@@ -933,7 +899,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 195.0,
+						"translation.y": 273.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -987,16 +953,64 @@
 		"selected_items":
 		[
 			[
-				"homt",
-				"task-repo/tasks/1/home.html"
+				"in",
+				"views/index.jade"
+			],
+			[
+				"con",
+				"config/configuration.json"
+			],
+			[
+				"inde",
+				"views/index.jade"
+			],
+			[
+				"new",
+				"views/task/new.jade"
+			],
+			[
+				"i",
+				"views/index.jade"
+			],
+			[
+				"deta",
+				"views/task/detail.jade"
+			],
+			[
+				"tas",
+				"task-repo/task-repo.js"
+			],
+			[
+				"co",
+				"config/config.js"
 			],
 			[
 				"conf",
 				"config/configuration.json"
 			],
 			[
-				"deta",
-				"views/task/detail.jade"
+				"err",
+				"views/error.jade"
+			],
+			[
+				"list",
+				"views/task/list.jade"
+			],
+			[
+				"lis",
+				"views/task/list.jade"
+			],
+			[
+				"confi",
+				"config/configuration.json"
+			],
+			[
+				"style",
+				"public/stylesheets/style.styl"
+			],
+			[
+				"homt",
+				"task-repo/tasks/1/home.html"
 			],
 			[
 				"ho",
@@ -1031,28 +1045,8 @@
 				"public/scripts/coffee/script.coffee"
 			],
 			[
-				"con",
-				"config/config.js"
-			],
-			[
-				"style",
-				"public/stylesheets/style.styl"
-			],
-			[
 				"det",
 				"views/task/detail.jade"
-			],
-			[
-				"new",
-				"views/task/new.jade"
-			],
-			[
-				"lis",
-				"views/task/list.jade"
-			],
-			[
-				"in",
-				"views/index.jade"
 			],
 			[
 				"de",
@@ -1083,10 +1077,6 @@
 				"views/test.jade"
 			],
 			[
-				"inde",
-				"views/index.jade"
-			],
-			[
 				"test",
 				"public/stylesheets/test.styl"
 			],
@@ -1113,10 +1103,6 @@
 			[
 				"we",
 				"public/scripts/coffee/webcl.coffee"
-			],
-			[
-				"err",
-				"views/error.jade"
 			],
 			[
 				"pa",
