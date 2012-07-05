@@ -31,7 +31,7 @@ Requester.prototype.checkResult = function( config, callback ) {
 	var errorMessage;
 	if( !config.error ) {
 		if( config.response.statusCode!=200) {
-			errorMessage = config.response || config.body
+			errorMessage = config.response || config.body;
 		} else {
 			// Cache only good responses
 			this.cache[ config.url ] = config.body;
@@ -66,7 +66,7 @@ Requester.prototype.request = function( obj ) {
 	};
 
 	log.debug( f( 'Requesting url: %s', config.url ) );
-	if( this.useCache && this.cache[ config.url ] ) {
+	if( config.method.toUpperCase()=='GET' && this.useCache && this.cache[ config.url ] ) {
 		log.debug( 'Using cached resource' );
 		callback( null, this.cache[ config.url ] );
 	} else {
@@ -98,9 +98,14 @@ Requester.prototype.get = function( task, API, filter, callback ) {
 	return this.request( obj );
 };
 
-Requester.prototype.post = function( task, API, callback ) {
-
-	return this.request( config, callback, force );
+Requester.prototype.post = function( task, API, data, callback ) {
+	var obj = {
+		task: task,
+		API: API,
+		body: data,
+		callback: callback
+	};
+	return this.request( obj );
 };
 
 

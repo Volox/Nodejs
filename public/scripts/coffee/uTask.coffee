@@ -3,7 +3,7 @@ class uTask
 		pathFragments = location.pathname.split '/'
 		taskID = pathFragments[ 2 ]
 
-		@task = taskID
+		@task = parseInt taskID
 		@url = '/task/' + taskID
 		@codeUrl = @url+'/code'
 		@inputUrl = @url+'/input'
@@ -26,8 +26,11 @@ class uTask
 			success: ( json )->
 				callback null, json
 		return
-		return
+
 	getData: ( config={}, callback ) ->
+		if !callback
+			callback = config
+			config = {}
 		# retrieve the resource defined by name (the column of the schema)
 		# filtered by the id
 		if typeof config == 'string'
@@ -39,6 +42,9 @@ class uTask
 		$.ajax 
 			url: "#{@inputUrl}/#{name}",
 			dataType: 'json',
+			beforeSend: ( xhr )=>
+				xhr.setRequestHeader "X-Requested-With", "XMLHttpRequest"
+				return
 			error: ( xhr, status, response )->
 				callback response, {}
 
@@ -46,6 +52,16 @@ class uTask
 				callback null, json
 		return
 	
+	toggleData: ( name ) ->
+		if @outputData[ name ]
+			@removeData name
+			return false
+		else
+			@storeData name, true
+			return true
+	removeData: ( name ) ->
+		delete @outputData[ name ]
+		return
 	storeData: ( name, data ) ->
 		@outputData[ name ] = data
 		return

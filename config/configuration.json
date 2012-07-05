@@ -22,7 +22,8 @@
 				"method": "GET",
 				"path": "getTaskComposition.do",
 				"params": {
-					"q": "taskID"
+					"q": "taskID",
+					"selectors": "fields"
 				}
 			},
 			"save": {

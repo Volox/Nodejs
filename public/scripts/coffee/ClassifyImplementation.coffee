@@ -1,4 +1,4 @@
-class Sample extends uTask
+class Classify extends uTask
 	init: =>
 		@categories = []
 		@maxNum = 1
@@ -16,7 +16,7 @@ class Sample extends uTask
 		$element = $ '<select>',
 			name: 'categories',
 			size: if @maxNum==1 then 1 else 3,
-			multiple: if @maxNum!=1 then true else false
+			multiple :if @maxNum!=1 then true else false
 
 		for category in @categories
 			$option = $ '<option>',
@@ -94,4 +94,4 @@ class Sample extends uTask
 
 # Entry point configurable
 $ ->
-	sample = new Sample
+	CI = new Classify

@@ -191,7 +191,7 @@ TaskRepository.prototype.API.run = function(req, res) {
 			if( error )
 				throw error;
 			
-			body = JSON.parse(body);
+			body = JSON.parse( body );
 
 			var parentTask = body.task;
 			var filePath = self.getFilePath( body.id, implementation, file );
@@ -297,25 +297,13 @@ TaskRepository.prototype.API.configuration = function(req, res) {
 TaskRepository.prototype.API.postResult = function(req, res) {
 	var taskID = parseInt( req.params.task );
 
-	var config = this.configuration.API.save;
-	var url = f( '%s:%s%s/%s', this.host, this.port, this.basePath, config.path );
-
 	var self = this;
-	this.requester.post( { url: url, body: req.body }, function( error, response, body ) {
+	this.requester.post( taskID, 'save', req.body, function( error, body ) {
 		try {
 			if( error )
 				throw error;
 			
-			body = JSON.parse(body);
-
-			var data = [];
-			for( index in body.configurations ) {
-				configuration = body.configurations[ index ];
-
-				if( configuration[ field ] ) {
-					data.push( configuration[ field ] );
-				}
-			}
+			body = JSON.parse( body || '"OK"' );
 
 			if( req.xhr ) {
 				res.type( 'json' );

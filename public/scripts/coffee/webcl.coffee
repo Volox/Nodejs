@@ -7,6 +7,7 @@ jQuery ($) ->
 		# get the image
 		$img = $ '#img'
 		try
+			console.time "SIFT"
 			# Build scale space
 			octaves = [2,1,1/2,1/3]
 			blurSteps = 5
@@ -16,37 +17,64 @@ jQuery ($) ->
 				[ 2.828, 4, 5.656, 8 , 11.313 ],
 				[ 5.656, 8, 11.313, 16 , 22.627 ]
 			]
+
+			tScaleSpace = "Scale space"
+			console.time tScaleSpace
 			scaleSpace = []
 			for octave, index in octaves
 				octaveRow = []
 				for blurStep in [0..blurSteps-1]
 					blurFactor = blurMatrix[ index ][ blurStep ]
 
-					#console.log "Performing octave #{index} blur #{blurStep}, scale: #{octave}, blurFactor: #{blurFactor}"
-					
+					timeID = "Octave #{index+1} Blur #{blurStep+1}"
+					#console.time timeID
 					blurCanvas = MM.blur $img[0], octave, blurFactor
+					#console.timeEnd timeID
 					blurCanvas.id = "scale_#{octave}_#{blurStep}"
 					
 					octaveRow.push blurCanvas
-					$dome.append blurCanvas
+					#$dome.append blurCanvas
 
 				scaleSpace.push octaveRow
+			console.timeEnd tScaleSpace
 			
 			# Compute DoG
-			###
+			tDoG = "DoG"
+			console.time tDoG
 			DoG = []
 			for octave in scaleSpace
 				DoGRow = []
 				for index in [1..octave.length-1]
+
+					timeID = "Difference from #{index-1} to #{index}"
+					#console.time timeID
 					DoGcanvas = MM.diff octave[ index-1 ], octave[ index ]
+					#console.timeEnd timeID
+
 					DoGRow.push DoGcanvas
-					$dome.append DoGcanvas
+					#$dome.append DoGcanvas
+
 				DoG.push DoGRow
+				console.timeEnd tDoG
 
 			# Find maxmin
-			for octave in scaleSpace
-				MM.maxmin octave
-			###
+			tMaxMin = 'MaxMin'
+			console.time tMaxMin
+			octave = scaleSpace[1]
+			prev = octave[0]
+			current = octave[1]
+			next = octave[2]
+
+			out = MM.maxmin prev, current, next
+			$dome.append out[0]
+			$dome.append out[1]
+
+			console.timeEnd tMaxMin
+
 		catch error
 			console.log error
+		finally
+			console.timeEnd "SIFT"
+
+
 		return

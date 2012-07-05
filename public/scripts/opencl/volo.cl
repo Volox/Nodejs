@@ -1,43 +1,66 @@
-__kernel void clMaxMin( __global const uchar4* images,
-                        __global uchar4* keyPoints,
+__kernel void clMaxMin( __global const uchar4* prev,
+                        __global const uchar4* current,
+                        __global const uchar4* next,
+                        __global uchar4* maxKeyPoints,
+                        __global uchar4* minKeyPoints,
                         uint width,
                         uint height ) {
-  /*
   uint x = get_global_id(0);
   uint y = get_global_id(1);
 
   if (x >= width || y >= height) return;
 
-  uchar4 prevImage = images[0];
-  uchar4 image = images[1];
-  uchar4 nextImage = images[2];
-
+  // Get the current pixel index
   uint idx = y*width+x;
-  // Using only r channel (grayscale image)
-  uchar point = ((uchar4) image[idx]).x;
+  
+  // Get the current pixel color
+  // Same color for every channel so we use only R channel
+  uchar color = current[ idx ].x;
 
-  uchar maxVal = point;
-  uchar minVal = point;
-  for (uint i=-1; i<2; i++ ) {
-    for (uint j=-1; j<2; j++ ) {
-      uint nX = x+i;
-      uint nY = y+j;
+  // Init max & min
+  bool isMax = true;
+  bool isMin = true;
 
-      uint currentIdx = nY*width+nX;
-      maxVal = max( ((uchar4) prevImage[ currentIdx ] ).x, maxVal );
-      minVal = min( ((uchar4) prevImage[ currentIdx ] ).x, minVal );
 
-      maxVal = max( ((uchar4) image[ currentIdx ] ).x, maxVal );
-      minVal = min( ((uchar4) image[ currentIdx ] ).x, minVal );
+  // Iterate over the neighbours
+  for( char ox=-1; ox<1; ox++ && ( isMin || isMax ) ) {
+    int cx = x+ox;
+    // Check x coordinate
+    if( cx<0 || cx>width-1 )
+      continue;
 
-      maxVal = max( ((uchar4) nextImage[ currentIdx ] ).x, maxVal );
-      minVal = min( ((uchar4) nextImage[ currentIdx ] ).x, minVal );
+    for( char oy=-1; oy<1; oy++ && ( isMin || isMax ) ) {
+      // Check y coordinate
+      int cy = y+oy;
+      if( cy<0 || cy>height-1 )
+        continue;
+
+      // Compute offset index
+      uint currentIdx = cy*width+cx;
+
+      // Check prev image
+      uchar prevColor = prev[ currentIdx ].x;
+      isMax = isMax && ( max( prevColor, color )==color );
+      isMin = isMin && ( min( prevColor, color )==color );
+
+      // Check current image
+      if( cx!=x || cy!=y ) {
+        uchar currentColor = current[ currentIdx ].x;
+        isMax = isMax && ( max( currentColor, color )==color );
+        isMin = isMin && ( min( currentColor, color )==color );
+      }
+
+      // Check next image
+      uchar nextColor = prev[ currentIdx ].x;
+      isMax = isMax && ( max( nextColor, color )==color );
+      isMin = isMin && ( min( nextColor, color )==color );
     }
   }
 
-  if( maxVal!=point || minVal!=point )
-    keyPoints[ idx ] = (uchar4)(255,0,0,255)
-  */
+  if( isMax )
+    maxKeyPoints[ idx ] = (uchar4)(255,0,0,255); // Red
+  if( isMin )
+    minKeyPoints[ idx ] = (uchar4)(0,255,0,255); // Green
 }
 
 __kernel void clDiff( __global const uchar4* src1,

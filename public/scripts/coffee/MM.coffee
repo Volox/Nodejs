@@ -59,8 +59,8 @@ class MM
 		imageData = MM.getImage image, scale
 		w = imageData.data.width
 		h = imageData.data.height
-		# Create the output image
-		outData = MM.createImage image
+		# Create the output image 
+		outData = MM.createImage w, h
 		
 		# Gaussaian 2d kernel
 		gaussSize = 7
@@ -77,22 +77,8 @@ class MM
 
 		MM.VoloTest.runKernel 'clConvolution', [ w, h ], kernelArgs
 
-		###
-		# Buffer sizes
-		filterSize = filter.length*filter.BYTES_PER_ELEMENT
-		imageSize = imageData.data.data.length*imageData.data.data.BYTES_PER_ELEMENT
-
-		VoloTest.addInput 'source', imageSize, imageData.data.data
-		VoloTest.addInput 'filter', filterSize, filter
-		VoloTest.addOutput 'destination', imageSize, outData.data.data
-		VoloTest.addArgument 'width', w, 'UINT'
-		VoloTest.addArgument 'height', h, 'UINT'
-		VoloTest.addArgument 'filterWidth', gaussSize, 'UINT'
-		VoloTest.addArgument 'filterHeight', gaussSize, 'UINT'
-
-
 		outData.context.putImageData outData.data, 0, 0
-		###
+
 		return outData.canvas
 		
 	@diff: (src1,src2)->
@@ -104,66 +90,46 @@ class MM
 		# Create the output image
 		outData = MM.createImage w, h
 		
-		# Load the kernel
-		VoloTest = new VoloCL
+		# Create the parameter object
+		kernelArgs = new KernelArguments MM.VoloTest
+		kernelArgs.addInput 'source1', imageData1
+		kernelArgs.addInput 'source2', imageData2
+		kernelArgs.addOutput 'destination', outData
+		kernelArgs.addArgument 'width', w
+		kernelArgs.addArgument 'height', h
 
-		# Buffer sizes
-		imageSize = imageData1.data.data.length*imageData1.data.data.BYTES_PER_ELEMENT
-
-		VoloTest.addInput 'source1', imageSize, imageData1.data.data
-		VoloTest.addInput 'source2', imageSize, imageData2.data.data
-		VoloTest.addOutput 'destination', imageSize, outData.data.data
-		VoloTest.addArgument 'width', w, 'UINT'
-		VoloTest.addArgument 'height', h, 'UINT'
-
-		VoloTest.loadKernel '#clVolo', 'clDiff'
-
-		VoloTest.setLocalWS [16,4]
-
-		VoloTest.setGlobalWS [ w, h ]
-
-		VoloTest.runKernel()
+		MM.VoloTest.runKernel 'clDiff', [ w, h ], kernelArgs
 
 		outData.context.putImageData outData.data, 0, 0
+
 		return outData.canvas
 
-	@maxmin: (images)->
-		###
-		imageData = MM.getImage images[0]
-		w = imageData.data.width
-		h = imageData.data.height
-
-		inputImages = []
-		for image in images
-			inputImages.push image.data.data
+	@maxmin: (prev, current, next)->
+		prevImage = MM.getImage prev
+		image = MM.getImage current
+		nextImage = MM.getImage next
+		w = image.data.width
+		h = image.data.height
 
 		# Create the output image
-		outData = MM.createImage w, h
-		
-		# Load the kernel
-		VoloTest = new VoloCL
+		maxData = MM.createImage w, h
+		minData = MM.createImage w, h
 
-		# Buffer sizes
-		imageSize = imageData.data.data.length*imageData.data.data.BYTES_PER_ELEMENT*images.length*3
-		outputSize = outData.data.data.length*outData.data.data.BYTES_PER_ELEMENT*3
+		# Create the parameter object
+		kernelArgs = new KernelArguments MM.VoloTest
+		kernelArgs.addInput 'prev', prevImage
+		kernelArgs.addInput 'current', image
+		kernelArgs.addInput 'next', nextImage
+		kernelArgs.addOutput 'max', maxData
+		kernelArgs.addOutput 'min', minData
+		kernelArgs.addArgument 'width', w
+		kernelArgs.addArgument 'height', h
 
-		VoloTest.addInput 'images', imageSize, inputImages
-		VoloTest.addOutput 'keyPoints', outputSize, outData.data.data
-		VoloTest.addArgument 'width', w, 'UINT'
-		VoloTest.addArgument 'height', h, 'UINT'
+		MM.VoloTest.runKernel 'clMaxMin', [ w, h ], kernelArgs
 
-		VoloTest.loadKernel '#clVolo', 'clMaxMin'
-
-		VoloTest.setLocalWS [1,16,4]
-
-		VoloTest.setGlobalWS [ 1, w, h ]
-
-		VoloTest.runKernel()
-
-		outData.context.putImageData outData.data, 0, 0
-		return outData.canvas
-		###
-		return
+		maxData.context.putImageData maxData.data, 0, 0
+		minData.context.putImageData minData.data, 0, 0
+		return [ minData.canvas, maxData.canvas ]
 
 MM.VoloTest = new VoloCL '/scripts/opencl/volo.cl'
 # Make global available
