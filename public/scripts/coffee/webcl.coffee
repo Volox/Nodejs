@@ -60,14 +60,14 @@ jQuery ($) ->
 			# Find maxmin
 			tMaxMin = 'MaxMin'
 			console.time tMaxMin
-			octave = scaleSpace[1]
-			prev = octave[0]
-			current = octave[1]
-			next = octave[2]
+			for octave in DoG
+				for index in [1..octave.length-2]
+					prev = octave[index-1]
+					current = octave[index]
+					next = octave[index+1]
 
-			out = MM.maxmin prev, current, next
-			$dome.append out[0]
-			$dome.append out[1]
+					keyPoints = MM.maxmin prev, current, next, 0
+					$dome.append keyPoints
 
 			console.timeEnd tMaxMin
 

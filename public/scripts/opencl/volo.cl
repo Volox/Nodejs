@@ -1,8 +1,8 @@
 __kernel void clMaxMin( __global const uchar4* prev,
                         __global const uchar4* current,
                         __global const uchar4* next,
-                        __global uchar4* maxKeyPoints,
-                        __global uchar4* minKeyPoints,
+                        __global uchar4* keyPoints,
+                        uchar threshold,
                         uint width,
                         uint height ) {
   uint x = get_global_id(0);
@@ -18,18 +18,19 @@ __kernel void clMaxMin( __global const uchar4* prev,
   uchar color = current[ idx ].x;
 
   // Init max & min
-  bool isMax = true;
-  bool isMin = true;
+  bool isMaxMin = true;
 
+  if( color<threshold )
+    isMaxMin = false;
 
   // Iterate over the neighbours
-  for( char ox=-1; ox<1; ox++ && ( isMin || isMax ) ) {
+  for( char ox=-1; ox<1; ox++ && isMaxMin ) {
     int cx = x+ox;
     // Check x coordinate
     if( cx<0 || cx>width-1 )
       continue;
 
-    for( char oy=-1; oy<1; oy++ && ( isMin || isMax ) ) {
+    for( char oy=-1; oy<1; oy++ && isMaxMin ) {
       // Check y coordinate
       int cy = y+oy;
       if( cy<0 || cy>height-1 )
@@ -40,27 +41,39 @@ __kernel void clMaxMin( __global const uchar4* prev,
 
       // Check prev image
       uchar prevColor = prev[ currentIdx ].x;
+      if( prevColor>color || prevColor<color )
+        isMaxMin = false;
+      /*
       isMax = isMax && ( max( prevColor, color )==color );
       isMin = isMin && ( min( prevColor, color )==color );
+      */
 
       // Check current image
-      if( cx!=x || cy!=y ) {
+      if( cx!=x && cy!=y ) {
         uchar currentColor = current[ currentIdx ].x;
+        if( currentColor>color || currentColor<color )
+          isMaxMin = false;
+        /*
         isMax = isMax && ( max( currentColor, color )==color );
         isMin = isMin && ( min( currentColor, color )==color );
+        */
       }
 
       // Check next image
       uchar nextColor = prev[ currentIdx ].x;
+      if( nextColor>color || nextColor<color )
+        isMaxMin = false;
+      /*
       isMax = isMax && ( max( nextColor, color )==color );
       isMin = isMin && ( min( nextColor, color )==color );
+      */
     }
   }
 
-  if( isMax )
-    maxKeyPoints[ idx ] = (uchar4)(255,0,0,255); // Red
-  if( isMin )
-    minKeyPoints[ idx ] = (uchar4)(0,255,0,255); // Green
+  if( isMaxMin )
+    keyPoints[ idx ] = (uchar4)(255,255,255,255); // White = Keypoint
+  else
+    keyPoints[ idx ] = (uchar4)(0,0,0,255); // Black = No keypoint
 }
 
 __kernel void clDiff( __global const uchar4* src1,

@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"th",
+				"threshold"
+			],
+			[
+				"is",
+				"isMaxMin"
+			],
+			[
+				"ne",
+				"nextColor"
+			],
+			[
+				"cu",
+				"currentColor"
+			],
+			[
 				"max",
 				"maxData"
 			],
@@ -20,16 +36,8 @@
 				"maxKeyPoints"
 			],
 			[
-				"cu",
-				"currentIdx"
-			],
-			[
 				"con",
 				"continue"
-			],
-			[
-				"is",
-				"isMax"
 			],
 			[
 				"pre",
@@ -162,10 +170,6 @@
 			[
 				"save",
 				"saveFile"
-			],
-			[
-				"th",
-				"throw"
 			],
 			[
 				"exis",
@@ -510,10 +514,6 @@
 			[
 				"uch",
 				"uchar4"
-			],
-			[
-				"__",
-				"__global"
 			]
 		]
 	},
@@ -523,7 +523,7 @@
 			"file": "public/scripts/coffee/webcl.coffee",
 			"settings":
 			{
-				"buffer_size": 1715,
+				"buffer_size": 1763,
 				"line_ending": "Windows"
 			}
 		},
@@ -531,15 +531,7 @@
 			"file": "public/scripts/coffee/MM.coffee",
 			"settings":
 			{
-				"buffer_size": 3610,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/scripts/coffee/VoloCL.coffee",
-			"settings":
-			{
-				"buffer_size": 5093,
+				"buffer_size": 3623,
 				"line_ending": "Windows"
 			}
 		},
@@ -547,7 +539,7 @@
 			"file": "public/scripts/opencl/volo.cl",
 			"settings":
 			{
-				"buffer_size": 3465,
+				"buffer_size": 3762,
 				"line_ending": "Windows"
 			}
 		}
@@ -680,6 +672,7 @@
 	},
 	"file_history":
 	[
+		"/D/Portable/Nodejs/public/scripts/coffee/VoloCL.coffee",
 		"/D/Portable/Nodejs/public/scripts/uTask.js",
 		"/D/Portable/Nodejs/task-repo/task-repo.js",
 		"/D/Portable/Nodejs/task-repo/requester/requester.js",
@@ -724,7 +717,6 @@
 		"/D/Portable/Nodejs/public/scripts/opencl/volo.cl",
 		"/D/Portable/Nodejs/public/scripts/coffee/webcl.coffee",
 		"/D/Portable/Nodejs/public/scripts/coffee/MM.coffee",
-		"/D/Portable/Nodejs/public/scripts/coffee/VoloCL.coffee",
 		"/D/Portable/Nodejs/task-repo/micro-task/micro-task.js",
 		"/D/Portable/Nodejs/public/scripts/VoloCL.js",
 		"/D/Portable/Nodejs/public/scripts/MM.js",
@@ -800,7 +792,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -808,15 +800,15 @@
 					"file": "public/scripts/coffee/webcl.coffee",
 					"settings":
 					{
-						"buffer_size": 1715,
+						"buffer_size": 1763,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1454,
-								1454
+								1624,
+								1624
 							]
 						],
 						"settings":
@@ -825,7 +817,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 332.0,
+						"translation.y": 429.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -835,15 +827,15 @@
 					"file": "public/scripts/coffee/MM.coffee",
 					"settings":
 					{
-						"buffer_size": 3610,
+						"buffer_size": 3623,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3351,
-								3351
+								2886,
+								2886
 							]
 						],
 						"settings":
@@ -852,52 +844,25 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1177.0,
+						"translation.y": 1129.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "public/scripts/coffee/VoloCL.coffee",
-					"settings":
-					{
-						"buffer_size": 5093,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1684,
-								1684
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "public/scripts/opencl/volo.cl",
 					"settings":
 					{
-						"buffer_size": 3465,
+						"buffer_size": 3762,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								671,
-								675
+								709,
+								709
 							]
 						],
 						"settings":
@@ -907,7 +872,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 78.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1174,6 +1139,10 @@
 		[
 			[
 				"",
+				"/D/Google Drive/Tesi/Tesi Latex/tesi.sublime-project"
+			],
+			[
+				"t",
 				"/D/Google Drive/Tesi/Tesi Latex/tesi.sublime-project"
 			]
 		],

@@ -104,7 +104,7 @@ class MM
 
 		return outData.canvas
 
-	@maxmin: (prev, current, next)->
+	@maxmin: (prev, current, next, threshold)->
 		prevImage = MM.getImage prev
 		image = MM.getImage current
 		nextImage = MM.getImage next
@@ -112,25 +112,26 @@ class MM
 		h = image.data.height
 
 		# Create the output image
-		maxData = MM.createImage w, h
-		minData = MM.createImage w, h
+		keyPoints = MM.createImage w, h
 
 		# Create the parameter object
 		kernelArgs = new KernelArguments MM.VoloTest
 		kernelArgs.addInput 'prev', prevImage
 		kernelArgs.addInput 'current', image
 		kernelArgs.addInput 'next', nextImage
-		kernelArgs.addOutput 'max', maxData
-		kernelArgs.addOutput 'min', minData
+		kernelArgs.addOutput 'keyPoints', keyPoints
+		kernelArgs.addArgument 'threshold', threshold, 'UCHAR'
 		kernelArgs.addArgument 'width', w
 		kernelArgs.addArgument 'height', h
 
 		MM.VoloTest.runKernel 'clMaxMin', [ w, h ], kernelArgs
 
-		maxData.context.putImageData maxData.data, 0, 0
-		minData.context.putImageData minData.data, 0, 0
-		return [ minData.canvas, maxData.canvas ]
+		keyPoints.context.putImageData keyPoints.data, 0, 0
+		return keyPoints.canvas
+	@sift: ( imageObj )->
+		image = MM.getImage imageObj
 
+		return image
 MM.VoloTest = new VoloCL '/scripts/opencl/volo.cl'
 # Make global available
 window.MM = MM
