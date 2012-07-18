@@ -43,30 +43,18 @@ __kernel void clMaxMin( __global const uchar4* prev,
       uchar prevColor = prev[ currentIdx ].x;
       if( prevColor>color || prevColor<color )
         isMaxMin = false;
-      /*
-      isMax = isMax && ( max( prevColor, color )==color );
-      isMin = isMin && ( min( prevColor, color )==color );
-      */
 
       // Check current image
       if( cx!=x && cy!=y ) {
         uchar currentColor = current[ currentIdx ].x;
         if( currentColor>color || currentColor<color )
           isMaxMin = false;
-        /*
-        isMax = isMax && ( max( currentColor, color )==color );
-        isMin = isMin && ( min( currentColor, color )==color );
-        */
       }
 
       // Check next image
       uchar nextColor = prev[ currentIdx ].x;
       if( nextColor>color || nextColor<color )
         isMaxMin = false;
-      /*
-      isMax = isMax && ( max( nextColor, color )==color );
-      isMin = isMin && ( min( nextColor, color )==color );
-      */
     }
   }
 

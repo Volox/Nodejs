@@ -1,5 +1,7 @@
 class MM
-	@VoloTest: null
+
+
+
 	@createImage: ( wImage, h )->
 		w = wImage
 		if not h?
@@ -13,6 +15,10 @@ class MM
 		imageData = canvasCtx.createImageData w, h
 		return canvas: canvas, context: canvasCtx, data: imageData
 
+
+
+
+
 	@getImage: ( image, scale=1 )->
 		w = parseInt image.width*scale
 		h = parseInt image.height*scale
@@ -25,6 +31,10 @@ class MM
 		canvasCtx.drawImage image, 0, 0, w, h
 		imageData = canvasCtx.getImageData 0, 0, w, h
 		return canvas: canvas, context: canvasCtx, data: imageData
+
+
+
+
 
 	@gauss2d: (size, sigma = size/2, center = true ) ->
 		result = new Float32Array size*size
@@ -54,6 +64,8 @@ class MM
 		
 		return result
 
+
+
 	@blur: (image, scale=1,sigma=1) ->
 		# Copy the image into a canvas
 		imageData = MM.getImage image, scale
@@ -66,7 +78,7 @@ class MM
 		gaussSize = 7
 		filter = MM.gauss2d gaussSize, sigma
 
-		kernelArgs = new KernelArguments MM.VoloTest
+		kernelArgs = MM.VoloTest.createKernelArgs()
 		kernelArgs.addInput 'source', imageData
 		kernelArgs.addInput 'filter', filter
 		kernelArgs.addOutput 'destination', outData
@@ -80,7 +92,9 @@ class MM
 		outData.context.putImageData outData.data, 0, 0
 
 		return outData.canvas
-		
+
+
+	
 	@diff: (src1,src2)->
 		imageData1 = MM.getImage src1
 		imageData2 = MM.getImage src2
@@ -91,7 +105,7 @@ class MM
 		outData = MM.createImage w, h
 		
 		# Create the parameter object
-		kernelArgs = new KernelArguments MM.VoloTest
+		kernelArgs = MM.VoloTest.createKernelArgs()
 		kernelArgs.addInput 'source1', imageData1
 		kernelArgs.addInput 'source2', imageData2
 		kernelArgs.addOutput 'destination', outData
@@ -104,6 +118,8 @@ class MM
 
 		return outData.canvas
 
+
+
 	@maxmin: (prev, current, next, threshold)->
 		prevImage = MM.getImage prev
 		image = MM.getImage current
@@ -115,7 +131,7 @@ class MM
 		keyPoints = MM.createImage w, h
 
 		# Create the parameter object
-		kernelArgs = new KernelArguments MM.VoloTest
+		kernelArgs = MM.VoloTest.createKernelArgs()
 		kernelArgs.addInput 'prev', prevImage
 		kernelArgs.addInput 'current', image
 		kernelArgs.addInput 'next', nextImage
@@ -132,6 +148,9 @@ class MM
 		image = MM.getImage imageObj
 
 		return image
-MM.VoloTest = new VoloCL '/scripts/opencl/volo.cl'
-# Make global available
+
+# Make globally available
 window.MM = MM
+
+# Create an instance
+MM.VoloTest = new VoloCL '/scripts/opencl/volo.cl'

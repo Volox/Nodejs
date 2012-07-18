@@ -1,8 +1,7 @@
 !!! 5
 html
 	head
-		title #{title}
-		
+		title=title
 		block css
 			link(rel='stylesheet', href='/stylesheets/style.css')
 
@@ -15,6 +14,7 @@ html
 			header
 				img(src='/img/logo.jpg', title='Logo', alt='Logo')
 			section.content
+				h1=title
 				block content
 			footer
 				span Powered by Volox

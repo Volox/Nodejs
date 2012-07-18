@@ -36,12 +36,13 @@ exports.missing = function(req, res){
 };
 
 
+
+// Test pages
 exports.test = function(req, res) {
 	res.render('test', {
 		title: 'Test page'
 	});
 };
-
 exports.testVideoPOI = function(req, res) {
 	res.render('testVideoPOI', {
 		title: 'Video Point Of Interest test page'
@@ -70,6 +71,27 @@ exports.testVideo = function(req, res) {
 	});
 };
 
+
+// Use cases
+exports.hybrid = function(req, res) {
+	res.render('use-cases/hybrid', {
+		title: 'Hybrid use case'
+	});
+};
+exports.human = function(req, res) {
+	res.render('use-cases/human', {
+		title: 'Human use case'
+	});
+};
+exports.automatic = function(req, res) {
+	res.render('use-cases/automatic', {
+		title: 'Automatic use case'
+	});
+};
+
+
+
+// Others
 exports.uploadAjax = function(req, res) {
 	var files = util.isArray( req.files.file )? req.files.file : [ req.files.file ];
 	var response = { files: [] };

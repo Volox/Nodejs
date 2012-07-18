@@ -1,0 +1,22 @@
+extends ../layout
+
+block append scripts
+	:coffeescript
+		$ ->
+			$video = $ '#video'
+			video = $video[ 0 ]
+			config = 
+				video: true
+
+			stream = ( stream ) ->
+				console.log arguments
+				video.src = stream
+				video.play()
+				return
+
+			navigator.mozGetUserMedia config, stream, ->
+				console.log 'error', arguments
+
+			return
+block content
+	video#video(width=800, height=600)

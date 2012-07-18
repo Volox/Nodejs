@@ -136,6 +136,8 @@ class VoloCL
 		@globalWS = value
 		return
 
+	createKernelArgs: ->
+		return new KernelArguments @
 class KernelArguments
 	constructor: (  VoloCL ) ->
 		@cl = VoloCL.cl

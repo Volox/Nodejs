@@ -4,6 +4,14 @@
 		"selected_items":
 		[
 			[
+				"con",
+				"console"
+			],
+			[
+				"Ker",
+				"KernelArguments"
+			],
+			[
 				"th",
 				"threshold"
 			],
@@ -34,10 +42,6 @@
 			[
 				"ma",
 				"maxKeyPoints"
-			],
-			[
-				"con",
-				"continue"
 			],
 			[
 				"pre",
@@ -510,15 +514,38 @@
 			[
 				"i",
 				"index"
-			],
-			[
-				"uch",
-				"uchar4"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"file": "public/scripts/coffee/MM.coffee",
+			"settings":
+			{
+				"buffer_size": 3644,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/scripts/opencl/volo.cl",
+			"settings":
+			{
+				"buffer_size": 3340,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "extends ../layout\n\nblock append scripts\n	:coffeescript\n		$ ->\n			$video = $ '#video'\n			video = $video[ 0 ]\n			config = \n				video: true\n\n			stream = ( stream ) ->\n				video.src = stream\n				video.play()\n				return\n\n			navigator.mozGetUserMedia config, stream, ->\n				console.log 'error', arguments\n\n			return\nblock content\n	video#video(width=800, height=600)",
+			"file": "views/use-cases/hybrid.jade",
+			"file_size": 406,
+			"file_write_time": 129870171676225757,
+			"settings":
+			{
+				"buffer_size": 359,
+				"line_ending": "Windows"
+			}
+		},
 		{
 			"file": "public/scripts/coffee/webcl.coffee",
 			"settings":
@@ -528,18 +555,10 @@
 			}
 		},
 		{
-			"file": "public/scripts/coffee/MM.coffee",
+			"file": "public/scripts/coffee/VoloCL.coffee",
 			"settings":
 			{
-				"buffer_size": 3623,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/scripts/opencl/volo.cl",
-			"settings":
-			{
-				"buffer_size": 3762,
+				"buffer_size": 5146,
 				"line_ending": "Windows"
 			}
 		}
@@ -547,15 +566,15 @@
 	"build_system": "Packages/Nodejs/Nodejs.sublime-build",
 	"command_palette":
 	{
-		"height": 86.0,
+		"height": 286.0,
 		"selected_items":
 		[
 			[
-				"upda",
+				"up",
 				"Package Control: Upgrade/Overwrite All Packages"
 			],
 			[
-				"up",
+				"upda",
 				"Package Control: Upgrade/Overwrite All Packages"
 			],
 			[
@@ -673,16 +692,19 @@
 	"file_history":
 	[
 		"/D/Portable/Nodejs/public/scripts/coffee/VoloCL.coffee",
+		"/D/Portable/Nodejs/public/scripts/coffee/webcl.coffee",
+		"/D/Portable/Sublime Text 2/Data/Packages/User/Preferences.sublime-settings",
+		"/D/Portable/Nodejs/server.js",
+		"/D/Portable/Nodejs/routes/index.js",
+		"/D/Portable/Nodejs/views/index.jade",
+		"/D/Portable/Nodejs/views/layout.jade",
 		"/D/Portable/Nodejs/public/scripts/uTask.js",
 		"/D/Portable/Nodejs/task-repo/task-repo.js",
 		"/D/Portable/Nodejs/task-repo/requester/requester.js",
 		"/D/Portable/Nodejs/public/scripts/coffee/LikeImplementation.coffee",
 		"/D/Portable/Nodejs/public/scripts/coffee/uTask.coffee",
-		"/D/Portable/Nodejs/server.js",
 		"/D/Portable/Nodejs/config/configuration.json",
-		"/D/Portable/Sublime Text 2/Data/Packages/User/Preferences.sublime-settings",
 		"/D/Portable/Nodejs/project.sublime-workspace",
-		"/D/Portable/Nodejs/views/index.jade",
 		"/D/down/To Upload/Like/home.html",
 		"/D/Portable/Nodejs/public/scripts/coffee/ClassifyImplementation.coffee",
 		"/D/down/To Upload/home.html",
@@ -697,13 +719,11 @@
 		"/D/Portable/Nodejs/task-repo/requester/package.json",
 		"/D/Portable/Nodejs/task-repo/tasks/1/home.html",
 		"/D/Portable/Nodejs/views/task/sample.jade",
-		"/D/Portable/Nodejs/views/layout.jade",
 		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
 		"/D/Portable/Nodejs/package.json",
 		"/D/Portable/Nodejs/task-repo/task/task.js",
 		"/D/Portable/Nodejs/public/scripts/coffee/uTaskImplementation.coffee",
 		"/D/Portable/Nodejs/config/mongo-node.conf",
-		"/D/Portable/Nodejs/routes/index.js",
 		"/D/Portable/Nodejs/sample.js",
 		"/D/Portable/Nodejs/public/scripts/coffee/test.coffee",
 		"/D/Portable/Nodejs/views/test.jade",
@@ -715,7 +735,6 @@
 		"/D/Portable/Nodejs/public/stylesheets/theme.styl",
 		"/D/Portable/Nodejs/node_modules/stylus/testing/test.styl",
 		"/D/Portable/Nodejs/public/scripts/opencl/volo.cl",
-		"/D/Portable/Nodejs/public/scripts/coffee/webcl.coffee",
 		"/D/Portable/Nodejs/public/scripts/coffee/MM.coffee",
 		"/D/Portable/Nodejs/task-repo/micro-task/micro-task.js",
 		"/D/Portable/Nodejs/public/scripts/VoloCL.js",
@@ -792,11 +811,93 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 4,
 			"sheets":
 			[
 				{
 					"buffer": 0,
+					"file": "public/scripts/coffee/MM.coffee",
+					"settings":
+					{
+						"buffer_size": 3644,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								560,
+								560
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/scripts/opencl/volo.cl",
+					"settings":
+					{
+						"buffer_size": 3340,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2447,
+								2447
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 897.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "views/use-cases/hybrid.jade",
+					"settings":
+					{
+						"buffer_size": 359,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								258,
+								258
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "public/scripts/coffee/webcl.coffee",
 					"settings":
 					{
@@ -807,69 +908,41 @@
 						"selection":
 						[
 							[
-								1624,
-								1624
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
+							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 429.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "public/scripts/coffee/MM.coffee",
+					"buffer": 4,
+					"file": "public/scripts/coffee/VoloCL.coffee",
 					"settings":
 					{
-						"buffer_size": 3623,
+						"buffer_size": 5146,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2886,
-								2886
+								886,
+								919
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CoffeeScript/Syntaxes/CoffeeScript.tmLanguage",
+							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
 							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1129.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/scripts/opencl/volo.cl",
-					"settings":
-					{
-						"buffer_size": 3762,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								709,
-								709
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -926,6 +999,26 @@
 		"selected_items":
 		[
 			[
+				"voolo",
+				"public/scripts/coffee/VoloCL.coffee"
+			],
+			[
+				"we",
+				"public/scripts/coffee/webcl.coffee"
+			],
+			[
+				"hy",
+				"views/use-cases/hybrid.jade"
+			],
+			[
+				"inde",
+				"views/index.jade"
+			],
+			[
+				"ser",
+				"server.js"
+			],
+			[
 				"volo",
 				"public/scripts/coffee/VoloCL.coffee"
 			],
@@ -934,16 +1027,8 @@
 				"public/scripts/coffee/MM.coffee"
 			],
 			[
-				"we",
-				"public/scripts/coffee/webcl.coffee"
-			],
-			[
 				"tas",
 				"task-repo/task-repo.js"
-			],
-			[
-				"inde",
-				"views/index.jade"
 			],
 			[
 				"con",
@@ -1060,10 +1145,6 @@
 			[
 				"sa",
 				"views/task/sample.jade"
-			],
-			[
-				"ser",
-				"server.js"
 			],
 			[
 				"tes",
