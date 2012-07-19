@@ -1,15 +1,19 @@
 # Logs #
 logs/*
 
-# MongoDB data #
+# Data #
+## MongoDB data ##
 data/*
+
+## Task data ##
+task-repo/tasks/*
 
 # Modules #
 node_modules
 
 # Generated css/js #
 public/stylesheets/*.css
-public/scripts/*.js
+public/javscripts
 
 # Video #
 public/video/*
@@ -18,8 +22,7 @@ public/video/*
 
 
 # Sublime files #
-*.sublime-workspace
+# *.sublime-workspace
 
 # Uploaded files #
-uploads/*
-task-repo/tasks/*
+uploads
