@@ -269,14 +269,18 @@ TaskRepository.prototype.API.configuration = function(req, res) {
 			
 			body = JSON.parse(body);
 
-			var data = [];
-			for( index in body.configurations ) {
-				configuration = body.configurations[ index ];
+			var data = body.configurations;
+			if( field!='*' ) {
+				data = [];
+				for( index in body.configurations ) {
+					configuration = body.configurations[ index ];
 
-				if( configuration[ field ] ) {
-					data.push( configuration[ field ] );
+					if( configuration[ field ] ) {
+						data.push( configuration[ field ] );
+					}
 				}
 			}
+
 
 			if( req.xhr ) {
 				res.type( 'json' );

@@ -4,8 +4,84 @@
 		"selected_items":
 		[
 			[
+				"conf",
+				"confidenceThreshold"
+			],
+			[
 				"con",
-				"console"
+				"confidenceThreshold"
+			],
+			[
+				"drop",
+				"drop"
+			],
+			[
+				"ima",
+				"imageUrl"
+			],
+			[
+				"e",
+				"evt"
+			],
+			[
+				"fil",
+				"fileList"
+			],
+			[
+				"dete",
+				"detectFaces"
+			],
+			[
+				"te",
+				"text"
+			],
+			[
+				"get",
+				"getCategories"
+			],
+			[
+				"face",
+				"face"
+			],
+			[
+				"fa",
+				"face"
+			],
+			[
+				"us",
+				"user"
+			],
+			[
+				"user",
+				"userFaces"
+			],
+			[
+				"use",
+				"userLayer"
+			],
+			[
+				"re",
+				"Rect"
+			],
+			[
+				"mou",
+				"mouseup"
+			],
+			[
+				"im",
+				"img"
+			],
+			[
+				"cl",
+				"clientX"
+			],
+			[
+				"st",
+				"startPoint"
+			],
+			[
+				"un",
+				"unbind"
 			],
 			[
 				"Ker",
@@ -124,10 +200,6 @@
 				"storeData"
 			],
 			[
-				"conf",
-				"configuration"
-			],
-			[
 				"code",
 				"codeName"
 			],
@@ -148,10 +220,6 @@
 				"parentTask"
 			],
 			[
-				"fil",
-				"filePath"
-			],
-			[
 				"task",
 				"taskPath"
 			],
@@ -168,20 +236,12 @@
 				"send"
 			],
 			[
-				"get",
-				"getFilePath"
-			],
-			[
 				"save",
 				"saveFile"
 			],
 			[
 				"exis",
 				"existsSync"
-			],
-			[
-				"re",
-				"response"
 			],
 			[
 				"err",
@@ -198,10 +258,6 @@
 			[
 				"fun",
 				"function"
-			],
-			[
-				"drop",
-				"dropzone"
 			],
 			[
 				"c",
@@ -252,10 +308,6 @@
 				"objReturn"
 			],
 			[
-				"e",
-				"element"
-			],
-			[
 				"ca",
 				"category"
 			],
@@ -302,10 +354,6 @@
 			[
 				"fon",
 				"font-size"
-			],
-			[
-				"te",
-				"text-align"
 			],
 			[
 				"se",
@@ -364,16 +412,8 @@
 				"tagId"
 			],
 			[
-				"im",
-				"imageData"
-			],
-			[
 				"Volo",
 				"VoloTest"
-			],
-			[
-				"ima",
-				"image"
 			],
 			[
 				"mic",
@@ -474,91 +514,33 @@
 			[
 				"kern",
 				"kernels"
-			],
-			[
-				"gauss",
-				"gaussSize"
-			],
-			[
-				"wr",
-				"workGroupSize"
-			],
-			[
-				"fOu",
-				"fOut"
-			],
-			[
-				"v",
-				"val"
-			],
-			[
-				"B",
-				"BYTES_PER_ELEMENT"
-			],
-			[
-				"setG",
-				"setGlobalWS"
-			],
-			[
-				"glo",
-				"globalWS"
-			],
-			[
-				"loca",
-				"localWS"
-			],
-			[
-				"bu",
-				"buffer"
-			],
-			[
-				"i",
-				"index"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "public/scripts/coffee/MM.coffee",
-			"settings":
-			{
-				"buffer_size": 3644,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/scripts/opencl/volo.cl",
-			"settings":
-			{
-				"buffer_size": 3340,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "extends ../layout\n\nblock append scripts\n	:coffeescript\n		$ ->\n			$video = $ '#video'\n			video = $video[ 0 ]\n			config = \n				video: true\n\n			stream = ( stream ) ->\n				video.src = stream\n				video.play()\n				return\n\n			navigator.mozGetUserMedia config, stream, ->\n				console.log 'error', arguments\n\n			return\nblock content\n	video#video(width=800, height=600)",
 			"file": "views/use-cases/hybrid.jade",
-			"file_size": 406,
-			"file_write_time": 129870171676225757,
 			"settings":
 			{
-				"buffer_size": 359,
+				"buffer_size": 235,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/scripts/coffee/webcl.coffee",
+			"file": "public/coffeescripts/hybrid.coffee",
 			"settings":
 			{
-				"buffer_size": 1763,
-				"line_ending": "Windows"
+				"buffer_size": 3089,
+				"line_ending": "Windows",
+				"name": "hybrid"
 			}
 		},
 		{
-			"file": "public/scripts/coffee/VoloCL.coffee",
+			"file": "public/coffeescripts/script.coffee",
 			"settings":
 			{
-				"buffer_size": 5146,
+				"buffer_size": 784,
 				"line_ending": "Windows"
 			}
 		}
@@ -691,51 +673,64 @@
 	},
 	"file_history":
 	[
+		"/D/Portable/Nodejs/public/stylesheets/style.styl",
+		"/D/Portable/Nodejs/routes/index.js",
+		"/D/Portable/Nodejs/views/task/new.jade",
+		"/D/Portable/Nodejs/views/layout.jade",
+		"/D/Portable/Nodejs/server.js",
+		"/D/Portable/Nodejs/views/index.jade",
+		"/D/Portable/Nodejs/public/coffeescripts/VoloCL.coffee",
+		"/D/Portable/Nodejs/public/coffeescripts/MM.coffee",
+		"/D/Portable/Nodejs/public/coffeescripts/webcl.coffee",
+		"/D/Portable/Nodejs/public/coffeescripts/ClassifyImageImplementation.coffee",
+		"/D/Portable/Nodejs/views/test.jade",
+		"/D/Portable/Nodejs/views/testVideo.jade",
+		"/D/Portable/Nodejs/views/testVideoPOI.jade",
+		"/D/Portable/Nodejs/views/task/detail.jade",
+		"/D/Portable/Nodejs/views/task/sample.jade",
+		"/D/Portable/Nodejs/views/error.jade",
+		"/D/Portable/Nodejs/views/task/list.jade",
+		"/D/Portable/Nodejs/views/use-cases/hybrid.jade",
+		"/D/Portable/Nodejs/package.json",
+		"/D/Portable/Nodejs/public/scripts/coffee/ClassifyImageImplementation.coffee",
+		"/D/Portable/Nodejs/public/scripts/coffee/uTask.coffee",
+		"/D/Portable/Nodejs/config/config.js",
+		"/D/Portable/Nodejs/node_modules/connect-assets/src/assets.coffee",
+		"/D/Portable/Nodejs/public/scripts/coffee/ClassifyImplementation.coffee",
+		"/D/down/To Upload/Classify/home.html",
+		"/D/Portable/Nodejs/task-repo/tasks/41/default/home.html",
+		"/D/Portable/Nodejs/task-repo/task-repo.js",
+		"/D/Portable/Nodejs/views/use-cases/automatic.jade",
+		"/D/Portable/Nodejs/views/use-cases/human.jade",
 		"/D/Portable/Nodejs/public/scripts/coffee/VoloCL.coffee",
 		"/D/Portable/Nodejs/public/scripts/coffee/webcl.coffee",
+		"/D/Portable/Nodejs/public/scripts/opencl/volo.cl",
+		"/D/Portable/Nodejs/public/scripts/coffee/MM.coffee",
+		"/D/down/To Upload/ClassifyImage/home.html",
+		"/D/down/ccv.js",
 		"/D/Portable/Sublime Text 2/Data/Packages/User/Preferences.sublime-settings",
-		"/D/Portable/Nodejs/server.js",
-		"/D/Portable/Nodejs/routes/index.js",
-		"/D/Portable/Nodejs/views/index.jade",
-		"/D/Portable/Nodejs/views/layout.jade",
 		"/D/Portable/Nodejs/public/scripts/uTask.js",
-		"/D/Portable/Nodejs/task-repo/task-repo.js",
 		"/D/Portable/Nodejs/task-repo/requester/requester.js",
 		"/D/Portable/Nodejs/public/scripts/coffee/LikeImplementation.coffee",
-		"/D/Portable/Nodejs/public/scripts/coffee/uTask.coffee",
 		"/D/Portable/Nodejs/config/configuration.json",
 		"/D/Portable/Nodejs/project.sublime-workspace",
 		"/D/down/To Upload/Like/home.html",
-		"/D/Portable/Nodejs/public/scripts/coffee/ClassifyImplementation.coffee",
 		"/D/down/To Upload/home.html",
 		"/D/Portable/Nodejs/public/scripts/uTaskImplementation.js",
 		"/D/Portable/Nodejs/.gitignore",
-		"/D/Portable/Nodejs/views/task/new.jade",
-		"/D/Portable/Nodejs/views/task/detail.jade",
-		"/D/Portable/Nodejs/config/config.js",
-		"/D/Portable/Nodejs/views/error.jade",
-		"/D/Portable/Nodejs/views/task/list.jade",
-		"/D/Portable/Nodejs/public/stylesheets/style.styl",
 		"/D/Portable/Nodejs/task-repo/requester/package.json",
 		"/D/Portable/Nodejs/task-repo/tasks/1/home.html",
-		"/D/Portable/Nodejs/views/task/sample.jade",
 		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
-		"/D/Portable/Nodejs/package.json",
 		"/D/Portable/Nodejs/task-repo/task/task.js",
 		"/D/Portable/Nodejs/public/scripts/coffee/uTaskImplementation.coffee",
 		"/D/Portable/Nodejs/config/mongo-node.conf",
 		"/D/Portable/Nodejs/sample.js",
 		"/D/Portable/Nodejs/public/scripts/coffee/test.coffee",
-		"/D/Portable/Nodejs/views/test.jade",
 		"/D/Portable/Nodejs/public/scripts/coffee/testVideoPOI.coffee",
-		"/D/Portable/Nodejs/views/testVideoPOI.jade",
-		"/D/Portable/Nodejs/views/testVideo.jade",
 		"/D/Portable/Nodejs/public/stylesheets/test.styl",
 		"/D/Portable/Nodejs/public/scripts/coffee/testVideo.coffee",
 		"/D/Portable/Nodejs/public/stylesheets/theme.styl",
 		"/D/Portable/Nodejs/node_modules/stylus/testing/test.styl",
-		"/D/Portable/Nodejs/public/scripts/opencl/volo.cl",
-		"/D/Portable/Nodejs/public/scripts/coffee/MM.coffee",
 		"/D/Portable/Nodejs/task-repo/micro-task/micro-task.js",
 		"/D/Portable/Nodejs/public/scripts/VoloCL.js",
 		"/D/Portable/Nodejs/public/scripts/MM.js",
@@ -785,6 +780,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"css",
+			"img",
+			"comp[i]",
 			"\nTaskRepository.prototype.API.postCode = function(req, res) {\n	var codeName = req.body;\n	var taskID = parseInt( req.body.parentTask || req.params.task );\n	var files = req.files;\n\n",
 			",\n",
 			" 	",
@@ -800,6 +798,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"face",
 			","
 		],
 		"reverse": false,
@@ -811,78 +810,23 @@
 	"groups":
 	[
 		{
-			"selected": 4,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/scripts/coffee/MM.coffee",
-					"settings":
-					{
-						"buffer_size": 3644,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								560,
-								560
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/scripts/opencl/volo.cl",
-					"settings":
-					{
-						"buffer_size": 3340,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2447,
-								2447
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 897.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "views/use-cases/hybrid.jade",
 					"settings":
 					{
-						"buffer_size": 359,
+						"buffer_size": 235,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								258,
-								258
+								224,
+								224
 							]
 						],
 						"settings":
@@ -897,52 +841,52 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "public/scripts/coffee/webcl.coffee",
+					"buffer": 1,
+					"file": "public/coffeescripts/hybrid.coffee",
 					"settings":
 					{
-						"buffer_size": 1763,
+						"buffer_size": 3089,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1822,
+								1822
 							]
 						],
 						"settings":
 						{
+							"auto_name": "hybrid",
 							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1169.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "public/scripts/coffee/VoloCL.coffee",
+					"buffer": 2,
+					"file": "public/coffeescripts/script.coffee",
 					"settings":
 					{
-						"buffer_size": 5146,
+						"buffer_size": 784,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								886,
-								919
+								96,
+								96
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -999,36 +943,92 @@
 		"selected_items":
 		[
 			[
-				"voolo",
-				"public/scripts/coffee/VoloCL.coffee"
-			],
-			[
-				"we",
-				"public/scripts/coffee/webcl.coffee"
-			],
-			[
-				"hy",
-				"views/use-cases/hybrid.jade"
-			],
-			[
-				"inde",
-				"views/index.jade"
+				"sty",
+				"public/stylesheets/style.styl"
 			],
 			[
 				"ser",
 				"server.js"
 			],
 			[
-				"volo",
-				"public/scripts/coffee/VoloCL.coffee"
+				"inde",
+				"views/index.jade"
+			],
+			[
+				"la",
+				"views/layout.jade"
+			],
+			[
+				"scri",
+				"public/coffeescripts/script.coffee"
+			],
+			[
+				"new",
+				"views/task/new.jade"
+			],
+			[
+				"hy",
+				"views/use-cases/hybrid.jade"
+			],
+			[
+				"cla",
+				"public/coffeescripts/ClassifyImageImplementation.coffee"
+			],
+			[
+				"we",
+				"public/coffeescripts/webcl.coffee"
+			],
+			[
+				"voloc",
+				"public/coffeescripts/VoloCL.coffee"
 			],
 			[
 				"mm",
-				"public/scripts/coffee/MM.coffee"
+				"public/coffeescripts/MM.coffee"
+			],
+			[
+				"tes",
+				"views/test.jade"
+			],
+			[
+				"pa",
+				"package.json"
+			],
+			[
+				"confi",
+				"config/config.js"
+			],
+			[
+				"in",
+				"views/index.jade"
+			],
+			[
+				"packa",
+				"package.json"
 			],
 			[
 				"tas",
 				"task-repo/task-repo.js"
+			],
+			[
+				"ta",
+				"task-repo/task-repo.js"
+			],
+			[
+				"uta",
+				"public/scripts/coffee/uTask.coffee"
+			],
+			[
+				"clas",
+				"public/scripts/coffee/ClassifyImplementation.coffee"
+			],
+			[
+				"voolo",
+				"public/scripts/coffee/VoloCL.coffee"
+			],
+			[
+				"volo",
+				"public/scripts/coffee/VoloCL.coffee"
 			],
 			[
 				"con",
@@ -1041,14 +1041,6 @@
 			[
 				"task",
 				"task-repo/task-repo.js"
-			],
-			[
-				"in",
-				"views/index.jade"
-			],
-			[
-				"new",
-				"views/task/new.jade"
 			],
 			[
 				"i",
@@ -1077,10 +1069,6 @@
 			[
 				"lis",
 				"views/task/list.jade"
-			],
-			[
-				"confi",
-				"config/configuration.json"
 			],
 			[
 				"style",
@@ -1115,10 +1103,6 @@
 				"/D/down/To Upload/home.html"
 			],
 			[
-				"sty",
-				"public/stylesheets/style.styl"
-			],
-			[
 				"scr",
 				"public/scripts/coffee/script.coffee"
 			],
@@ -1147,10 +1131,6 @@
 				"views/task/sample.jade"
 			],
 			[
-				"tes",
-				"views/test.jade"
-			],
-			[
 				"test",
 				"public/stylesheets/test.styl"
 			],
@@ -1167,16 +1147,8 @@
 				"public/scripts/coffee/webcl.coffee"
 			],
 			[
-				"pa",
-				"package.json"
-			],
-			[
 				"v",
 				"public/scripts/opencl/volo.cl"
-			],
-			[
-				"voloc",
-				"public/scripts/VoloCL.js"
 			],
 			[
 				"mm.co",

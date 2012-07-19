@@ -2,13 +2,15 @@ extends ../layout
 
 block append scripts
 	:coffeescript
-		jQuery.event.props.push 'dataTransfer'
 		jQuery ($)->
 			$fileList = $ '.fileList'
 			$dropzone = $ '.dropzone'
 			$hiddenFile = $ '.hiddenFile', $dropzone
 
-			addFiles = ( files ) ->
+
+			addFiles = ( evt, files ) ->
+				console.log evt
+				console.log files
 				for file in files
 					fileList = $dropzone.data( 'fileList' ) || {}
 					if !fileList[ file.name ]
@@ -20,29 +22,9 @@ block append scripts
 					else
 						alert "'#{file.name}'' already present!"
 				return
-			$hiddenFile.on 'change', ( evt )->
-				addFiles @files
-
-				return
-
-			$dropzone.on 'click', ( evt ) ->
-				evt.stopPropagation()
-				$hiddenFile.trigger evt
-
-			$dropzone.on 'drop', ( evt ) ->
-				$( @ ).removeClass 'active'
-
-				addFiles evt.dataTransfer.files
-				return false
-			$dropzone.on 'dragover dragenter', (evt) ->
-				evt.dataTransfer.dropEffect = 'copy'
-				$( @ ).addClass 'active'
-				return false
-
-			$dropzone.on 'dragexit', ->
-				$( @ ).removeClass 'active'
-				return false
 			
+			$dropzone.on 'fileReady', addFiles
+
 			$( '#btnSend' ).click ->
 				$form = $ 'form'
 				fileList = $dropzone.data( 'fileList' ) || {}
@@ -70,7 +52,6 @@ block content
 		label(for="name") Insert code instance name: 
 		input#name(name="name",placeholder="Insert name")
 		div.dropzone Click or drop files here
-			input.hiddenFile(type="file",multiple)
 		ul.fileList
 		section.actions
 			// input#btnAdd(type="button", value="Add file")

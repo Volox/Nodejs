@@ -14,7 +14,7 @@
 		"mongojs": "*",
 		"winston": "*",
         "socket.io": "*",
-        "q": "*"
+        "express-coffee": "*"
     },
     "engines": {
         "node": "0.6.x",

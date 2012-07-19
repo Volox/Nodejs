@@ -20,15 +20,17 @@ exports.index = function(req, res){
 	});
 };
 exports.error40x = function(req, res){
+	res.statusCode = 400;
 	res.render('error', {
 		title: 'Error',
 		message: 'Missing page'
 	});
 };
 exports.error50x = function(req, res){
+	res.statusCode = 500;
 	res.render('error', {
 		title: 'Error',
-		message: 'SERVER ERRROR'
+		message: 'SERVER ERROR'
 	});
 };
 exports.missing = function(req, res){

@@ -15,7 +15,10 @@ class uTask
 		@init()
 
 	# Helper functions
-	getConfiguration: ( name='*', callback ) ->
+	getConfiguration: ( name, callback ) ->
+		if !callback
+			callback = name
+			name = '*'
 		# retrieve the configuration defined by name
 		$.ajax 
 			url: "#{@configUrl}/#{name}",

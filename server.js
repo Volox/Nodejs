@@ -1,7 +1,6 @@
 /**
  * Module dependencies.
  */
-
 var config = require('./config');
 
 var log = config.logger,
@@ -9,8 +8,7 @@ var log = config.logger,
     express = require('express'),
     http = require('http');
 
-var app = express(),
-    stylus = require('stylus');
+var app = express();
 
 // Process tweaks
 process.title = 'Volox';
@@ -29,7 +27,21 @@ app.configure(function(){
   // CORS -> Cross Domain ajax requests
   app.use( routes.cors );
 
-  app.use(require('stylus').middleware({ src: __dirname + '/public' }));
+  // Compile and serve .coffee files
+  app.use(require('express-coffee')( {
+    path: __dirname+'/public',
+    //live: !process.env.PRODUCTION,
+    //uglify: process.env.PRODUCTION
+    live: true,
+    uglify: false
+  } ) );
+  // Compile and serve .styl files
+  app.use(require('stylus').middleware( {
+    src: __dirname + '/public'
+    // dest: __dirname + '/public'
+  } ) );
+
+  // Serve the files under the "public folder statically"
   app.use(express.static(__dirname + '/public'));
   
   app.use(express.bodyParser( {uploadDir: __dirname+'/uploads' } ) );
@@ -58,7 +70,7 @@ app.get('/testVideo', routes.testVideo );
 app.get('/testVideoPOI', routes.testVideoPOI );
 
 // Use cases
-app.get('/automatic', routes.automatic );
+app.get('/automatic', routes.test );
 app.get('/hybrid', routes.hybrid );
 app.get('/human', routes.human );
 

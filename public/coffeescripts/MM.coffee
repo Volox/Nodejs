@@ -153,4 +153,4 @@ class MM
 window.MM = MM
 
 # Create an instance
-MM.VoloTest = new VoloCL '/scripts/opencl/volo.cl'
+MM.VoloTest = new VoloCL '/opencl/volo.cl'
