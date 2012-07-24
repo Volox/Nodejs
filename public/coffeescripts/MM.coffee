@@ -1,7 +1,4 @@
 class MM
-
-
-
 	@createImage: ( wImage, h )->
 		w = wImage
 		if not h?

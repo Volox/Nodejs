@@ -4,543 +4,94 @@
 		"selected_items":
 		[
 			[
-				"conf",
-				"confidenceThreshold"
+				"scri",
+				"scripts"
 			],
 			[
-				"con",
-				"confidenceThreshold"
+				"sta",
+				"stage4"
 			],
 			[
-				"drop",
-				"drop"
+				"stage",
+				"stage3"
 			],
 			[
-				"ima",
-				"imageUrl"
-			],
-			[
-				"e",
-				"evt"
-			],
-			[
-				"fil",
-				"fileList"
-			],
-			[
-				"dete",
-				"detectFaces"
-			],
-			[
-				"te",
-				"text"
-			],
-			[
-				"get",
-				"getCategories"
-			],
-			[
-				"face",
-				"face"
-			],
-			[
-				"fa",
-				"face"
-			],
-			[
-				"us",
-				"user"
-			],
-			[
-				"user",
-				"userFaces"
-			],
-			[
-				"use",
-				"userLayer"
-			],
-			[
-				"re",
-				"Rect"
-			],
-			[
-				"mou",
-				"mouseup"
-			],
-			[
-				"im",
-				"img"
-			],
-			[
-				"cl",
-				"clientX"
-			],
-			[
-				"st",
-				"startPoint"
-			],
-			[
-				"un",
-				"unbind"
-			],
-			[
-				"Ker",
-				"KernelArguments"
-			],
-			[
-				"th",
-				"threshold"
-			],
-			[
-				"is",
-				"isMaxMin"
-			],
-			[
-				"ne",
-				"nextColor"
-			],
-			[
-				"cu",
-				"currentColor"
-			],
-			[
-				"max",
-				"maxData"
-			],
-			[
-				"mi",
-				"minData"
-			],
-			[
-				"min",
-				"minKeyPoints"
-			],
-			[
-				"ma",
-				"maxKeyPoints"
-			],
-			[
-				"pre",
-				"prevColor"
-			],
-			[
-				"inde",
-				"index"
-			],
-			[
-				"tim",
-				"timeID"
-			],
-			[
-				"bl",
-				"blurStep"
-			],
-			[
-				"s",
-				"size"
-			],
-			[
-				"wi",
-				"with"
-			],
-			[
-				"lo",
-				"log	log"
-			],
-			[
-				"va",
-				"variable"
-			],
-			[
-				"val",
-				"value"
-			],
-			[
-				"out",
-				"outputs"
-			],
-			[
-				"kerne",
-				"kernel"
-			],
-			[
-				"u",
-				"url"
-			],
-			[
-				"ker",
-				"kernelSrc"
-			],
-			[
-				"argume",
-				"arguments"
-			],
-			[
-				"ta",
-				"target"
-			],
-			[
-				"obj",
-				"objId"
-			],
-			[
-				"an",
-				"answers"
-			],
-			[
-				"pos",
-				"postResults"
-			],
-			[
-				"po",
-				"postButton"
-			],
-			[
-				"store",
-				"storeData"
-			],
-			[
-				"code",
-				"codeName"
-			],
-			[
-				"fi",
-				"field"
-			],
-			[
-				"api",
-				"apiUrl"
-			],
-			[
-				"co",
-				"codeAvailable"
-			],
-			[
-				"pare",
-				"parentTask"
-			],
-			[
-				"task",
-				"taskPath"
-			],
-			[
-				"pa",
-				"path"
-			],
-			[
-				"confi",
-				"config"
-			],
-			[
-				"sen",
-				"send"
-			],
-			[
-				"save",
-				"saveFile"
-			],
-			[
-				"exis",
-				"existsSync"
-			],
-			[
-				"err",
-				"error"
-			],
-			[
-				"erro",
-				"error"
-			],
-			[
-				"mongo",
-				"mongoLoad"
-			],
-			[
-				"fun",
-				"function"
-			],
-			[
-				"c",
-				"categories"
-			],
-			[
-				"run",
-				"runBtn"
-			],
-			[
-				"fiel",
-				"field"
-			],
-			[
-				"fie",
-				"fieldName"
-			],
-			[
-				"data",
-				"dataType"
+				"A",
+				"Array"
 			],
 			[
 				"for",
-				"formData"
+				"for	for (…) {…}"
 			],
 			[
-				"de",
-				"debug"
+				"rest",
+				"result"
 			],
 			[
-				"res",
-				"response"
-			],
-			[
-				"par",
-				"parseInt"
-			],
-			[
-				"set",
-				"setRequestHeader"
-			],
-			[
-				"tas",
-				"taskID"
-			],
-			[
-				"ob",
-				"objReturn"
-			],
-			[
-				"ca",
-				"category"
-			],
-			[
-				"cate",
-				"categories"
-			],
-			[
-				"ou",
-				"outputData"
+				"Tas",
+				"TaskRepository"
 			],
 			[
 				"config",
 				"configuration"
 			],
 			[
-				"field",
-				"fieldID"
+				"T",
+				"TaskRepository"
 			],
 			[
-				"doc",
-				"docs"
-			],
-			[
-				"do",
-				"docID"
-			],
-			[
-				"file",
-				"filePath"
-			],
-			[
-				"bin",
-				"binaryFile"
-			],
-			[
-				"fo",
-				"formData"
-			],
-			[
-				"in",
-				"input"
-			],
-			[
-				"fon",
-				"font-size"
-			],
-			[
-				"se",
-				"send"
-			],
-			[
-				"mar",
-				"margin-right"
-			],
-			[
-				"ur",
-				"urlConfig"
-			],
-			[
-				"pro",
-				"prototype"
-			],
-			[
-				"Re",
-				"Requester"
-			],
-			[
-				"parent",
-				"parentTask"
-			],
-			[
-				"sa",
-				"saveToDB"
-			],
-			[
-				"sta",
-				"statusCode"
-			],
-			[
-				"repo",
-				"repoCollection"
-			],
-			[
-				"date",
-				"dateStart"
-			],
-			[
-				"time",
-				"timeStart"
-			],
-			[
-				"di",
-				"display"
-			],
-			[
-				"le",
-				"length"
-			],
-			[
-				"tag",
-				"tagId"
-			],
-			[
-				"Volo",
-				"VoloTest"
-			],
-			[
-				"mic",
-				"microTask"
-			],
-			[
-				"p",
-				"push"
-			],
-			[
-				"base",
-				"basePath"
-			],
-			[
-				"ba",
-				"basePath"
-			],
-			[
-				"uchar",
-				"uchar4"
-			],
-			[
-				"blu",
-				"blurCanvas"
-			],
-			[
-				"pi",
-				"point"
-			],
-			[
-				"blurS",
-				"blurSteps"
-			],
-			[
-				"y",
-				"y"
-			],
-			[
-				"D",
-				"DoGRow"
-			],
-			[
-				"sca",
-				"scaleSpace"
-			],
-			[
-				"var",
-				"variable"
-			],
-			[
-				"oct",
-				"octave"
-			],
-			[
-				"argu",
-				"argument"
-			],
-			[
-				"arg",
-				"argument"
-			],
-			[
-				"ar",
-				"argumentsMap"
-			],
-			[
-				"argument",
-				"argumentsMap"
-			],
-			[
-				"a",
-				"argument"
-			],
-			[
-				"h",
-				"height"
-			],
-			[
-				"w",
-				"width"
-			],
-			[
-				"crea",
-				"createImage"
-			],
-			[
-				"can",
-				"canvas"
-			],
-			[
-				"oc",
-				"octave"
-			],
-			[
-				"sc",
-				"scaleSpace"
-			],
-			[
-				"kern",
-				"kernels"
+				"mongo",
+				"mongoObj"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "views/use-cases/hybrid.jade",
+			"file": "public/coffeescripts/MM.coffee",
 			"settings":
 			{
-				"buffer_size": 235,
+				"buffer_size": 3633,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/coffeescripts/hybrid.coffee",
+			"file": "public/coffeescripts/VoloCL.coffee",
 			"settings":
 			{
-				"buffer_size": 3089,
-				"line_ending": "Windows",
-				"name": "hybrid"
+				"buffer_size": 5146,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "public/coffeescripts/script.coffee",
+			"file": "public/coffeescripts/webcl.coffee",
 			"settings":
 			{
-				"buffer_size": 784,
+				"buffer_size": 1763,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "config/config.js",
+			"settings":
+			{
+				"buffer_size": 2870,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "server.js",
+			"settings":
+			{
+				"buffer_size": 2612,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "package.json",
+			"settings":
+			{
+				"buffer_size": 492,
 				"line_ending": "Windows"
 			}
 		}
@@ -548,36 +99,28 @@
 	"build_system": "Packages/Nodejs/Nodejs.sublime-build",
 	"command_palette":
 	{
-		"height": 286.0,
+		"height": 375.0,
 		"selected_items":
 		[
-			[
-				"up",
-				"Package Control: Upgrade/Overwrite All Packages"
-			],
 			[
 				"upda",
 				"Package Control: Upgrade/Overwrite All Packages"
 			],
 			[
-				"insta",
-				"Package Control: Install Package"
+				"up",
+				"Package Control: Upgrade/Overwrite All Packages"
 			],
 			[
 				"in",
 				"Package Control: Install Package"
 			],
 			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
 				"remo",
 				"Package Control: Remove Package"
-			],
-			[
-				"git a",
-				"Git: Add..."
-			],
-			[
-				"git",
-				"Package Control: Install Package"
 			],
 			[
 				"inst",
@@ -632,6 +175,10 @@
 				"Git: Custom Command"
 			],
 			[
+				"git",
+				"Git: Status"
+			],
+			[
 				"node",
 				"Nodejs::Run::Current File"
 			],
@@ -656,7 +203,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 386.0
+		"width": 522.0
 	},
 	"console":
 	{
@@ -673,82 +220,44 @@
 	},
 	"file_history":
 	[
-		"/D/Portable/Nodejs/public/stylesheets/style.styl",
+		"/D/Projects/Nodejs/config/configuration.json",
+		"/D/Projects/Nodejs/.gitignore",
+		"/D/Projects/Nodejs/public/scripts/coffee/MM.coffee",
+		"/D/Projects/Nodejs/public/scripts/coffee/webcl.coffee",
+		"/D/Projects/Nodejs/public/scripts/coffee/VoloCL.coffee",
+		"/D/Projects/Nodejs/public/scripts/opencl/volo.cl",
+		"/D/Projects/Nodejs/task-repo/task-repo.js",
+		"/D/Projects/Nodejs/config/config.js",
+		"/D/Projects/Nodejs/public/stylesheets/test.styl",
+		"/D/Projects/Nodejs/public/scripts/coffee/testVideo.coffee",
+		"/D/Projects/Nodejs/server.js",
+		"/D/Projects/Nodejs/views/testVideo.jade",
+		"/D/Projects/Nodejs/views/index.jade",
+		"/D/Projects/Nodejs/routes/index.js",
+		"/D/Projects/Nodejs/public/scripts/task.js",
+		"/D/Projects/Nodejs/public/scripts/coffee/taskRun.coffee",
+		"/D/Projects/Nodejs/views/test.jade",
+		"/D/Projects/Nodejs/public/scripts/libs/numeric.js",
+		"/D/Projects/Nodejs/public/stylesheets/theme.styl",
+		"/D/Projects/Nodejs/task_repo/task_repo.js",
 		"/D/Portable/Nodejs/routes/index.js",
-		"/D/Portable/Nodejs/views/task/new.jade",
-		"/D/Portable/Nodejs/views/layout.jade",
-		"/D/Portable/Nodejs/server.js",
-		"/D/Portable/Nodejs/views/index.jade",
-		"/D/Portable/Nodejs/public/coffeescripts/VoloCL.coffee",
-		"/D/Portable/Nodejs/public/coffeescripts/MM.coffee",
-		"/D/Portable/Nodejs/public/coffeescripts/webcl.coffee",
-		"/D/Portable/Nodejs/public/coffeescripts/ClassifyImageImplementation.coffee",
-		"/D/Portable/Nodejs/views/test.jade",
-		"/D/Portable/Nodejs/views/testVideo.jade",
-		"/D/Portable/Nodejs/views/testVideoPOI.jade",
-		"/D/Portable/Nodejs/views/task/detail.jade",
-		"/D/Portable/Nodejs/views/task/sample.jade",
-		"/D/Portable/Nodejs/views/error.jade",
-		"/D/Portable/Nodejs/views/task/list.jade",
-		"/D/Portable/Nodejs/views/use-cases/hybrid.jade",
-		"/D/Portable/Nodejs/package.json",
-		"/D/Portable/Nodejs/public/scripts/coffee/ClassifyImageImplementation.coffee",
-		"/D/Portable/Nodejs/public/scripts/coffee/uTask.coffee",
-		"/D/Portable/Nodejs/config/config.js",
-		"/D/Portable/Nodejs/node_modules/connect-assets/src/assets.coffee",
-		"/D/Portable/Nodejs/public/scripts/coffee/ClassifyImplementation.coffee",
-		"/D/down/To Upload/Classify/home.html",
-		"/D/Portable/Nodejs/task-repo/tasks/41/default/home.html",
-		"/D/Portable/Nodejs/task-repo/task-repo.js",
-		"/D/Portable/Nodejs/views/use-cases/automatic.jade",
-		"/D/Portable/Nodejs/views/use-cases/human.jade",
-		"/D/Portable/Nodejs/public/scripts/coffee/VoloCL.coffee",
-		"/D/Portable/Nodejs/public/scripts/coffee/webcl.coffee",
-		"/D/Portable/Nodejs/public/scripts/opencl/volo.cl",
-		"/D/Portable/Nodejs/public/scripts/coffee/MM.coffee",
-		"/D/down/To Upload/ClassifyImage/home.html",
-		"/D/down/ccv.js",
-		"/D/Portable/Sublime Text 2/Data/Packages/User/Preferences.sublime-settings",
-		"/D/Portable/Nodejs/public/scripts/uTask.js",
-		"/D/Portable/Nodejs/task-repo/requester/requester.js",
-		"/D/Portable/Nodejs/public/scripts/coffee/LikeImplementation.coffee",
-		"/D/Portable/Nodejs/config/configuration.json",
-		"/D/Portable/Nodejs/project.sublime-workspace",
-		"/D/down/To Upload/Like/home.html",
-		"/D/down/To Upload/home.html",
-		"/D/Portable/Nodejs/public/scripts/uTaskImplementation.js",
-		"/D/Portable/Nodejs/.gitignore",
-		"/D/Portable/Nodejs/task-repo/requester/package.json",
-		"/D/Portable/Nodejs/task-repo/tasks/1/home.html",
-		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
-		"/D/Portable/Nodejs/task-repo/task/task.js",
-		"/D/Portable/Nodejs/public/scripts/coffee/uTaskImplementation.coffee",
-		"/D/Portable/Nodejs/config/mongo-node.conf",
-		"/D/Portable/Nodejs/sample.js",
-		"/D/Portable/Nodejs/public/scripts/coffee/test.coffee",
-		"/D/Portable/Nodejs/public/scripts/coffee/testVideoPOI.coffee",
-		"/D/Portable/Nodejs/public/stylesheets/test.styl",
-		"/D/Portable/Nodejs/public/scripts/coffee/testVideo.coffee",
-		"/D/Portable/Nodejs/public/stylesheets/theme.styl",
-		"/D/Portable/Nodejs/node_modules/stylus/testing/test.styl",
-		"/D/Portable/Nodejs/task-repo/micro-task/micro-task.js",
-		"/D/Portable/Nodejs/public/scripts/VoloCL.js",
-		"/D/Portable/Nodejs/public/scripts/MM.js",
-		"/D/Portable/Nodejs/public/scripts/libs/numeric.js",
-		"/D/Portable/Nodejs/public/scripts/coffee/taskRun.coffee",
-		"/D/Portable/Nodejs/public/scripts/libs/fft.js",
-		"/D/Portable/Nodejs/public/scripts/taskRun.js",
-		"/D/Portable/Nodejs/utils/utils.js",
-		"/D/Portable/Nodejs/project.sublime-project",
 		"/D/Portable/Nodejs/config/package.json",
-		"/D/Portable/Nodejs/task-repo/package.json",
-		"/D/Portable/Nodejs/task_repo/task_repo.js",
+		"/D/Portable/Nodejs/config/configuration.json",
+		"/D/Portable/Nodejs/config/config.js",
+		"/D/Portable/Nodejs/utils/utils.js",
 		"/D/Portable/Nodejs/README.md",
+		"/D/Portable/Nodejs/views/error.jade",
+		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
+		"/D/Portable/Nodejs/views/layout.jade",
+		"/D/Portable/Nodejs/package.json",
 		"/D/Portable/Nodejs/task/task.js",
 		"/D/Portable/Nodejs/public/scripts/coffee/task.coffee",
 		"/D/Portable/Nodejs/config/logConfig.json",
 		"/D/down/jQueryTimelinr_095/js/jquery.timelinr-0.9.5.js",
+		"/D/Portable/Nodejs/sample.js",
 		"/D/Portable/Sublime Text 2/Data/Packages/Default/Preferences.sublime-settings",
+		"/D/Portable/Nodejs/server.js",
+		"/D/Portable/Nodejs/views/task/new.jade",
 		"/D/Portable/Sublime Text 2/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
 		"/D/Portable/Nodejs/test.sublime-project",
 		"/D/Portable/Nodejs/README",
@@ -780,12 +289,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"css",
-			"img",
-			"comp[i]",
-			"\nTaskRepository.prototype.API.postCode = function(req, res) {\n	var codeName = req.body;\n	var taskID = parseInt( req.body.parentTask || req.params.task );\n	var files = req.files;\n\n",
-			",\n",
-			" 	",
+			"2s",
+			"2c",
 			"utf",
 			"var",
 			"\n	\n",
@@ -798,8 +303,6 @@
 		"regex": false,
 		"replace_history":
 		[
-			"face",
-			","
 		],
 		"reverse": false,
 		"show_context": true,
@@ -810,28 +313,28 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 5,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "views/use-cases/hybrid.jade",
+					"file": "public/coffeescripts/MM.coffee",
 					"settings":
 					{
-						"buffer_size": 235,
+						"buffer_size": 3633,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								224,
-								224
+								436,
+								436
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
@@ -842,51 +345,134 @@
 				},
 				{
 					"buffer": 1,
-					"file": "public/coffeescripts/hybrid.coffee",
+					"file": "public/coffeescripts/VoloCL.coffee",
 					"settings":
 					{
-						"buffer_size": 3089,
+						"buffer_size": 5146,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1822,
-								1822
+								298,
+								298
 							]
 						],
 						"settings":
 						{
-							"auto_name": "hybrid",
 							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1169.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "public/coffeescripts/script.coffee",
+					"file": "public/coffeescripts/webcl.coffee",
 					"settings":
 					{
-						"buffer_size": 784,
+						"buffer_size": 1763,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								96,
-								96
+								877,
+								877
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage"
+							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 314.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "config/config.js",
+					"settings":
+					{
+						"buffer_size": 2870,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2870,
+								2870
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 705.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "server.js",
+					"settings":
+					{
+						"buffer_size": 2612,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1800,
+								1800
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 787.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "package.json",
+					"settings":
+					{
+						"buffer_size": 492,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								456,
+								456
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -930,11 +516,11 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 92.0
+		"height": 98.0
 	},
 	"replace":
 	{
-		"height": 60.0
+		"height": 0.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -943,43 +529,27 @@
 		"selected_items":
 		[
 			[
-				"sty",
-				"public/stylesheets/style.styl"
+				"pa",
+				"package.json"
 			],
 			[
 				"ser",
 				"server.js"
 			],
 			[
-				"inde",
-				"views/index.jade"
+				"con",
+				"config/configuration.json"
 			],
 			[
-				"la",
-				"views/layout.jade"
+				"conf",
+				"config/config.js"
 			],
 			[
-				"scri",
-				"public/coffeescripts/script.coffee"
-			],
-			[
-				"new",
-				"views/task/new.jade"
-			],
-			[
-				"hy",
-				"views/use-cases/hybrid.jade"
-			],
-			[
-				"cla",
-				"public/coffeescripts/ClassifyImageImplementation.coffee"
-			],
-			[
-				"we",
+				"webcl",
 				"public/coffeescripts/webcl.coffee"
 			],
 			[
-				"voloc",
+				"volo",
 				"public/coffeescripts/VoloCL.coffee"
 			],
 			[
@@ -987,196 +557,32 @@
 				"public/coffeescripts/MM.coffee"
 			],
 			[
-				"tes",
-				"views/test.jade"
+				"we",
+				"public/scripts/coffee/webcl.coffee"
 			],
 			[
-				"pa",
-				"package.json"
-			],
-			[
-				"confi",
-				"config/config.js"
-			],
-			[
-				"in",
-				"views/index.jade"
-			],
-			[
-				"packa",
-				"package.json"
+				"mmcoff",
+				"public/scripts/coffee/MM.coffee"
 			],
 			[
 				"tas",
 				"task-repo/task-repo.js"
 			],
 			[
-				"ta",
-				"task-repo/task-repo.js"
-			],
-			[
-				"uta",
-				"public/scripts/coffee/uTask.coffee"
-			],
-			[
-				"clas",
-				"public/scripts/coffee/ClassifyImplementation.coffee"
-			],
-			[
-				"voolo",
-				"public/scripts/coffee/VoloCL.coffee"
-			],
-			[
-				"volo",
-				"public/scripts/coffee/VoloCL.coffee"
-			],
-			[
-				"con",
-				"config/configuration.json"
-			],
-			[
-				"req",
-				"task-repo/requester/requester.js"
-			],
-			[
-				"task",
-				"task-repo/task-repo.js"
-			],
-			[
-				"i",
-				"views/index.jade"
-			],
-			[
-				"deta",
-				"views/task/detail.jade"
-			],
-			[
-				"co",
-				"config/config.js"
-			],
-			[
-				"conf",
-				"config/configuration.json"
-			],
-			[
-				"err",
-				"views/error.jade"
-			],
-			[
-				"list",
-				"views/task/list.jade"
-			],
-			[
-				"lis",
-				"views/task/list.jade"
-			],
-			[
-				"style",
-				"public/stylesheets/style.styl"
-			],
-			[
-				"homt",
-				"task-repo/tasks/1/home.html"
-			],
-			[
-				"ho",
-				"task-repo/tasks/1/home.html"
-			],
-			[
-				"utas",
-				"public/scripts/coffee/uTask.coffee"
-			],
-			[
-				"impl",
-				"public/scripts/coffee/uTaskImplementation.coffee"
-			],
-			[
-				"lay",
-				"views/layout.jade"
-			],
-			[
-				"sam",
-				"views/task/sample.jade"
-			],
-			[
-				"home",
-				"/D/down/To Upload/home.html"
-			],
-			[
-				"scr",
-				"public/scripts/coffee/script.coffee"
-			],
-			[
-				"det",
-				"views/task/detail.jade"
-			],
-			[
-				"de",
-				"views/task/detail.jade"
-			],
-			[
-				"n",
-				"views/task/new.jade"
-			],
-			[
-				"config",
-				"config/config.js"
-			],
-			[
-				"sc",
-				"public/scripts/coffee/script.coffee"
-			],
-			[
-				"sa",
-				"views/task/sample.jade"
-			],
-			[
 				"test",
 				"public/stylesheets/test.styl"
 			],
 			[
-				"video",
-				"public/scripts/coffee/testVideo.coffee"
+				"in",
+				"views/index.jade"
 			],
 			[
-				"te",
-				"views/test.jade"
-			],
-			[
-				"web",
-				"public/scripts/coffee/webcl.coffee"
-			],
-			[
-				"v",
-				"public/scripts/opencl/volo.cl"
-			],
-			[
-				"mm.co",
-				"public/scripts/coffee/MM.coffee"
+				"inde",
+				"routes/index.js"
 			],
 			[
 				"num",
 				"public/scripts/libs/numeric.js"
-			],
-			[
-				"nume",
-				"public/scripts/libs/numeric.js"
-			],
-			[
-				"numer",
-				"public/scripts/libs/numeric.js"
-			],
-			[
-				"taskr",
-				"public/scripts/coffee/taskRun.coffee"
-			],
-			[
-				"nu",
-				"public/scripts/libs/numeric.js"
-			],
-			[
-				"testjade",
-				"views/test.jade"
 			],
 			[
 				"",
@@ -1192,10 +598,6 @@
 		[
 			[
 				"",
-				"/D/Google Drive/Tesi/Tesi Latex/tesi.sublime-project"
-			],
-			[
-				"t",
 				"/D/Google Drive/Tesi/Tesi Latex/tesi.sublime-project"
 			]
 		],

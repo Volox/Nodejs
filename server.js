@@ -101,11 +101,12 @@ app.post('/task/:task/result', TRI.API.postResult );
 
 // TODO
 app.all('/proxy', function( req, res ) {
-  res.send( 'Proxy not implemented' );
+  res.send( 'Proxy not yet implemented' );
 } );
 
 
 app.all( '/*', routes.missing );
-server.listen( config.port );
+server.listen( config.port, function() {
   log.debug( f( 'Express server listening on port %d in %s mode',
     server.address().port, app.settings.env ) );
+} );
