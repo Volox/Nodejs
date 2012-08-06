@@ -1,0 +1,65 @@
+video {
+  padding: 10px;
+  border: 1px solid #999;
+}
+#tags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+#tags li {
+  width: 70px;
+  color: #000;
+  border: 2px solid #808080;
+  width: 70px;
+  height: 70px;
+  line-height: 69.65px;
+  text-align: center;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 140px;
+}
+#tags li:hover {
+  background-color: #6c6;
+  border-color: #008000;
+  font-weight: bold;
+}
+#tags li:active {
+  border-color: #f00;
+}
+#timestamps {
+  height: 50px;
+  margin: 5px;
+  padding: 0;
+  list-style: none;
+  display: block;
+  border: 1px solid #808080;
+  position: relative;
+  height: 50px;
+}
+#timestamps li {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  background-color: #f00;
+  border-right: 1px solid;
+  width: 0.9%;
+  height: 50px;
+  cursor: pointer;
+}
+#timestamps li div {
+  display: none;
+  position: absolute;
+  top: 50px;
+  padding: 5px;
+  background-color: #ccc;
+  border-radius: 0 10px 10px 10px;
+  border: 1px solid #808080;
+  font-size: 0.9em;
+}
+#timestamps li div span {
+  display: block;
+}
+#timestamps li:hover div {
+  display: block;
+}

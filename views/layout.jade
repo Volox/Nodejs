@@ -2,20 +2,28 @@
 html
 	head
 		title=title
+		meta(name="viewport",content="width=device-width, initial-scale=1.0")
 		block css
+			link(rel='stylesheet', href='/stylesheets/bootstrap.css')
+			link(rel='stylesheet', href='/stylesheets/bootstrap-responsive.css')
 			link(rel='stylesheet', href='/stylesheets/style.css')
 
 		block scripts
 			script(src='/libs/jquery.js')
 			script(src='/libs/modernizr.js')
+			script(src='/libs/bootstrap.js')
 			script(src='/javascripts/script.js')
 	body
-		div.all
-			header
-				img(src='/img/logo.jpg', title='Logo', alt='Logo')
-			section.content
-				h1=title
-				block content
-			footer
-				span Powered by Volox
-				img(src="/img/vologo.jpg",title="Volox",alt="Volox")
+		.container
+			header.row
+				.span4.offset4.center
+					img(src='/img/logo.jpg', title='Logo', alt='Logo')
+			section.row
+				.span12
+					.page-header
+						h1=title
+				.span12
+					block content
+			footer.row
+				.span4.offset8.right
+					span.label.label-info Powered by Volox

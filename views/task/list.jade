@@ -1,11 +1,18 @@
 extends ../layout
 
 block content
-	div.taskList
-		h1 &micro;Task list for Task #{taskID} 
-		a.addCode(href="/task/#{taskID}/code/add") Add code
-		if data.microTasks
-			ul
-				each microTask in data.microTasks
-					li
-						a(href="/task/#{microTask.id}")= microTask.id
+	.row
+		.span4
+			h2 &micro;Task list for Task #{taskID} 
+		.span4
+			a.btn.btn-primary(href="/task/#{taskID}/code/add")
+				i.icon-plus.icon-white
+				|  Add code
+
+	.row
+		.span12
+			if data.microTasks
+				ul
+					each microTask in data.microTasks
+						li
+							a(href="/task/#{microTask.id}")= microTask.id

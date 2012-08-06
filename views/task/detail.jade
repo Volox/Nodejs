@@ -1,31 +1,42 @@
 extends ../layout
 
 block content
-	div.taskDetail
-		h1 Task #{data.id} (#{data.type}): #{data.title}
-		if code
-			a.action(href="/task/#{data.id}/run/default/home.html") Run code
-		if data.schema
-			h2 Schema
-			table
-				each column in data.schema
-					tr
-						td= column.id
-						td= column.name
-						td= column.type
-		pre!= JSON.stringify(data.configurations)
-		hr
-		span!= data.question
-		hr
-		if data.objects
-			h3 Data
-			table
-				thead
-					tr
+	.row
+		.span4
+			h2 Task #{data.id} (#{data.type}): #{data.title}
+		.span4
+			if code
+				a.btn.btn-primary(href="/task/#{data.id}/run/default/home.html")
+					i.icon-play.icon-white
+					|  Run code
+	if data.schema
+		h3 Schema
+		dl.dl-horizontal
+			each column in data.schema
+				dt= column.name
+				dd= column.type
+	
+
+	
+	h3 Question
+	.well= data.question
+
+
+
+	.alert.alert-info.alert-block
+		button.close(type="button",data-dismiss="alert",href="#") x
+		h4.alert-heading Question
+		p!= JSON.stringify(data.configurations)
+	hr
+	if data.objects
+		h3 Data
+		table.table.table-striped.table-bordered.table-condensed
+			thead
+				tr
+					each val, fieldName in data.objects.field
+						th= fieldName
+			tbody
+				each objectId, index in data.objects.id
+					tr(data-object-id="#{objectId}")
 						each val, fieldName in data.objects.field
-							th= fieldName
-				tbody
-					each objectId, index in data.objects.id
-						tr(data-object-id="#{objectId}")
-							each val, fieldName in data.objects.field
-								td= data.objects.field[ fieldName ][ index ]
+							td= data.objects.field[ fieldName ][ index ]

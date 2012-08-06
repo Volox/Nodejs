@@ -48,50 +48,10 @@
 	"buffers":
 	[
 		{
-			"file": "public/coffeescripts/MM.coffee",
+			"file": "public/coffeescripts/script.coffee",
 			"settings":
 			{
-				"buffer_size": 3633,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/coffeescripts/VoloCL.coffee",
-			"settings":
-			{
-				"buffer_size": 5146,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/coffeescripts/webcl.coffee",
-			"settings":
-			{
-				"buffer_size": 1763,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "config/config.js",
-			"settings":
-			{
-				"buffer_size": 2870,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "server.js",
-			"settings":
-			{
-				"buffer_size": 2612,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "package.json",
-			"settings":
-			{
-				"buffer_size": 492,
+				"buffer_size": 784,
 				"line_ending": "Windows"
 			}
 		}
@@ -220,6 +180,18 @@
 	},
 	"file_history":
 	[
+		"/D/Portable/Nodejs/views/layout.jade",
+		"/D/Portable/Nodejs/views/task/list.jade",
+		"/D/Portable/Nodejs/views/task/new.jade",
+		"/D/Portable/Nodejs/views/task/detail.jade",
+		"/D/Portable/Nodejs/public/stylesheets/style.styl",
+		"/D/Portable/Nodejs/views/index.jade",
+		"/D/Portable/Nodejs/package.json",
+		"/D/Portable/Nodejs/server.js",
+		"/D/Portable/Nodejs/config/config.js",
+		"/D/Portable/Nodejs/public/coffeescripts/webcl.coffee",
+		"/D/Portable/Nodejs/public/coffeescripts/VoloCL.coffee",
+		"/D/Portable/Nodejs/public/coffeescripts/MM.coffee",
 		"/D/Projects/Nodejs/config/configuration.json",
 		"/D/Projects/Nodejs/.gitignore",
 		"/D/Projects/Nodejs/public/scripts/coffee/MM.coffee",
@@ -243,21 +215,16 @@
 		"/D/Portable/Nodejs/routes/index.js",
 		"/D/Portable/Nodejs/config/package.json",
 		"/D/Portable/Nodejs/config/configuration.json",
-		"/D/Portable/Nodejs/config/config.js",
 		"/D/Portable/Nodejs/utils/utils.js",
 		"/D/Portable/Nodejs/README.md",
 		"/D/Portable/Nodejs/views/error.jade",
 		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
-		"/D/Portable/Nodejs/views/layout.jade",
-		"/D/Portable/Nodejs/package.json",
 		"/D/Portable/Nodejs/task/task.js",
 		"/D/Portable/Nodejs/public/scripts/coffee/task.coffee",
 		"/D/Portable/Nodejs/config/logConfig.json",
 		"/D/down/jQueryTimelinr_095/js/jquery.timelinr-0.9.5.js",
 		"/D/Portable/Nodejs/sample.js",
 		"/D/Portable/Sublime Text 2/Data/Packages/Default/Preferences.sublime-settings",
-		"/D/Portable/Nodejs/server.js",
-		"/D/Portable/Nodejs/views/task/new.jade",
 		"/D/Portable/Sublime Text 2/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
 		"/D/Portable/Nodejs/test.sublime-project",
 		"/D/Portable/Nodejs/README",
@@ -313,166 +280,29 @@
 	"groups":
 	[
 		{
-			"selected": 5,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/coffeescripts/MM.coffee",
+					"file": "public/coffeescripts/script.coffee",
 					"settings":
 					{
-						"buffer_size": 3633,
+						"buffer_size": 784,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								436,
-								436
+								199,
+								199
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
 							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/coffeescripts/VoloCL.coffee",
-					"settings":
-					{
-						"buffer_size": 5146,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								298,
-								298
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/coffeescripts/webcl.coffee",
-					"settings":
-					{
-						"buffer_size": 1763,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								877,
-								877
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 314.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "config/config.js",
-					"settings":
-					{
-						"buffer_size": 2870,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2870,
-								2870
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 705.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "server.js",
-					"settings":
-					{
-						"buffer_size": 2612,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1800,
-								1800
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 787.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "package.json",
-					"settings":
-					{
-						"buffer_size": 492,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								456,
-								456
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -529,6 +359,34 @@
 		"selected_items":
 		[
 			[
+				"list",
+				"views/task/list.jade"
+			],
+			[
+				"scr",
+				"public/coffeescripts/script.coffee"
+			],
+			[
+				"de",
+				"views/task/detail.jade"
+			],
+			[
+				"in",
+				"views/index.jade"
+			],
+			[
+				"inde",
+				"views/index.jade"
+			],
+			[
+				"style",
+				"public/stylesheets/style.styl"
+			],
+			[
+				"la",
+				"views/layout.jade"
+			],
+			[
 				"pa",
 				"package.json"
 			],
@@ -571,14 +429,6 @@
 			[
 				"test",
 				"public/stylesheets/test.styl"
-			],
-			[
-				"in",
-				"views/index.jade"
-			],
-			[
-				"inde",
-				"routes/index.js"
 			],
 			[
 				"num",

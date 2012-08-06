@@ -1,0 +1,23 @@
+body {
+  background-color: #ffc2c2;
+  text-align: center;
+  margin: 1em;
+  color: #444;
+}
+body h1 {
+  margin: 0;
+  margin-bottom: 2em;
+  padding: 0;
+  color: #c00;
+}
+body h2 {
+  margin: 0;
+  margin-bottom: 2em;
+  padding: 0;
+  color: #ff1f1f;
+}
+body p {
+  width: 500px;
+  text-align: justify;
+  margin: auto;
+}

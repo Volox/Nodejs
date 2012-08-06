@@ -12,7 +12,7 @@ task-repo/tasks/*
 node_modules
 
 # Generated css/js #
-public/stylesheets/*.css
+#public/stylesheets/*.css
 public/javscripts
 
 # Video #

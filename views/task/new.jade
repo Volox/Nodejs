@@ -15,9 +15,12 @@ block append scripts
 					fileList = $dropzone.data( 'fileList' ) || {}
 					if !fileList[ file.name ]
 						fileList[ file.name ] = file
-						$li = $ '<li>',
-							text: "#{file.name} (#{file.type})"
-						$fileList.append $li
+						$dt = $ '<dt>',
+							text: "#{file.name}"
+						$dd = $ '<dd>',
+							text: "#{file.type}"
+						$fileList.append $dt
+						$fileList.append $dd
 						$dropzone.data 'fileList', fileList
 					else
 						alert "'#{file.name}'' already present!"
@@ -29,7 +32,7 @@ block append scripts
 				$form = $ 'form'
 				fileList = $dropzone.data( 'fileList' ) || {}
 				if $.isEmptyObject( fileList )
-					alert 'Selezionare almeno 1 file'
+					alert 'Select al least 1 file'
 				else
 					formData = new FormData $form[ 0 ]
 					$.each fileList, ( fileID, file )->
@@ -47,12 +50,21 @@ block append scripts
 
 				return false
 block content
-	h1 #{title}
-	form(action="/task/#{taskID}/code",method="post",enctype="multipart/form-data")
-		label(for="name") Insert code instance name: 
-		input#name(name="name",placeholder="Insert name")
+	form.form-horizontal(action="/task/#{taskID}/code",method="post",enctype="multipart/form-data")
+		.control-group
+			label.control-label(for="name") Insert code instance name: 
+			.controls
+				input.input-xlarge#name(type="text",name="name",placeholder="Insert name")
+				p.help-block Insert the name
+		
+		
 		div.dropzone Click or drop files here
-		ul.fileList
-		section.actions
-			// input#btnAdd(type="button", value="Add file")
-			input#btnSend(type="submit", value="Send")
+		dl.fileList.dl-horizontal
+
+
+		button.btn.btn-primary#btnSend(type="submit")
+			i.icon-ok.icon-white
+			|  Send
+		button.btn#btnCancel(type="reset")
+			i.icon-refresh
+			|  Reset

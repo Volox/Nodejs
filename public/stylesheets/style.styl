@@ -5,8 +5,6 @@ $bc = $baseColor
 $tc = $textColor
 $lc = $linkColor
 
-$border = 1px solid $bc
-$borderRadius = 10px
 
 // Main page layout
 a
@@ -15,58 +13,13 @@ a
 	&:hover
 		color darken($lc,20%)
 		text-decoration underline
-body
-	font-family $font
-	font-size $fontSize
-	color $tc
-	text-align center
-	& > *
-		margin auto
-		border-right $border
-		border-left $border
-		text-align justify
-		width 1000px
-		background-color lighten($bc,90%)
-		box-shadow 0.5em 0.5em 0.5em lighten($bc,50%)
-	& > *:first-child
-		border-top $border
-		border-top-radius $borderRadius
-	& > *:last-child
-		border-bottom $border
-		border-bottom-radius $borderRadius
-	header
-		text-align center
-		nav
-			ul
-				list-style none
-				margin 0
-				padding 0
-				li
-					a
-	.content
-		min-height 600px
-		h1
-			margin 0
-			padding 0
-	footer
-		linear-bg top, lighten($bc,90%), lighten($bc,60%)
-		border-bottom-radius $borderRadius
-		text-align right
-		font-size 0.9em
-		min-height 4em
-		line-height @min-height
-		& > *
-			display inline-block
-		span
-			margin-right 1em
-		img
-			vertical-align middle
-			border-radius 10px
-.all > *
-	padding 7px
 
-a.action
-	margin-right 1em
+.right
+	text-align right
+.left
+	text-align left
+.center
+	text-align center
 
 div.dropzone
 	@height 5em
@@ -74,7 +27,6 @@ div.dropzone
 	margin-bottom 1em
 	border 5px dashed #ccc
 	height @height
-	display block
 	text-align center
 	font-size 1em
 	color #aaa

@@ -1,0 +1,42 @@
+a {
+  color: #f00;
+  text-decoration: none;
+}
+a:hover {
+  color: #c00;
+  text-decoration: underline;
+}
+.right {
+  text-align: right;
+}
+.left {
+  text-align: left;
+}
+.center {
+  text-align: center;
+}
+div.dropzone {
+  height: 5em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  border: 5px dashed #ccc;
+  height: 5em;
+  text-align: center;
+  font-size: 1em;
+  color: #aaa;
+  font-weight: bold;
+  line-height: 5em;
+}
+div.dropzone.active {
+  border-color: #008000;
+  color: #008000;
+}
+div.dropzone.present {
+  border-color: #f00;
+  color: #f00;
+}
+div.dropzone input[type="file"] {
+  visibility: hidden;
+  width: 0;
+  height: 0;
+}
