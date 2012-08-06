@@ -6,6 +6,8 @@
 ## Installation
 	git clone git@github.com:Volox/Nodejs.git
 	cd Nodejs
+	mkdir logs
+	mkdir data
 	npm install -d
 
 ## To run
