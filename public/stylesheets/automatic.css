@@ -1,0 +1,12 @@
+.dropzoneImage {
+  outline: 5px dashed #ccc;
+}
+.dropzoneImage.active {
+  background-color: #90ee90;
+}
+#dome .page-header {
+  cursor: pointer;
+}
+#dome .page-header + * {
+  display: none;
+}

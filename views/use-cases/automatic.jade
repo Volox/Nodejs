@@ -1,6 +1,20 @@
 extends ../layout
 
+block append css
+	link(rel='stylesheet', href='/stylesheets/automatic.css')
+
 block append scripts
-	:coffeescript
-		# ASD
+	script(src='/javascripts/VoloCL.js')
+	script(src='/javascripts/MM.js')
+	script(src='/javascripts/webcl.js')
+	
 block content
+	.row
+		.span6.center.dropzoneImage
+			img#img(src="/img/test.jpg", title="Image")
+		.span6
+			.well Click to execute SIFT on the image on the left
+			.alert.alert-info Drag an image over the image area to change
+			button.btn.btn-primary#clickme Click me
+	.row
+		.span12#dome

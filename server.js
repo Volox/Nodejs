@@ -70,7 +70,7 @@ app.get('/testVideo', routes.testVideo );
 app.get('/testVideoPOI', routes.testVideoPOI );
 
 // Use cases
-app.get('/automatic', routes.test );
+app.get('/automatic', routes.automatic );
 app.get('/hybrid', routes.hybrid );
 app.get('/human', routes.human );
 

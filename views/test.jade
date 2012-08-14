@@ -9,8 +9,11 @@ block append scripts
 	script(src='/javascripts/webcl.js')
 	
 block content
-	h1 Page test.
-	img#img(src="/img/test.jpg", title="Image")
-	br
-	button#clickme Click me
-	#dome
+	.row
+		.span6
+			img#img(src="/img/test.jpg", title="Image")
+		.span6.center
+			.alert.alert-info Perform SIFT on the image
+			button.btn.btn-primary#clickme Click me
+	.row
+		.span12#dome

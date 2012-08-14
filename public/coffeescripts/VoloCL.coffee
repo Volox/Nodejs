@@ -41,7 +41,7 @@ class VoloCL
 		@ctx = @cl.createContextFromType [ @cl.CL_CONTEXT_PLATFORM, 
                                            @platform ],
                                            @cl.CL_DEVICE_TYPE_DEFAULT
-		
+		\
 		#console.log 'Context created'
 
 		@loadKernel kernelSrc
@@ -123,6 +123,9 @@ class VoloCL
 
 		#console.log 'Closing the command queue'
 		cmdQueue.finish()
+
+		# flush data
+		cmdQueue.releaseCLResources()
 		return
 
 	#throw new Error "Not implemented"

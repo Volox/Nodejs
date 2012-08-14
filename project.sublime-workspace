@@ -4,6 +4,286 @@
 		"selected_items":
 		[
 			[
+				"key",
+				"keyPoints"
+			],
+			[
+				"tim",
+				"timeEnd"
+			],
+			[
+				"DoG",
+				"DoGImage"
+			],
+			[
+				"blur",
+				"blurStep"
+			],
+			[
+				"th",
+				"threshold"
+			],
+			[
+				"ma",
+				"max"
+			],
+			[
+				"pre",
+				"prevValue"
+			],
+			[
+				"cu",
+				"current"
+			],
+			[
+				"co",
+				"continue"
+			],
+			[
+				"ne",
+				"nextValue"
+			],
+			[
+				"prev",
+				"prevValue"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"spa",
+				"span6"
+			],
+			[
+				"i",
+				"idx"
+			],
+			[
+				"Ma",
+				"MaxMin"
+			],
+			[
+				"MA",
+				"MaxMin"
+			],
+			[
+				"ima",
+				"imageData"
+			],
+			[
+				"fi",
+				"fitRange"
+			],
+			[
+				"n",
+				"newVal"
+			],
+			[
+				"te",
+				"ten"
+			],
+			[
+				"bl",
+				"blurImage"
+			],
+			[
+				"ca",
+				"canvasImageData"
+			],
+			[
+				"im",
+				"imageData"
+			],
+			[
+				"blu",
+				"blurStep"
+			],
+			[
+				"sr",
+				"src1"
+			],
+			[
+				"img",
+				"img2"
+			],
+			[
+				"Sc",
+				"ScaleSpaceRow"
+			],
+			[
+				"SC",
+				"ScaleSpaceRow"
+			],
+			[
+				"h",
+				"height"
+			],
+			[
+				"Sca",
+				"ScaleSpace"
+			],
+			[
+				"fil",
+				"filter"
+			],
+			[
+				"Flo",
+				"Float32Array"
+			],
+			[
+				"ga",
+				"gaussSize"
+			],
+			[
+				"Blur",
+				"BlurredImages"
+			],
+			[
+				"oc",
+				"octavesNum"
+			],
+			[
+				"D",
+				"DoG"
+			],
+			[
+				"Do",
+				"DoGRow"
+			],
+			[
+				"to",
+				"toRGB"
+			],
+			[
+				"s",
+				"src"
+			],
+			[
+				"con",
+				"console"
+			],
+			[
+				"dom",
+				"dome"
+			],
+			[
+				"image",
+				"imageData"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"scale",
+				"ScaleSpace"
+			],
+			[
+				"Scale",
+				"scale"
+			],
+			[
+				"wi",
+				"width"
+			],
+			[
+				"out",
+				"output"
+			],
+			[
+				"scaleSpace",
+				"ScaleSpace"
+			],
+			[
+				"sc",
+				"scaleSpace"
+			],
+			[
+				"sca",
+				"scale"
+			],
+			[
+				"cli",
+				"click"
+			],
+			[
+				"ou",
+				"output"
+			],
+			[
+				"in",
+				"index"
+			],
+			[
+				"time",
+				"times"
+			],
+			[
+				"S",
+				"ScaleSpace"
+			],
+			[
+				"DO",
+				"DoGRow"
+			],
+			[
+				"o",
+				"octave"
+			],
+			[
+				"octa",
+				"octave"
+			],
+			[
+				"ex",
+				"expoD"
+			],
+			[
+				"create",
+				"createInfo"
+			],
+			[
+				"cre",
+				"createTitle"
+			],
+			[
+				"ti",
+				"title"
+			],
+			[
+				"ste",
+				"blurSteps"
+			],
+			[
+				"re",
+				"return"
+			],
+			[
+				"be",
+				"benchmarkDebug"
+			],
+			[
+				"ben",
+				"benchmark"
+			],
+			[
+				"li",
+				"thumbLi"
+			],
+			[
+				"l",
+				"label"
+			],
+			[
+				"di",
+				"divCont"
+			],
+			[
+				"tu",
+				"thumbLi"
+			],
+			[
 				"scri",
 				"scripts"
 			],
@@ -48,10 +328,54 @@
 	"buffers":
 	[
 		{
-			"file": "public/coffeescripts/script.coffee",
+			"file": "public/coffeescripts/webcl.coffee",
 			"settings":
 			{
-				"buffer_size": 784,
+				"buffer_size": 6923,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/coffeescripts/MM.coffee",
+			"settings":
+			{
+				"buffer_size": 7936,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "__kernel void clMaxMin( __global const float* keyPoints,\n                        __global float* keyPointsRefined,\n                        uint width,\n                        uint height ) {\n  uint x = get_global_id(0);\n  uint y = get_global_id(1);\n\n  if (x >= width || y >= height) return;\n\n  // Get the current pixel index\n  uint idx = y*width+x;\n  \n  float value = keyPoints[ idx ];\n\n  if( value!=0 ) {\n    float vP = (y+1)*width+(x+1);\n    float vPP = (y+2)*width+(x+2);\n    float Dx = vP + value;\n    float Dxx = value;\n    float Dxy = value;\n    float Dyy = value;\n    \n    float Tr = Dxx + Dyy;\n    float Det = Dxx*Dyy-pown(Dxy,2);\n    float R = pown(Tr,2)/Det;\n\n    keyPointsRefined[ idx ] = R;\n  } else {\n    keyPointsRefined[ idx ] = 0;\n  }\n}\n\n__kernel void clMaxMin( __global const float* prev,\n                        __global const float* current,\n                        __global const float* next,\n                        __global float* keyPoints,\n                        float threshold,\n                        uint width,\n                        uint height ) {\n  uint x = get_global_id(0);\n  uint y = get_global_id(1);\n\n  if (x >= width || y >= height) return;\n\n  // Get the current pixel index\n  uint idx = y*width+x;\n  \n  float value = current[ idx ];\n\n  float tmpValue = value;\n  if( tmpValue<0 )\n    tmpValue = -1*value;\n\n  // Init max & min\n  float max = value;\n  float min = value;\n\n  // Iterate over the neighbours\n  if( tmpValue>threshold ) {\n    for( char ox=-1; ox<=1; ox++ ) {\n      uint cx = x+ox;\n      if( cx<0 || cx>width-1 ) {\n        continue;\n      }\n      for( char oy=-1; oy<=1; oy++ ) {\n        uint cy = y+oy;\n        if( cy<0 || cy>height-1 ) {\n          continue;\n        }\n        uint currentIdx = cy*width+cx;\n\n        // Values\n        float prevValue = prev[ currentIdx ];\n        float currValue = current[ currentIdx ];\n        float nextValue = next[ currentIdx ];\n\n\n        // Check prev\n        if( prevValue>max )\n          max = prevValue;\n        if( prevValue<min )\n          min = prevValue;\n\n        // Check current\n        if( cx!=x && cy!=y ) {\n          if( currValue>max )\n            max = currValue;\n          if( currValue<min )\n            min = currValue;\n        }\n\n        // Check next\n        if( nextValue>max )\n          max = nextValue;\n        if( nextValue<min )\n          min = nextValue;\n\n\n      }\n    }\n    \n  }\n\n  if( value==max || value==min ) {\n    keyPoints[idx] = 255;\n  } else {\n    keyPoints[idx] = 0;\n  }\n}\n\n\n__kernel void clFloat( __global const uchar4* src,\n                      __global float* dst,\n                      uint width,\n                      uint height ) {\n  uint x = get_global_id(0);\n  uint y = get_global_id(1);\n  if (x >= width || y >= height) return;\n\n  uint idx = y*width+x;\n  float r = (float) src[idx].x;\n  float g = (float) src[idx].y;\n  float b = (float) src[idx].z;\n\n  dst[idx] = 0.3f*r + 0.59f*g + 0.11f*b;\n}\n__kernel void clRGB( __global const float* src,\n                      __global uchar4* dst,\n                      uint width,\n                      uint height,\n                      float min,\n                      float max ) {\n  uint x = get_global_id(0);\n  uint y = get_global_id(1);\n  if (x >= width || y >= height) return;\n\n  uint idx = y*width+x;\n\n  float newVal = src[idx];\n  // Good values for \"fitting\"\n  if( max>min ) {\n    float range = max-min;\n    // x:255=newVal:range\n    // x = 255*newVal/range\n\n    newVal = smoothstep( min, max, newVal )*255;\n  }\n\n  uchar lum = (uchar) newVal;\n  \n  dst[idx] = (uchar4)(lum,lum,lum,255);\n}\n\n\n__kernel void clDiff( __global const float* src1,\n                      __global const float* src2,\n                      __global float* dst,\n                      uint width,\n                      uint height ) {\n  uint x = get_global_id(0);\n  uint y = get_global_id(1);\n  if (x >= width || y >= height) return;\n\n  uint idx = y*width+x;\n\n  dst[idx] = src2[ idx ] - src1[ idx ];\n}\n                             \n\n__kernel void clConvolution( __global const float* src,\n                      __global const float* filter,\n                      __global float* dst,\n                      uint width,\n                      uint height,\n                      uint fW,\n                      uint fH) {\n  uint x = get_global_id(0);\n  uint y = get_global_id(1);\n  if (x >= width || y >= height) return;\n\n  float val = 0;\n  for(int xF=0; xF<fW; xF++) {\n    for(int yF=0; yF<fH; yF++) {\n      int cx = (x+xF);\n      int cy = (y+yF);\n\n      if(cx>=width) cx=width-1;\n      if(cy>=height) cy=height-1;\n      \n      uint idx = cy*width+cx;\n      //uint filterIdx = yF*fW+xF;\n      uint filterIdx = (fH-1-yF)*fW+(fW-1-xF);\n\n      val += filter[filterIdx] * src[idx];\n    }\n  }\n  \n  uint idx = y*width+x;\n\n  dst[idx] = val;\n}",
+			"file": "public/opencl/volo.cl",
+			"file_size": 4993,
+			"file_write_time": 129894269744588198,
+			"settings":
+			{
+				"buffer_size": 4784,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/use-cases/automatic.jade",
+			"settings":
+			{
+				"buffer_size": 518,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/stylesheets/automatic.styl",
+			"settings":
+			{
+				"buffer_size": 150,
+				"line_ending": "Windows",
+				"name": "automatic"
+			}
+		},
+		{
+			"file": "public/coffeescripts/VoloCL.coffee",
+			"settings":
+			{
+				"buffer_size": 5195,
 				"line_ending": "Windows"
 			}
 		}
@@ -180,18 +504,27 @@
 	},
 	"file_history":
 	[
+		"/D/Portable/Nodejs/public/stylesheets/style.styl",
+		"/D/Portable/Nodejs/public/coffeescripts/VoloCL.coffee",
+		"/D/Portable/Nodejs/public/stylesheets/test.styl",
+		"/D/Portable/Nodejs/views/use-cases/automatic.jade",
+		"/D/Portable/Sublime Text 2/Data/Packages/User/Preferences.sublime-settings",
+		"/D/Portable/Sublime Text 2/Data/Packages/User/Default (Windows).sublime-keymap",
+		"/D/Portable/Nodejs/public/coffeescripts/MM.coffee",
+		"/D/Portable/Sublime Text 2/Data/Packages/Default/Default (Windows).sublime-keymap",
+		"/D/Portable/Nodejs/server.js",
+		"/D/Portable/Nodejs/views/index.jade",
+		"/D/Portable/Nodejs/routes/index.js",
+		"/D/Portable/Nodejs/views/test.jade",
 		"/D/Portable/Nodejs/views/layout.jade",
+		"/D/Portable/Nodejs/public/coffeescripts/script.coffee",
+		"/D/Portable/Nodejs/README.md",
 		"/D/Portable/Nodejs/views/task/list.jade",
 		"/D/Portable/Nodejs/views/task/new.jade",
 		"/D/Portable/Nodejs/views/task/detail.jade",
-		"/D/Portable/Nodejs/public/stylesheets/style.styl",
-		"/D/Portable/Nodejs/views/index.jade",
 		"/D/Portable/Nodejs/package.json",
-		"/D/Portable/Nodejs/server.js",
 		"/D/Portable/Nodejs/config/config.js",
 		"/D/Portable/Nodejs/public/coffeescripts/webcl.coffee",
-		"/D/Portable/Nodejs/public/coffeescripts/VoloCL.coffee",
-		"/D/Portable/Nodejs/public/coffeescripts/MM.coffee",
 		"/D/Projects/Nodejs/config/configuration.json",
 		"/D/Projects/Nodejs/.gitignore",
 		"/D/Projects/Nodejs/public/scripts/coffee/MM.coffee",
@@ -212,11 +545,9 @@
 		"/D/Projects/Nodejs/public/scripts/libs/numeric.js",
 		"/D/Projects/Nodejs/public/stylesheets/theme.styl",
 		"/D/Projects/Nodejs/task_repo/task_repo.js",
-		"/D/Portable/Nodejs/routes/index.js",
 		"/D/Portable/Nodejs/config/package.json",
 		"/D/Portable/Nodejs/config/configuration.json",
 		"/D/Portable/Nodejs/utils/utils.js",
-		"/D/Portable/Nodejs/README.md",
 		"/D/Portable/Nodejs/views/error.jade",
 		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
 		"/D/Portable/Nodejs/task/task.js",
@@ -256,6 +587,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"keyPoints",
+			"nextColor",
+			"currentColor",
+			"prevColor",
+			"norma",
+			"zoom",
 			"2s",
 			"2c",
 			"utf",
@@ -280,23 +617,23 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "public/coffeescripts/script.coffee",
+					"file": "public/coffeescripts/webcl.coffee",
 					"settings":
 					{
-						"buffer_size": 784,
+						"buffer_size": 6923,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								199,
-								199
+								3196,
+								3196
 							]
 						],
 						"settings":
@@ -305,7 +642,143 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
+						"translation.y": 1106.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "public/coffeescripts/MM.coffee",
+					"settings":
+					{
+						"buffer_size": 7936,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7602,
+								7602
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4346.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/opencl/volo.cl",
+					"settings":
+					{
+						"buffer_size": 4784,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								46,
+								55
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "views/use-cases/automatic.jade",
+					"settings":
+					{
+						"buffer_size": 518,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								498,
+								498
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "public/stylesheets/automatic.styl",
+					"settings":
+					{
+						"buffer_size": 150,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								40,
+								40
+							]
+						],
+						"settings":
+						{
+							"auto_name": "automatic",
+							"syntax": "Packages/Stylus/Stylus.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "public/coffeescripts/VoloCL.coffee",
+					"settings":
+					{
+						"buffer_size": 5195,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3170,
+								3170
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1313.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -359,6 +832,62 @@
 		"selected_items":
 		[
 			[
+				"sty",
+				"public/stylesheets/style.styl"
+			],
+			[
+				"volo",
+				"public/coffeescripts/VoloCL.coffee"
+			],
+			[
+				"test.s",
+				"public/stylesheets/test.styl"
+			],
+			[
+				"au",
+				"views/use-cases/automatic.jade"
+			],
+			[
+				"v",
+				"public/opencl/volo.cl"
+			],
+			[
+				"mm",
+				"public/coffeescripts/MM.coffee"
+			],
+			[
+				"in",
+				"views/index.jade"
+			],
+			[
+				"s",
+				"server.js"
+			],
+			[
+				"ser",
+				"server.js"
+			],
+			[
+				"inde",
+				"routes/index.js"
+			],
+			[
+				"we",
+				"public/coffeescripts/webcl.coffee"
+			],
+			[
+				"la",
+				"views/layout.jade"
+			],
+			[
+				"tes",
+				"views/test.jade"
+			],
+			[
+				"re",
+				"README.md"
+			],
+			[
 				"list",
 				"views/task/list.jade"
 			],
@@ -371,28 +900,12 @@
 				"views/task/detail.jade"
 			],
 			[
-				"in",
-				"views/index.jade"
-			],
-			[
-				"inde",
-				"views/index.jade"
-			],
-			[
 				"style",
 				"public/stylesheets/style.styl"
 			],
 			[
-				"la",
-				"views/layout.jade"
-			],
-			[
 				"pa",
 				"package.json"
-			],
-			[
-				"ser",
-				"server.js"
 			],
 			[
 				"con",
@@ -405,18 +918,6 @@
 			[
 				"webcl",
 				"public/coffeescripts/webcl.coffee"
-			],
-			[
-				"volo",
-				"public/coffeescripts/VoloCL.coffee"
-			],
-			[
-				"mm",
-				"public/coffeescripts/MM.coffee"
-			],
-			[
-				"we",
-				"public/scripts/coffee/webcl.coffee"
 			],
 			[
 				"mmcoff",

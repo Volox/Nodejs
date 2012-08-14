@@ -15,7 +15,7 @@ a:hover {
 .center {
   text-align: center;
 }
-div.dropzone {
+.dropzone {
   height: 5em;
   margin-top: 1em;
   margin-bottom: 1em;
@@ -27,15 +27,15 @@ div.dropzone {
   font-weight: bold;
   line-height: 5em;
 }
-div.dropzone.active {
+.dropzone.active {
   border-color: #008000;
   color: #008000;
 }
-div.dropzone.present {
+.dropzone.present {
   border-color: #f00;
   color: #f00;
 }
-div.dropzone input[type="file"] {
+.dropzone input[type="file"] {
   visibility: hidden;
   width: 0;
   height: 0;

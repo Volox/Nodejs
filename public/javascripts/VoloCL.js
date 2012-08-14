@@ -96,6 +96,7 @@
         cmdQueue.enqueueReadBuffer(output.buffer, false, 0, output.size, output.value, []);
       }
       cmdQueue.finish();
+      cmdQueue.releaseCLResources();
     };
 
     VoloCL.prototype.setLocalWS = function(value) {

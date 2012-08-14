@@ -1,30 +1,28 @@
 extends layout
 
-block scripts
-
 block content
 	dl
 		dt Task related pages
 		dd Get the 
-			a(href="/task/1/list", title="Task list") &micro;Task list
+			a(href="/task/1/list",rel="tooltip", title="Task list") &micro;Task list
 			|  for task 1 (Classify)
 		dd Get the 
-			a(href="/task/38/list", title="Task list") &micro;Task list
+			a(href="/task/38/list",rel="tooltip", title="Task list") &micro;Task list
 			|  for task 38 (Like)
 		dd Get the 
-			a(href="/task/41/list", title="Task list") &micro;Task list
+			a(href="/task/41/list",rel="tooltip", title="Task list") &micro;Task list
 			|  for task 41 (Classify image)
 		dt Test pages
 		dd
-			a(href="/test", title="WebCL SIFT test page") Test page for WebCL SIFT
+			a(href="/test",rel="tooltip", title="WebCL SIFT test page") Test page for WebCL SIFT
 		dd
-			a(href="/testVideo", title="Video test page") Video tag test page
+			a(href="/testVideo",rel="tooltip", title="Video test page") Video tag test page
 		dd
-			a(href="/testVideoPOI", title="Video POI test page") Video POI test page
+			a(href="/testVideoPOI",rel="tooltip", title="Video POI test page") Video POI test page
 		dt Use cases
 		dd
-			a(href="/hybrid", title="Hybrid use-case") Hybrid use-case
+			a(href="/hybrid",rel="tooltip", title="Hybrid use-case") Hybrid use-case
 		dd
-			a(href="/automatic", title="Automatic use-case") Automatic use-case
+			a(href="/automatic",rel="tooltip", title="Automatic use-case") Automatic use-case
 		dd
-			a(href="/human", title="Manual use-case") Manual use-case
+			a(href="/human",rel="tooltip", title="Manual use-case") Manual use-case
