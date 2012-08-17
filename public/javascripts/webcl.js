@@ -61,86 +61,142 @@
   };
 
   jQuery(function($) {
+    var myImage;
+    myImage = new Image();
+    myImage.onload = function() {
+      var $canvas, canvas, ctx;
+      $canvas = $('#img');
+      canvas = $canvas[0];
+      ctx = canvas.getContext('2d');
+      ctx.drawImage(this, 0, 0);
+    };
+    myImage.src = '/img/scene.jpg';
     $('#dome').on('click', '.page-header', function() {
       $(this).next('ul.thumbnails').toggle();
     });
     $('#clickme').click(function() {
-      var $DoG, $DoGInfo, $DoGTitle, $MaxMin, $MaxMinInfo, $MaxMinTitle, $dome, $img, $info, $scaleSpace, $scaleSpaceInfo, $scaleSpaceTitle, $thumbLi, DoG, DoGRow, DoGcanvas, blurCanvas, blurFactor, blurMatrix, blurStep, blurSteps, caption, current, idx, index, info, keyPoints, label, next, octave, octaveRow, octaves, prev, scaleSpace, sift, tDoG, tMaxMin, tScaleSpace, timeID, timeTook, _len, _len2, _len3, _ref, _ref2, _ref3;
+      var $dome, $img, myScaleSpace, sift;
       $dome = $('#dome');
       $dome.empty();
       $img = $('#img');
       sift = true;
       if (sift) {
+        myScaleSpace = null;
         MM.sift($img[0], {
           scale: function(ScaleSpace, time) {
-            var $contents, $thumbLi, $title, blurStep, canvas, image, label, octave, row, _len, _len2;
+            var $contents, $title;
+            myScaleSpace = ScaleSpace;
             $title = createTitle('Scale space', "took " + time + "ms");
             $contents = $('<ul>', {
               'class': 'thumbnails'
             });
-            for (octave = 0, _len = ScaleSpace.length; octave < _len; octave++) {
-              row = ScaleSpace[octave];
-              for (blurStep = 0, _len2 = row.length; blurStep < _len2; blurStep++) {
-                image = row[blurStep];
-                label = "octave " + (octave + 1) + ", blurStep " + (blurStep + 1);
-                canvas = MM.toImage(image);
-                $thumbLi = createThumbnail(canvas, label, null, index + 1);
-                $contents.append($thumbLi);
-              }
-            }
+            /*
+            					for row,octave in ScaleSpace
+            						for image,blurStep in row
+            							label = "octave #{octave+1}, blurStep #{blurStep+1}"
+            							canvas = MM.toImage image
+            							$thumbLi = createThumbnail canvas, label, null, octave+1
+            							$contents.append $thumbLi
+            */
             $dome.append($title);
             $dome.append($contents);
           },
           dog: function(DoG, time) {
-            var $contents, $thumbLi, $title, DoGRow, blurStep, canvas, image, label, octave, _len, _len2;
+            var $contents, $title;
             $title = createTitle('DoG', "took " + time + "ms");
             $contents = $('<ul>', {
               'class': 'thumbnails'
             });
-            for (octave = 0, _len = DoG.length; octave < _len; octave++) {
-              DoGRow = DoG[octave];
-              for (blurStep = 0, _len2 = DoGRow.length; blurStep < _len2; blurStep++) {
-                image = DoGRow[blurStep];
-                label = "DoG octave " + (octave + 1) + ", blurStep " + (blurStep + 1) + "-" + blurStep;
-                canvas = MM.toImage(image);
-                $thumbLi = createThumbnail(canvas, label, null, octave + 1);
-                $contents.append($thumbLi);
-              }
-            }
+            /*
+            					# insert the images into the dome elements
+            					for DoGRow,octave in DoG
+            						for image,blurStep in DoGRow
+            							label = "DoG octave #{octave+1}, blurStep #{blurStep+1}-#{blurStep}"
+            							canvas = MM.toImage image
+            							$thumbLi = createThumbnail canvas, label, null, octave+1
+            							$contents.append $thumbLi
+            */
             $dome.append($title);
             $dome.append($contents);
           },
           maxmin: function(MaxMin, time) {
-            var $contents, $thumbLi, $title, MaxMinRow, blurStep, canvas, image, label, octave, _len, _len2;
+            var $contents, $title;
             $title = createTitle('MaxMin', "took " + time + "ms");
             $contents = $('<ul>', {
               'class': 'thumbnails'
             });
-            for (octave = 0, _len = MaxMin.length; octave < _len; octave++) {
-              MaxMinRow = MaxMin[octave];
-              for (blurStep = 0, _len2 = MaxMinRow.length; blurStep < _len2; blurStep++) {
-                image = MaxMinRow[blurStep];
-                label = "MaxMin of octave " + (octave + 1) + " using DoG " + blurStep + "," + (blurStep + 1) + " and " + (blurStep + 2);
-                canvas = MM.toImage(image);
-                $thumbLi = createThumbnail(canvas, label, null, octave + 1);
-                $contents.append($thumbLi);
-              }
-            }
+            /*
+            					# insert the images into the dome elements
+            					for MaxMinRow,octave in MaxMin
+            						for image,blurStep in MaxMinRow
+            							label = "MaxMin of octave #{octave+1} using DoG #{blurStep},#{blurStep+1} and #{blurStep+2}"
+            							canvas = MM.toImage image
+            							$thumbLi = createThumbnail canvas, label, null, octave+1
+            							$contents.append $thumbLi
+            */
             $dome.append($title);
             $dome.append($contents);
           },
           refine: function(Refine, time) {
-            var $contents, $thumbLi, $title, RefineRow, blurStep, canvas, image, label, octave, _len, _len2;
+            var $contents, $title;
             $title = createTitle('KeyPoints refinement', "took " + time + "ms");
             $contents = $('<ul>', {
               'class': 'thumbnails'
             });
-            for (octave = 0, _len = Refine.length; octave < _len; octave++) {
-              RefineRow = Refine[octave];
-              for (blurStep = 0, _len2 = RefineRow.length; blurStep < _len2; blurStep++) {
-                image = RefineRow[blurStep];
-                label = "Refinement";
+            /*
+            					# insert the images into the dome elements
+            					for RefineRow,octave in Refine
+            						for image,blurStep in RefineRow
+            							label = "Refinement"
+            							canvas = MM.toImage image
+            							$thumbLi = createThumbnail canvas, label, null, octave+1
+            							$contents.append $thumbLi
+            */
+            $dome.append($title);
+            $dome.append($contents);
+          },
+          magor: function(MagOr, time) {
+            var $contents, $thumbLi, $title, MagOrRow, blurStep, canvas, canvas_arrow, ctx, data, diag, image, imgMag, imgOr, label, mag, octave, orient, x, y, _len, _len2, _ref, _ref2;
+            $title = createTitle('Magnitude and Orientation', "took " + time + "ms");
+            $contents = $('<ul>', {
+              'class': 'thumbnails'
+            });
+            canvas_arrow = function(context, fromx, fromy, orient, mag) {
+              var angle, headlen, tox, toy;
+              headlen = 5;
+              angle = orient;
+              tox = fromx + mag * Math.cos(orient);
+              toy = fromy + mag * Math.sin(orient);
+              context.beginPath();
+              context.moveTo(fromx, fromy);
+              context.lineTo(tox, toy);
+              context.lineTo(tox - headlen * Math.cos(angle - Math.PI / 6), toy - headlen * Math.sin(angle - Math.PI / 6));
+              context.moveTo(tox, toy);
+              context.lineTo(tox - headlen * Math.cos(angle + Math.PI / 6), toy - headlen * Math.sin(angle + Math.PI / 6));
+              context.closePath();
+              context.stroke();
+            };
+            for (octave = 0, _len = MagOr.length; octave < _len; octave++) {
+              MagOrRow = MagOr[octave];
+              for (blurStep = 0, _len2 = MagOrRow.length; blurStep < _len2; blurStep++) {
+                data = MagOrRow[blurStep];
+                label = "Magnitude";
+                imgMag = new MMImage(data.magnitude);
+                imgOr = new MMImage(data.orientation);
+                image = myScaleSpace[octave][0];
                 canvas = MM.toImage(image);
+                diag = Math.sqrt(Math.pow(imgMag.width, 2) + Math.pow(imgMag.height, 2));
+                ctx = canvas.getContext('2d');
+                ctx.strokeStyle = 'red';
+                for (x = 0, _ref = imgMag.width - 1; 0 <= _ref ? x <= _ref : x >= _ref; 0 <= _ref ? x++ : x--) {
+                  for (y = 0, _ref2 = imgMag.height - 1; 0 <= _ref2 ? y <= _ref2 : y >= _ref2; 0 <= _ref2 ? y++ : y--) {
+                    mag = imgMag.at(x, y);
+                    if (0 !== mag) {
+                      orient = imgOr.at(x, y);
+                      canvas_arrow(ctx, x, y, orient, mag * 0.5);
+                    }
+                  }
+                }
                 $thumbLi = createThumbnail(canvas, label, null, octave + 1);
                 $contents.append($thumbLi);
               }
@@ -149,104 +205,6 @@
             $dome.append($contents);
           }
         });
-        return;
-      }
-      try {
-        if (benchmark) console.time("SIFT");
-        octaves = [2, 1, 1 / 2, 1 / 3];
-        blurSteps = 5;
-        blurMatrix = [[0.707, 1, 1.414, 2, 2.828], [1.414, 2, 2.828, 4, 5.656], [2.828, 4, 5.656, 8, 11.313], [5.656, 8, 11.313, 16, 22.627]];
-        tScaleSpace = "Scale space";
-        if (benchmark) console.time(tScaleSpace);
-        $scaleSpace = $('<ul>', {
-          'class': 'thumbnails'
-        });
-        $scaleSpaceTitle = createTitle('Scale space', '4 octaves and 5 blur blur steps');
-        scaleSpace = [];
-        for (index = 0, _len = octaves.length; index < _len; index++) {
-          octave = octaves[index];
-          octaveRow = [];
-          for (blurStep = 0, _ref = blurSteps - 1; 0 <= _ref ? blurStep <= _ref : blurStep >= _ref; 0 <= _ref ? blurStep++ : blurStep--) {
-            blurFactor = blurMatrix[index][blurStep];
-            timeID = "Octave " + (index + 1) + " Blur " + (blurStep + 1);
-            if (benchmark && benchmarkDebug) console.time(timeID);
-            blurCanvas = MM.blur($img[0], octave, blurFactor);
-            if (benchmark && benchmarkDebug) console.timeEnd(timeID);
-            blurCanvas.id = "scale_" + octave + "_" + blurStep;
-            octaveRow.push(blurCanvas);
-            label = "Octave " + (index + 1) + ", blur step " + (blurStep + 1);
-            caption = "Scale factor: " + octave + ", blurFactor: " + blurFactor;
-            $thumbLi = createThumbnail(blurCanvas, label, caption, index + 1);
-            $scaleSpace.append($thumbLi);
-          }
-          scaleSpace.push(octaveRow);
-        }
-        if (benchmark) timeTook = console.timeEnd(tScaleSpace);
-        info = "Scale Space took " + timeTook + "ms";
-        $scaleSpaceInfo = createInfo(info);
-        $dome.append($scaleSpaceTitle);
-        $dome.append($scaleSpace);
-        $dome.append($scaleSpaceInfo);
-        tDoG = "DoG";
-        if (benchmark) console.time(tDoG);
-        $DoG = $('<ul>', {
-          'class': 'thumbnails'
-        });
-        $DoGTitle = createTitle('DoG', 'Difference of Gaussian');
-        DoG = [];
-        for (idx = 0, _len2 = scaleSpace.length; idx < _len2; idx++) {
-          octave = scaleSpace[idx];
-          DoGRow = [];
-          for (index = 1, _ref2 = octave.length - 1; 1 <= _ref2 ? index <= _ref2 : index >= _ref2; 1 <= _ref2 ? index++ : index--) {
-            timeID = "Difference from " + (index - 1) + " to " + index;
-            if (benchmark && benchmarkDebug) console.time(timeID);
-            DoGcanvas = MM.diff(octave[index - 1], octave[index]);
-            if (benchmark && benchmarkDebug) console.timeEnd(timeID);
-            DoGRow.push(DoGcanvas);
-            label = timeID;
-            $thumbLi = createThumbnail(DoGcanvas, label, null, idx + 1);
-            $DoG.append($thumbLi);
-          }
-          DoG.push(DoGRow);
-        }
-        if (benchmark) timeTook = console.timeEnd(tDoG);
-        info = "DoG took " + timeTook + "ms";
-        $DoGInfo = createInfo(info);
-        $dome.append($DoGTitle);
-        $dome.append($DoG);
-        $dome.append($DoGInfo);
-        tMaxMin = 'MaxMin';
-        if (benchmark) console.time(tMaxMin);
-        $MaxMin = $('<ul>', {
-          'class': 'thumbnails'
-        });
-        $MaxMinTitle = createTitle('Find MaxMin');
-        for (idx = 0, _len3 = DoG.length; idx < _len3; idx++) {
-          octave = DoG[idx];
-          for (index = 1, _ref3 = octave.length - 2; 1 <= _ref3 ? index <= _ref3 : index >= _ref3; 1 <= _ref3 ? index++ : index--) {
-            prev = octave[index - 1];
-            current = octave[index];
-            next = octave[index + 1];
-            keyPoints = MM.maxmin(prev, current, next, 0);
-            $MaxMin.append(keyPoints);
-            label = "Current index: " + index;
-            $thumbLi = createThumbnail(keyPoints, label, null, idx + 1);
-            $MaxMin.append($thumbLi);
-          }
-        }
-        if (benchmark) timeTook = console.timeEnd(tMaxMin);
-        info = "MaxMin took " + timeTook + "ms";
-        $MaxMinInfo = createInfo(info);
-        $dome.append($MaxMinTitle);
-        $dome.append($MaxMin);
-        $dome.append($MaxMinInfo);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        if (benchmark) timeTook = console.timeEnd("SIFT");
-        info = "SIFT total time " + timeTook + "ms";
-        $info = createInfo(info);
-        $dome.append($info);
       }
     });
   });

@@ -6,8 +6,61 @@ block append css
 block append scripts
 	script(src='/javascripts/VoloCL.js')
 	script(src='/javascripts/MM.js')
-	script(src='/javascripts/webcl.js')
-	
+	script(src='/libs/three.js')
+	:coffeescript
+		$ ->
+			$img = $ '#img'
+			img = MM.getImage $img[0], 1, true, 'Float32Array'
+			imgColor = MM.getImage $img[0]
+			$dome = $ '#dome'
+			
+			# Three
+			WIDTH = 800
+			HEIGHT = 600
+			ASPECT = WIDTH/HEIGHT
+
+			camera = new THREE.PerspectiveCamera 45, ASPECT, 1, 10000
+			camera.position.z = 150
+			#camera.position.x = camera.position.y = camera.position.z = 150
+			#camera.lookAt new THREE.Vector3()
+
+			scene = new THREE.Scene()
+			img = 
+				width: 50
+				height: 50
+				data: new Float32Array 50*50
+			for value,idx in img.data
+				img.data[ idx ] = Math.random()*25
+			
+
+			plane = new THREE.PlaneGeometry img.width, img.height, img.width, img.height
+
+			i = 0
+			for x in [0..img.width-1]
+				for y in [0..img.height-1]
+					idx = y*img.width+x
+
+					plane.vertices[ i ].z = img.data[ idx ]
+					i++
+
+			plane.computeCentroids()
+			plane.computeFaceNormals()
+			#plane.computeVertexNormals()
+
+			mesh = new THREE.Mesh plane, new THREE.MeshNormalMaterial()
+			scene.add mesh
+
+			renderer = new THREE.WebGLRenderer()
+			renderer.setSize WIDTH, HEIGHT
+
+			$dome.append renderer.domElement
+
+			control = new THREE.TrackballControls camera, $dome[0]
+
+			scene.add new THREE.AxisHelper()
+
+			renderer.render scene, camera
+
 block content
 	.row
 		.span6

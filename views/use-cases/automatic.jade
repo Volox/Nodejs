@@ -4,6 +4,7 @@ block append css
 	link(rel='stylesheet', href='/stylesheets/automatic.css')
 
 block append scripts
+	script(src='/libs/three.js')
 	script(src='/javascripts/VoloCL.js')
 	script(src='/javascripts/MM.js')
 	script(src='/javascripts/webcl.js')
@@ -11,7 +12,7 @@ block append scripts
 block content
 	.row
 		.span6.center.dropzoneImage
-			img#img(src="/img/test.jpg", title="Image")
+			canvas#img(title="Image", width=480, height=360)
 		.span6
 			.well Click to execute SIFT on the image on the left
 			.alert.alert-info Drag an image over the image area to change

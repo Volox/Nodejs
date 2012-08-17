@@ -1,3 +1,81 @@
+class Image
+	DEFAULT_VALUE: 0
+
+	constructor: ( obj )->
+		#Check input data
+		@data = null
+		@width = 0
+		@height = 0
+		@channels = 0
+
+		# Array data
+		ret = true
+		if arguments.length==3
+			ret = @setArray.apply @, arguments
+		if arguments.length==2
+			ret  = @setEmpty.apply @, arguments
+		else if arguments.length==1
+			if obj instanceof HTMLElement
+				ret = @setCanvas obj
+			else
+				ret = @setImageObject obj
+
+		if !ret
+			throw new Error 'Unable to create the image'
+
+	setEmpty: ( width, height )->
+		if width? and width>0 and height? and height>0
+			@width = width
+			@height = height
+			@channels = 1
+			@data = new Float32Array @width*@height
+			return true
+		else
+			return false
+	setCanvas: ( canvas )->
+		try
+			ctx = canvas.getContext '2d'
+			data = ctx.getImageData 0, 0, canvas.width, canvas.height
+			@width = data.width
+			@height = data.height
+			@data = data.data
+			@channels = data.data.length
+			return true
+		catch ex
+			return false
+
+	setArray: ( ArrayData, width, height, channels=1 )->
+		# Check array size
+		if ( channels==1 and width*height==ArrayData.length ) or ( channels==ArrayData.length and width*height==ArrayData[0].length )
+			@channels = channels
+			@data = ArrayData
+			@width = width
+			@height = height
+			return true
+		else
+			return false
+
+	setImageObject: ( image )->
+		if image.data? and image.width? and image.height? and image.data.length==image.width*image.height
+			return @setArray image.data, image.width, image.height
+		else			
+			return false
+
+	at: ( x, y, channel=0 )->
+		x = parseInt x
+		y = parseInt y
+		if x<0 or x>@width-1 then return @DEFAULT_VALUE
+		if y<0 or y>@height-1 then return @DEFAULT_VALUE
+		index =@_i x, y
+		if @channels==1
+			return @data[ index ]
+		else
+			return @data[ channel ][ index ]
+
+	# Private methods
+	_i: (x,y)->
+		return y*@width+x
+
 class MM
 	@toImage: ( imageData, fitRange=false ) ->
 		w = imageData.width
@@ -23,7 +101,7 @@ class MM
 		canvas = document.createElement 'canvas'
 		canvas.width = w
 		canvas.height = h
-		canvasCtx = canvas.getContext "2d"
+		canvasCtx = canvas.getContext '2d'
 		imageData = canvasCtx.createImageData w, h
 		return canvas: canvas, context: canvasCtx, data: imageData
 
@@ -193,7 +271,7 @@ class MM
 
 
 
-	@maxmin: ( prev, current, next, threshold=0 )->
+	@maxmin: ( prev, current, next )->
 		w = current.width
 		h = current.height
 		# Check dimension
@@ -212,7 +290,6 @@ class MM
 		kernelArgs.addInput 'current', current.data
 		kernelArgs.addInput 'next', next.data
 		kernelArgs.addOutput 'output', output.data
-		kernelArgs.addArgument 'threshold', threshold, 'FLOAT'
 		kernelArgs.addArgument 'width', w
 		kernelArgs.addArgument 'height', h
 
@@ -220,13 +297,60 @@ class MM
 		
 		return output
 
-	@sift: ( imageObj, handlers )->
-		###
-		image = MM.getImage imageObj, true, 'Float32Array'
-		h = image.data.height
-		w = image.data.weight
-		####
+	@refine: ( image, keyPoints )->
+		w = image.width
+		h = image.height
+		if w!=keyPoints.width or h!=keyPoints.height
+			throw new Error 'Dimension mismatch'
 
+		# Create the output image
+		output =
+			width: w
+			height: h
+			data: new Float32Array w*h
+
+		# Create the parameter object
+		kernelArgs = MM.VoloTest.createKernelArgs()
+		kernelArgs.addInput 'image', image.data
+		kernelArgs.addInput 'keypoints', keyPoints.data
+		kernelArgs.addOutput 'output', output.data
+		kernelArgs.addArgument 'width', w
+		kernelArgs.addArgument 'height', h
+
+		MM.VoloTest.runKernel 'clRefine', [ w, h ], kernelArgs
+
+		return output
+
+	@magor: ( image, keyPoints )->
+		w = image.width
+		h = image.height
+		if w!=keyPoints.width or h!=keyPoints.height
+			throw new Error 'Dimension mismatch'
+
+		# Create the output image
+		orientation =
+			width: w
+			height: h
+			data: new Float32Array w*h
+		magnitude =
+			width: w
+			height: h
+			data: new Float32Array w*h
+
+		# Create the parameter object
+		kernelArgs = MM.VoloTest.createKernelArgs()
+		kernelArgs.addInput 'image', image.data
+		kernelArgs.addInput 'keypoints', keyPoints.data
+		kernelArgs.addOutput 'magnitude', magnitude.data
+		kernelArgs.addOutput 'orientation', orientation.data
+		kernelArgs.addArgument 'width', w
+		kernelArgs.addArgument 'height', h
+
+		MM.VoloTest.runKernel 'clMagOrient', [ w, h ], kernelArgs
+
+		return magnitude: magnitude, orientation: orientation
+
+	@sift: ( imageObj, handlers )->
 		# variables
 		times = 
 			SIFT: 'SIFT'
@@ -234,6 +358,7 @@ class MM
 			DoG: 'DoG'
 			MaxMin: 'MaxMin'
 			KeyPointRef: 'KeyPointRef'
+			MagOr: 'MagOr'
 
 		octavesNum = 4
 		blurSteps = 5
@@ -249,9 +374,6 @@ class MM
 
 		# Gauss size for blurring
 		gaussSize = 7
-
-		# threshold for min max
-		threshold = 0.03
 
 		try
 			# Start SIFT timer
@@ -314,7 +436,7 @@ class MM
 					current = octave[index]
 					next = octave[index+1]
 
-					output = MM.maxmin prev, current, next, threshold
+					output = MM.maxmin prev, current, next
 
 					MaxMinRow.push output
 				MaxMin.push MaxMinRow
@@ -328,14 +450,34 @@ class MM
 
 			# Refine keypoints
 			console.time times.KeyPointRef
-			for DoGRow,octave in DoG
-				for image,blurStep in DoGRow
-					# do asdad
+			KeyPoints = []
+			for octave,idx in DoG
+				KeyPointsRow = []
+				for index in [1..octave.length-2]
+					image = octave[index]
+					output = MM.refine image, MaxMin[idx][index-1]
+					KeyPointsRow.push output
+				KeyPoints.push KeyPointsRow
 			time = console.timeEnd times.KeyPointRef
 			# call handler if present
-			if handlers.refine? then handlers.refine Refine, time
+			if handlers.refine? then handlers.refine KeyPoints, time
 
 
+
+
+			# Find magnitude and orientation
+			console.time times.MagOr
+			MagOr = []
+			for octave,idx in DoG
+				MagOrRow = []
+				for index in [1..octave.length-2]
+					image = octave[ index ]
+					data = MM.magor image, KeyPoints[idx][index-1]
+					MagOrRow.push data
+				MagOr.push MagOrRow
+			time = console.timeEnd times.MagOr
+			# call handler if present
+			if handlers.magor? then handlers.magor MagOr, time
 		catch ex
 			console.log ex
 		finally
@@ -345,6 +487,7 @@ class MM
 
 # Make globally available
 window.MM = MM
+window.MMImage = Image
 
 # Create an instance
 MM.VoloTest = new VoloCL '/opencl/volo.cl'

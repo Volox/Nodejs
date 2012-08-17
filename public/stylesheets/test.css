@@ -1,3 +1,6 @@
+canvas {
+  border: 1px solid #000;
+}
 video {
   padding: 10px;
   border: 1px solid #999;
