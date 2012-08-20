@@ -1,11 +1,16 @@
 (function() {
-  var Image, MM;
 
-  Image = (function() {
+  /*
+  @class MMImage
+  */
 
-    Image.prototype.DEFAULT_VALUE = 0;
+  var MM, MMImage;
 
-    function Image(obj) {
+  MMImage = (function() {
+
+    MMImage.prototype.DEFAULT_VALUE = 0;
+
+    function MMImage(obj) {
       var ret;
       this.data = null;
       this.width = 0;
@@ -25,7 +30,7 @@
       if (!ret) throw new Error('Unable to create the image');
     }
 
-    Image.prototype.setEmpty = function(width, height) {
+    MMImage.prototype.setEmpty = function(width, height) {
       if ((width != null) && width > 0 && (height != null) && height > 0) {
         this.width = width;
         this.height = height;
@@ -37,7 +42,7 @@
       }
     };
 
-    Image.prototype.setCanvas = function(canvas) {
+    MMImage.prototype.setCanvas = function(canvas) {
       var ctx, data;
       try {
         ctx = canvas.getContext('2d');
@@ -52,7 +57,7 @@
       }
     };
 
-    Image.prototype.setArray = function(ArrayData, width, height, channels) {
+    MMImage.prototype.setArray = function(ArrayData, width, height, channels) {
       if (channels == null) channels = 1;
       if ((channels === 1 && width * height === ArrayData.length) || (channels === ArrayData.length && width * height === ArrayData[0].length)) {
         this.channels = channels;
@@ -65,7 +70,7 @@
       }
     };
 
-    Image.prototype.setImageObject = function(image) {
+    MMImage.prototype.setImageObject = function(image) {
       if ((image.data != null) && (image.width != null) && (image.height != null) && image.data.length === image.width * image.height) {
         return this.setArray(image.data, image.width, image.height);
       } else {
@@ -73,7 +78,7 @@
       }
     };
 
-    Image.prototype.at = function(x, y, channel) {
+    MMImage.prototype.at = function(x, y, channel) {
       var index;
       if (channel == null) channel = 0;
       x = parseInt(x);
@@ -88,13 +93,17 @@
       }
     };
 
-    Image.prototype._i = function(x, y) {
+    MMImage.prototype._i = function(x, y) {
       return y * this.width + x;
     };
 
-    return Image;
+    return MMImage;
 
   })();
+
+  /*
+  @class MM
+  */
 
   MM = (function() {
 
@@ -156,6 +165,20 @@
       return output;
     };
 
+    MM.scale = function(image, scale) {
+      var canvas, canvasCtx, h, imageData, output, w;
+      w = image.width * scale;
+      h = image.height * scale;
+      canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      canvasCtx = canvas.getContext("2d");
+      imageData = canvasCtx.getImageData(0, 0, w, h);
+      MM.toRGB(image, imageData);
+      output = MM.toFloat(imageData);
+      return output;
+    };
+
     MM.gauss2d = function(size, sigma, center) {
       var cX, cY, exp, front, i, index, rX, rY, result, sum, value, x, y, _len;
       if (sigma == null) sigma = size / 2;
@@ -183,12 +206,12 @@
       return result;
     };
 
-    MM.toRGB = function(image, imageData, fitRange) {
+    MM.toRGB = function(image, output, fitRange) {
       var h, idx, kernelArgs, max, min, w, x, y, _ref, _ref2;
       if (fitRange == null) fitRange = false;
       w = image.width;
       h = image.height;
-      if (w !== imageData.width || h !== imageData.height) {
+      if (w !== output.width || h !== output.height) {
         throw new Error('Dimension mismatch');
       }
       max = -1;
@@ -205,7 +228,7 @@
       }
       kernelArgs = MM.VoloTest.createKernelArgs();
       kernelArgs.addInput('source', image.data);
-      kernelArgs.addOutput('destination', imageData.data);
+      kernelArgs.addOutput('destination', output.data);
       kernelArgs.addArgument('width', w);
       kernelArgs.addArgument('height', h);
       kernelArgs.addArgument('min', min, 'FLOAT');
@@ -214,21 +237,17 @@
     };
 
     MM.toFloat = function(image) {
-      var FloatImage, h, kernelArgs, w;
+      var h, kernelArgs, output, w;
       w = image.width;
       h = image.height;
-      FloatImage = {
-        width: w,
-        height: h,
-        data: new Float32Array(w * h)
-      };
+      output = new MMImage(w, h);
       kernelArgs = MM.VoloTest.createKernelArgs();
       kernelArgs.addInput('source', image.data);
-      kernelArgs.addOutput('destination', FloatImage.data);
+      kernelArgs.addOutput('destination', output.data);
       kernelArgs.addArgument('width', w);
       kernelArgs.addArgument('height', h);
       MM.VoloTest.runKernel('clFloat', [w, h], kernelArgs);
-      return FloatImage;
+      return output;
     };
 
     MM.blur = function(image, sigma, gaussSize) {
@@ -237,11 +256,7 @@
       if (gaussSize == null) gaussSize = 7;
       w = image.width;
       h = image.height;
-      output = {
-        width: w,
-        height: h,
-        data: new Float32Array(w * h)
-      };
+      output = new MMImage(w, h);
       filter = MM.gauss2d(gaussSize, sigma);
       kernelArgs = MM.VoloTest.createKernelArgs();
       kernelArgs.addInput('source', image.data);
@@ -262,11 +277,7 @@
       if (w !== img2.width || h !== img2.height) {
         throw new Error('Image size mismatch');
       }
-      output = {
-        width: w,
-        height: h,
-        data: new Float32Array(w * h)
-      };
+      output = new MMImage(w, h);
       kernelArgs = MM.VoloTest.createKernelArgs();
       kernelArgs.addInput('source1', img1.data);
       kernelArgs.addInput('source2', img2.data);
@@ -284,11 +295,7 @@
       if (w !== prev.width || w !== next.width || h !== prev.height || h !== next.height) {
         throw new Error('Dimension mismatch');
       }
-      output = {
-        width: w,
-        height: h,
-        data: new Float32Array(w * h)
-      };
+      output = new MMImage(w, h);
       kernelArgs = MM.VoloTest.createKernelArgs();
       kernelArgs.addInput('prev', prev.data);
       kernelArgs.addInput('current', current.data);
@@ -307,11 +314,7 @@
       if (w !== keyPoints.width || h !== keyPoints.height) {
         throw new Error('Dimension mismatch');
       }
-      output = {
-        width: w,
-        height: h,
-        data: new Float32Array(w * h)
-      };
+      output = new MMImage(w, h);
       kernelArgs = MM.VoloTest.createKernelArgs();
       kernelArgs.addInput('image', image.data);
       kernelArgs.addInput('keypoints', keyPoints.data);
@@ -329,16 +332,8 @@
       if (w !== keyPoints.width || h !== keyPoints.height) {
         throw new Error('Dimension mismatch');
       }
-      orientation = {
-        width: w,
-        height: h,
-        data: new Float32Array(w * h)
-      };
-      magnitude = {
-        width: w,
-        height: h,
-        data: new Float32Array(w * h)
-      };
+      orientation = new MMImage(w, h);
+      magnitude = new MMImage(w, h);
       kernelArgs = MM.VoloTest.createKernelArgs();
       kernelArgs.addInput('image', image.data);
       kernelArgs.addInput('keypoints', keyPoints.data);
@@ -354,43 +349,46 @@
     };
 
     MM.sift = function(imageObj, handlers) {
-      var DoG, DoGImage, DoGRow, KeyPoints, KeyPointsRow, MagOr, MagOrRow, MaxMin, MaxMinRow, ScaleSpace, ScaleSpaceRow, blurBaseValue, blurImage, blurStep, blurSteps, current, data, gaussSize, idx, image, img, img1, img2, index, next, octave, octaves, octavesNum, output, prev, scale, time, times, _i, _len, _len2, _len3, _len4, _ref, _ref2, _ref3, _ref4, _ref5, _ref6;
+      var DoG, DoGImage, DoGRow, KeyPoints, KeyPointsRow, MagOr, MagOrRow, MaxMin, MaxMinRow, ScaleSpace, ScaleSpaceRow, blurBaseValue, blurImage, blurStep, blurSteps, current, data, gaussSize, idx, image, img, img1, img2, index, next, octave, octaves, octavesNum, output, prev, scale, time, times, totalTime, _i, _len, _len2, _len3, _len4, _ref, _ref2, _ref3, _ref4, _ref5, _ref6;
       times = {
         SIFT: 'SIFT',
-        ScaleSpace: 'ScaleSpace',
-        DoG: 'DoG',
-        MaxMin: 'MaxMin',
-        KeyPointRef: 'KeyPointRef',
-        MagOr: 'MagOr'
+        ScaleSpace: 'Scale space',
+        DoG: 'Difference of Gaussian',
+        MaxMin: 'Detecting Max/Min points',
+        KeyPointRef: 'Key points refinement',
+        MagOr: 'Computing magnitude and orientation'
       };
       octavesNum = 4;
       blurSteps = 5;
       octaves = [];
       for (octave = 1; 1 <= octavesNum ? octave <= octavesNum : octave >= octavesNum; 1 <= octavesNum ? octave++ : octave--) {
-        if (octave === 1) octaves.push(2);
-        if (octave !== 1) octaves.push(1 / (octave - 1));
+        octaves.push(1 / octave);
       }
       blurBaseValue = 0.707;
       gaussSize = 7;
       try {
-        console.time(times.SIFT);
+        console.log(times.SIFT);
+        console.group();
+        totalTime = 0;
+        image = MM.getImage(imageObj, 2);
         ScaleSpace = [];
         console.time(times.ScaleSpace);
-        for (_i = 0, _len = octaves.length; _i < _len; _i++) {
-          scale = octaves[_i];
+        for (index = 0, _len = octaves.length; index < _len; index++) {
+          scale = octaves[index];
           ScaleSpaceRow = [];
           for (blurStep = 0, _ref = blurSteps - 1; 0 <= _ref ? blurStep <= _ref : blurStep >= _ref; 0 <= _ref ? blurStep++ : blurStep--) {
-            img = MM.getImage(imageObj, scale, true, 'Float32Array');
-            if (blurStep !== 0) {
-              blurImage = MM.blur(img, blurBaseValue * blurStep, gaussSize);
+            img = MM.getImage(image.canvas, scale, true, 'Float32Array');
+            if (index === 0 && blurStep === 0) {
+              blurImage = MM.blur(img, 1, gaussSize);
             } else {
-              blurImage = img;
+              blurImage = MM.blur(img, blurBaseValue * Math.pow(Math.SQRT2, blurStep), gaussSize);
             }
             ScaleSpaceRow.push(blurImage);
           }
           ScaleSpace.push(ScaleSpaceRow);
         }
         time = console.timeEnd(times.ScaleSpace);
+        totalTime += time;
         if (handlers.scale != null) handlers.scale(ScaleSpace, time);
         DoG = [];
         console.time(times.DoG);
@@ -405,11 +403,12 @@
           DoG.push(DoGRow);
         }
         time = console.timeEnd(times.DoG);
+        totalTime += time;
         if (handlers.dog != null) handlers.dog(DoG, time);
         console.time(times.MaxMin);
         MaxMin = [];
-        for (idx = 0, _len2 = DoG.length; idx < _len2; idx++) {
-          octave = DoG[idx];
+        for (_i = 0, _len2 = DoG.length; _i < _len2; _i++) {
+          octave = DoG[_i];
           MaxMinRow = [];
           for (index = 1, _ref4 = octave.length - 2; 1 <= _ref4 ? index <= _ref4 : index >= _ref4; 1 <= _ref4 ? index++ : index--) {
             prev = octave[index - 1];
@@ -421,6 +420,7 @@
           MaxMin.push(MaxMinRow);
         }
         time = console.timeEnd(times.MaxMin);
+        totalTime += time;
         if (handlers.maxmin != null) handlers.maxmin(MaxMin, time);
         console.time(times.KeyPointRef);
         KeyPoints = [];
@@ -435,6 +435,7 @@
           KeyPoints.push(KeyPointsRow);
         }
         time = console.timeEnd(times.KeyPointRef);
+        totalTime += time;
         if (handlers.refine != null) handlers.refine(KeyPoints, time);
         console.time(times.MagOr);
         MagOr = [];
@@ -449,11 +450,13 @@
           MagOr.push(MagOrRow);
         }
         time = console.timeEnd(times.MagOr);
+        totalTime += time;
         if (handlers.magor != null) handlers.magor(MagOr, time);
       } catch (ex) {
         console.log(ex);
       } finally {
-        console.timeEnd(times.SIFT);
+        console.groupEnd();
+        console.log("" + times.SIFT + " total time " + totalTime + "ms");
       }
     };
 
@@ -463,7 +466,7 @@
 
   window.MM = MM;
 
-  window.MMImage = Image;
+  window.MMImage = MMImage;
 
   MM.VoloTest = new VoloCL('/opencl/volo.cl');
 

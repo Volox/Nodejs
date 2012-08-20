@@ -1,4 +1,7 @@
-class Image
+###
+@class MMImage
+###
+class MMImage
 	DEFAULT_VALUE: 0
 
 	constructor: ( obj )->
@@ -76,6 +79,12 @@ class Image
 	_i: (x,y)->
 		return y*@width+x
 
+
+
+
+###
+@class MM
+###
 class MM
 	@toImage: ( imageData, fitRange=false ) ->
 		w = imageData.width
@@ -136,6 +145,19 @@ class MM
 		
 		return output
 
+	@scale: ( image, scale )->
+		w = image.width*scale
+		h = image.height*scale
+
+		canvas = document.createElement 'canvas'
+		canvas.width = w
+		canvas.height = h
+
+		canvasCtx = canvas.getContext "2d"
+		imageData = canvasCtx.getImageData 0, 0, w, h
+		MM.toRGB image, imageData
+		output = MM.toFloat imageData
+		return output
 
 
 
@@ -168,14 +190,14 @@ class MM
 		
 		return result
 
-	@toRGB: ( image, imageData, fitRange=false )->
+	@toRGB: ( image, output, fitRange=false )->
 		# check dimension
 		w = image.width
 		h = image.height
-		if w!=imageData.width or h!=imageData.height
+		if w!=output.width or h!=output.height
 			throw new Error 'Dimension mismatch'
 
-		# Wrong data
+		# Set initial wrong data for range fitting
 		max = -1
 		min = 1
 		if fitRange
@@ -188,7 +210,7 @@ class MM
 
 		kernelArgs = MM.VoloTest.createKernelArgs()
 		kernelArgs.addInput 'source', image.data
-		kernelArgs.addOutput 'destination', imageData.data
+		kernelArgs.addOutput 'destination', output.data
 		kernelArgs.addArgument 'width', w
 		kernelArgs.addArgument 'height', h
 		kernelArgs.addArgument 'min', min, 'FLOAT'
@@ -200,31 +222,25 @@ class MM
 	@toFloat: ( image )->
 		w = image.width
 		h = image.height
-		FloatImage = 
-			width: w
-			height: h
-			data: new Float32Array w*h
+		output = new MMImage w, h
 
 		kernelArgs = MM.VoloTest.createKernelArgs()
 		kernelArgs.addInput 'source', image.data
-		kernelArgs.addOutput 'destination', FloatImage.data
+		kernelArgs.addOutput 'destination', output.data
 		kernelArgs.addArgument 'width', w
 		kernelArgs.addArgument 'height', h
 
 		MM.VoloTest.runKernel 'clFloat', [ w, h ], kernelArgs
 
-		return FloatImage
-
+		return output
+	
 
 	@blur: ( image, sigma=1, gaussSize=7 ) ->
 		# Copy the image into a canvas
 		w = image.width
 		h = image.height
 		# Create the output image 
-		output =
-			width: w
-			height: h
-			data: new Float32Array w*h
+		output = new MMImage w, h
 		
 		# Gaussaian 2d kernel (Float32Array)
 		filter = MM.gauss2d gaussSize, sigma
@@ -252,10 +268,7 @@ class MM
 		if w!=img2.width or h!=img2.height
 			throw new Error 'Image size mismatch'
 
-		output =
-			width : w
-			height: h
-			data: new Float32Array w*h
+		output = new MMImage w, h
 		
 		# Create the parameter object
 		kernelArgs = MM.VoloTest.createKernelArgs()
@@ -279,10 +292,7 @@ class MM
 			throw new Error 'Dimension mismatch'
 		
 		# Create the output image
-		output =
-			width: w
-			height: h
-			data: new Float32Array w*h
+		output = new MMImage w, h
 
 		# Create the parameter object
 		kernelArgs = MM.VoloTest.createKernelArgs()
@@ -304,10 +314,7 @@ class MM
 			throw new Error 'Dimension mismatch'
 
 		# Create the output image
-		output =
-			width: w
-			height: h
-			data: new Float32Array w*h
+		output = new MMImage w, h
 
 		# Create the parameter object
 		kernelArgs = MM.VoloTest.createKernelArgs()
@@ -328,14 +335,8 @@ class MM
 			throw new Error 'Dimension mismatch'
 
 		# Create the output image
-		orientation =
-			width: w
-			height: h
-			data: new Float32Array w*h
-		magnitude =
-			width: w
-			height: h
-			data: new Float32Array w*h
+		orientation = new MMImage w, h
+		magnitude = new MMImage w, h
 
 		# Create the parameter object
 		kernelArgs = MM.VoloTest.createKernelArgs()
@@ -354,11 +355,11 @@ class MM
 		# variables
 		times = 
 			SIFT: 'SIFT'
-			ScaleSpace: 'ScaleSpace'
-			DoG: 'DoG'
-			MaxMin: 'MaxMin'
-			KeyPointRef: 'KeyPointRef'
-			MagOr: 'MagOr'
+			ScaleSpace: 'Scale space'
+			DoG: 'Difference of Gaussian'
+			MaxMin: 'Detecting Max/Min points'
+			KeyPointRef: 'Key points refinement'
+			MagOr: 'Computing magnitude and orientation'
 
 		octavesNum = 4
 		blurSteps = 5
@@ -366,10 +367,8 @@ class MM
 		# Calculate octaves
 		octaves = []
 		for octave in [1..octavesNum]
-			octaves.push 2 if octave==1
-			octaves.push 1/(octave-1) if octave!=1
+			octaves.push 1/octave
 		
-		# Compose blurMatix
 		blurBaseValue = 0.707
 
 		# Gauss size for blurring
@@ -377,27 +376,36 @@ class MM
 
 		try
 			# Start SIFT timer
-			console.time times.SIFT
+			console.log times.SIFT
+			console.group()
+			totalTime = 0
+
+			# blur image and double dimension
+			image = MM.getImage imageObj, 2
+			#image = MM.blur image, 0.5, gaussSize
 
 			# First Perform ScaleSpace + Blur
 			ScaleSpace = []
 			console.time times.ScaleSpace
 			
-			for scale in octaves
+			for scale,index in octaves
 				ScaleSpaceRow = []
 				for blurStep in [0..blurSteps-1]
-					# get the image in BW and convert to float array
-					img = MM.getImage imageObj, scale, true, 'Float32Array'
-					if blurStep!=0
-						blurImage = MM.blur img, blurBaseValue*blurStep, gaussSize
+
+					# get the image and scale it
+					img = MM.getImage image.canvas, scale, true, 'Float32Array'
+
+					# blur the image
+					if index==0 and blurStep==0
+						blurImage = MM.blur img, 1, gaussSize
 					else
-						blurImage = img
+						blurImage = MM.blur img, blurBaseValue*Math.pow(Math.SQRT2,blurStep), gaussSize
 
 					ScaleSpaceRow.push blurImage
 				ScaleSpace.push ScaleSpaceRow
 			
 			time = console.timeEnd times.ScaleSpace
-			
+			totalTime += time
 			# call handler if present
 			if handlers.scale? then handlers.scale ScaleSpace, time
 
@@ -410,7 +418,6 @@ class MM
 			for octave in [0..octavesNum-1]
 				# Create the row for the octave
 				DoGRow = []
-				
 				# for each octave perform "blurSteps" blur
 				for blurStep in [0..blurSteps-2]
 					img1 = ScaleSpace[ octave ][ blurStep ]
@@ -421,6 +428,7 @@ class MM
 				DoG.push DoGRow
 
 			time = console.timeEnd times.DoG
+			totalTime += time
 			# call handler if present
 			if handlers.dog? then handlers.dog DoG, time
 
@@ -429,7 +437,7 @@ class MM
 			# Find MaxMin
 			console.time times.MaxMin
 			MaxMin = []
-			for octave,idx in DoG
+			for octave in DoG
 				MaxMinRow = []
 				for index in [1..octave.length-2]
 					prev = octave[index-1]
@@ -442,6 +450,7 @@ class MM
 				MaxMin.push MaxMinRow
 
 			time = console.timeEnd times.MaxMin
+			totalTime += time
 			# call handler if present
 			if handlers.maxmin? then handlers.maxmin MaxMin, time
 
@@ -459,6 +468,7 @@ class MM
 					KeyPointsRow.push output
 				KeyPoints.push KeyPointsRow
 			time = console.timeEnd times.KeyPointRef
+			totalTime += time
 			# call handler if present
 			if handlers.refine? then handlers.refine KeyPoints, time
 
@@ -476,18 +486,20 @@ class MM
 					MagOrRow.push data
 				MagOr.push MagOrRow
 			time = console.timeEnd times.MagOr
+			totalTime += time
 			# call handler if present
 			if handlers.magor? then handlers.magor MagOr, time
 		catch ex
 			console.log ex
 		finally
-			console.timeEnd times.SIFT
+			console.groupEnd()
+			console.log "#{times.SIFT} total time #{totalTime}ms"
 
 		return
 
 # Make globally available
 window.MM = MM
-window.MMImage = Image
+window.MMImage = MMImage
 
 # Create an instance
 MM.VoloTest = new VoloCL '/opencl/volo.cl'

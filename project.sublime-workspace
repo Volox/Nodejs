@@ -4,24 +4,92 @@
 		"selected_items":
 		[
 			[
+				"TI",
+				"times"
+			],
+			[
+				"tim",
+				"time"
+			],
+			[
+				"si",
+				"SIFT"
+			],
+			[
+				"time",
+				"times"
+			],
+			[
+				"get",
+				"getImage"
+			],
+			[
+				"ima",
+				"image"
+			],
+			[
+				"to",
+				"toFloat"
+			],
+			[
+				"h",
+				"height"
+			],
+			[
+				"img",
+				"imageObj"
+			],
+			[
+				"bl",
+				"blurImage"
+			],
+			[
+				"max",
+				"maxOrient"
+			],
+			[
+				"ma",
+				"maxPeak"
+			],
+			[
+				"BIN",
+				"BIN_NUMBER"
+			],
+			[
+				"he",
+				"height"
+			],
+			[
+				"con",
+				"continue"
+			],
+			[
+				"D",
+				"Dxy"
+			],
+			[
+				"mag",
+				"magor"
+			],
+			[
+				"MM",
+				"MMImage"
+			],
+			[
+				"curr",
+				"currIdx"
+			],
+			[
+				"DO",
+				"DoG"
+			],
+			[
 				"di",
 				"diag"
 			],
 			[
-				"he",
-				"height-1"
-			],
-			[
-				"ima",
-				"imgMag"
-			],
-			[
 				"w",
 				"width"
-			],
-			[
-				"h",
-				"h-1"
 			],
 			[
 				"R",
@@ -52,10 +120,6 @@
 				"setEmpty"
 			],
 			[
-				"con",
-				"context"
-			],
-			[
 				"be",
 				"beginPath"
 			],
@@ -64,16 +128,8 @@
 				"context"
 			],
 			[
-				"ma",
-				"mag"
-			],
-			[
 				"o",
 				"orient"
-			],
-			[
-				"img",
-				"image"
 			],
 			[
 				"A",
@@ -114,10 +170,6 @@
 			[
 				"arra",
 				"ArrayData"
-			],
-			[
-				"get",
-				"getImageData"
 			],
 			[
 				"im",
@@ -228,10 +280,6 @@
 				"DoG"
 			],
 			[
-				"bl",
-				"blurStep"
-			],
-			[
 				"oc",
 				"octave"
 			],
@@ -244,16 +292,8 @@
 				"MaxMin"
 			],
 			[
-				"time",
-				"timeEnd"
-			],
-			[
 				"ori",
 				"orient"
-			],
-			[
-				"tim",
-				"timeEnd"
 			],
 			[
 				"DoG",
@@ -324,14 +364,6 @@
 				"BlurredImages"
 			],
 			[
-				"D",
-				"DoG"
-			],
-			[
-				"to",
-				"toRGB"
-			],
-			[
 				"s",
 				"src"
 			],
@@ -382,10 +414,6 @@
 			[
 				"S",
 				"ScaleSpace"
-			],
-			[
-				"DO",
-				"DoGRow"
 			],
 			[
 				"octa",
@@ -463,7 +491,7 @@
 			"file": "public/coffeescripts/webcl.coffee",
 			"settings":
 			{
-				"buffer_size": 5381,
+				"buffer_size": 5584,
 				"line_ending": "Windows"
 			}
 		},
@@ -471,7 +499,7 @@
 			"file": "public/coffeescripts/MM.coffee",
 			"settings":
 			{
-				"buffer_size": 11545,
+				"buffer_size": 12023,
 				"line_ending": "Windows"
 			}
 		},
@@ -479,7 +507,7 @@
 			"file": "public/opencl/volo.cl",
 			"settings":
 			{
-				"buffer_size": 8103,
+				"buffer_size": 8391,
 				"line_ending": "Windows"
 			}
 		},
@@ -710,6 +738,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"PI",
+			"lowContrastThreshold",
 			"getIndex",
 			"imgOr",
 			"imgMag",
@@ -743,7 +773,7 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
@@ -751,15 +781,15 @@
 					"file": "public/coffeescripts/webcl.coffee",
 					"settings":
 					{
-						"buffer_size": 5381,
+						"buffer_size": 5584,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4882,
-								4882
+								4667,
+								4667
 							]
 						],
 						"settings":
@@ -768,7 +798,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1888.0,
+						"translation.y": 2445.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -778,15 +808,15 @@
 					"file": "public/coffeescripts/MM.coffee",
 					"settings":
 					{
-						"buffer_size": 11545,
+						"buffer_size": 12023,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6819,
-								6819
+								9024,
+								9024
 							]
 						],
 						"settings":
@@ -796,7 +826,7 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4893.0,
+						"translation.y": 5330.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -806,15 +836,15 @@
 					"file": "public/opencl/volo.cl",
 					"settings":
 					{
-						"buffer_size": 8103,
+						"buffer_size": 8391,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3164,
-								3164
+								1540,
+								1540
 							]
 						],
 						"settings":
@@ -824,7 +854,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1305.0,
+						"translation.y": 659.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"

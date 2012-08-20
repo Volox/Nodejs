@@ -46,6 +46,12 @@ createThumbnail = (image, label, caption, ratio=1)->
 	return $thumbLi
 
 jQuery ($) ->
+	# UI related
+	$( '#dome' ).on 'click', '.page-header', ->
+		$( @ ).next( 'ul.thumbnails' ).toggle()
+		return
+
+	# Load the image
 	myImage = new Image()
 	myImage.onload = () ->
 		$canvas = $ '#img'
@@ -55,10 +61,9 @@ jQuery ($) ->
 
 		return
 	myImage.src = '/img/scene.jpg'
+	
 
-	$( '#dome' ).on 'click', '.page-header', ->
-		$( @ ).next( 'ul.thumbnails' ).toggle()
-		return
+	# Do SIFT on click
 	$( '#clickme' ).click ->
 		$dome = $ '#dome'
 		$dome.empty()
@@ -66,39 +71,40 @@ jQuery ($) ->
 
 		# get the image
 		$img = $ '#img'
+		DOM = 
+			scale: true
+			dog: true
+			maxmin: true
+			refine: true
+			magor: true
 
 		sift = true
 		if sift
-			myScaleSpace = null
 			MM.sift $img[0],
-				scale: ( ScaleSpace, time )->
-					myScaleSpace = ScaleSpace
+				scale: if DOM.scale then ( ScaleSpace, time )->
 					# Create dom elements
 					$title = createTitle 'Scale space', "took #{time}ms"
 					$contents = $ '<ul>',
 						'class': 'thumbnails'
 
 					# insert the images into the dome elements
-					###
 					for row,octave in ScaleSpace
 						for image,blurStep in row
 							label = "octave #{octave+1}, blurStep #{blurStep+1}"
 							canvas = MM.toImage image
 							$thumbLi = createThumbnail canvas, label, null, octave+1
 							$contents.append $thumbLi
-					###
 
 					# add the elements to the visible DOM
 					$dome.append $title
 					$dome.append $contents
 					return
-				dog: ( DoG, time )->
+				dog: if DOM.dog then ( DoG, time )->
 					# Create dom elements
 					$title = createTitle 'DoG', "took #{time}ms"
 					$contents = $ '<ul>',
 						'class': 'thumbnails'
 
-					###
 					# insert the images into the dome elements
 					for DoGRow,octave in DoG
 						for image,blurStep in DoGRow
@@ -106,18 +112,16 @@ jQuery ($) ->
 							canvas = MM.toImage image
 							$thumbLi = createThumbnail canvas, label, null, octave+1
 							$contents.append $thumbLi
-					###
 
 					# add the elements to the visible DOM
 					$dome.append $title
 					$dome.append $contents
 					return
-				maxmin: ( MaxMin, time )->
+				maxmin: if DOM.maxmin then ( MaxMin, time )->
 					$title = createTitle 'MaxMin', "took #{time}ms"
 					$contents = $ '<ul>',
 						'class': 'thumbnails'
 
-					###
 					# insert the images into the dome elements
 					for MaxMinRow,octave in MaxMin
 						for image,blurStep in MaxMinRow
@@ -125,19 +129,16 @@ jQuery ($) ->
 							canvas = MM.toImage image
 							$thumbLi = createThumbnail canvas, label, null, octave+1
 							$contents.append $thumbLi
-					###
 
 					# add the elements to the visible DOM
 					$dome.append $title
 					$dome.append $contents
 					return
-				refine: ( Refine, time )->
+				refine: if DOM.refine then ( Refine, time )->
 					$title = createTitle 'KeyPoints refinement', "took #{time}ms"
 					$contents = $ '<ul>',
 						'class': 'thumbnails'
 
-
-					###
 					# insert the images into the dome elements
 					for RefineRow,octave in Refine
 						for image,blurStep in RefineRow
@@ -145,13 +146,12 @@ jQuery ($) ->
 							canvas = MM.toImage image
 							$thumbLi = createThumbnail canvas, label, null, octave+1
 							$contents.append $thumbLi
-					###
 
 					# add the elements to the visible DOM
 					$dome.append $title
 					$dome.append $contents
 					return
-				magor: ( MagOr, time )->
+				magor: if DOM.magor then ( MagOr, time )->
 					$title = createTitle 'Magnitude and Orientation', "took #{time}ms"
 					$contents = $ '<ul>',
 						'class': 'thumbnails'
@@ -177,13 +177,18 @@ jQuery ($) ->
 						return
 
 					# insert the images into the dome elements
+					magWeight = 100
+
 					for MagOrRow,octave in MagOr
 						for data,blurStep in MagOrRow
 							label = "Magnitude"
 							imgMag = new MMImage data.magnitude
 							imgOr = new MMImage data.orientation
-							image = myScaleSpace[octave][0]
-							canvas = MM.toImage image
+							
+							scale = 2 if octave==0
+							scale = 1/octave if octave>0
+							image = MM.getImage $img[0], scale
+							canvas = image.canvas
 
 							diag = Math.sqrt( Math.pow(imgMag.width,2) + Math.pow(imgMag.height,2) );
 							ctx = canvas.getContext '2d'
@@ -194,7 +199,7 @@ jQuery ($) ->
 									mag = imgMag.at x, y
 									if 0!=mag
 										orient = imgOr.at x, y
-										canvas_arrow ctx, x, y, orient, mag*0.5
+										canvas_arrow ctx, x, y, orient, mag*magWeight
 
 							$thumbLi = createThumbnail canvas, label, null, octave+1
 							$contents.append $thumbLi

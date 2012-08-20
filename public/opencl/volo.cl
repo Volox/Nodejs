@@ -1,17 +1,25 @@
-
+// MACROS
+#define RGB2GRAY(r,g,b) (0.3f*r + 0.59f*g + 0.11f*b)
 // Keypoints refinement
-#define lowContrastThreshold 0.03f
-#define Rth 10.0f
+#define KEYPOINT_THRESHOLD 0.03f
+#define Rth 5.0f
+//#define CURVATURE_THRESHOLD 5.0f
+#define CURVATURE_THRESHOLD ((Rth+1)*(Rth+1)/Rth)
 
 // Keypoints detection
-#define KEYPOINT_GOOD 255.0f
+#define KEYPOINT_GOOD 128.0f
 #define KEYPOINT_BAD 0.0f
 
 // Magniture Orientation related
-#define windowSize 7
-#define binSize 36
-#define gapSize (360/binSize) // 360/binSize
+#define WIN_SIZE 7
+#define BIN_NUMBER 36
+#define BIN_SIZE (360/BIN_NUMBER)
+#ifndef M_PI
+  #define M_PI (355/113)
+#endif
 
+// Useful global functions
+// Return the index based on the giver x and y coordinates
 uint _i( uint x, uint y, uint w, uint h ) {
   //if( x<0 ) x=0;
   if( x>w-1 ) x=w-1;
@@ -45,51 +53,55 @@ __kernel void clMagOrient( __global const float* image,
 
   if( value!=0 ) {
 
-    // Create anc init to 0 orientation histogram
-    float orHist[ binSize ];
-    for ( uchar i=0; i<binSize; i++ )
+    // Create and init to 0 orientation histogram
+    float orHist[ BIN_NUMBER ];
+    for ( uchar i=0; i<BIN_NUMBER; i++ )
       orHist[i] = 0;
     
     float maxPeak = 0;
-    float maxOrient = 0;
+    //float maxOrient = 0;
     uchar maxPeakPos = 0;
 
-    for( char ox=-windowSize/2; ox<=windowSize/2; ox++ ) {
-      for( char oy=-windowSize/2; oy<=windowSize/2; oy++ ) {
-        uint cx = x+ox;
-        uint cy = y+oy;
-        float LNx = image[ _i(cx+1,cy,width,height) ];
-        float LPx = image[ _i(cx-1,cy,width,height) ];
-        float LNy = image[ _i(cx,cy+1,width,height) ];
-        float LPy = image[ _i(cx,cy-1,width,height) ];
+    for( char ox=-WIN_SIZE/2; ox<=WIN_SIZE/2; ox++ ) {
+      for( char oy=-WIN_SIZE/2; oy<=WIN_SIZE/2; oy++ ) {
+        int cx = x+ox;
+        int cy = y+oy;
+        if( cx+1>width-1 || cx+1<0 )
+          continue;
+        if( cy+1>height-1 || cy-1<0 )
+          continue;
+
+
+        float Dx = image[ _i(cx+1,cy,width,height) ] - image[ _i(cx-1,cy,width,height) ];
+        float Dy = image[ _i(cx,cy+1,width,height) ] - image[ _i(cx,cy-1,width,height) ];
 
         // Calculate Magnitude and Orientation
-        float mag = sqrt( pown(LNx-LPx,2) + pown(LNy-LPy,2) );
-        float orient = atan( (LNy-LPy)/(LNx-LPx) );
+        float mag = sqrt( Dx*Dx + Dy*Dy );
+        float orient = atan( Dy/Dx );
+
+        if( orient>M_PI || orient<=-M_PI ) orient += M_PI;
 
         // Normalize degree
         uint degr = (uint) fmod(degrees(orient)+360,360); 
-        uchar bin = (uchar) floor( degr/gapSize );
+        uchar bin = (uchar) floor( degr/BIN_SIZE );
         orHist[ bin ] += mag;
 
-        maxPeak = max( maxPeak, orHist[ bin ] );
-        if( maxPeak==orHist[bin] )
-          maxPeakPos = bin;
+        //if(mag>maxPeak) maxOrient = orient;
       }
     }
 
     // Find the bins with 80% or more of the highest peak
-    // TODO extend to multiple bins
-    
-    /*
-    for ( uchar i=0; i<36; i++ ) {
-      if( orHist[i]>maxPeak*0.8 ) {
-        // Good bin
+    maxPeak = orHist[0];
+    for ( uchar i=1; i<BIN_NUMBER; i++ ) {
+      if( orHist[i]>maxPeak ) {
+        maxPeak = orHist[ i ];
+        maxPeakPos = i;
       }
     }
-    */
+
     magnitude[ idx ] = orHist[ maxPeakPos ];
-    orientation[ idx ] = gapSize*maxPeakPos+gapSize/2;
+    orientation[ idx ] = BIN_SIZE*maxPeakPos+BIN_SIZE/2;
+    //orientation[ idx ] = maxOrient;
   } else {
     magnitude[ idx ] = KEYPOINT_BAD;
     orientation[ idx ] = KEYPOINT_BAD;
@@ -112,7 +124,8 @@ __kernel void clRefine( __global const float* image,
   
   float value = _sPx( image, x, y, width, height );
 
-  if( keyPoints[ idx ]!=KEYPOINT_BAD && value>lowContrastThreshold ) {
+  // If the point is a good one and is above the threshold
+  if( keyPoints[ idx ]!=KEYPOINT_BAD && value>KEYPOINT_THRESHOLD ) {
     float NxValue = _sPx( image, x+1, y, width, height );
     float PxValue = _sPx( image, x-1, y, width, height );
     float NyValue = _sPx( image, x, y+1, width, height );
@@ -123,28 +136,25 @@ __kernel void clRefine( __global const float* image,
     float PxNyValue = _sPx( image, x-1, y+1, width, height );
     
 
-    float deltaX = 1;
-    float deltaY = 1;
-    float delta = 1;
+    float delta = 4;
     
 
     // Derivatives
-    float Dx = (NxValue-PxValue)/deltaX;
-    float Dxx = (NxValue-2*value+PxValue)/pown(deltaX,2);
-    float Dyy = (NyValue-2*value+PyValue)/pown(deltaY,2);;
+    float Dxx = NxValue-2*value+PxValue;
+    float Dyy = NyValue-2*value+PyValue;
     float Dxy = (NxyValue+PxyValue-NxPyValue-PxNyValue)/delta;
     
     // Hessian trace and determinant
     float Tr = Dxx + Dyy;
-    float Det = Dxx*Dyy-pown(Dxy,2);
+    float Det = Dxx*Dyy-Dxy*Dxy;
     
-    float R = pown(Tr,2)/Det;
-    float rThreshold = pown(Rth+1,2)/Rth;
+    float curvature = Tr*Tr/Det;
 
-    if( R>rThreshold ) {
+    if( Det<0 || curvature>CURVATURE_THRESHOLD ) {
       // Reject keypoint
       keyPointsRefined[ idx ] = KEYPOINT_BAD;
     } else {
+      // Keep keypoint
       keyPointsRefined[ idx ] = KEYPOINT_GOOD;
     }
   } else {
@@ -174,12 +184,12 @@ __kernel void clMaxMin( __global const float* prev,
 
   // Iterate over the neighbours
   for( char ox=-1; ox<=1; ox++ ) {
-    uint cx = x+ox;
+    int cx = x+ox;
     if( cx<0 || cx>width-1 ) {
       continue;
     }
     for( char oy=-1; oy<=1; oy++ ) {
-      uint cy = y+oy;
+      int cy = y+oy;
       if( cy<0 || cy>height-1 ) {
         continue;
       }
@@ -236,7 +246,7 @@ __kernel void clFloat( __global const uchar4* src,
   float g = (float) src[idx].y;
   float b = (float) src[idx].z;
 
-  dst[idx] = 0.3f*r + 0.59f*g + 0.11f*b;
+  dst[idx] = RGB2GRAY(r,g,b)/255.0f;
 }
 
 __kernel void clRGB( __global const float* src,
