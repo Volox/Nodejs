@@ -70,6 +70,8 @@
       var $canvas, canvas, ctx;
       $canvas = $('#img');
       canvas = $canvas[0];
+      canvas.width = myImage.width;
+      canvas.height = myImage.height;
       ctx = canvas.getContext('2d');
       ctx.drawImage(this, 0, 0);
     };

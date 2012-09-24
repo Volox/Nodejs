@@ -1,6 +1,51 @@
 extends ../layout
 
 block append scripts
-	:coffeescript
-		# ASD
+    script(src='/javascripts/human.js')
+
 block content
+    .row
+        .span6
+            h3 Text
+            #text.well
+                span.label.label-warning Agnetha
+                | , 
+                span.label.label-warning Björn
+                | , 
+                span.label Benny
+                | , and 
+                span.label.label-warning Anni-Frid
+                |  formed 
+                span.label.label-warning Sweden
+                | 's most successful pop music group. Their greatest hits were 
+                span.label.label-warning Waterloo
+                |  and SOS.
+                
+        .span6
+            .alert.alert-info
+                | Selected word: 
+                strong: em Benny
+
+            h3 Possible definitions
+            dl
+                dt Benny Andersson
+                dd: p.
+                    Göran Bror Benny Andersson (born 16 December 1946), known
+                    professionally as Benny Andersson, is a Swedish musician,
+                    composer, former member of the Swedish musical group ABBA
+                dt Benny Neyman
+                dd: p.
+                    Wilhelmus Albertus (Benny) Neyman (9 June 1951 in Maastricht,
+                    Netherlands; 7 February 2008 in Soesterberg, Netherlands)
+                    was a Dutch singer.
+                dt Benny Hill
+                dd: p.
+                    Benny Hill (21 January 1925 – 20 April 1992) was an
+                    English comedian and actor, notable for his long-running
+                    television programme The Benny Hill Show.
+                dt Benny Goodman
+                dd: p.
+                    Benjamin David “Benny” Goodman (May 30, 1909 – June 13,
+                    1986) was an American jazz and swing musician,
+                    clarinetist and bandleader; widely known as the
+                    "King of Swing".

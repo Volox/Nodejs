@@ -1,11 +1,13 @@
 extends ../layout
 
 block append scripts
-	script(src='/libs/kinetic.js')
-	script(src='/libs/ccv.js')
-	script(src='/libs/face.js')
-	script(src='/javascripts/hybrid.js')
-		
+    script(src='/libs/kinetic.js')
+    script(src='/libs/ccv.js')
+    script(src='/libs/face.js')
+    script(src='/javascripts/hybrid.js')
+
 block content
-	div.dropzone Click or drop images here
-	div#canvas
+    .alert.alert-info
+        i.icon-user
+        span  Loading image &amp; detecting faces
+    #canvas

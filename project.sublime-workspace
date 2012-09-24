@@ -4,6 +4,54 @@
 		"selected_items":
 		[
 			[
+				"span",
+				"span6"
+			],
+			[
+				"str",
+				"strokeWidth"
+			],
+			[
+				"fa",
+				"facesDetected"
+			],
+			[
+				"user",
+				"userLayer"
+			],
+			[
+				"us",
+				"userRect"
+			],
+			[
+				"re",
+				"rect"
+			],
+			[
+				"R",
+				"RIGHT_MOUSE_BTN"
+			],
+			[
+				"w",
+				"which"
+			],
+			[
+				"ima",
+				"imageUrl"
+			],
+			[
+				"im",
+				"imageUrl"
+			],
+			[
+				"cre",
+				"createImage"
+			],
+			[
+				"img",
+				"imgNum"
+			],
+			[
 				"TI",
 				"times"
 			],
@@ -24,20 +72,12 @@
 				"getImage"
 			],
 			[
-				"ima",
-				"image"
-			],
-			[
 				"to",
 				"toFloat"
 			],
 			[
 				"h",
 				"height"
-			],
-			[
-				"img",
-				"imageObj"
 			],
 			[
 				"bl",
@@ -86,14 +126,6 @@
 			[
 				"di",
 				"diag"
-			],
-			[
-				"w",
-				"width"
-			],
-			[
-				"R",
-				"Rth"
 			],
 			[
 				"bin",
@@ -172,10 +204,6 @@
 				"ArrayData"
 			],
 			[
-				"im",
-				"image"
-			],
-			[
 				"for",
 				"forx	Range Comprehension (exclusive)"
 			],
@@ -242,10 +270,6 @@
 			[
 				"li",
 				"light"
-			],
-			[
-				"re",
-				"renderer"
 			],
 			[
 				"key",
@@ -428,10 +452,6 @@
 				"createInfo"
 			],
 			[
-				"cre",
-				"createTitle"
-			],
-			[
 				"ti",
 				"title"
 			],
@@ -488,44 +508,11 @@
 	"buffers":
 	[
 		{
-			"file": "public/coffeescripts/webcl.coffee",
+			"file": "views/use-cases/human.jade",
 			"settings":
 			{
-				"buffer_size": 5584,
+				"buffer_size": 1937,
 				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/coffeescripts/MM.coffee",
-			"settings":
-			{
-				"buffer_size": 12023,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/opencl/volo.cl",
-			"settings":
-			{
-				"buffer_size": 8391,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/use-cases/automatic.jade",
-			"settings":
-			{
-				"buffer_size": 553,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/stylesheets/automatic.styl",
-			"settings":
-			{
-				"buffer_size": 150,
-				"line_ending": "Windows",
-				"name": "automatic"
 			}
 		}
 	],
@@ -636,7 +623,7 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 522.0
+		"width": 386.0
 	},
 	"console":
 	{
@@ -653,17 +640,24 @@
 	},
 	"file_history":
 	[
+		"/D/Portable/Nodejs/views/layout.jade",
+		"/D/Portable/Nodejs/public/coffeescripts/human.coffee",
+		"/D/Portable/Nodejs/views/use-cases/hybrid.jade",
+		"/D/Portable/Nodejs/public/coffeescripts/hybrid.coffee",
 		"/D/Portable/Nodejs/public/coffeescripts/VoloCL.coffee",
+		"/D/Portable/Nodejs/task-repo/task-repo.js",
+		"/D/Portable/Nodejs/public/stylesheets/automatic.styl",
+		"/D/Portable/Nodejs/views/use-cases/automatic.jade",
+		"/D/Portable/Nodejs/public/opencl/volo.cl",
+		"/D/Portable/Nodejs/public/coffeescripts/MM.coffee",
+		"/D/Portable/Nodejs/public/coffeescripts/webcl.coffee",
 		"/D/Portable/Nodejs/views/test.jade",
 		"/C/Users/Volox/Downloads/mrdoob-three.js-ef02075/examples/canvas_geometry_terrain.html",
-		"/D/Portable/Nodejs/views/layout.jade",
 		"/D/Portable/Nodejs/public/stylesheets/test.styl",
 		"/D/down/three.js",
 		"/D/Portable/Nodejs/public/stylesheets/style.styl",
-		"/D/Portable/Nodejs/views/use-cases/automatic.jade",
 		"/D/Portable/Sublime Text 2/Data/Packages/User/Preferences.sublime-settings",
 		"/D/Portable/Sublime Text 2/Data/Packages/User/Default (Windows).sublime-keymap",
-		"/D/Portable/Nodejs/public/coffeescripts/MM.coffee",
 		"/D/Portable/Sublime Text 2/Data/Packages/Default/Default (Windows).sublime-keymap",
 		"/D/Portable/Nodejs/server.js",
 		"/D/Portable/Nodejs/views/index.jade",
@@ -675,7 +669,6 @@
 		"/D/Portable/Nodejs/views/task/detail.jade",
 		"/D/Portable/Nodejs/package.json",
 		"/D/Portable/Nodejs/config/config.js",
-		"/D/Portable/Nodejs/public/coffeescripts/webcl.coffee",
 		"/D/Projects/Nodejs/config/configuration.json",
 		"/D/Projects/Nodejs/.gitignore",
 		"/D/Projects/Nodejs/public/scripts/coffee/MM.coffee",
@@ -778,134 +771,25 @@
 			[
 				{
 					"buffer": 0,
-					"file": "public/coffeescripts/webcl.coffee",
+					"file": "views/use-cases/human.jade",
 					"settings":
 					{
-						"buffer_size": 5584,
+						"buffer_size": 1937,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4667,
-								4667
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2445.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "public/coffeescripts/MM.coffee",
-					"settings":
-					{
-						"buffer_size": 12023,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								9024,
-								9024
-							]
-						],
-						"settings":
-						{
-							"spell_check": false,
-							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 5330.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "public/opencl/volo.cl",
-					"settings":
-					{
-						"buffer_size": 8391,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1540,
-								1540
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 659.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "views/use-cases/automatic.jade",
-					"settings":
-					{
-						"buffer_size": 553,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								358,
-								358
+								161,
+								161
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "public/stylesheets/automatic.styl",
-					"settings":
-					{
-						"buffer_size": 150,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								40,
-								40
-							]
-						],
-						"settings":
-						{
-							"auto_name": "automatic",
-							"syntax": "Packages/Stylus/Stylus.tmLanguage"
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -966,6 +850,26 @@
 				"views/layout.jade"
 			],
 			[
+				"hy",
+				"views/use-cases/hybrid.jade"
+			],
+			[
+				"hum",
+				"views/use-cases/human.jade"
+			],
+			[
+				"we",
+				"public/coffeescripts/webcl.coffee"
+			],
+			[
+				"aut",
+				"views/use-cases/automatic.jade"
+			],
+			[
+				"cvolo",
+				"public/coffeescripts/VoloCL.coffee"
+			],
+			[
 				"tessty",
 				"public/stylesheets/test.styl"
 			],
@@ -1012,10 +916,6 @@
 			[
 				"inde",
 				"routes/index.js"
-			],
-			[
-				"we",
-				"public/coffeescripts/webcl.coffee"
 			],
 			[
 				"re",
@@ -1083,7 +983,7 @@
 		[
 			[
 				"",
-				"/D/Google Drive/Tesi/Tesi Latex/tesi.sublime-project"
+				"/D/Portable/Tesi Latex/tesi.sublime-project"
 			]
 		],
 		"width": 380.0

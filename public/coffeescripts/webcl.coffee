@@ -56,6 +56,8 @@ jQuery ($) ->
 	myImage.onload = () ->
 		$canvas = $ '#img'
 		canvas = $canvas[ 0 ]
+		canvas.width = myImage.width
+		canvas.height = myImage.height
 		ctx = canvas.getContext '2d'
 		ctx.drawImage @, 0, 0
 
