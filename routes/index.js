@@ -81,8 +81,15 @@ exports.hybrid = function(req, res) {
 	});
 };
 exports.human = function(req, res) {
+	var samples = [
+		'Michael was the father of Ingres and Postgres, two relational database systems developed at Berkeley. Research at Stanford led to a search engine company, founded by Page and Brin.',
+		'Alexandria is an ancient city on the Mediterranean. It was famous for its lighthouse, one of the seven world wonders.',
+		'Agnetha, Bjorn, Benny, and Anni-Frid formed Sweden\'s most successful pop music group. Their greatest hits were Waterloo and SOS.'
+	];
+	var idx = Math.floor( Math.random()*samples.length );
 	res.render('use-cases/human', {
-		title: 'Human use case'
+		title: 'Human use case',
+		text: samples[idx]
 	});
 };
 exports.automatic = function(req, res) {
