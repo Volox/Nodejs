@@ -39,9 +39,10 @@
 
     Like.prototype.like = function(evt) {
       var $button, liked, objectId;
-      $button = $(evt.target);
+      $button = $(evt.delegateTarget);
       objectId = $button.data('objectId');
       liked = this.toggleData("like_" + objectId);
+      $button.empty();
       if (liked) {
         return $button.html('<i class="icon-thumbs-down"></i> Unlike');
       } else {
@@ -104,13 +105,18 @@
     };
 
     Like.prototype.run = function(evt) {
-      var _this = this;
+      var $progress,
+        _this = this;
       console.log('Run!');
       this.createAnswer();
+      $progress = $('.progress');
+      $progress.removeClass('hide');
       return this.postData(function(error, data) {
         if (!error) {
-          alert('Data sent successfully');
-          return $(evt.target).prop('disabled', true);
+          $progress.addClass('progress-success');
+          $progress.removeClass('active');
+          $(evt.delegateTarget).prop('disabled', true);
+          return alert('Data sent successfully');
         } else {
           return console.error(error, data);
         }

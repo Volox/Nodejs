@@ -9,11 +9,12 @@ class Like extends uTask
 		@getDetails @getQuestion
 
 	like: ( evt )=>
-		$button = $ evt.target
+		$button = $ evt.delegateTarget
 
 		objectId = $button.data 'objectId'
 		liked = @toggleData "like_#{objectId}"
 
+		$button.empty()
 		if liked
 			$button.html '<i class="icon-thumbs-down"></i> Unlike'
 		else
@@ -76,10 +77,15 @@ class Like extends uTask
 
 		@createAnswer()
 
+		$progress = $ '.progress'
+		$progress.removeClass 'hide'
+
 		@postData ( error, data )=>
 			if !error
+				$progress.addClass 'progress-success'
+				$progress.removeClass 'active'
+				$( evt.delegateTarget ).prop 'disabled', true
 				alert 'Data sent successfully'
-				$( evt.target ).prop 'disabled', true
 			else
 				console.error error, data
 

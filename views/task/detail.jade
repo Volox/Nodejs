@@ -18,15 +18,17 @@ block content
 					a.btn.btn-info(href='/task/#{data.id}/list')
 						i.icon-list.icon-white
 						|  &micro;Task list
+				a.btn.btn-primary(href="/task/#{data.id}/code/add")
+					i.icon-plus.icon-white
+					|  Add code
+				- var runUrl = '/task/'+ data.id + '/run/';
+				if config
+					- runUrl += config+'/'
+				- runUrl += 'home.html'
+				a.btn.btn-success(href="#{runUrl}")
+					i.icon-play.icon-white
+					|  Run code
 
-				if code
-					a.btn.btn-primary(href="/task/#{data.id}/run/default/home.html")
-						i.icon-play.icon-white
-						|  Run code
-				else
-					a.btn.btn-primary(href="/task/#{data.id}/code/add")
-						i.icon-plus.icon-white
-						|  Add code
 	.row
 		.span6
 			h3 Schema

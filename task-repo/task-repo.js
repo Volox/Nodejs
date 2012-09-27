@@ -99,8 +99,6 @@ TaskRepository.prototype.API.details = function(req, res) {
 			} else {
 
 				var parentTask = body.task;
-				var codeAvailable = self.check( parentTask ) || self.check( body.id );
-
 				// Parse the result
 				var data = {
 					id: [],
@@ -123,7 +121,7 @@ TaskRepository.prototype.API.details = function(req, res) {
 					title: 'Task detail',
 					data: body,
 					objects: data,
-					code: codeAvailable
+					config: body.implementation.config || 'default'
 				});
 			}
 		} catch( error ) {
@@ -227,7 +225,7 @@ TaskRepository.prototype.API.run = function(req, res) {
 				configuration: req.params.configuration,
 				fileName: file
 			} );
-			
+
 			if( fs.existsSync( filePath ) ) {
 				res.sendfile( filePath );
 			} else {
