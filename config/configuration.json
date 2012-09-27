@@ -41,7 +41,9 @@
 	},
 	
 	"task_repository": {
-		"path": "tasks"
+		"customImplementationPath": "custom",
+		"defaultImplementationPath": "defaults"
+
 	},
 
 	"mongo": {

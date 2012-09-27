@@ -1,8 +1,7 @@
 class Like extends uTask
 	init: =>
-		console.log 'Like init'
-
-		@getData 'googleUrl', @getImages
+		@imageField = 'imageUrl'
+		@getData @imageField, @getImages
 
 		$sendBtn = $ '#sendBtn'
 		$sendBtn.click @run
@@ -47,7 +46,7 @@ class Like extends uTask
 		self = @
 		if !error
 			for objectId, index in data.id
-				image = data[ 'googleUrl' ][ index ]
+				image = data[ self.imageField ][ index ]
 
 				self.createImage image, objectId
 

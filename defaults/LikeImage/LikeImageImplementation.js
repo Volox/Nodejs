@@ -30,8 +30,8 @@
 
     Like.prototype.init = function() {
       var $sendBtn;
-      console.log('Like init');
-      this.getData('googleUrl', this.getImages);
+      this.imageField = 'imageUrl';
+      this.getData(this.imageField, this.getImages);
       $sendBtn = $('#sendBtn');
       $sendBtn.click(this.run);
       return this.getDetails(this.getQuestion);
@@ -79,7 +79,7 @@
         _results = [];
         for (index = _i = 0, _len = _ref.length; _i < _len; index = ++_i) {
           objectId = _ref[index];
-          image = data['googleUrl'][index];
+          image = data[self.imageField][index];
           _results.push(self.createImage(image, objectId));
         }
         return _results;

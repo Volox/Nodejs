@@ -16,6 +16,29 @@ process.title = 'Volox';
 // Routes
 var routes = require('./routes');
 
+var limitAccess = function( req, res, next ) {
+  var URL = require( 'url' );
+  var referrer = req.get( 'Referrer' );
+  
+  var regExp = /\/task\/\w{1,}\/*/i;
+
+  if( referrer && regExp.test( req.path ) ) {
+    referrer = URL.parse( referrer );
+    var origin = referrer.path.split( '/' );
+    origin = _.first( origin, 3 ).join( '/' );
+
+    var originReq = req.path.split( '/' );
+    originReq = _.first( originReq, 3 ).join( '/' );
+
+    if( origin==originReq ) {
+      next()
+    } else {
+      res.send( 'Access denied', 403 );
+    }
+  } else {
+    next();
+  }
+}
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -46,6 +69,11 @@ app.configure(function(){
   
   app.use(express.bodyParser( {uploadDir: __dirname+'/uploads' } ) );
   app.use(express.methodOverride());
+  
+
+
+  app.use( limitAccess );
+
   
   app.use(app.router);
 
@@ -86,33 +114,6 @@ var server = http.createServer(app);
 var TaskRepository = require( './task-repo' );
 var TRI = new TaskRepository( config.nconf.get( "task_repository" ) );
 
-/*
-var sameTask = function( req, res, next ) {
-  var URL = require( 'url' );
-  var referrer = req.get( 'Referrer' );
-  if( referrer ) {
-    var pathParts = URL.parse( referrer ).path.split( '/' );
-    if( pathParts[3] && pathParts[3]=='run') {
-      refParts = _.first( pathParts, 5 ).join( '/' );
-      reqParts = _.first( req.path.split( '/' ), 5 ).join( '/' );
-      if(reqParts==refParts) {
-        next();
-      } else {
-        console.log( reqParts );
-        console.log( refParts );
-        console.log( 'NOOOO' );
-        res.send( 'You can not access here', 401 );
-      }
-    } else {
-      next();
-    }
-  } else {
-    next();
-  }
-}
-app.use( sameTask );
-*/
-
 
 //app.get('/task/list', TRI.API.list );
 app.get('/task/:task', TRI.API.details );
@@ -120,7 +121,7 @@ app.get('/task/:task/list', TRI.API.uTaskList );
 
 app.get('/task/:task/code/add', TRI.API.addCode );
 
-app.get('/task/:task/run/:implementation/:file?' ,TRI.API.run );
+app.get('/task/:task/run/:configuration?/:file?' ,TRI.API.run );
 
 app.get('/task/:task/input/:field?', TRI.API.input );
 

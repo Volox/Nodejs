@@ -18,6 +18,7 @@ var TaskRepository = function( configuration ) {
 	this.configuration = configuration;
 	this.collection = null;
 	this.taskPath = null;
+	this.taskDefaultPath = null;
 
 	this.requester = new Requester();
 
@@ -31,25 +32,26 @@ TaskRepository.prototype.init = function() {
 	}
 
 	// Create the path
-	this.taskPath = path.join( __dirname, this.configuration.path );
+	this.taskPath = path.join( process.cwd(), this.configuration.customImplementationPath );
+	this.taskDefaultPath = path.join( process.cwd(), this.configuration.defaultImplementationPath );
+
 	if( !fs.existsSync( this.taskPath ) ) {
 		fs.mkdirSync( this.taskPath );
+	}
+	if( !fs.existsSync( this.taskDefaultPath ) ) {
+		fs.mkdirSync( this.taskDefaultPath );
 	}
 }
 
 
 
 
-TaskRepository.prototype.getFilePath = function( taskID, implementation, file ) {
-	if( !implementation )
-		implementation = 'default'
-	if( !file )
-		file = 'home.html'
-	var filePath = path.join( this.taskPath, ""+taskID, implementation, file );
+TaskRepository.prototype.getFilePath = function( options) {
+	var filePath = path.join( this.taskPath, ""+options.taskID, options.fileName );
+	if( options.configuration ) {
+		filePath = path.join( this.taskDefaultPath, options.configuration, options.fileName )
+	}
 	return filePath;
-};
-TaskRepository.prototype.check = function( taskID, implementation, file ) {
-	return fs.existsSync( this.getFilePath( taskID, implementation, file ) );
 };
 
 TaskRepository.prototype.API = {};
@@ -206,7 +208,10 @@ TaskRepository.prototype.API.postCode = function(req, res) {
 
 TaskRepository.prototype.API.run = function(req, res) {
 	var taskID = parseInt( req.params.task );
-	var implementation = req.params.implementation || 'default';
+	if( !req.params.file ) {
+		req.params.file = req.params.configuration
+		delete req.params[ 'configuration' ]
+	}
 	var file = req.params.file || 'home.html';
 
 	var self = this;
@@ -217,17 +222,13 @@ TaskRepository.prototype.API.run = function(req, res) {
 			
 			body = JSON.parse( body );
 
-			var parentTask = body.task;
-			var filePath = self.getFilePath( body.id, implementation, file );
-			var codeAvailable = self.check( body.id, implementation, file );
-
-			if( parentTask && !codeAvailable ) {
-				filePath = self.getFilePath( parentTask, implementation, file );
-				codeAvailable = self.check( parentTask, implementation, file );
-			}
+			var filePath = self.getFilePath( {
+				taskID: taskID,
+				configuration: req.params.configuration,
+				fileName: file
+			} );
 			
-
-			if( codeAvailable ) {
+			if( fs.existsSync( filePath ) ) {
 				res.sendfile( filePath );
 			} else {
 				res.send( 'Not found', 404 );
