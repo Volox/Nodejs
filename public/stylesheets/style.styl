@@ -17,6 +17,26 @@ a
 :hover[class*="span"]
 	//background #ddd
 
+.container footer
+	margin-top 2em
+
+.table tbody tr.success td
+	background-color #dff0d8
+.table tbody tr.error td
+	background-color: #f2dede
+.table tbody tr.warning td
+	background-color: #fcf8e3
+.table tbody tr.info td
+	background-color: #d9edf7
+.table-hover tbody tr.success:hover td
+	background-color: #d0e9c6
+.table-hover tbody tr.error:hover td
+	background-color: #ebcccc
+.table-hover tbody tr.warning:hover td
+	background-color: #faf2cc
+.table-hover tbody tr.info:hover td
+	background-color: #c4e3f3
+
 .right
 	text-align right
 .left
@@ -26,10 +46,8 @@ a
 
 .dropzone
 	@height 5em
-	margin-top 1em
-	margin-bottom 1em
 	border 5px dashed #ccc
-	height @height
+	min-height @height
 	text-align center
 	font-size 1em
 	color #aaa

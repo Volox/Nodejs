@@ -4,17 +4,20 @@ $ ->
 	$dropzone = $ '.dropzone'
 
 	# create the hidden input filed
-	$hiddenInput = $ '<input type="file">'
+	$hiddenInput = $dropzone.find 'input[type="file"]'
+	if $hiddenInput.length!=1
+		$hiddenInput = $ '<input type="file">'
 	$hiddenInput.prop 'multiple', true
 	$hiddenInput.on 'change', ( evt )->
 		$dropzone.trigger 'fileReady', [ @files, null ]
+		evt.stopPropagation()
 		return false
 
 	$dropzone.append $hiddenInput
 
 
 	$dropzone.on 'click', ( evt ) ->
-		$hiddenInput.trigger evt
+		$hiddenInput.triggerHandler 'change'
 		return false
 	$dropzone.on 'drop', ( evt ) ->
 		$( @ ).removeClass 'active'

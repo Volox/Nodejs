@@ -67,7 +67,7 @@ TaskRepository.prototype.API.uTaskList = function(req, res) {
 				throw "The selected task does not have any microTask associated";
 
 			res.render('task/list', {
-				title: 'Task list',
+				title: '&micro;Task list',
 				taskID: taskID,
 				data: body
 			});
@@ -91,15 +91,39 @@ TaskRepository.prototype.API.details = function(req, res) {
 				throw error;
 			
 			body = JSON.parse(body);
+			if( req.xhr ) {
+				res.type( 'json' );
+				res.send( JSON.stringify(body) );
+			} else {
 
-			var parentTask = body.task;
-			var codeAvailable = self.check( parentTask ) || self.check( body.id );
+				var parentTask = body.task;
+				var codeAvailable = self.check( parentTask ) || self.check( body.id );
 
-			res.render('task/detail', {
-				title: 'Task detail',
-				data: body,
-				code: codeAvailable
-			});
+				// Parse the result
+				var data = {
+					id: [],
+					fields: {}
+				};
+
+				_.each( body.schema.fields, function( column ) {
+					data.fields[ column.name ] = [];
+				} );
+
+				_.each( body.objects, function( dataObj ) {
+					data.id.push( dataObj.id );
+
+					_.each( data.fields, function( field, fieldName ) {
+						data.fields[ fieldName ].push( dataObj.fields[ fieldName ] );
+					} );
+				} );
+
+				res.render('task/detail', {
+					title: 'Task detail',
+					data: body,
+					objects: data,
+					code: codeAvailable
+				});
+			}
 		} catch( error ) {
 			log.error( error );
 			res.render('error', {
@@ -224,7 +248,7 @@ TaskRepository.prototype.API.input = function(req, res) {
 	var field = req.params.field || '*';
 
 	var self = this;
-	this.requester.get( taskID, 'details', 'objects', function( error, body ) {
+	this.requester.get( taskID, 'details', 'objects', function( error, body ){ 
 		try {
 			if( error )
 				throw error;
@@ -233,10 +257,15 @@ TaskRepository.prototype.API.input = function(req, res) {
 
 			var data;
 			if( field!='*' ) {
-				data = {};
-				data.field = {};
-				data.id = body.objects.id;
-				data.field[ field ] = body.objects.field[ field ];
+				data = {
+					id: [],
+				};
+				data[ field ] = [];
+
+				_.each( body.objects, function( val ) {
+					data.id.push( val.id );
+					data[ field ].push( val.fields[ field ] );
+				} );
 			} else {
 				data = body.objects;
 			}
@@ -245,7 +274,9 @@ TaskRepository.prototype.API.input = function(req, res) {
 				res.type( 'json' );
 				res.send( JSON.stringify( data ) );
 			} else {
-				throw "Not implemented"
+				//throw "Not implemented"
+				res.type( 'json' );
+				res.send( JSON.stringify( data ) );
 			}
 		} catch( error ) {
 			log.error( error );

@@ -3,37 +3,62 @@ extends ../layout
 block append scripts
 	:coffeescript
 		jQuery ($)->
+			fileID = 0
 			$fileList = $ '.fileList'
 			$dropzone = $ '.dropzone'
 			$hiddenFile = $ '.hiddenFile', $dropzone
+			$progress = $ '.progress'
 
 
+			createActions = (id)->
+				$btnGroup = $ '<div>',
+					'class': 'btn-group'
+
+				delBtn = '<button class="btn btn-danger"><i class="icon-remove"></i> Remove</button>'
+				priBtn = '<button class="btn btn-primary"><i class="icon-ok"></i> Main</button>'
+
+				$btnGroup.append priBtn
+				$btnGroup.append delBtn
 			addFiles = ( evt, files ) ->
-				console.log evt
-				console.log files
 				for file in files
+					$tr = $ '<tr>'
 					fileList = $dropzone.data( 'fileList' ) || {}
 					if !fileList[ file.name ]
 						fileList[ file.name ] = file
-						$dt = $ '<dt>',
-							text: "#{file.name}"
-						$dd = $ '<dd>',
-							text: "#{file.type}"
-						$fileList.append $dt
-						$fileList.append $dd
+						html = "<td></td><td>#{file.name}</td><td class='right'>#{parseInt( file.size/1024 )}KB</td><td>#{file.type}</td>"
 						$dropzone.data 'fileList', fileList
+						$tr.append html
+						$tr.append( $ '<td>',
+							html: createActions file.name );
 					else
-						alert "'#{file.name}'' already present!"
+						alert "'#{file.name}' already present!"
+					$fileList.append $tr
 				return
 			
 			$dropzone.on 'fileReady', addFiles
+			$fileList.on 'click', 'button.btn-primary', (evt)->
+				$btn = $ @
+				$rows = $btn.closest( 'tbody' ).find 'tr'
+				$rows.removeClass 'success'
+				$rows.find( 'button' ).prop 'disabled', false
+				$rows.find( 'button' ).removeClass 'disabled'
+				$tr = $btn.closest 'tr'
+				$tr.addClass 'success'
 
+				$btn.addClass 'disabled'
+				$btn.prop 'disabled', true
+
+			$( '#btnCancel' ).click ->
+				$form[0].reset()
+				$dropzone.data 'fileList', {}
 			$( '#btnSend' ).click ->
 				$form = $ 'form'
 				fileList = $dropzone.data( 'fileList' ) || {}
 				if $.isEmptyObject( fileList )
 					alert 'Select al least 1 file'
 				else
+					$progress.show();
+					$bar = $ '.bar', $progress
 					formData = new FormData $form[ 0 ]
 					$.each fileList, ( fileID, file )->
 						formData.append fileID, file
@@ -42,29 +67,42 @@ block append scripts
 					xhr.open $form.prop( 'method' ), $form.prop( 'action' ), true
 					xhr.setRequestHeader "X-Requested-With", "XMLHttpRequest"
 					xhr.onprogress = ( evt ) ->
-						console.log 'Progresso: '+parseInt evt.position/evt.total*100
+						progr = parseInt evt.position/evt.total*100
+						$bar.css 'width', "#{progr}%" 
 					xhr.onload = ( evt ) ->
-						location.href = evt.originalTarget.responseText
+						$progress.hide()
+						$bar.css 'width', null
+						location.href = evt.target.responseText
 						return
 					xhr.send formData
 
 				return false
 block content
-	form.form-horizontal(action="/task/#{taskID}/code",method="post",enctype="multipart/form-data")
-		.control-group
-			label.control-label(for="name") Insert code instance name: 
-			.controls
-				input.input-xlarge#name(type="text",name="name",placeholder="Insert name")
-				p.help-block Insert the name
-		
-		
-		div.dropzone Click or drop files here
-		dl.fileList.dl-horizontal
-
-
-		button.btn.btn-primary#btnSend(type="submit")
+	.row
+		.span6
+			form.form-horizontal(action="/task/#{taskID}/code",method="post",enctype="multipart/form-data")
+				.control-group
+					label.control-label(for="name") Insert code instance name: 
+					.controls
+						input.input-xlarge#name(type="text",name="name",placeholder="Insert name")
+		.span6: .dropzone Click or drop files here
+	.row: .span12
+		h2 File list
+		table.table.table-striped.table-hover.table-condensed
+			thead
+				tr
+					th #ID
+					th File name
+					th File size (KB)
+					th Type
+					th Actions
+			tbody.fileList
+		.progress.progress-success.progress-striped.active.hide
+			.bar
+	.row: .span12: .btn-group.pull-right
+		button.btn.btn-primary#btnSend
 			i.icon-ok.icon-white
 			|  Send
-		button.btn#btnCancel(type="reset")
-			i.icon-refresh
+		button.btn#btnCancel
+			i.icon-repeat
 			|  Reset

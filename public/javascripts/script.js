@@ -4,15 +4,17 @@
   $(function() {
     var $dropzone, $hiddenInput;
     $dropzone = $('.dropzone');
-    $hiddenInput = $('<input type="file">');
+    $hiddenInput = $dropzone.find('input[type="file"]');
+    if ($hiddenInput.length !== 1) $hiddenInput = $('<input type="file">');
     $hiddenInput.prop('multiple', true);
     $hiddenInput.on('change', function(evt) {
       $dropzone.trigger('fileReady', [this.files, null]);
+      evt.stopPropagation();
       return false;
     });
     $dropzone.append($hiddenInput);
     $dropzone.on('click', function(evt) {
-      $hiddenInput.trigger(evt);
+      $hiddenInput.triggerHandler('change');
       return false;
     });
     $dropzone.on('drop', function(evt) {

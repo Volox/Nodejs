@@ -29,7 +29,20 @@ class uTask
 			success: ( json )->
 				callback null, json
 		return
+	getDetails: (callback)->
+		if !callback
+			throw new Error 'No callback provided'
 
+		$.ajax 
+			url: @url,
+			dataType: 'json',
+			error: ( xhr, status, response )->
+				callback response, {}
+
+			success: ( json )->
+				callback null, json
+
+		return
 	getData: ( config={}, callback ) ->
 		if !callback
 			callback = config

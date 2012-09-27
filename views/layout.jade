@@ -21,8 +21,9 @@ html
 					img(src='/img/logo.jpg', title='Logo', alt='Logo')
 			section.row
 				.span12
-					.page-header
-						h1=title
+					block header
+						.page-header
+							h1=title
 				.span12
 					block content
 			footer.row

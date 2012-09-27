@@ -4,6 +4,102 @@
 		"selected_items":
 		[
 			[
+				"pat",
+				"pathParts"
+			],
+			[
+				"re",
+				"referrer"
+			],
+			[
+				"ref",
+				"refParts"
+			],
+			[
+				"req",
+				"reqParts"
+			],
+			[
+				"pa",
+				"pathParts"
+			],
+			[
+				"mar",
+				"margin-bottom"
+			],
+			[
+				"ima",
+				"image"
+			],
+			[
+				"crea",
+				"createImage"
+			],
+			[
+				"data",
+				"data-object-id"
+			],
+			[
+				"im",
+				"imageList"
+			],
+			[
+				"fiel",
+				"field"
+			],
+			[
+				"fie",
+				"field"
+			],
+			[
+				"in",
+				"index"
+			],
+			[
+				"hi",
+				"hiddenInput"
+			],
+			[
+				"drop",
+				"dropzone"
+			],
+			[
+				"file",
+				"fileID"
+			],
+			[
+				"row",
+				"rows"
+			],
+			[
+				"pro",
+				"progr"
+			],
+			[
+				"btn",
+				"btnGroup"
+			],
+			[
+				"da",
+				"data"
+			],
+			[
+				"sp",
+				"span12"
+			],
+			[
+				"co",
+				"column"
+			],
+			[
+				"de",
+				"debug"
+			],
+			[
+				"dat",
+				"dataObj"
+			],
+			[
 				"span",
 				"span6"
 			],
@@ -24,24 +120,12 @@
 				"userRect"
 			],
 			[
-				"re",
-				"rect"
-			],
-			[
 				"R",
 				"RIGHT_MOUSE_BTN"
 			],
 			[
 				"w",
 				"which"
-			],
-			[
-				"ima",
-				"imageUrl"
-			],
-			[
-				"im",
-				"imageUrl"
 			],
 			[
 				"cre",
@@ -276,16 +360,8 @@
 				"keyPointsRefined"
 			],
 			[
-				"co",
-				"comparison"
-			],
-			[
 				"P",
 				"PxyValue"
-			],
-			[
-				"de",
-				"delta"
 			],
 			[
 				"n",
@@ -432,86 +508,38 @@
 				"output"
 			],
 			[
-				"in",
-				"index"
-			],
-			[
 				"S",
 				"ScaleSpace"
 			],
 			[
 				"octa",
 				"octave"
-			],
-			[
-				"ex",
-				"expoD"
-			],
-			[
-				"create",
-				"createInfo"
-			],
-			[
-				"ti",
-				"title"
-			],
-			[
-				"ste",
-				"blurSteps"
-			],
-			[
-				"ben",
-				"benchmark"
-			],
-			[
-				"l",
-				"label"
-			],
-			[
-				"tu",
-				"thumbLi"
-			],
-			[
-				"scri",
-				"scripts"
-			],
-			[
-				"sta",
-				"stage4"
-			],
-			[
-				"stage",
-				"stage3"
-			],
-			[
-				"rest",
-				"result"
-			],
-			[
-				"Tas",
-				"TaskRepository"
-			],
-			[
-				"config",
-				"configuration"
-			],
-			[
-				"T",
-				"TaskRepository"
-			],
-			[
-				"mongo",
-				"mongoObj"
 			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "views/use-cases/human.jade",
+			"file": "defaults/LikeImage/LikeImageImplementation.coffee",
 			"settings":
 			{
-				"buffer_size": 1937,
+				"buffer_size": 1659,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "task-repo/task-repo.js",
+			"settings":
+			{
+				"buffer_size": 7924,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "defaults/LikeImage/home.html",
+			"settings":
+			{
+				"buffer_size": 1093,
 				"line_ending": "Windows"
 			}
 		}
@@ -519,9 +547,17 @@
 	"build_system": "Packages/Nodejs/Nodejs.sublime-build",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 60.0,
 		"selected_items":
 		[
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
 			[
 				"upda",
 				"Package Control: Upgrade/Overwrite All Packages"
@@ -537,10 +573,6 @@
 			[
 				"insta",
 				"Package Control: Install Package"
-			],
-			[
-				"remo",
-				"Package Control: Remove Package"
 			],
 			[
 				"inst",
@@ -577,10 +609,6 @@
 			[
 				"lin",
 				"SublimeLinter: Lint Current File"
-			],
-			[
-				"ins",
-				"Package Control: Install Package"
 			],
 			[
 				"instal",
@@ -640,12 +668,40 @@
 	},
 	"file_history":
 	[
+		"/D/Portable/Nodejs/config/configuration.json",
+		"/D/Portable/Nodejs/server.js",
+		"/D/Portable/Nodejs/views/task/detail.jade",
+		"/D/Portable/Nodejs/views/task/new.jade",
+		"/D/Portable/Nodejs/defaults/uTask.coffee",
+		"/D/Portable/Nodejs/defaults/LikeImage/style.css",
+		"/D/Portable/Nodejs/public/coffeescripts/uTask.coffee",
+		"/D/Portable/Nodejs/defaults/LikeImage/index.html",
+		"/D/Portable/Nodejs/defaults/LikeImage/bootstrap.css",
+		"/D/Portable/Nodejs/defaults/LikeImage/uTask.js",
+		"/D/Portable/smokeTest/config/configuration.js",
+		"/D/Portable/smokeTest/routes/task.js",
+		"/D/Portable/Nodejs/views/index.jade",
+		"/D/Portable/Nodejs/public/coffeescripts/DefaultImplementation/LikeImplementation.coffee",
+		"/D/Portable/Nodejs/defaults/LikeImage/LikeImplementation.coffee",
+		"/D/Portable/smokeTest/app.js",
+		"/D/Portable/smokeTest/views/task_form.ejs",
+		"/D/Portable/Nodejs/project.sublime-project",
+		"/D/Portable/Nodejs/task-repo/task-repo.js",
 		"/D/Portable/Nodejs/views/layout.jade",
+		"/D/Portable/Nodejs/public/coffeescripts/script.coffee",
+		"/D/Portable/Nodejs/public/stylesheets/style.styl",
+		"/D/Portable/Nodejs/node_modules/request/main.js",
+		"/D/Portable/Nodejs/public/stylesheets/bootstrap.css",
+		"/D/Portable/Nodejs/views/task/list.jade",
+		"/D/Portable/Nodejs/routes/index.js",
+		"/D/Portable/Nodejs/task-repo/requester/requester.js",
+		"/D/Portable/Sublime Text 2/Data/Packages/User/LaTeXTools Preferences.sublime-settings",
+		"/D/Portable/Sublime Text 2/Data/Packages/Default/Preferences.sublime-settings",
+		"/D/Portable/Nodejs/views/use-cases/human.jade",
 		"/D/Portable/Nodejs/public/coffeescripts/human.coffee",
 		"/D/Portable/Nodejs/views/use-cases/hybrid.jade",
 		"/D/Portable/Nodejs/public/coffeescripts/hybrid.coffee",
 		"/D/Portable/Nodejs/public/coffeescripts/VoloCL.coffee",
-		"/D/Portable/Nodejs/task-repo/task-repo.js",
 		"/D/Portable/Nodejs/public/stylesheets/automatic.styl",
 		"/D/Portable/Nodejs/views/use-cases/automatic.jade",
 		"/D/Portable/Nodejs/public/opencl/volo.cl",
@@ -655,18 +711,10 @@
 		"/C/Users/Volox/Downloads/mrdoob-three.js-ef02075/examples/canvas_geometry_terrain.html",
 		"/D/Portable/Nodejs/public/stylesheets/test.styl",
 		"/D/down/three.js",
-		"/D/Portable/Nodejs/public/stylesheets/style.styl",
 		"/D/Portable/Sublime Text 2/Data/Packages/User/Preferences.sublime-settings",
 		"/D/Portable/Sublime Text 2/Data/Packages/User/Default (Windows).sublime-keymap",
 		"/D/Portable/Sublime Text 2/Data/Packages/Default/Default (Windows).sublime-keymap",
-		"/D/Portable/Nodejs/server.js",
-		"/D/Portable/Nodejs/views/index.jade",
-		"/D/Portable/Nodejs/routes/index.js",
-		"/D/Portable/Nodejs/public/coffeescripts/script.coffee",
 		"/D/Portable/Nodejs/README.md",
-		"/D/Portable/Nodejs/views/task/list.jade",
-		"/D/Portable/Nodejs/views/task/new.jade",
-		"/D/Portable/Nodejs/views/task/detail.jade",
 		"/D/Portable/Nodejs/package.json",
 		"/D/Portable/Nodejs/config/config.js",
 		"/D/Projects/Nodejs/config/configuration.json",
@@ -690,7 +738,6 @@
 		"/D/Projects/Nodejs/public/stylesheets/theme.styl",
 		"/D/Projects/Nodejs/task_repo/task_repo.js",
 		"/D/Portable/Nodejs/config/package.json",
-		"/D/Portable/Nodejs/config/configuration.json",
 		"/D/Portable/Nodejs/utils/utils.js",
 		"/D/Portable/Nodejs/views/error.jade",
 		"/D/Portable/Nodejs/public/scripts/coffee/script.coffee",
@@ -699,7 +746,6 @@
 		"/D/Portable/Nodejs/config/logConfig.json",
 		"/D/down/jQueryTimelinr_095/js/jquery.timelinr-0.9.5.js",
 		"/D/Portable/Nodejs/sample.js",
-		"/D/Portable/Sublime Text 2/Data/Packages/Default/Preferences.sublime-settings",
 		"/D/Portable/Sublime Text 2/Data/Packages/SublimeLinter/SublimeLinter.sublime-settings",
 		"/D/Portable/Nodejs/test.sublime-project",
 		"/D/Portable/Nodejs/README",
@@ -731,6 +777,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"success",
 			"PI",
 			"lowContrastThreshold",
 			"getIndex",
@@ -766,28 +813,82 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "views/use-cases/human.jade",
+					"file": "defaults/LikeImage/LikeImageImplementation.coffee",
 					"settings":
 					{
-						"buffer_size": 1937,
+						"buffer_size": 1659,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								161,
-								161
+								1607,
+								1607
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
+							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 574.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "task-repo/task-repo.js",
+					"settings":
+					{
+						"buffer_size": 7924,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7520,
+								7520
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4707.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "defaults/LikeImage/home.html",
+					"settings":
+					{
+						"buffer_size": 1093,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								698,
+								698
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
@@ -846,8 +947,104 @@
 		"selected_items":
 		[
 			[
+				"con",
+				"Task Execution Framework/config/configuration.json"
+			],
+			[
+				"ser",
+				"Task Execution Framework/server.js"
+			],
+			[
+				"style",
+				"Task Execution Framework/defaults/LikeImage/style.css"
+			],
+			[
+				"uta",
+				"Task Execution Framework/defaults/uTask.coffee"
+			],
+			[
+				"utas",
+				"Task Execution Framework/public/coffeescripts/uTask.coffee"
+			],
+			[
+				"hom",
+				"Task Execution Framework/defaults/LikeImage/home.html"
+			],
+			[
+				"tas",
+				"Task Execution Framework/task-repo/task-repo.js"
+			],
+			[
+				"deta",
+				"Task Execution Framework/views/task/detail.jade"
+			],
+			[
+				"new",
+				"Task Execution Framework/views/task/new.jade"
+			],
+			[
+				"confi",
+				"Smoke Test/config/configuration.js"
+			],
+			[
+				"conf",
+				"Task Execution Framework/config/configuration.json"
+			],
+			[
+				"likeimage",
+				"Task Execution Framework/defaults/LikeImage/LikeImageImplementation.coffee"
+			],
+			[
+				"li",
+				"Task Execution Framework/public/coffeescripts/DefaultImplementation/LikeImplementation.coffee"
+			],
+			[
+				"a",
+				"Smoke Test/app.js"
+			],
+			[
+				"task",
+				"Smoke Test/routes/task.js"
+			],
+			[
+				"inde",
+				"Task Execution Framework/views/index.jade"
+			],
+			[
+				"task_",
+				"Smoke Test/views/task_form.ejs"
+			],
+			[
+				"de",
+				"views/task/detail.jade"
+			],
+			[
+				"sc",
+				"public/coffeescripts/script.coffee"
+			],
+			[
 				"la",
 				"views/layout.jade"
+			],
+			[
+				"main",
+				"node_modules/request/main.js"
+			],
+			[
+				"sty",
+				"public/stylesheets/style.styl"
+			],
+			[
+				"boo",
+				"public/stylesheets/bootstrap.css"
+			],
+			[
+				"boots",
+				"public/stylesheets/bootstrap.css"
+			],
+			[
+				"in",
+				"routes/index.js"
 			],
 			[
 				"hy",
@@ -878,10 +1075,6 @@
 				"views/test.jade"
 			],
 			[
-				"sty",
-				"public/stylesheets/style.styl"
-			],
-			[
 				"volo",
 				"public/coffeescripts/VoloCL.coffee"
 			],
@@ -902,20 +1095,8 @@
 				"public/coffeescripts/MM.coffee"
 			],
 			[
-				"in",
-				"views/index.jade"
-			],
-			[
 				"s",
 				"server.js"
-			],
-			[
-				"ser",
-				"server.js"
-			],
-			[
-				"inde",
-				"routes/index.js"
 			],
 			[
 				"re",
@@ -930,24 +1111,8 @@
 				"public/coffeescripts/script.coffee"
 			],
 			[
-				"de",
-				"views/task/detail.jade"
-			],
-			[
-				"style",
-				"public/stylesheets/style.styl"
-			],
-			[
 				"pa",
 				"package.json"
-			],
-			[
-				"con",
-				"config/configuration.json"
-			],
-			[
-				"conf",
-				"config/config.js"
 			],
 			[
 				"webcl",
@@ -956,10 +1121,6 @@
 			[
 				"mmcoff",
 				"public/scripts/coffee/MM.coffee"
-			],
-			[
-				"tas",
-				"task-repo/task-repo.js"
 			],
 			[
 				"test",

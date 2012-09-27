@@ -1,42 +1,67 @@
 extends ../layout
 
+if data.isMicroTask
+	block header
+		.page-header
+			h1 &micro;#{title}
+
 block content
 	.row
 		.span4
-			h2 Task #{data.id} (#{data.type}): #{data.title}
-		.span4
-			if code
-				a.btn.btn-primary(href="/task/#{data.id}/run/default/home.html")
-					i.icon-play.icon-white
-					|  Run code
-	if data.schema
-		h3 Schema
-		dl.dl-horizontal
-			each column in data.schema
-				dt= column.name
-				dd= column.type
-	
+			h2
+				if data.isMicroTask
+					| &micro;
+				| Task #{data.id} (#{data.type}): #{data.title} 
+		.span8
+			.btn-group
+				if !data.isMicroTask
+					a.btn.btn-info(href='/task/#{data.id}/list')
+						i.icon-list.icon-white
+						|  &micro;Task list
 
-	
-	h3 Question
-	.well= data.question
+				if code
+					a.btn.btn-primary(href="/task/#{data.id}/run/default/home.html")
+						i.icon-play.icon-white
+						|  Run code
+				else
+					a.btn.btn-primary(href="/task/#{data.id}/code/add")
+						i.icon-plus.icon-white
+						|  Add code
+	.row
+		.span6
+			h3 Schema
+			dl.dl-horizontal
+				each column in data.schema.fields
+					dt= column.name
+					dd= column.type
+		.span6
+			h3 Configurations
+			dl.dl-horizontal
+				each key, value in data.configurations
+					dt= key
+					dd= value
 
+			
 
-
-	.alert.alert-info.alert-block
-		button.close(type="button",data-dismiss="alert",href="#") x
-		h4.alert-heading Question
-		p!= JSON.stringify(data.configurations)
+	.row: .span12
+		h3 Question
+		.well= data.question
 	hr
-	if data.objects
-		h3 Data
-		table.table.table-striped.table-bordered.table-condensed
-			thead
-				tr
-					each val, fieldName in data.objects.field
-						th= fieldName
-			tbody
-				each objectId, index in data.objects.id
-					tr(data-object-id="#{objectId}")
-						each val, fieldName in data.objects.field
-							td= data.objects.field[ fieldName ][ index ]
+	.row: .span12
+		if objects
+			h3 Data
+			table.table.table-striped.table-bordered.table-condensed
+				thead
+					tr
+						each field, fieldName in objects.fields
+							th= fieldName
+				tbody
+					each objectId, index in objects.id
+						if index>19
+							tr
+								td.center(colspan=data.schema.fields.length): em ... and more ...
+							- break
+						else
+							tr(data-object-id="#{objectId}")
+								each val, fieldName in objects.fields
+									td= objects.fields[ fieldName ][ index ]

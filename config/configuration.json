@@ -5,11 +5,18 @@
 		
 		"cache": false,
 
-		"hostname": "pc-volonterio",
+		"hostname": "localhost",
 		"port": 8080,
 		"appPath": "/CrowdSearch_prototype_v2",
 
 		"API": {
+			"myTask": {
+				"method": "GET",
+				"path": "",
+				"params": {
+					"secretKey": "secretKey"
+				}
+			},
 			"details": {
 				"method": "GET",
 				"path": "getTask.do",
