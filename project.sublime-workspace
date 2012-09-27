@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"bor",
+				"border-top-color"
+			],
+			[
+				"se",
+				"selected"
+			],
+			[
+				"crea",
+				"createDefinition"
+			],
+			[
+				"de",
+				"definitions"
+			],
+			[
 				"te",
 				"text"
 			],
@@ -80,10 +96,6 @@
 				"margin-bottom"
 			],
 			[
-				"crea",
-				"createImage"
-			],
-			[
 				"data",
 				"data-object-id"
 			],
@@ -130,10 +142,6 @@
 			[
 				"co",
 				"column"
-			],
-			[
-				"de",
-				"debug"
 			],
 			[
 				"dat",
@@ -506,14 +514,6 @@
 			[
 				"wi",
 				"width"
-			],
-			[
-				"out",
-				"output"
-			],
-			[
-				"scaleSpace",
-				"ScaleSpace"
 			]
 		]
 	},
@@ -528,18 +528,21 @@
 			}
 		},
 		{
-			"file": "public/coffeescripts/human.coffee",
+			"contents": "extends ../layout\n\nblock append scripts\n    script(src='/javascripts/human.js')\n    link(rel='stylesheet', href='/stylesheets/human.css')\n\nblock content\n    .row\n        .span6\n            h3 Text\n            #text.well= text\n        \n        .span6\n            .alert.alert-info\n                | Selected word: \n                strong: em#selectedWord\n            #progress.progress.progress-striped.animate.hide\n                .bar(style=\"width: 100%\")\n            h3 Possible definitions\n            dl#definitions",
+			"file": "views/use-cases/human.jade",
+			"file_size": 546,
+			"file_write_time": 1348773008000000,
 			"settings":
 			{
-				"buffer_size": 1225,
+				"buffer_size": 519,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "views/use-cases/human.jade",
+			"file": "public/coffeescripts/human.coffee",
 			"settings":
 			{
-				"buffer_size": 425,
+				"buffer_size": 1791,
 				"line_ending": "Windows"
 			}
 		},
@@ -547,15 +550,7 @@
 			"file": "public/stylesheets/human.styl",
 			"settings":
 			{
-				"buffer_size": 29,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "routes/index.js",
-			"settings":
-			{
-				"buffer_size": 2551,
+				"buffer_size": 342,
 				"line_ending": "Windows"
 			}
 		}
@@ -684,6 +679,8 @@
 	},
 	"file_history":
 	[
+		"/home/volox/Nodejs/routes/index.js",
+		"/home/volox/Nodejs/views/use-cases/human.jade",
 		"/D/Portable/Nodejs/views/task/detail.jade",
 		"/D/Portable/Nodejs/config/configuration.json",
 		"/D/Portable/Nodejs/defaults/LikeImage/home.html",
@@ -833,7 +830,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -848,8 +845,8 @@
 						"selection":
 						[
 							[
-								304,
-								251
+								644,
+								644
 							]
 						],
 						"settings":
@@ -865,44 +862,18 @@
 				},
 				{
 					"buffer": 1,
-					"file": "public/coffeescripts/human.coffee",
-					"settings":
-					{
-						"buffer_size": 1225,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								628,
-								628
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
 					"file": "views/use-cases/human.jade",
 					"settings":
 					{
-						"buffer_size": 425,
+						"buffer_size": 519,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								349,
-								361
+								234,
+								234
 							]
 						],
 						"settings":
@@ -918,24 +889,26 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "public/stylesheets/human.styl",
+					"buffer": 2,
+					"file": "public/coffeescripts/human.coffee",
 					"settings":
 					{
-						"buffer_size": 29,
+						"buffer_size": 1791,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								29,
-								29
+								500,
+								500
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Stylus/Stylus.tmLanguage"
+							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -944,28 +917,27 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "routes/index.js",
+					"buffer": 3,
+					"file": "public/stylesheets/human.styl",
 					"settings":
 					{
-						"buffer_size": 2551,
+						"buffer_size": 342,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2067,
-								2067
+								243,
+								243
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Stylus/Stylus.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 813.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1018,6 +990,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"hu",
+				"Task Execution Framework/views/use-cases/human.jade"
+			],
 			[
 				"inde",
 				"Task Execution Framework/routes/index.js"

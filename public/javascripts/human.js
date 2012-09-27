@@ -1,30 +1,45 @@
 
   $(function() {
-    var $definitions, $selWord, $text, baseAPI, createDefinition, createWord, selectWord, text, words;
+    var $definitions, $progress, $selWord, $text, baseAPI, createDefinition, createWord, selectWord, text, words;
     baseAPI = 'http://lookup.dbpedia.org/api/search.asmx/KeywordSearch?QueryString=';
     $text = $('#text');
     $definitions = $('#definitions');
     $selWord = $('#selectedWord');
+    $progress = $('#progress');
     createDefinition = function(name, descr) {
-      var html;
-      html = "<dt>" + name + "</dt><dd><p>" + descr + "</p></dd>";
-      return html;
+      var $html;
+      $html = $("<div><dt>" + name + " <i class='icon-ok'></i></dt><dd><p>" + descr + "</p></dd></div>");
+      $html.click(function() {
+        $definitions.find('.selected').removeClass('selected');
+        return $html.addClass('selected');
+      });
+      return $html;
     };
     selectWord = function(evt) {
       var word;
       word = $(evt.delegateTarget).text();
-      console.log(baseAPI + word);
-      $.get({
+      $progress.removeClass('hide');
+      $definitions.empty();
+      $definitions.text('Loading definitions...');
+      $.ajax({
         url: baseAPI + word,
         dataType: 'xml',
         success: function(data) {
-          $selWord.text(word);
-          console.log('asdasdasdadaererser');
-          console.log(data);
-          return console.log($.parseXML(data));
+          $progress.addClass('hide');
+          $definitions.empty();
+          return $.each($(data).find('Result'), function(key, val) {
+            var descr, name;
+            name = $(this).children('Label').text();
+            descr = $(this).children('Description').text();
+            return $definitions.append(createDefinition(name, descr));
+          });
         },
         error: function(xhr, status, error) {
-          return console.error(status, error);
+          console.error(status, error);
+          return $definitions.append(error);
+        },
+        complete: function() {
+          return $selWord.text(word);
         }
       });
     };

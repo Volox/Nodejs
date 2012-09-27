@@ -22,7 +22,7 @@ public/video/*
 
 
 # Sublime files #
-*.sublime-workspace
+project.sublime-workspace
 
 # Uploaded files #
 uploads
