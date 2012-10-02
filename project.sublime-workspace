@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"bor",
+				"border-top-color"
+			],
+			[
+				"se",
+				"selected"
+			],
+			[
+				"crea",
+				"createDefinition"
+			],
+			[
+				"de",
+				"definitions"
+			],
+			[
 				"te",
 				"text"
 			],
@@ -80,10 +96,6 @@
 				"margin-bottom"
 			],
 			[
-				"crea",
-				"createImage"
-			],
-			[
 				"data",
 				"data-object-id"
 			],
@@ -130,10 +142,6 @@
 			[
 				"co",
 				"column"
-			],
-			[
-				"de",
-				"debug"
 			],
 			[
 				"dat",
@@ -506,19 +514,12 @@
 			[
 				"wi",
 				"width"
-			],
-			[
-				"out",
-				"output"
-			],
-			[
-				"scaleSpace",
-				"ScaleSpace"
 			]
 		]
 	},
 	"buffers":
 	[
+<<<<<<< HEAD
 		{
 			"file": "views/layout.jade",
 			"settings":
@@ -551,6 +552,8 @@
 				"line_ending": "Windows"
 			}
 		}
+=======
+>>>>>>> cf803e144d3596a04b0253cf66e63a700d934067
 	],
 	"build_system": "Packages/Nodejs/Nodejs.sublime-build",
 	"command_palette":
@@ -676,9 +679,17 @@
 	},
 	"file_history":
 	[
+<<<<<<< HEAD
 		"/D/Portable/Nodejs/public/stylesheets/human.styl",
 		"/D/Portable/Nodejs/views/use-cases/human.jade",
 		"/D/Portable/Nodejs/public/coffeescripts/human.coffee",
+=======
+		"/home/volox/Nodejs/views/layout.jade",
+		"/home/volox/Nodejs/public/stylesheets/human.styl",
+		"/home/volox/Nodejs/public/coffeescripts/human.coffee",
+		"/home/volox/Nodejs/views/use-cases/human.jade",
+		"/home/volox/Nodejs/routes/index.js",
+>>>>>>> cf803e144d3596a04b0253cf66e63a700d934067
 		"/D/Portable/Nodejs/views/task/detail.jade",
 		"/D/Portable/Nodejs/config/configuration.json",
 		"/D/Portable/Nodejs/defaults/LikeImage/home.html",
@@ -826,6 +837,7 @@
 	"groups":
 	[
 		{
+<<<<<<< HEAD
 			"selected": 2,
 			"sheets":
 			[
@@ -936,6 +948,10 @@
 					},
 					"type": "text"
 				}
+=======
+			"sheets":
+			[
+>>>>>>> cf803e144d3596a04b0253cf66e63a700d934067
 			]
 		}
 	],
@@ -985,8 +1001,13 @@
 		"selected_items":
 		[
 			[
+<<<<<<< HEAD
 				"hy",
 				"Task Execution Framework/views/use-cases/hybrid.jade"
+=======
+				"hu",
+				"Task Execution Framework/views/use-cases/human.jade"
+>>>>>>> cf803e144d3596a04b0253cf66e63a700d934067
 			],
 			[
 				"inde",

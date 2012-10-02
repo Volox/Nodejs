@@ -4,24 +4,37 @@ $ ->
     $text = $ '#text'
     $definitions = $ '#definitions'
     $selWord = $ '#selectedWord'
+    $progress = $ '#progress'
 
     createDefinition = ( name, descr )->
-        html = "<dt>#{name}</dt><dd><p>#{descr}</p></dd>"
-        return html
+        $html = $ "<div><dt>#{name} <i class='icon-ok'></i></dt><dd><p>#{descr}</p></dd></div>"
+        $html.click ->
+            $definitions.find( '.selected' ).removeClass 'selected'
+            $html.addClass 'selected'
+        return $html
 
     selectWord = ( evt )->
         word = $( evt.delegateTarget ).text()
-        console.log baseAPI+word
-        $.get
+        $progress.removeClass 'hide'
+        $definitions.empty()
+        $definitions.text 'Loading definitions...'
+        $.ajax
             url: baseAPI+word
             dataType: 'xml'
             success: (data)->
-                $selWord.text word
-                console.log 'asdasdasdadaererser'
-                console.log data
-                console.log $.parseXML data
+                $progress.addClass 'hide'
+                $definitions.empty()
+                $.each $( data ).find( 'Result' ), (key, val)->
+                    name = $( @ ).children( 'Label' ).text()
+                    descr = $( @ ).children( 'Description' ).text()
+                    $definitions.append createDefinition name, descr
+
             error: ( xhr, status, error )->
                 console.error status, error
+                $definitions.append error
+            complete: ->
+                $selWord.text word
+
         return
     createWord = ( word )->
         html = "<span class='label label-warning'>#{word}</span>"

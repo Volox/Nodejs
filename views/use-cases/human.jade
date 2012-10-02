@@ -9,11 +9,14 @@ block content
         .span6
             h3 Text
             #text.well= text
-                
+            button.btn.btn-primary.pull-right
+                i.icon-envelope.icon-white
+                |  Send results
         .span6
             .alert.alert-info
                 | Selected word: 
                 strong: em#selectedWord
-
+            #progress.progress.progress-striped.animate.hide
+                .bar(style="width: 100%")
             h3 Possible definitions
             dl#definitions

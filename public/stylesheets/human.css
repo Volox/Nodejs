@@ -1,3 +1,21 @@
 span.label {
   cursor: pointer;
 }
+#definitions dt i {
+  display: none;
+}
+#definitions dd p {
+  cursor: pointer;
+}
+#definitions .selected dt {
+  color: #468847;
+}
+#definitions .selected dt i {
+  display: inline-block;
+}
+#definitions .selected dd {
+  background-color: #dff0d8;
+}
+#definitions .selected dd:hover {
+  background-color: #d0e9c6;
+}
