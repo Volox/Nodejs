@@ -15,11 +15,18 @@ $ ->
 	avgFace = 
 		w: 0
 		h: 0
-	NUM_FACES = 7;
+	NUM_FACES = 7
+
+	timer = null
+	time = 1000*5
 
 	imgNum = Math.ceil Math.random()*NUM_FACES
 	imgPath = "/img/faces/faces (#{imgNum}).jpg"
 
+
+	stopTime = =>
+		console.log 'Time Stop!'
+		alert 'Time end!!!'
 	# creiamo l'immagine vera e propria
 	createImage = (imageUrl)->
 		img  = new Image
@@ -27,6 +34,8 @@ $ ->
 			console.log 'Image loaded!'
 			console.log 'Detecting faces'
 			detectFaces img
+
+			timer = setTimeout stopTime, time
 		img.src = imageUrl
 		console.log "Loading image: #{imageUrl}"
 

@@ -528,34 +528,26 @@
 			}
 		},
 		{
-			"file": "public/coffeescripts/human.coffee",
-			"settings":
-			{
-				"buffer_size": 1225,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "views/use-cases/human.jade",
-			"settings":
-			{
-				"buffer_size": 425,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "public/stylesheets/human.styl",
-			"settings":
-			{
-				"buffer_size": 29,
-				"line_ending": "Windows"
-			}
-		},
-		{
 			"file": "routes/index.js",
 			"settings":
 			{
 				"buffer_size": 2551,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "public/coffeescripts/hybrid.coffee",
+			"settings":
+			{
+				"buffer_size": 2846,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "views/use-cases/hybrid.jade",
+			"settings":
+			{
+				"buffer_size": 297,
 				"line_ending": "Windows"
 			}
 		}
@@ -684,6 +676,9 @@
 	},
 	"file_history":
 	[
+		"/D/Portable/Nodejs/public/stylesheets/human.styl",
+		"/D/Portable/Nodejs/views/use-cases/human.jade",
+		"/D/Portable/Nodejs/public/coffeescripts/human.coffee",
 		"/D/Portable/Nodejs/views/task/detail.jade",
 		"/D/Portable/Nodejs/config/configuration.json",
 		"/D/Portable/Nodejs/defaults/LikeImage/home.html",
@@ -715,8 +710,6 @@
 		"/D/Portable/Nodejs/task-repo/requester/requester.js",
 		"/D/Portable/Sublime Text 2/Data/Packages/User/LaTeXTools Preferences.sublime-settings",
 		"/D/Portable/Sublime Text 2/Data/Packages/Default/Preferences.sublime-settings",
-		"/D/Portable/Nodejs/views/use-cases/human.jade",
-		"/D/Portable/Nodejs/public/coffeescripts/human.coffee",
 		"/D/Portable/Nodejs/views/use-cases/hybrid.jade",
 		"/D/Portable/Nodejs/public/coffeescripts/hybrid.coffee",
 		"/D/Portable/Nodejs/public/coffeescripts/VoloCL.coffee",
@@ -833,7 +826,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -865,86 +858,6 @@
 				},
 				{
 					"buffer": 1,
-					"file": "public/coffeescripts/human.coffee",
-					"settings":
-					{
-						"buffer_size": 1225,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								628,
-								628
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "views/use-cases/human.jade",
-					"settings":
-					{
-						"buffer_size": 425,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								349,
-								361
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "public/stylesheets/human.styl",
-					"settings":
-					{
-						"buffer_size": 29,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								29,
-								29
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Stylus/Stylus.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
 					"file": "routes/index.js",
 					"settings":
 					{
@@ -966,6 +879,59 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 813.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "public/coffeescripts/hybrid.coffee",
+					"settings":
+					{
+						"buffer_size": 2846,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								509,
+								509
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/CoffeeScript/CoffeeScript.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 35.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "views/use-cases/hybrid.jade",
+					"settings":
+					{
+						"buffer_size": 297,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Jade/Syntaxes/Jade.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -1018,6 +984,10 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"hy",
+				"Task Execution Framework/views/use-cases/hybrid.jade"
+			],
 			[
 				"inde",
 				"Task Execution Framework/routes/index.js"
@@ -1133,10 +1103,6 @@
 			[
 				"in",
 				"routes/index.js"
-			],
-			[
-				"hy",
-				"views/use-cases/hybrid.jade"
 			],
 			[
 				"we",

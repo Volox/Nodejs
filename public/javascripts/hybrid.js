@@ -1,6 +1,7 @@
 
   $(function() {
-    var $canvas, $msg, LEFT_MOUSE_BTN, NUM_FACES, RIGHT_MOUSE_BTN, avgFace, createImage, detectFaces, drawBoundingBox, faceLayer, facesDetected, facesSkipped, facesUser, imageLayer, imgNum, imgPath, userLayer;
+    var $canvas, $msg, LEFT_MOUSE_BTN, NUM_FACES, RIGHT_MOUSE_BTN, avgFace, createImage, detectFaces, drawBoundingBox, faceLayer, facesDetected, facesSkipped, facesUser, imageLayer, imgNum, imgPath, stopTime, time, timer, userLayer;
+    var _this = this;
     $msg = $('.alert.alert-info span');
     $canvas = $('#canvas');
     imageLayer = new Kinetic.Layer;
@@ -16,15 +17,22 @@
       h: 0
     };
     NUM_FACES = 7;
+    timer = null;
+    time = 1000 * 5;
     imgNum = Math.ceil(Math.random() * NUM_FACES);
     imgPath = "/img/faces/faces (" + imgNum + ").jpg";
+    stopTime = function() {
+      console.log('Time Stop!');
+      return alert('Time end!!!');
+    };
     createImage = function(imageUrl) {
       var img;
       img = new Image;
       img.onload = function() {
         console.log('Image loaded!');
         console.log('Detecting faces');
-        return detectFaces(img);
+        detectFaces(img);
+        return timer = setTimeout(stopTime, time);
       };
       img.src = imageUrl;
       return console.log("Loading image: " + imageUrl);
