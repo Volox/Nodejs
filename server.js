@@ -116,6 +116,7 @@ var TRI = new TaskRepository( config.nconf.get( "task_repository" ) );
 
 
 //app.get('/task/list', TRI.API.list );
+app.get('/execute', TRI.API.executeTask );
 app.get('/task/:task', TRI.API.details );
 app.get('/task/:task/list', TRI.API.uTaskList );
 

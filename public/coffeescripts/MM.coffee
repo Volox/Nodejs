@@ -350,6 +350,7 @@ class MM
 		MM.VoloTest.runKernel 'clMagOrient', [ w, h ], kernelArgs
 
 		return magnitude: magnitude, orientation: orientation
+	@generateFeatures: ()->
 
 	@sift: ( imageObj, handlers )->
 		# variables

@@ -3,6 +3,12 @@ class uTask
 		pathFragments = location.pathname.split '/'
 		taskID = pathFragments[ 2 ]
 
+		query = location.search.substring 1
+		params = query.split( '&' );
+		$.each params, (idx, val)=>
+			val = val.match( /accessToken=(.*)/i )[1]
+			if val then @token=val
+
 		@task = parseInt taskID
 		@url = '/task/' + taskID
 		@codeUrl = @url+'/code'

@@ -56,6 +56,25 @@ TaskRepository.prototype.getFilePath = function( options) {
 
 TaskRepository.prototype.API = {};
 
+TaskRepository.prototype.API.executeTask = function(req, res) {
+	var taskID = req.query.taskID;
+	var accessToken = req.query.accessToken;
+	var config = req.query.config;
+	
+	// Create the URL	
+	var url = '/task/'+taskID+'/run';
+
+	// Add the configuration if present
+	if( config )
+		url += '/'+config;
+
+	// Append the access token as Query String
+	url += '?accessToken='+accessToken;
+
+	// Redirect
+	res.redirect( url );
+}
+
 TaskRepository.prototype.API.uTaskList = function(req, res) {
 	var taskID = req.params.task;
 	this.requester.get( taskID, 'list', function( error, body ) {

@@ -18,6 +18,10 @@
   #define M_PI (355/113)
 #endif
 
+// GenerateFeatures related
+#define KEY_WINDOW 16
+#define KEY_SUB_WINDOW 4
+
 // Useful global functions
 // Return the index based on the giver x and y coordinates
 uint _i( uint x, uint y, uint w, uint h ) {
@@ -33,6 +37,26 @@ uint _i( uint x, uint y, uint w, uint h ) {
 float _sPx( __global const float* image, uint x, uint y, uint w, uint h ) {
   // D + D' + D''
   return image[ _i(x,y,w,h) ];
+}
+
+__kernel void clGenerateFeatures( __global const float* image,
+                           __global const float* keyPoints,
+                           __global float* boh,
+                           uint width,
+                           uint height ) {
+  uint x = get_global_id(0);
+  uint y = get_global_id(1);
+
+  if (x >= width || y >= height) return;
+
+  // Get the current pixel index
+  uint idx = y*width+x;
+  
+  float value = keyPoints[ idx ];
+
+  if( value!=0 ) {
+
+  }
 }
 
 __kernel void clMagOrient( __global const float* image,
