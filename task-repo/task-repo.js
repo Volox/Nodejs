@@ -57,7 +57,7 @@ TaskRepository.prototype.getFilePath = function( options) {
 TaskRepository.prototype.API = {};
 
 TaskRepository.prototype.API.executeTask = function(req, res) {
-	var taskID = req.query.taskID;
+	var taskID = req.query.taskId;
 	var accessToken = req.query.accessToken;
 	var config = req.query.config;
 	
