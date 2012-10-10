@@ -10,11 +10,18 @@
 		"appPath": "/CrowdSearch_prototype_v2",
 
 		"API": {
+			"auth": {
+				"method": "GET",
+				"path": "authentication.do",
+				"params": {
+					"callback": ""
+				}
+			},
 			"myTask": {
 				"method": "GET",
-				"path": "",
+				"path": "getMyTasks.do",
 				"params": {
-					"secretKey": "secretKey"
+					"secretKey": ""
 				}
 			},
 			"details": {

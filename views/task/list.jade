@@ -1,18 +1,31 @@
 extends ../layout
 
 block content
-	.row
-		.span4
-			h2 &micro;Task list for Task #{taskID} 
-		.span4
-			a.btn.btn-primary(href="/task/#{taskID}/code/add")
-				i.icon-plus.icon-white
-				|  Add code
+	if this.taskID
+		.row
+			.span4
+				h2 &micro;Task list for Task #{taskID} 
+			.span4
+				a.btn.btn-primary(href="/task/#{taskID}/code/add")
+					i.icon-plus.icon-white
+					|  Add code
 
 	.row
 		.span12
-			if data.microTasks
+			if data.tasks
 				ul
-					each microTask in data.microTasks
+					each task in data.tasks
 						li
-							a(href="/task/#{microTask.id}")= microTask.id
+							a(href='/task/#{task.id}')= task.title
+							|  - 
+							- var url = '/execute?taskId='+task.id
+							- if( task.config ) { url += '&config='+task.config }
+							- if( task.token ) { url += '&accessToken='+task.token }
+							a(href='#{url}') Run
+			else
+				if data.microTasks
+					ul
+						each microTask in data.microTasks
+							li: a(href="/task/#{microTask.id}")= microTask.id
+				else
+					p.text-error No &micro;Task found

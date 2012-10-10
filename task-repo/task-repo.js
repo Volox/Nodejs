@@ -56,28 +56,81 @@ TaskRepository.prototype.getFilePath = function( options) {
 
 TaskRepository.prototype.API = {};
 
+
+TaskRepository.prototype.API.getTaskID = function(req, res, next ) {
+	req.taskID = parseInt( req.params.task, 10 );
+	next();
+};
+
 TaskRepository.prototype.API.executeTask = function(req, res) {
 	var taskID = req.query.taskId;
-	var accessToken = req.query.accessToken;
+	var accessToken = req.query.accessToken || req.session.token;
 	var config = req.query.config;
 	
+
+	log.debug( 'Redirecting to' );
+	log.debug( 'TaskID: '+taskID );
+	log.debug( 'accessToken: '+accessToken );
+	log.debug( 'config: '+config );
 	// Create the URL
 	var url = '/task/'+taskID+'/run';
 
 	// Add the configuration if present
-	if( config )
+	if( !_.isUndefined( config ) )
 		url += '/'+config;
 
 	// Append the access token as Query String
-	if (accessToken !== null)
+	if( !_.isUndefined( accessToken ) )
 		url += '?accessToken='+accessToken;
 
 	// Redirect
 	res.redirect( url );
 };
 
+TaskRepository.prototype.API.myTaskList = function(req, res) {
+	var token = req.query.token || req.session.token;
+	//log.debug( 'Token: '+token );
+	if( _.isString( token ) ) {
+		req.session.token = token;
+		this.requester.request( {
+			API: 'myTask',
+			params: {
+				secretKey: '59ifq6asa4dsqi48aras7n52rm'
+			},
+			callback: function( error, body ) {
+				try {
+					if( error )
+						throw error;
+					
+					body = JSON.parse(body);
+
+					log.debug( 'Retrieved' );
+					log.debug( body );
+
+					res.render('task/list', {
+						title: 'User Task list',
+						data: body
+					});
+				} catch( err ) {
+					log.error( err );
+					res.render('error', {
+						title: 'Request error',
+						message: err
+					});
+				}
+			}
+		} );
+
+	} else {
+		var url = this.requester.getEndPoint( 'auth', {
+			callback: 'localhost/tasks'
+		} ).url;
+		log.debug( 'URL: '+url );
+		res.redirect( url );
+	}
+};
 TaskRepository.prototype.API.uTaskList = function(req, res) {
-	var taskID = req.params.task;
+	var taskID = req.taskID;
 	this.requester.get( taskID, 'list', function( error, body ) {
 		try {
 			if( error )
@@ -86,7 +139,7 @@ TaskRepository.prototype.API.uTaskList = function(req, res) {
 			body = JSON.parse(body);
 
 			if( !body.microTasks )
-				throw "The selected task does not have any microTask associated";
+				throw 'The selected task does not have any microTask associated';
 
 			res.render('task/list', {
 				title: '&micro;Task list',
@@ -104,7 +157,7 @@ TaskRepository.prototype.API.uTaskList = function(req, res) {
 };
 
 TaskRepository.prototype.API.details = function(req, res) {
-	var taskID = req.params.task;
+	var taskID = req.taskID;
 
 	var self = this;
 	this.requester.get( taskID, 'details', function( error, body ) {
@@ -156,7 +209,7 @@ TaskRepository.prototype.API.details = function(req, res) {
 };
 
 TaskRepository.prototype.API.addCode = function(req, res) {
-	var taskID = req.params.task;
+	var taskID = req.taskID;
 
 	// Render the page
 	res.render('task/new', {
@@ -166,7 +219,7 @@ TaskRepository.prototype.API.addCode = function(req, res) {
 };
 TaskRepository.prototype.API.postCode = function(req, res) {
 	var codeName = ( _( req.body.name ).isBlank() )? 'default' : req.body.name;
-	var taskID = parseInt( req.params.task, 10 );
+	var taskID = req.taskID;
 	var files = req.files;
 
 
@@ -189,7 +242,7 @@ TaskRepository.prototype.API.postCode = function(req, res) {
 					var file = files[ fileID ];
 
 					if( file.size>=0 ) {
-						var taskPath = path.join( self.taskPath, ""+parentTask );
+						var taskPath = path.join( self.taskPath, ''+parentTask );
 						if( !fs.existsSync( taskPath ) ) {
 							fs.mkdirSync( taskPath );
 						}
@@ -225,7 +278,7 @@ TaskRepository.prototype.API.postCode = function(req, res) {
 };
 
 TaskRepository.prototype.API.run = function(req, res) {
-	var taskID = parseInt( req.params.task, 10 );
+	var taskID = req.taskID;
 	if( !req.params.file ) {
 		req.params.file = req.params.configuration;
 		delete req.params[ 'configuration' ];
@@ -263,7 +316,7 @@ TaskRepository.prototype.API.run = function(req, res) {
 
 
 TaskRepository.prototype.API.input = function(req, res) {
-	var taskID = parseInt( req.params.task, 10 );
+	var taskID = req.taskID;
 	var field = req.params.field || '*';
 
 	var self = this;
@@ -308,7 +361,7 @@ TaskRepository.prototype.API.input = function(req, res) {
 };
 
 TaskRepository.prototype.API.configuration = function(req, res) {
-	var taskID = parseInt( req.params.task, 10 );
+	var taskID = req.taskID;
 	var field = req.params.field || '*';
 
 	var self = this;
@@ -349,7 +402,7 @@ TaskRepository.prototype.API.configuration = function(req, res) {
 };
 
 TaskRepository.prototype.API.postResult = function(req, res) {
-	var taskID = parseInt( req.params.task, 10 );
+	var taskID = req.taskID;
 
 	var self = this;
 	this.requester.post( taskID, 'save', req.body, function( error, body ) {

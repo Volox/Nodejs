@@ -72,15 +72,16 @@ app.configure(function(){
   
 
 
-  app.use( limitAccess );
+  //app.use( limitAccess );
 
   
-  app.use(app.router);
 
   // Sessions
+  app.use(express.cookieParser());
   app.use( express.session( {
     secret: 'Volo'
   } ) );
+  app.use(app.router);
 });
 
 app.configure('development', function(){
@@ -90,13 +91,10 @@ app.configure('development', function(){
 
 // Routes
 app.get( '/', routes.index );
-app.post( '/uploadAjax', routes.uploadAjax );
-
-// Errors
-app.get('/404', routes.error40x );
-app.get('/505', routes.error50x );
 
 
+
+/*
 // Test pages
 app.get('/test', routes.test );
 app.get('/testVideo', routes.testVideo );
@@ -106,7 +104,7 @@ app.get('/testVideoPOI', routes.testVideoPOI );
 app.get('/automatic', routes.automatic );
 app.get('/hybrid', routes.hybrid );
 app.get('/human', routes.human );
-
+*/
 
 
 var server = http.createServer(app);
@@ -116,31 +114,31 @@ var TaskRepository = require( './task-repo' );
 var TRI = new TaskRepository( config.nconf.get( "task_repository" ) );
 
 
-//app.get('/task/list', TRI.API.list );
+var middleware = [ TRI.API.getTaskID ];
 app.get('/execute', TRI.API.executeTask );
-app.get('/task/:task', TRI.API.details );
-app.get('/task/:task/list', TRI.API.uTaskList );
-
-app.get('/task/:task/code/add', TRI.API.addCode );
-
-app.get('/task/:task/run/:configuration?/:file?' ,TRI.API.run );
-
-app.get('/task/:task/input/:field?', TRI.API.input );
-
-app.get('/task/:task/configuration/:field?', TRI.API.configuration );
-
-app.post('/task/:task/code', TRI.API.postCode );
-
-app.post('/task/:task/result', TRI.API.postResult );
+app.get('/tasks', TRI.API.myTaskList );
+app.get('/task/:task', middleware, TRI.API.details );
+app.get('/task/:task/list', middleware, TRI.API.uTaskList );
+app.get('/task/:task/code/add', middleware, TRI.API.addCode );
+app.get('/task/:task/run/:configuration?/:file?', middleware, TRI.API.run );
+app.get('/task/:task/input/:field?', middleware, TRI.API.input );
+app.get('/task/:task/configuration/:field?', middleware, TRI.API.configuration );
+app.post('/task/:task/code', middleware, TRI.API.postCode );
+app.post('/task/:task/result', middleware, TRI.API.postResult );
 
 
+// Errors
+app.get('/404', routes.error40x );
+app.get('/505', routes.error50x );
+// Other
+app.post( '/uploadAjax', routes.uploadAjax );
 // TODO
 app.all('/proxy', function( req, res ) {
   res.send( 'Proxy not yet implemented' );
 } );
 
 
-app.all( '/*', routes.missing );
+app.all( '*', routes.missing );
 server.listen( config.port, function() {
   log.debug( f( 'Express server listening on port %d in %s mode',
     server.address().port, app.settings.env ) );

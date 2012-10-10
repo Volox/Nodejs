@@ -43,15 +43,31 @@ Requester.prototype.checkResult = function( config, callback ) {
 	callback( errorMessage, config.body );
 };
 
+Requester.prototype.getEndPoint = function( action, data ) {
+	var apiConfig = this.configuration.API[ action ];
+	var apiUrl = url.format( {
+		protocol: 'http',
+		hostname: this.hostname,
+		port: this.port,
+		pathname: this.appPath+'/'+apiConfig.path,
+		query: data
+	});
+	return {
+		url: apiUrl,
+		obj: apiConfig
+	};
+};
 Requester.prototype.request = function( obj ) {
 	var callback = obj.callback;
 	var apiConfig = this.configuration.API[ obj.API ];
 	var query = false;
 	if( apiConfig.params ) {
-		query = _.extend( {}, apiConfig.params );
+		query = _.extend( {}, apiConfig.params, obj.params );
 		query.q = obj.task;
 		query.selectors = JSON.stringify( obj.filter );
 	}
+	log.debug( 'Query:' );
+	log.debug( query );
 	var apiUrl = url.format( {
 		protocol: 'http',
 		hostname: this.hostname,
@@ -81,7 +97,7 @@ Requester.prototype.request = function( obj ) {
 			}, callback );
 		} );
 	}
-}
+};
 
 Requester.prototype.get = function( task, API, filter, callback ) {
 	if( !callback ) {

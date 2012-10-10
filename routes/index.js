@@ -19,6 +19,16 @@ exports.index = function(req, res){
 		title: 'Homepage'
 	});
 };
+
+
+
+
+
+
+
+
+
+// Other
 exports.error40x = function(req, res){
 	res.statusCode = 400;
 	res.render('error', {
@@ -36,6 +46,28 @@ exports.error50x = function(req, res){
 exports.missing = function(req, res){
 	res.redirect( '/404' );
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -72,6 +104,15 @@ exports.testVideo = function(req, res) {
 		]
 	});
 };
+
+
+
+
+
+
+
+
+
 
 
 // Use cases
