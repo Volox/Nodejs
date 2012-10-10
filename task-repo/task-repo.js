@@ -69,7 +69,7 @@ TaskRepository.prototype.API.executeTask = function(req, res) {
 		url += '/'+config;
 
 	// Append the access token as Query String
-	if (accessToken != null)
+	if (accessToken !== null)
 		url += '?accessToken='+accessToken;
 
 	// Redirect
