@@ -31,14 +31,14 @@ var limitAccess = function( req, res, next ) {
     originReq = _.first( originReq, 3 ).join( '/' );
 
     if( origin==originReq ) {
-      next()
+      next();
     } else {
       res.send( 'Access denied', 403 );
     }
   } else {
     next();
   }
-}
+};
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
@@ -65,7 +65,7 @@ app.configure(function(){
   } ) );
 
   // Serve the files under the "public folder statically"
-  app.use(express.static(__dirname + '/public'));
+  app.use(express['static'](__dirname + '/public'));
   
   app.use(express.bodyParser( {uploadDir: __dirname+'/uploads' } ) );
   app.use(express.methodOverride());
@@ -77,6 +77,7 @@ app.configure(function(){
   
   app.use(app.router);
 
+  // Sessions
   app.use( express.session( {
     secret: 'Volo'
   } ) );

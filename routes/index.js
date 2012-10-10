@@ -9,8 +9,8 @@ var log = config.logger,
 
 exports.cors = function(req, res, next ) {
 	// add header to all the requests for CROSS DOMAIN AJAX
-  	res.set( 'Access-Control-Allow-Origin', '*' );
-  	res.set( 'Access-Control-Allow-Headers', 'X-Requested-With');
+	res.set( 'Access-Control-Allow-Origin', '*' );
+	res.set( 'Access-Control-Allow-Headers', 'X-Requested-With');
 	next();
 };
 
@@ -68,7 +68,7 @@ exports.testVideo = function(req, res) {
 			"hole",
 			"sky",
 			"squirrel",
-			"butterfly",
+			"butterfly"
 		]
 	});
 };

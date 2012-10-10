@@ -23,12 +23,12 @@ var TaskRepository = function( configuration ) {
 	this.requester = new Requester();
 
 	this.init();
-}
+};
 
 TaskRepository.prototype.init = function() {
 	// Bind the API
-	for( API in this.API ) {
-		this.API[ API ] = _.bind( this.API[ API ], this )
+	for( var api in this.API ) {
+		this.API[ api ] = _.bind( this.API[ api ], this );
 	}
 
 	// Create the path
@@ -41,7 +41,7 @@ TaskRepository.prototype.init = function() {
 	if( !fs.existsSync( this.taskDefaultPath ) ) {
 		fs.mkdirSync( this.taskDefaultPath );
 	}
-}
+};
 
 
 
@@ -49,7 +49,7 @@ TaskRepository.prototype.init = function() {
 TaskRepository.prototype.getFilePath = function( options) {
 	var filePath = path.join( this.taskPath, ""+options.taskID, options.fileName );
 	if( options.configuration ) {
-		filePath = path.join( this.taskDefaultPath, options.configuration, options.fileName )
+		filePath = path.join( this.taskDefaultPath, options.configuration, options.fileName );
 	}
 	return filePath;
 };
@@ -61,7 +61,7 @@ TaskRepository.prototype.API.executeTask = function(req, res) {
 	var accessToken = req.query.accessToken;
 	var config = req.query.config;
 	
-	// Create the URL	
+	// Create the URL
 	var url = '/task/'+taskID+'/run';
 
 	// Add the configuration if present
@@ -73,7 +73,7 @@ TaskRepository.prototype.API.executeTask = function(req, res) {
 
 	// Redirect
 	res.redirect( url );
-}
+};
 
 TaskRepository.prototype.API.uTaskList = function(req, res) {
 	var taskID = req.params.task;
@@ -92,15 +92,15 @@ TaskRepository.prototype.API.uTaskList = function(req, res) {
 				taskID: taskID,
 				data: body
 			});
-		} catch( error ) {
-			log.error( error );
+		} catch( err ) {
+			log.error( err );
 			res.render('error', {
 				title: 'Request error',
-				message: error
+				message: err
 			});
 		}
 	} );
-}
+};
 
 TaskRepository.prototype.API.details = function(req, res) {
 	var taskID = req.params.task;
@@ -143,11 +143,11 @@ TaskRepository.prototype.API.details = function(req, res) {
 					config: body.implementation.config || 'default'
 				});
 			}
-		} catch( error ) {
-			log.error( error );
+		} catch( err ) {
+			log.error( err );
 			res.render('error', {
 				title: 'Request error',
-				message: error
+				message: err
 			});
 		}
 	} );
@@ -165,7 +165,7 @@ TaskRepository.prototype.API.addCode = function(req, res) {
 };
 TaskRepository.prototype.API.postCode = function(req, res) {
 	var codeName = ( _( req.body.name ).isBlank() )? 'default' : req.body.name;
-	var taskID = parseInt( req.params.task );
+	var taskID = parseInt( req.params.task, 10 );
 	var files = req.files;
 
 
@@ -178,13 +178,13 @@ TaskRepository.prototype.API.postCode = function(req, res) {
 			
 			body = JSON.parse(body);
 
-			var parentTask = parseInt( ( body.isMicroTask )? body.task : body.id );
+			var parentTask = parseInt( ( body.isMicroTask )? body.task : body.id, 10 );
 
 			// Save to FS function
 			var saveFiles = function( files ) {
 				log.debug( 'Saving data to filesystem' );
 
-				for( fileID in files) {
+				for( var fileID in files) {
 					var file = files[ fileID ];
 
 					if( file.size>=0 ) {
@@ -208,15 +208,15 @@ TaskRepository.prototype.API.postCode = function(req, res) {
 				} else {
 					res.redirect( '/task/'+parentTask+'/list' );
 				}
-			}
+			};
 
 			saveFiles( files );
 
-		} catch( error ) {
-			log.error( error );
+		} catch( err ) {
+			log.error( err );
 			res.render('error', {
 				title: 'Request error',
-				message: error
+				message: err
 			});
 		}
 
@@ -224,10 +224,10 @@ TaskRepository.prototype.API.postCode = function(req, res) {
 };
 
 TaskRepository.prototype.API.run = function(req, res) {
-	var taskID = parseInt( req.params.task );
+	var taskID = parseInt( req.params.task, 10 );
 	if( !req.params.file ) {
-		req.params.file = req.params.configuration
-		delete req.params[ 'configuration' ]
+		req.params.file = req.params.configuration;
+		delete req.params[ 'configuration' ];
 	}
 	var file = req.params.file || 'home.html';
 
@@ -250,11 +250,11 @@ TaskRepository.prototype.API.run = function(req, res) {
 			} else {
 				res.send( 'Not found', 404 );
 			}
-		} catch( error ) {
-			log.error( error );
+		} catch( err ) {
+			log.error( err );
 			res.render('error', {
 				title: 'Request error',
-				message: error
+				message: err
 			});
 		}
 	} );
@@ -262,11 +262,11 @@ TaskRepository.prototype.API.run = function(req, res) {
 
 
 TaskRepository.prototype.API.input = function(req, res) {
-	var taskID = parseInt( req.params.task );
+	var taskID = parseInt( req.params.task, 10 );
 	var field = req.params.field || '*';
 
 	var self = this;
-	this.requester.get( taskID, 'details', 'objects', function( error, body ){ 
+	this.requester.get( taskID, 'details', 'objects', function( error, body ) {
 		try {
 			if( error )
 				throw error;
@@ -276,7 +276,7 @@ TaskRepository.prototype.API.input = function(req, res) {
 			var data;
 			if( field!='*' ) {
 				data = {
-					id: [],
+					id: []
 				};
 				data[ field ] = [];
 
@@ -296,18 +296,18 @@ TaskRepository.prototype.API.input = function(req, res) {
 				res.type( 'json' );
 				res.send( JSON.stringify( data ) );
 			}
-		} catch( error ) {
-			log.error( error );
+		} catch( err ) {
+			log.error( err );
 			res.render('error', {
 				title: 'Request error',
-				message: error
+				message: err
 			});
 		}
 	} );
 };
 
 TaskRepository.prototype.API.configuration = function(req, res) {
-	var taskID = parseInt( req.params.task );
+	var taskID = parseInt( req.params.task, 10 );
 	var field = req.params.field || '*';
 
 	var self = this;
@@ -321,7 +321,7 @@ TaskRepository.prototype.API.configuration = function(req, res) {
 			var data = body.configurations;
 			if( field!='*' ) {
 				data = [];
-				for( index in body.configurations ) {
+				for( var index in body.configurations ) {
 					configuration = body.configurations[ index ];
 
 					if( configuration[ field ] ) {
@@ -335,20 +335,20 @@ TaskRepository.prototype.API.configuration = function(req, res) {
 				res.type( 'json' );
 				res.send( JSON.stringify( data ) );
 			} else {
-				throw "Not implemented"
+				throw "Not implemented";
 			}
-		} catch( error ) {
-			log.error( error );
+		} catch( err ) {
+			log.error( err );
 			res.render('error', {
 				title: 'Request error',
-				message: error
+				message: err
 			});
 		}
 	} );
 };
 
 TaskRepository.prototype.API.postResult = function(req, res) {
-	var taskID = parseInt( req.params.task );
+	var taskID = parseInt( req.params.task, 10 );
 
 	var self = this;
 	this.requester.post( taskID, 'save', req.body, function( error, body ) {
@@ -364,11 +364,11 @@ TaskRepository.prototype.API.postResult = function(req, res) {
 			} else {
 				res.send( 'OK' );
 			}
-		} catch( error ) {
-			log.error( error );
+		} catch( err ) {
+			log.error( err );
 			res.render('error', {
 				title: 'Request error',
-				message: error
+				message: err
 			});
 		}
 	} );
