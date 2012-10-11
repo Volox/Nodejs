@@ -103,7 +103,6 @@ class uTask
 
 		# Post the stored data to the server
 		console.log 'Posting data', @outputData, formData
-		return
 		$.ajax
 			url: @resultUrl,
 			data: formData || JSON.stringify( @outputData ),

@@ -126,7 +126,6 @@
       this.outputData['execution'] = this.execution;
       this.outputData['token'] = this.token;
       console.log('Posting data', this.outputData, formData);
-      return;
       $.ajax({
         url: this.resultUrl,
         data: formData || JSON.stringify(this.outputData),
