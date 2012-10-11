@@ -34,8 +34,8 @@ function init( expressApp ) {
 
 	// Common Required modules
 	props.util	= util;
-	props.fs 	= fs;
-	props.path 	= path;
+	props.fs	= fs;
+	props.path	= path;
 	props.nconf	= nconf;
 	props._		= _;
 	props.mongo	= mongo;
@@ -57,14 +57,15 @@ function initLogger( config ) {
 		var winston = require( 'winston' );
 
 		var transports = [];
+		var timeStamp = function() {
+			return ( new Date() ).getTime();
+		};
 		for( var type in logConf ) {
 			
 			// Set generic properties to the object
 			var logObj = {
 				level: logConf[ type ].level,
-				timestamp: function() {
-					return ( new Date() ).getTime();
-				}
+				timestamp: timeStamp
 			};
 
 
@@ -112,7 +113,8 @@ function initMongo( config ) {
 	function configureMongo( configuration ) {
 		var mongoObj = {};
 		var dbUrl = f( '%s:%d/%s', configuration.host, configuration.port, configuration['db-name'] );
-		var db = mongo.connect( dbUrl );
+		//var db = mongo.connect( dbUrl, { safe: true } );
+		var db = null;
 
 		mongoObj = db;
 

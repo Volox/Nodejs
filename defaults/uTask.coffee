@@ -3,13 +3,19 @@ class uTask
 		pathFragments = location.pathname.split '/'
 		taskID = pathFragments[ 2 ]
 
+		# Parse the querystring to extract accessToken and execution
 		query = location.search.substring 1
-		params = query.split( '&' );
+		params = query.split '&'
 		$.each params, (idx, val)=>
-			val = val.match( /accessToken=(.*)/i )[1]
-			if val then @token=val
+			res = val.match( /accessToken=(.*)/i )
+			if res and res[1] then @token=res[1]
+			res = val.match( /execution=(.*)/i )
+			if res and res[1] then @execution=res[1]
 
-		@task = parseInt taskID
+
+		console.log "Execution = #{@execution}"
+		console.log "Token = #{@token}"
+		@task = parseInt taskID, 10
 		@url = '/task/' + taskID
 		@codeUrl = @url+'/code'
 		@inputUrl = @url+'/input'
@@ -73,7 +79,6 @@ class uTask
 			success: ( json )->
 				callback null, json
 		return
-	
 	toggleData: ( name ) ->
 		if @outputData[ name ]
 			@removeData name
@@ -91,7 +96,14 @@ class uTask
 		if !callback
 			callback = formData
 			formData = undefined
+
+		# append the execution and the Access token
+		@outputData['execution'] = @execution
+		@outputData['token'] = @token
+
 		# Post the stored data to the server
+		console.log 'Posting data', @outputData, formData
+		return
 		$.ajax
 			url: @resultUrl,
 			data: formData || JSON.stringify( @outputData ),

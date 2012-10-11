@@ -7,9 +7,18 @@
     uTask.name = 'uTask';
 
     function uTask() {
-      var pathFragments, taskID;
+      var params, pathFragments, query, taskID,
+        _this = this;
       pathFragments = location.pathname.split('/');
       taskID = pathFragments[2];
+      query = location.search.substring(1);
+      params = query.split('&');
+      $.each(params, function(idx, val) {
+        val = val.match(/accessToken=(.*)/i)[1];
+        if (val) {
+          return _this.token = val;
+        }
+      });
       this.task = parseInt(taskID);
       this.url = '/task/' + taskID;
       this.codeUrl = this.url + '/code';

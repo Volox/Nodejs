@@ -120,7 +120,10 @@ app.get('/tasks', TRI.API.myTaskList );
 app.get('/task/:task', middleware, TRI.API.details );
 app.get('/task/:task/list', middleware, TRI.API.uTaskList );
 app.get('/task/:task/code/add', middleware, TRI.API.addCode );
-app.get('/task/:task/run/:configuration?/:file?', middleware, TRI.API.run );
+app.get('/task/:task/run/:configuration/:file?', middleware, TRI.API.run );
+app.get('/test/uTask.js', function( req, res ) {
+  res.sendfile( __dirname+'/defaults/uTask.js');
+} );
 app.get('/task/:task/input/:field?', middleware, TRI.API.input );
 app.get('/task/:task/configuration/:field?', middleware, TRI.API.configuration );
 app.post('/task/:task/code', middleware, TRI.API.postCode );

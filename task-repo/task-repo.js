@@ -46,7 +46,7 @@ TaskRepository.prototype.init = function() {
 
 
 
-TaskRepository.prototype.getFilePath = function( options) {
+TaskRepository.prototype.getFilePath = function( options ) {
 	var filePath = path.join( this.taskPath, ""+options.taskID, options.fileName );
 	if( options.configuration ) {
 		filePath = path.join( this.taskDefaultPath, options.configuration, options.fileName );
@@ -62,8 +62,16 @@ TaskRepository.prototype.API.getTaskID = function(req, res, next ) {
 	next();
 };
 
-TaskRepository.prototype.API.executeTask = function(req, res) {
+TaskRepository.prototype.API.executeTask = function(req, res, next ) {
 	var taskID = req.query.taskId;
+	var execution = req.query.execution;
+	if( _.isUndefined(taskID) ) {
+		return next( new Error("Missing TaskID") );
+	}
+	if( _.isUndefined(execution) ) {
+		return next( new Error("Missing execution") );
+	}
+
 	var accessToken = req.query.accessToken || req.session.token;
 	var config = req.query.config;
 	
@@ -71,6 +79,7 @@ TaskRepository.prototype.API.executeTask = function(req, res) {
 	log.debug( 'Redirecting to' );
 	log.debug( 'TaskID: '+taskID );
 	log.debug( 'accessToken: '+accessToken );
+	log.debug( 'execution: '+execution );
 	log.debug( 'config: '+config );
 	// Create the URL
 	var url = '/task/'+taskID+'/run';
@@ -79,11 +88,17 @@ TaskRepository.prototype.API.executeTask = function(req, res) {
 	if( !_.isUndefined( config ) )
 		url += '/'+config;
 
+
+	// Append the execution to the query string
+	url += '/home.html?execution='+execution;
+
 	// Append the access token as Query String
-	if( !_.isUndefined( accessToken ) )
-		url += '?accessToken='+accessToken;
+	if( _.isString( accessToken ) )
+		url += '&accessToken='+accessToken;
 
 	// Redirect
+	log.debug( 'Redirecting to ' );
+	log.debug( url );
 	res.redirect( url );
 };
 
@@ -279,11 +294,15 @@ TaskRepository.prototype.API.postCode = function(req, res) {
 
 TaskRepository.prototype.API.run = function(req, res) {
 	var taskID = req.taskID;
-	if( !req.params.file ) {
+	log.debug( 'Configuration: '+req.params.configuration );
+	log.debug( 'File: '+req.params.file );
+	
+
+	if( !req.params.file )
 		req.params.file = req.params.configuration;
-		delete req.params[ 'configuration' ];
-	}
-	var file = req.params.file || 'home.html';
+
+	var file = req.params.file;
+	log.debug( 'Requesting '+taskID+' resource "'+req.params.file+'"' );
 
 	var self = this;
 	this.requester.get( taskID, 'details', function( error, body ) {
@@ -302,7 +321,7 @@ TaskRepository.prototype.API.run = function(req, res) {
 			if( fs.existsSync( filePath ) ) {
 				res.sendfile( filePath );
 			} else {
-				res.send( 'Not found', 404 );
+				res.send( 'Resource not found', 404 );
 			}
 		} catch( err ) {
 			log.error( err );

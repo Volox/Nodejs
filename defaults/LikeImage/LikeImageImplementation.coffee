@@ -6,6 +6,8 @@ class Like extends uTask
 		$sendBtn = $ '#sendBtn'
 		$sendBtn.click @run
 
+		console.log 'asdasd'
+
 		@getDetails @getQuestion
 
 	like: ( evt )=>
