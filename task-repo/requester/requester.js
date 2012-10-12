@@ -63,7 +63,7 @@ Requester.prototype.request = function( obj ) {
 	var query = false;
 	if( apiConfig.params ) {
 		query = _.extend( {}, apiConfig.params, obj.params );
-		query.q = obj.task;
+		query.id = obj.task;
 		query.selectors = JSON.stringify( obj.filter );
 	}
 	log.debug( 'Query:' );

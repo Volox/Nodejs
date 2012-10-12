@@ -28,7 +28,7 @@
 				"method": "GET",
 				"path": "getTask.do",
 				"params": {
-					"q": "taskID",
+					"id": "taskID",
 					"selectors": "fields"
 				}
 			},
@@ -36,7 +36,7 @@
 				"method": "GET",
 				"path": "getTaskComposition.do",
 				"params": {
-					"q": "taskID",
+					"id": "taskID",
 					"selectors": "fields"
 				}
 			},
